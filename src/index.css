@@ -1,0 +1,305 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables CSS personalizadas */
+:root {
+  --alaniz-green: #0d1e12;
+  --alaniz-gold: #d4af37;
+  --parchment: #f9f6ef;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-elegant: 0 10px 25px -3px rgba(13, 30, 18, 0.3), 0 4px 6px -2px rgba(13, 30, 18, 0.05);
+}
+
+/* Base styles mejorados */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    @apply scroll-smooth;
+    scroll-behavior: smooth;
+    /* Mejor renderizado de fuentes */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-gradient-green text-parchment-100 font-serif antialiased;
+    background-attachment: fixed;
+    min-height: 100vh;
+    line-height: 1.7;
+    /* Patrón sutil de fondo */
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.02) 0%, transparent 50%);
+  }
+
+  /* Tipografía mejorada */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-alanizGold-600 drop-shadow-gold;
+    font-feature-settings: 'liga' 1, 'kern' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6; }
+  h2 { @apply text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-5; }
+  h3 { @apply text-2xl md:text-3xl font-medium leading-snug mb-4; }
+  h4 { @apply text-xl md:text-2xl font-medium leading-snug mb-3; }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed mb-4;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  a {
+    @apply transition-all duration-300 ease-in-out;
+    text-decoration: none;
+  }
+
+  /* Elementos de formulario mejorados */
+  input, textarea, select {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    @apply outline-none ring-2 ring-alanizGold-600 ring-opacity-50;
+  }
+
+  /* Scrollbar personalizado */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-alanizGreen-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-alanizGold-600 rounded-full;
+    transition: var(--transition-smooth);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-alanizGold-500;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 #0d1e12;
+  }
+}
+
+/* Componentes reutilizables */
+@layer components {
+  /* Botón principal Casa Alaniz */
+  .btn-alaniz {
+    @apply inline-flex items-center justify-center px-6 py-3 
+           bg-alanizGold-600 text-alanizGreen-950 font-semibold
+           rounded-lg shadow-lg hover:shadow-glow
+           transition-all duration-300 ease-in-out
+           hover:bg-alanizGold-500 hover:scale-105
+           active:scale-95 focus:outline-none focus:ring-2 
+           focus:ring-alanizGold-600 focus:ring-opacity-50;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-alaniz:disabled {
+    @apply opacity-50 cursor-not-allowed hover:scale-100;
+  }
+
+  /* Botón secundario */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-transparent text-alanizGold-600 font-semibold
+           border-2 border-alanizGold-600 rounded-lg
+           transition-all duration-300 ease-in-out
+           hover:bg-alanizGold-600 hover:text-alanizGreen-950
+           hover:shadow-glow hover:scale-105
+           active:scale-95 focus:outline-none focus:ring-2
+           focus:ring-alanizGold-600 focus:ring-opacity-50;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Tarjeta elegante */
+  .card-elegant {
+    @apply bg-gradient-to-br from-alanizGreen-800/90 to-alanizGreen-900/90
+           backdrop-blur-sm border border-alanizGold-600/20
+           rounded-xl shadow-elegant p-6
+           transition-all duration-300 ease-in-out
+           hover:shadow-glow-lg hover:border-alanizGold-600/40;
+  }
+
+  /* Contenedor de contenido principal */
+  .content-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Texto con efecto dorado */
+  .text-gold-glow {
+    @apply text-alanizGold-600;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+
+  /* Línea divisoria ornamental */
+  .divider-ornamental {
+    @apply relative flex items-center justify-center my-8;
+  }
+
+  .divider-ornamental::before {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-alanizGold-600 to-transparent;
+  }
+
+  .divider-ornamental::after {
+    content: '❦';
+    @apply px-4 text-alanizGold-600 text-xl;
+  }
+
+  /* Animaciones de entrada */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fix para elementos observe-me */
+  .observe-me {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .observe-me.animate-fade-in-up {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Asegurar visibilidad después de animaciones */
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-slide-in-right,
+  .animate-slide-in-left {
+    animation-fill-mode: forwards;
+  }
+
+  /* Efecto de resplandor para imágenes */
+  .image-glow {
+    @apply transition-all duration-500 ease-in-out;
+    filter: brightness(0.9) contrast(1.1);
+  }
+
+  .image-glow:hover {
+    filter: brightness(1.1) contrast(1.2) drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
+  }
+
+  /* Navbar mejorado */
+  .navbar-glass {
+    @apply bg-alanizGreen-950/90 backdrop-blur-md border-b border-alanizGold-600/20;
+    background-image: linear-gradient(
+      135deg, 
+      rgba(13, 30, 18, 0.95) 0%, 
+      rgba(36, 58, 43, 0.9) 50%, 
+      rgba(13, 30, 18, 0.95) 100%
+    );
+  }
+
+  /* Formulario estilizado */
+  .form-elegant {
+    @apply space-y-6;
+  }
+
+  .form-elegant input,
+  .form-elegant textarea {
+    @apply w-full px-4 py-3 bg-alanizGreen-800/50 
+           border border-alanizGold-600/30 rounded-lg
+           text-parchment-100 placeholder-parchment-400
+           focus:border-alanizGold-600 focus:bg-alanizGreen-800/70
+           transition-all duration-300;
+  }
+
+  .form-elegant label {
+    @apply block text-sm font-medium text-alanizGold-600 mb-2;
+  }
+}
+
+/* Utilidades personalizadas */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradientes personalizados */
+  .bg-heraldic {
+    background: linear-gradient(135deg, #0d1e12 0%, #243a2b 50%, #0d1e12 100%);
+    background-size: 400% 400%;
+    animation: heraldic-shift 8s ease-in-out infinite;
+  }
+
+  @keyframes heraldic-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Estados de carga */
+  .loading-dots::after {
+    content: '';
+    animation: loading-dots 1.5s steps(4, end) infinite;
+  }
+
+  @keyframes loading-dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Responsive typography */
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 20px;
+  }
+}

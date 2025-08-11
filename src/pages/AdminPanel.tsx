@@ -14,15 +14,31 @@ interface Document {
   url: string;
 }
 
+interface Condecorado {
+  id: string;
+  nombre: string;
+  fechaOtorgamiento: string;
+  motivo: string;
+  condecoracion: string;
+}
+
+const condecoraciones = [
+  { id: 'gran-cruz', nombre: 'Gran Cruz de la Distinción Alaniz' },
+  { id: 'cruz-honor-merito', nombre: 'Cruz del Honor y el Mérito' }
+];
+
 export default function AdminPanel() {
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalDocuments: 0,
+    totalCondecoraciones: 0,
     activeUsers: 0
   });
   const [users, setUsers] = useState<any[]>([]);
+  const [condecorados, setCondecorados] = useState<Condecorado[]>([]);
   const [showCreateUser, setShowCreateUser] = useState(false);
   const [showDocumentManager, setShowDocumentManager] = useState(false);
+  const [showCondecoracionesManager, setShowCondecoracionesManager] = useState(false);
   const [selectedUser, setSelectedUser] = useState<string>('');
   const [userDocuments, setUserDocuments] = useState<Document[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -35,6 +51,12 @@ export default function AdminPanel() {
     name: '',
     type: '',
     file: null as File | null
+  });
+  const [condecoracionForm, setCondecoracionForm] = useState({
+    nombre: '',
+    fechaOtorgamiento: '',
+    motivo: '',
+    condecoracion: ''
   });
   const navigate = useNavigate();
 
@@ -54,6 +76,7 @@ export default function AdminPanel() {
       
       localStorage.setItem('alanizUsers', JSON.stringify(adminUser));
       localStorage.setItem('alanizDocuments', JSON.stringify({}));
+      localStorage.setItem('alanizCondecorados', JSON.stringify([]));
     }
   };
 
@@ -61,11 +84,13 @@ export default function AdminPanel() {
     initializeAdmin();
     loadStats();
     loadUsers();
+    loadCondecorados();
   }, []);
 
   const loadStats = () => {
     const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
     const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
+    const condecorados = JSON.parse(localStorage.getItem('alanizCondecorados') || '[]');
     
     let totalDocs = 0;
     Object.values(documents).forEach((userDocs: any) => {
@@ -75,6 +100,7 @@ export default function AdminPanel() {
     setStats({
       totalUsers: Object.keys(users).length,
       totalDocuments: totalDocs,
+      totalCondecoraciones: condecorados.length,
       activeUsers: Object.keys(users).length
     });
   };
@@ -86,6 +112,13 @@ export default function AdminPanel() {
       ...userData
     }));
     setUsers(usersList);
+  };
+
+  const loadCondecorados = () => {
+    const savedCondecorados = localStorage.getItem('alanizCondecorados');
+    if (savedCondecorados) {
+      setCondecorados(JSON.parse(savedCondecorados));
+    }
   };
 
   const loadUserDocuments = (userDni: string) => {
@@ -138,6 +171,39 @@ export default function AdminPanel() {
     loadUsers();
     
     alert(`Usuario creado exitosamente.\n\nDNI: ${newUser.dni.toUpperCase()}\nContraseña: ${password}\n\n¡Guarda esta información!`);
+  };
+
+  const handleCreateCondecorado = () => {
+    if (!condecoracionForm.nombre || !condecoracionForm.fechaOtorgamiento || !condecoracionForm.motivo || !condecoracionForm.condecoracion) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+
+    const nuevoCondecorado: Condecorado = {
+      id: Date.now().toString(),
+      nombre: condecoracionForm.nombre,
+      fechaOtorgamiento: condecoracionForm.fechaOtorgamiento,
+      motivo: condecoracionForm.motivo,
+      condecoracion: condecoracionForm.condecoracion
+    };
+
+    const nuevosCondecorados = [...condecorados, nuevoCondecorado];
+    setCondecorados(nuevosCondecorados);
+    localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
+
+    setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
+    loadStats();
+    
+    alert('Condecorado añadido exitosamente');
+  };
+
+  const handleDeleteCondecorado = (id: string) => {
+    if (!confirm('¿Estás seguro de eliminar este condecorado?')) return;
+
+    const nuevosCondecorados = condecorados.filter(c => c.id !== id);
+    setCondecorados(nuevosCondecorados);
+    localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
+    loadStats();
   };
 
   const handleDeleteUser = (dni: string) => {
@@ -298,6 +364,10 @@ export default function AdminPanel() {
     setShowDocumentManager(true);
   };
 
+  const getCondecoracionName = (id: string) => {
+    return condecoraciones.find(c => c.id === id)?.nombre || id;
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('alanizAuth');
     localStorage.removeItem('alanizUserId');
@@ -336,7 +406,7 @@ export default function AdminPanel() {
         </div>
 
         {/* Estadísticas */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-4 gap-6 mb-8">
           <div className="card-elegant">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
@@ -371,6 +441,22 @@ export default function AdminPanel() {
 
           <div className="card-elegant">
             <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                <span className="text-yellow-400 text-xl">🏆</span>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-alanizGold-600">
+                  Condecoraciones
+                </h3>
+                <p className="text-2xl font-bold text-parchment-100">
+                  {stats.totalCondecoraciones}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="card-elegant">
+            <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
                 <span className="text-purple-400 text-xl">☁️</span>
               </div>
@@ -384,6 +470,147 @@ export default function AdminPanel() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Gestión de condecoraciones */}
+        <div className="card-elegant mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-display font-bold text-alanizGold-600">
+              Gestión de Condecoraciones
+            </h2>
+            <button
+              onClick={() => setShowCondecoracionesManager(!showCondecoracionesManager)}
+              className="btn-alaniz"
+            >
+              🏆 {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
+            </button>
+          </div>
+
+          {showCondecoracionesManager && (
+            <div className="bg-alanizGreen-900/30 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
+                Añadir Nuevo Condecorado
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                    Nombre completo
+                  </label>
+                  <input
+                    type="text"
+                    value={condecoracionForm.nombre}
+                    onChange={(e) => setCondecoracionForm({...condecoracionForm, nombre: e.target.value})}
+                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
+                               rounded-lg text-parchment-100 placeholder-parchment-400
+                               focus:border-alanizGold-600"
+                    placeholder="Don Fernando de Castilla"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                    Fecha de otorgamiento
+                  </label>
+                  <input
+                    type="date"
+                    value={condecoracionForm.fechaOtorgamiento}
+                    onChange={(e) => setCondecoracionForm({...condecoracionForm, fechaOtorgamiento: e.target.value})}
+                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
+                               rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  Condecoración otorgada
+                </label>
+                <select
+                  value={condecoracionForm.condecoracion}
+                  onChange={(e) => setCondecoracionForm({...condecoracionForm, condecoracion: e.target.value})}
+                  className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
+                             rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                >
+                  <option value="">Seleccionar condecoración</option>
+                  {condecoraciones.map(condecoracion => (
+                    <option key={condecoracion.id} value={condecoracion.id}>
+                      {condecoracion.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  Motivo del otorgamiento
+                </label>
+                <textarea
+                  value={condecoracionForm.motivo}
+                  onChange={(e) => setCondecoracionForm({...condecoracionForm, motivo: e.target.value})}
+                  rows={3}
+                  className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
+                             rounded-lg text-parchment-100 placeholder-parchment-400
+                             focus:border-alanizGold-600 resize-none"
+                  placeholder="Descripción del motivo por el cual se otorga la condecoración..."
+                />
+              </div>
+
+              <div className="flex space-x-4 mb-6">
+                <button
+                  onClick={handleCreateCondecorado}
+                  className="btn-alaniz"
+                >
+                  Añadir Condecorado
+                </button>
+              </div>
+
+              {/* Lista de condecorados */}
+              <div>
+                <h4 className="text-lg font-semibold text-alanizGold-600 mb-4">
+                  Condecorados Registrados ({condecorados.length})
+                </h4>
+                
+                {condecorados.length === 0 ? (
+                  <p className="text-parchment-400 italic text-center py-4">
+                    No hay condecorados registrados aún.
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {condecorados.map((condecorado) => (
+                      <div key={condecorado.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h5 className="font-semibold text-alanizGold-600">
+                              {condecorado.nombre}
+                            </h5>
+                            <p className="text-sm text-parchment-400 mb-1">
+                              {getCondecoracionName(condecorado.condecoracion)}
+                            </p>
+                            <p className="text-sm text-parchment-400 mb-2">
+                              Otorgada el {new Date(condecorado.fechaOtorgamiento).toLocaleDateString('es-ES', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                              })}
+                            </p>
+                            <p className="text-parchment-200 text-sm">
+                              {condecorado.motivo}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => handleDeleteCondecorado(condecorado.id)}
+                            className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
+                            title="Eliminar condecorado"
+                          >
+                            <span className="text-sm">🗑️</span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Gestión de usuarios */}
@@ -586,7 +813,7 @@ export default function AdminPanel() {
                   {uploading ? (
                     <div className="flex items-center space-x-2">
                       <div className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent rounded-full animate-spin"></div>
-                      <span>Subiendo a Supabase...</span>
+                      <span>Subiendo...</span>
                     </div>
                   ) : (
                     '☁️ Subir Documento'

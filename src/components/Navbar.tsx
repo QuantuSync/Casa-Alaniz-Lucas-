@@ -22,13 +22,16 @@ const Logo = () => (
   >
     <div className="relative flex items-center">
       <div
-        className="w-10 h-10 bg-gradient-to-br from-alanizGold-500 to-alanizGold-700 
-                   rounded-full flex items-center justify-center text-alanizGreen-950 text-xl
-                   group-hover:from-alanizGold-400 group-hover:to-alanizGold-600
-                   transition-all duration-300 shadow-lg ring-2 ring-alanizGold-600/30
-                   group-hover:ring-alanizGold-500/50 group-hover:shadow-xl"
+        className="w-10 h-10 rounded-full overflow-hidden 
+                   ring-2 ring-alanizGold-600/30 group-hover:ring-alanizGold-500/50 
+                   transition-all duration-300 shadow-lg group-hover:shadow-xl"
       >
-        🛡️
+        <img 
+          src="/src/assets/Escudo.jpg" 
+          alt="Escudo Casa Alaniz"
+          className="w-full h-full object-cover transition-transform duration-300 
+                     group-hover:scale-110"
+        />
       </div>
       <div
         className="absolute inset-0 bg-alanizGold-600/20 rounded-full scale-0 

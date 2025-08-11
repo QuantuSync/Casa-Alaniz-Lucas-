@@ -238,7 +238,7 @@ export default function AdminPanel() {
       loadUserDocuments(selectedUser);
       loadStats();
       
-      alert('Documento subido exitosamente a Supabase');
+      alert('Documento subido exitosamente');
     } catch (error) {
       console.error('Error:', error);
       alert('Error al subir el documento: ' + (error as Error).message);

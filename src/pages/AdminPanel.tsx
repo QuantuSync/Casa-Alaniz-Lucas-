@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// CONFIGURACIÓN CLOUDINARY - Ya configurado con tu Cloud Name
-const CLOUDINARY_CLOUD_NAME = 'dyfnwbqy5'; // Tu Cloud Name real
+// CONFIGURACIÓN SUPABASE
+const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
 interface Document {
   id: string;
@@ -173,28 +174,32 @@ export default function AdminPanel() {
     }
   };
 
-  // Función para subir a Cloudinary - CORREGIDA
-  const uploadToCloudinary = async (file: File): Promise<string> => {
+  // Función para subir archivo a Supabase Storage
+  const uploadToSupabase = async (file: File, dni: string): Promise<string> => {
+    const fileName = `${dni}/${Date.now()}_${file.name}`;
+    
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'ml_default');
-    
+
     const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+      `${SUPABASE_URL}/storage/v1/object/documentos/${fileName}`,
       {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        },
         body: formData
       }
     );
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Cloudinary error:', errorText);
-      throw new Error(`Error al subir a Cloudinary: ${response.status}`);
+      const error = await response.text();
+      throw new Error(`Error al subir archivo: ${error}`);
     }
 
-    const data = await response.json();
-    return data.secure_url;
+    // Generar URL pública del archivo
+    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/documentos/${fileName}`;
+    return publicUrl;
   };
 
   const handleUploadDocument = async () => {
@@ -206,8 +211,8 @@ export default function AdminPanel() {
     setUploading(true);
 
     try {
-      // Subir a Cloudinary
-      const fileUrl = await uploadToCloudinary(documentForm.file);
+      // Subir a Supabase
+      const fileUrl = await uploadToSupabase(documentForm.file, selectedUser);
       const fileSize = (documentForm.file.size / (1024 * 1024)).toFixed(1) + ' MB';
       
       const newDocument: Document = {
@@ -233,26 +238,58 @@ export default function AdminPanel() {
       loadUserDocuments(selectedUser);
       loadStats();
       
-      alert('Documento subido exitosamente a Cloudinary');
+      alert('Documento subido exitosamente a Supabase');
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al subir el documento. Verifica la configuración de Cloudinary.');
+      alert('Error al subir el documento: ' + (error as Error).message);
     } finally {
       setUploading(false);
     }
   };
 
-  const handleDeleteDocument = (documentId: string) => {
+  const handleDeleteDocument = async (documentId: string) => {
     if (!confirm('¿Estás seguro de eliminar este documento?')) {
       return;
     }
 
-    const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-    allDocuments[selectedUser] = allDocuments[selectedUser].filter((doc: Document) => doc.id !== documentId);
-    localStorage.setItem('alanizDocuments', JSON.stringify(allDocuments));
-    
-    loadUserDocuments(selectedUser);
-    loadStats();
+    try {
+      const document = userDocuments.find(doc => doc.id === documentId);
+      if (document && document.url) {
+        // Extraer el path del archivo de la URL de Supabase
+        const urlParts = document.url.split('/storage/v1/object/public/documentos/');
+        if (urlParts.length > 1) {
+          const filePath = urlParts[1];
+          
+          // Eliminar archivo de Supabase Storage
+          const deleteResponse = await fetch(
+            `${SUPABASE_URL}/storage/v1/object/documentos/${filePath}`,
+            {
+              method: 'DELETE',
+              headers: {
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              }
+            }
+          );
+
+          if (!deleteResponse.ok) {
+            console.warn('No se pudo eliminar el archivo del storage, pero se eliminará de la lista');
+          }
+        }
+      }
+
+      // Eliminar de la lista local
+      const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
+      allDocuments[selectedUser] = allDocuments[selectedUser].filter((doc: Document) => doc.id !== documentId);
+      localStorage.setItem('alanizDocuments', JSON.stringify(allDocuments));
+      
+      loadUserDocuments(selectedUser);
+      loadStats();
+      
+      alert('Documento eliminado correctamente');
+    } catch (error) {
+      console.error('Error al eliminar documento:', error);
+      alert('Error al eliminar el documento');
+    }
   };
 
   const openDocumentManager = (userDni: string) => {
@@ -285,7 +322,7 @@ export default function AdminPanel() {
                   Panel de Administración
                 </h1>
                 <p className="text-parchment-300">
-                  Gestión del sistema Casa Alaniz • Cloudinary conectado ✅
+                  Gestión del sistema Casa Alaniz • Supabase conectado ✅
                 </p>
               </div>
             </div>
@@ -342,7 +379,7 @@ export default function AdminPanel() {
                   Storage
                 </h3>
                 <p className="text-2xl font-bold text-parchment-100">
-                  Cloudinary
+                  Supabase
                 </p>
               </div>
             </div>
@@ -549,7 +586,7 @@ export default function AdminPanel() {
                   {uploading ? (
                     <div className="flex items-center space-x-2">
                       <div className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent rounded-full animate-spin"></div>
-                      <span>Subiendo a Cloudinary...</span>
+                      <span>Subiendo a Supabase...</span>
                     </div>
                   ) : (
                     '☁️ Subir Documento'
@@ -582,7 +619,7 @@ export default function AdminPanel() {
                             <div>
                               <h4 className="font-medium text-alanizGold-600">{doc.name}</h4>
                               <p className="text-sm text-parchment-400">
-                                {doc.type} • {doc.size} • {doc.uploadDate} • Cloudinary
+                                {doc.type} • {doc.size} • {doc.uploadDate} • Supabase
                               </p>
                             </div>
                           </div>
@@ -628,9 +665,9 @@ export default function AdminPanel() {
               </div>
               <div>
                 <h4 className="font-semibold text-alanizGold-600 mb-2">Almacenamiento</h4>
-                <p className="text-parchment-400">☁️ Cloudinary Storage</p>
+                <p className="text-parchment-400">☁️ Supabase Storage</p>
                 <p className="text-parchment-400">🔒 Documentos seguros en la nube</p>
-                <p className="text-green-400 text-xs">Cloud Name: {CLOUDINARY_CLOUD_NAME}</p>
+                <p className="text-green-400 text-xs">Global access enabled</p>
               </div>
             </div>
           </div>

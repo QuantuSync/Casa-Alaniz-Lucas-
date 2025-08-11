@@ -173,13 +173,12 @@ export default function AdminPanel() {
     }
   };
 
-  // Función para subir a Cloudinary - FUNCIONAL
+  // Función para subir a Cloudinary - CORREGIDA
   const uploadToCloudinary = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'casa_alaniz_docs');
-    formData.append('folder', `casa_alaniz/${selectedUser}`);
-
+    formData.append('upload_preset', 'ml_default');
+    
     const response = await fetch(
       `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
       {
@@ -189,7 +188,9 @@ export default function AdminPanel() {
     );
 
     if (!response.ok) {
-      throw new Error('Error al subir a Cloudinary');
+      const errorText = await response.text();
+      console.error('Cloudinary error:', errorText);
+      throw new Error(`Error al subir a Cloudinary: ${response.status}`);
     }
 
     const data = await response.json();

@@ -61,7 +61,7 @@ const LoadingBar = () => {
   if (!loading) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-alanizGreen-900">
+    <div className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-alanizGreen-900">
       <div className="h-full bg-gradient-to-r from-alanizGold-600 to-alanizGold-400 
                       animate-pulse transition-all duration-600 ease-out"
            style={{ width: '100%' }}>
@@ -88,7 +88,7 @@ export default function Layout({ children }: LayoutProps) {
     body.classList.remove(
       'page-home', 'page-historia', 'page-simbolos', 
       'page-legado', 'page-documentos', 'page-contacto', 
-      'page-login', 'page-miembros'
+      'page-login', 'page-miembros', 'page-condecoraciones'
     );
     
     // Aplicar clase según la ruta actual
@@ -98,6 +98,7 @@ export default function Layout({ children }: LayoutProps) {
       '/simbolos': 'page-simbolos',
       '/legado': 'page-legado',
       '/documentos': 'page-documentos',
+      '/condecoraciones': 'page-condecoraciones',
       '/contacto': 'page-contacto',
       '/login': 'page-login',
       '/miembros': 'page-miembros',
@@ -165,7 +166,7 @@ export default function Layout({ children }: LayoutProps) {
       href="#main-content"
       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
                  bg-alanizGold-600 text-alanizGreen-950 px-4 py-2 rounded-lg
-                 font-semibold z-50 transition-all duration-200"
+                 font-semibold z-[9999] transition-all duration-200"
     >
       Saltar al contenido principal
     </a>
@@ -208,8 +209,10 @@ export default function Layout({ children }: LayoutProps) {
       {/* Background pattern */}
       <BackgroundPattern />
       
-      {/* Header */}
-      <Navbar />
+      {/* Header - Z-INDEX MUY ALTO para evitar solapamiento */}
+      <div className="relative z-[9998]">
+        <Navbar />
+      </div>
       
       {/* Main content */}
       <main 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Crown, Star, Award, Plus, Trash2, Shield } from 'lucide-react';
 
 interface Condecorado {
   id: string;
@@ -113,9 +112,9 @@ export default function Condecoraciones() {
         <div className="card-elegant mb-8">
           <div className="text-center">
             <div className="flex justify-center items-center space-x-4 mb-4">
-              <Award className="w-12 h-12 text-alanizGold-600" />
-              <Crown className="w-16 h-16 text-alanizGold-600" />
-              <Star className="w-12 h-12 text-alanizGold-600" />
+              <span className="text-4xl">🏆</span>
+              <span className="text-5xl">👑</span>
+              <span className="text-4xl">⭐</span>
             </div>
             <h1 className="text-4xl font-display font-bold text-alanizGold-600 mb-4">
               Condecoraciones de la Casa Alaniz
@@ -141,7 +140,7 @@ export default function Condecoraciones() {
                 onClick={() => setShowForm(!showForm)}
                 className="btn-alaniz flex items-center space-x-2"
               >
-                <Plus className="w-4 h-4" />
+                <span className="text-lg">➕</span>
                 <span>Añadir Condecorado</span>
               </button>
             </div>
@@ -259,7 +258,7 @@ export default function Condecoraciones() {
                           target.style.display = 'none';
                           const parent = target.parentElement;
                           if (parent) {
-                            parent.innerHTML = `<Crown className="w-24 h-24 text-alanizGold-600/30" />`;
+                            parent.innerHTML = '<span class="text-6xl">👑</span>';
                           }
                         }}
                       />
@@ -340,7 +339,7 @@ export default function Condecoraciones() {
                                   className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
                                   title="Eliminar condecorado"
                                 >
-                                  <Trash2 className="w-4 h-4" />
+                                  <span className="text-sm">🗑️</span>
                                 </button>
                               )}
                             </div>

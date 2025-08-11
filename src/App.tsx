@@ -14,6 +14,7 @@ const Login = React.lazy(() => import('./pages/Login'));
 const Miembros = React.lazy(() => import('./pages/Miembros'));
 const SedeElectronica = React.lazy(() => import('./pages/SedeElectronica'));
 const AdminPanel = React.lazy(() => import('./pages/AdminPanel'));
+const Condecoraciones = React.lazy(() => import('./pages/Condecoraciones'));
 
 // Componente de carga para transiciones
 const PageLoader = () => (
@@ -63,6 +64,7 @@ const useScrollToTop = () => {
       '/simbolos': 'Símbolos Heráldicos - Casa Alaniz',
       '/legado': 'El Legado Vivo - Casa Alaniz',
       '/documentos': 'Archivo Documental - Casa Alaniz',
+      '/condecoraciones': 'Condecoraciones - Casa Alaniz',
       '/contacto': 'Contacto - Casa Alaniz',
       '/login': 'Acceso Miembros - Casa Alaniz',
       '/miembros': 'Área Privada - Casa Alaniz',
@@ -80,6 +82,7 @@ const useScrollToTop = () => {
       '/simbolos': 'Explora los símbolos heráldicos de la Casa Alaniz: escudo, bandera y anillo familiar.',
       '/legado': 'El legado vivo de la Casa Alaniz y su impacto en las generaciones futuras.',
       '/documentos': 'Acceso al archivo documental con cartas, tratados y crónicas restauradas.',
+      '/condecoraciones': 'Condecoraciones y distinciones otorgadas por la Casa Alaniz en reconocimiento al honor y mérito.',
       '/contacto': 'Contacta con la administración oficial de la Casa Alaniz.',
       '/login': 'Acceso exclusivo para miembros verificados de la Casa Alaniz.',
       '/miembros': 'Área privada para guardians y miembros de la Casa Alaniz.',
@@ -177,6 +180,7 @@ export default function App() {
             <Route path="/simbolos" element={<Simbolos />} />
             <Route path="/legado" element={<Legado />} />
             <Route path="/documentos" element={<Documentos />} />
+            <Route path="/condecoraciones" element={<Condecoraciones />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
             

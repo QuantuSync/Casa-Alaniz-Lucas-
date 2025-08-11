@@ -12,6 +12,8 @@ const Documentos = React.lazy(() => import('./pages/Documentos'));
 const Contacto = React.lazy(() => import('./pages/Contacto'));
 const Login = React.lazy(() => import('./pages/Login'));
 const Miembros = React.lazy(() => import('./pages/Miembros'));
+const SedeElectronica = React.lazy(() => import('./pages/SedeElectronica'));
+const AdminPanel = React.lazy(() => import('./pages/AdminPanel'));
 
 // Componente de carga para transiciones
 const PageLoader = () => (
@@ -64,6 +66,8 @@ const useScrollToTop = () => {
       '/contacto': 'Contacto - Casa Alaniz',
       '/login': 'Acceso Miembros - Casa Alaniz',
       '/miembros': 'Área Privada - Casa Alaniz',
+      '/sede-electronica': 'Sede Electrónica - Casa Alaniz',
+      '/admin': 'Panel de Administración - Casa Alaniz',
     };
     
     const title = routeTitles[location.pathname] || 'Casa Alaniz - Archivo Heráldico Familiar';
@@ -79,6 +83,8 @@ const useScrollToTop = () => {
       '/contacto': 'Contacta con la administración oficial de la Casa Alaniz.',
       '/login': 'Acceso exclusivo para miembros verificados de la Casa Alaniz.',
       '/miembros': 'Área privada para guardians y miembros de la Casa Alaniz.',
+      '/sede-electronica': 'Sede electrónica oficial para miembros de la Casa Alaniz.',
+      '/admin': 'Panel de administración del sistema Casa Alaniz.',
     };
     
     const description = descriptions[location.pathname] || descriptions['/'];
@@ -174,12 +180,30 @@ export default function App() {
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
             
-            {/* Ruta protegida */}
+            {/* Rutas protegidas */}
             <Route
               path="/miembros"
               element={
                 <ProtectedRoute>
                   <Miembros />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
+              path="/sede-electronica"
+              element={
+                <ProtectedRoute>
+                  <SedeElectronica />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute adminOnly={true}>
+                  <AdminPanel />
                 </ProtectedRoute>
               }
             />

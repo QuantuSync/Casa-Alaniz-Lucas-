@@ -28,7 +28,7 @@ const Logo = () => (
         🛡️
       </div>
     </div>
-    <div className="hidden lg:flex items-baseline space-x-2">
+    <div className="hidden lg:flex items-baseline">
       <h1
         className="text-xl font-display font-bold text-alanizGold-600 
                      group-hover:text-alanizGold-500 transition-colors duration-300
@@ -36,9 +36,6 @@ const Logo = () => (
       >
         Casa Alaniz
       </h1>
-      <span className="text-xs text-alanizGold-600/70 italic">
-        Memoria Ardet
-      </span>
     </div>
   </NavLink>
 );

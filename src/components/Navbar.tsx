@@ -22,35 +22,23 @@ const Logo = () => (
   >
     <div className="relative flex items-center">
       <div
-        className="w-10 h-10 rounded-full overflow-hidden 
-                   ring-2 ring-alanizGold-600/30 group-hover:ring-alanizGold-500/50 
-                   transition-all duration-300 shadow-lg group-hover:shadow-xl"
+        className="w-8 h-8 text-alanizGold-600 group-hover:text-alanizGold-500 
+                      transition-colors duration-300 drop-shadow-gold flex items-center justify-center text-xl"
       >
-        <img 
-          src="/src/assets/Escudo.jpg" 
-          alt="Escudo Casa Alaniz"
-          className="w-full h-full object-cover transition-transform duration-300 
-                     group-hover:scale-110"
-        />
+        🛡️
       </div>
-      <div
-        className="absolute inset-0 bg-alanizGold-600/20 rounded-full scale-0 
-                      group-hover:scale-150 transition-transform duration-500 -z-10"
-      ></div>
     </div>
-    <div className="hidden lg:flex flex-col justify-center">
+    <div className="hidden lg:flex items-baseline space-x-2">
       <h1
-        className="text-xl font-display font-bold text-alanizGold-500 
-                     group-hover:text-alanizGold-400 transition-colors duration-300
-                     drop-shadow-lg leading-tight mb-0 tracking-wide"
+        className="text-xl font-display font-bold text-alanizGold-600 
+                     group-hover:text-alanizGold-500 transition-colors duration-300
+                     drop-shadow-gold"
       >
         Casa Alaniz
       </h1>
-      <p className="text-xs text-alanizGold-500/70 italic leading-none -mt-0.5 
-                   group-hover:text-alanizGold-400/70 transition-colors duration-300
-                   font-light tracking-wider">
+      <span className="text-xs text-alanizGold-600/70 italic">
         Memoria Ardet
-      </p>
+      </span>
     </div>
   </NavLink>
 );

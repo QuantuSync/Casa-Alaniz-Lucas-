@@ -314,29 +314,31 @@ export default function Condecoraciones() {
                         Aún no se han otorgado condecoraciones de este tipo.
                       </p>
                     ) : (
-                      <div className="space-y-3">
+                      <div className="space-y-6">
                         {getCondecoradosPorCondecoracion(condecoracion.id).map((condecorado) => (
-                          <div key={condecorado.id} className="bg-alanizGreen-900/30 rounded-lg p-4">
+                          <div key={condecorado.id} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
                             <div className="flex items-start justify-between">
                               <div className="flex-1">
-                                <h4 className="font-semibold text-alanizGold-600">
+                                <h4 className="text-xl font-display font-bold text-alanizGold-500 mb-2">
                                   {condecorado.nombre}
                                 </h4>
-                                <p className="text-sm text-parchment-400 mb-2">
-                                  Otorgada el {new Date(condecorado.fechaOtorgamiento).toLocaleDateString('es-ES', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                  })}
-                                </p>
-                                <p className="text-parchment-200 text-sm">
-                                  {condecorado.motivo}
+                                <div className="flex items-center space-x-2 mb-3">
+                                  <span className="inline-flex items-center px-2 py-1 bg-alanizGold-600/20 rounded-full text-xs font-medium text-alanizGold-400">
+                                    {new Date(condecorado.fechaOtorgamiento).toLocaleDateString('es-ES', {
+                                      year: 'numeric',
+                                      month: 'long',
+                                      day: 'numeric'
+                                    })}
+                                  </span>
+                                </div>
+                                <p className="text-parchment-200 text-sm leading-relaxed italic pl-4 border-l-2 border-alanizGold-600/30">
+                                  "{condecorado.motivo}"
                                 </p>
                               </div>
                               {isAdmin && (
                                 <button
                                   onClick={() => handleDelete(condecorado.id)}
-                                  className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
+                                  className="ml-6 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
                                   title="Eliminar condecorado"
                                 >
                                   <span className="text-sm">🗑️</span>

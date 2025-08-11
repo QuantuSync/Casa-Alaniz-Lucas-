@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // CONFIGURACIÓN CLOUDINARY - Ya configurado con tu Cloud Name
-const CLOUDINARY_CLOUD_NAME = "dyfnwbqy5"; // Tu Cloud Name real
+const CLOUDINARY_CLOUD_NAME = 'dyfnwbqy5'; // Tu Cloud Name real
 
 interface Document {
   id: string;
@@ -17,42 +17,42 @@ export default function AdminPanel() {
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalDocuments: 0,
-    activeUsers: 0,
+    activeUsers: 0
   });
   const [users, setUsers] = useState<any[]>([]);
   const [showCreateUser, setShowCreateUser] = useState(false);
   const [showDocumentManager, setShowDocumentManager] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<string>("");
+  const [selectedUser, setSelectedUser] = useState<string>('');
   const [userDocuments, setUserDocuments] = useState<Document[]>([]);
   const [uploading, setUploading] = useState(false);
   const [newUser, setNewUser] = useState({
-    dni: "",
-    name: "",
-    type: "user" as "admin" | "user",
+    dni: '',
+    name: '',
+    type: 'user' as 'admin' | 'user'
   });
   const [documentForm, setDocumentForm] = useState({
-    name: "",
-    type: "",
-    file: null as File | null,
+    name: '',
+    type: '',
+    file: null as File | null
   });
   const navigate = useNavigate();
 
   // Inicializar solo administrador
   const initializeAdmin = () => {
-    const existingUsers = localStorage.getItem("alanizUsers");
-
+    const existingUsers = localStorage.getItem('alanizUsers');
+    
     if (!existingUsers) {
       const adminUser = {
-        "34323575P": {
-          name: "Administrador",
-          password: "110788",
-          type: "admin",
-          createdDate: new Date().toISOString(),
-        },
+        '34323575P': {
+          name: 'Administrador',
+          password: '110788',
+          type: 'admin',
+          createdDate: new Date().toISOString()
+        }
       };
-
-      localStorage.setItem("alanizUsers", JSON.stringify(adminUser));
-      localStorage.setItem("alanizDocuments", JSON.stringify({}));
+      
+      localStorage.setItem('alanizUsers', JSON.stringify(adminUser));
+      localStorage.setItem('alanizDocuments', JSON.stringify({}));
     }
   };
 
@@ -63,11 +63,9 @@ export default function AdminPanel() {
   }, []);
 
   const loadStats = () => {
-    const users = JSON.parse(localStorage.getItem("alanizUsers") || "{}");
-    const documents = JSON.parse(
-      localStorage.getItem("alanizDocuments") || "{}"
-    );
-
+    const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
+    const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
+    
     let totalDocs = 0;
     Object.values(documents).forEach((userDocs: any) => {
       totalDocs += userDocs.length;
@@ -76,33 +74,28 @@ export default function AdminPanel() {
     setStats({
       totalUsers: Object.keys(users).length,
       totalDocuments: totalDocs,
-      activeUsers: Object.keys(users).length,
+      activeUsers: Object.keys(users).length
     });
   };
 
   const loadUsers = () => {
-    const usersData = JSON.parse(localStorage.getItem("alanizUsers") || "{}");
-    const usersList = Object.entries(usersData).map(
-      ([dni, userData]: [string, any]) => ({
-        dni,
-        ...userData,
-      })
-    );
+    const usersData = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
+    const usersList = Object.entries(usersData).map(([dni, userData]: [string, any]) => ({
+      dni,
+      ...userData
+    }));
     setUsers(usersList);
   };
 
   const loadUserDocuments = (userDni: string) => {
-    const allDocuments = JSON.parse(
-      localStorage.getItem("alanizDocuments") || "{}"
-    );
+    const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
     const docs = allDocuments[userDni] || [];
     setUserDocuments(docs);
   };
 
   const generateRandomPassword = () => {
-    const chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
     for (let i = 0; i < 8; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -111,16 +104,14 @@ export default function AdminPanel() {
 
   const handleCreateUser = () => {
     if (!newUser.dni || !newUser.name) {
-      alert("DNI y nombre son obligatorios");
+      alert('DNI y nombre son obligatorios');
       return;
     }
 
-    const existingUsers = JSON.parse(
-      localStorage.getItem("alanizUsers") || "{}"
-    );
-
+    const existingUsers = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
+    
     if (existingUsers[newUser.dni.toUpperCase()]) {
-      alert("Ya existe un usuario con ese DNI");
+      alert('Ya existe un usuario con ese DNI');
       return;
     }
 
@@ -129,27 +120,23 @@ export default function AdminPanel() {
       name: newUser.name,
       password: password,
       type: newUser.type,
-      createdDate: new Date().toISOString(),
+      createdDate: new Date().toISOString()
     };
 
     existingUsers[newUser.dni.toUpperCase()] = userData;
-    localStorage.setItem("alanizUsers", JSON.stringify(existingUsers));
-
+    localStorage.setItem('alanizUsers', JSON.stringify(existingUsers));
+    
     // Crear carpeta de documentos vacía para el usuario
-    const documents = JSON.parse(
-      localStorage.getItem("alanizDocuments") || "{}"
-    );
+    const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
     documents[newUser.dni.toUpperCase()] = [];
-    localStorage.setItem("alanizDocuments", JSON.stringify(documents));
+    localStorage.setItem('alanizDocuments', JSON.stringify(documents));
 
     setShowCreateUser(false);
-    setNewUser({ dni: "", name: "", type: "user" });
+    setNewUser({ dni: '', name: '', type: 'user' });
     loadStats();
     loadUsers();
-
-    alert(
-      `Usuario creado exitosamente.\n\nDNI: ${newUser.dni.toUpperCase()}\nContraseña: ${password}\n\n¡Guarda esta información!`
-    );
+    
+    alert(`Usuario creado exitosamente.\n\nDNI: ${newUser.dni.toUpperCase()}\nContraseña: ${password}\n\n¡Guarda esta información!`);
   };
 
   const handleDeleteUser = (dni: string) => {
@@ -157,17 +144,15 @@ export default function AdminPanel() {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("alanizUsers") || "{}");
-    const documents = JSON.parse(
-      localStorage.getItem("alanizDocuments") || "{}"
-    );
-
+    const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
+    const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
+    
     delete users[dni];
     delete documents[dni];
-
-    localStorage.setItem("alanizUsers", JSON.stringify(users));
-    localStorage.setItem("alanizDocuments", JSON.stringify(documents));
-
+    
+    localStorage.setItem('alanizUsers', JSON.stringify(users));
+    localStorage.setItem('alanizDocuments', JSON.stringify(documents));
+    
     loadStats();
     loadUsers();
   };
@@ -175,109 +160,96 @@ export default function AdminPanel() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.type !== "application/pdf") {
-        alert("Solo se permiten archivos PDF");
+      if (file.type !== 'application/pdf') {
+        alert('Solo se permiten archivos PDF');
         return;
       }
-
+      
       setDocumentForm({
         ...documentForm,
         file: file,
-        name: documentForm.name || file.name.replace(".pdf", ""),
+        name: documentForm.name || file.name.replace('.pdf', '')
       });
     }
   };
 
-  // Función para almacenar PDF en Base64 (persiste entre recargas)
-  const uploadDocument = async (file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64Data = reader.result as string;
+  // Función para subir a Cloudinary - FUNCIONAL
+  const uploadToCloudinary = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'casa_alaniz_docs');
+    formData.append('folder', `casa_alaniz/${selectedUser}`);
 
-        // Crear un ID único para el archivo
-        const fileId = `doc_${Date.now()}_${Math.random()
-          .toString(36)
-          .substr(2, 9)}`;
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`,
+      {
+        method: 'POST',
+        body: formData
+      }
+    );
 
-        // Guardar el archivo en base64 en localStorage
-        localStorage.setItem(`file_${fileId}`, base64Data);
+    if (!response.ok) {
+      throw new Error('Error al subir a Cloudinary');
+    }
 
-        // Retornar el ID como URL
-        resolve(fileId);
-      };
-      reader.readAsDataURL(file);
-    });
+    const data = await response.json();
+    return data.secure_url;
   };
 
   const handleUploadDocument = async () => {
-    if (
-      !selectedUser ||
-      !documentForm.file ||
-      !documentForm.name ||
-      !documentForm.type
-    ) {
-      alert("Todos los campos son obligatorios");
+    if (!selectedUser || !documentForm.file || !documentForm.name || !documentForm.type) {
+      alert('Todos los campos son obligatorios');
       return;
     }
 
     setUploading(true);
 
     try {
-      // Usar almacenamiento local (funciona al 100%)
-      const fileUrl = await uploadDocument(documentForm.file);
-      const fileSize =
-        (documentForm.file.size / (1024 * 1024)).toFixed(1) + " MB";
-
+      // Subir a Cloudinary
+      const fileUrl = await uploadToCloudinary(documentForm.file);
+      const fileSize = (documentForm.file.size / (1024 * 1024)).toFixed(1) + ' MB';
+      
       const newDocument: Document = {
         id: Date.now().toString(),
-        name: documentForm.name + ".pdf",
+        name: documentForm.name + '.pdf',
         type: documentForm.type,
         uploadDate: new Date().toLocaleDateString(),
         size: fileSize,
-        url: fileUrl,
+        url: fileUrl
       };
 
       // Añadir documento al usuario
-      const allDocuments = JSON.parse(
-        localStorage.getItem("alanizDocuments") || "{}"
-      );
+      const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
       if (!allDocuments[selectedUser]) {
         allDocuments[selectedUser] = [];
       }
-
+      
       allDocuments[selectedUser].push(newDocument);
-      localStorage.setItem("alanizDocuments", JSON.stringify(allDocuments));
+      localStorage.setItem('alanizDocuments', JSON.stringify(allDocuments));
 
       // Resetear formulario
-      setDocumentForm({ name: "", type: "", file: null });
+      setDocumentForm({ name: '', type: '', file: null });
       loadUserDocuments(selectedUser);
       loadStats();
-
-      alert("¡Documento subido exitosamente!");
+      
+      alert('Documento subido exitosamente a Cloudinary');
     } catch (error) {
-      console.error("Error completo:", error);
-      alert(
-        `Error detallado: ${error.message}\n\nRevisa la consola (F12) para más información.`
-      );
+      console.error('Error:', error);
+      alert('Error al subir el documento. Verifica la configuración de Cloudinary.');
     } finally {
       setUploading(false);
     }
   };
 
   const handleDeleteDocument = (documentId: string) => {
-    if (!confirm("¿Estás seguro de eliminar este documento?")) {
+    if (!confirm('¿Estás seguro de eliminar este documento?')) {
       return;
     }
 
-    const allDocuments = JSON.parse(
-      localStorage.getItem("alanizDocuments") || "{}"
-    );
-    allDocuments[selectedUser] = allDocuments[selectedUser].filter(
-      (doc: Document) => doc.id !== documentId
-    );
-    localStorage.setItem("alanizDocuments", JSON.stringify(allDocuments));
-
+    const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
+    allDocuments[selectedUser] = allDocuments[selectedUser].filter((doc: Document) => doc.id !== documentId);
+    localStorage.setItem('alanizDocuments', JSON.stringify(allDocuments));
+    
     loadUserDocuments(selectedUser);
     loadStats();
   };
@@ -289,16 +261,17 @@ export default function AdminPanel() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("alanizAuth");
-    localStorage.removeItem("alanizUserId");
-    localStorage.removeItem("alanizUserType");
-    localStorage.removeItem("alanizUserName");
-    navigate("/login");
+    localStorage.removeItem('alanizAuth');
+    localStorage.removeItem('alanizUserId');
+    localStorage.removeItem('alanizUserType');
+    localStorage.removeItem('alanizUserName');
+    navigate('/login');
   };
 
   return (
     <div className="min-h-screen bg-alanizGreen-950 py-8">
       <div className="content-container">
+        
         {/* Header */}
         <div className="card-elegant mb-8">
           <div className="flex items-center justify-between">
@@ -311,11 +284,14 @@ export default function AdminPanel() {
                   Panel de Administración
                 </h1>
                 <p className="text-parchment-300">
-                  Gestión del sistema Casa Alaniz • Sistema funcional ✅
+                  Gestión del sistema Casa Alaniz • Cloudinary conectado ✅
                 </p>
               </div>
             </div>
-            <button onClick={handleLogout} className="btn-secondary">
+            <button
+              onClick={handleLogout}
+              className="btn-secondary"
+            >
               Cerrar Sesión
             </button>
           </div>
@@ -364,7 +340,9 @@ export default function AdminPanel() {
                 <h3 className="text-lg font-semibold text-alanizGold-600">
                   Storage
                 </h3>
-                <p className="text-2xl font-bold text-parchment-100">Local</p>
+                <p className="text-2xl font-bold text-parchment-100">
+                  Cloudinary
+                </p>
               </div>
             </div>
           </div>
@@ -399,12 +377,7 @@ export default function AdminPanel() {
                     type="text"
                     placeholder="12345678A"
                     value={newUser.dni}
-                    onChange={(e) =>
-                      setNewUser({
-                        ...newUser,
-                        dni: e.target.value.toUpperCase(),
-                      })
-                    }
+                    onChange={(e) => setNewUser({...newUser, dni: e.target.value.toUpperCase()})}
                     maxLength={9}
                     className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                                rounded-lg text-parchment-100 placeholder-parchment-400
@@ -419,9 +392,7 @@ export default function AdminPanel() {
                     type="text"
                     placeholder="Juan Alaniz López"
                     value={newUser.name}
-                    onChange={(e) =>
-                      setNewUser({ ...newUser, name: e.target.value })
-                    }
+                    onChange={(e) => setNewUser({...newUser, name: e.target.value})}
                     className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                                rounded-lg text-parchment-100 placeholder-parchment-400
                                focus:border-alanizGold-600"
@@ -433,12 +404,7 @@ export default function AdminPanel() {
                   </label>
                   <select
                     value={newUser.type}
-                    onChange={(e) =>
-                      setNewUser({
-                        ...newUser,
-                        type: e.target.value as "admin" | "user",
-                      })
-                    }
+                    onChange={(e) => setNewUser({...newUser, type: e.target.value as 'admin' | 'user'})}
                     className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                                rounded-lg text-parchment-100 focus:border-alanizGold-600"
                   >
@@ -448,7 +414,10 @@ export default function AdminPanel() {
                 </div>
               </div>
               <div className="flex space-x-4 mt-4">
-                <button onClick={handleCreateUser} className="btn-alaniz">
+                <button
+                  onClick={handleCreateUser}
+                  className="btn-alaniz"
+                >
                   Crear Usuario
                 </button>
                 <button
@@ -464,15 +433,12 @@ export default function AdminPanel() {
           {/* Lista de usuarios */}
           <div className="space-y-4">
             {users.map((user) => (
-              <div
-                key={user.dni}
-                className="bg-alanizGreen-900/30 rounded-lg p-4"
-              >
+              <div key={user.dni} className="bg-alanizGreen-900/30 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="w-10 h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
                       <span className="text-alanizGold-600">
-                        {user.type === "admin" ? "👑" : "👤"}
+                        {user.type === 'admin' ? '👑' : '👤'}
                       </span>
                     </div>
                     <div>
@@ -480,10 +446,8 @@ export default function AdminPanel() {
                         {user.name}
                       </h3>
                       <p className="text-sm text-parchment-400">
-                        DNI: {user.dni} •{" "}
-                        {user.type === "admin" ? "Administrador" : "Usuario"} •
-                        Creado:{" "}
-                        {new Date(user.createdDate).toLocaleDateString()}
+                        DNI: {user.dni} • Contraseña: {user.password} • {user.type === 'admin' ? 'Administrador' : 'Usuario'} • 
+                        Creado: {new Date(user.createdDate).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
@@ -494,7 +458,7 @@ export default function AdminPanel() {
                     >
                       📄 Documentos
                     </button>
-                    {user.type !== "admin" && (
+                    {user.type !== 'admin' && (
                       <button
                         onClick={() => handleDeleteUser(user.dni)}
                         className="px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
@@ -516,8 +480,7 @@ export default function AdminPanel() {
             <div className="bg-alanizGreen-900 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-display font-bold text-alanizGold-600">
-                  Documentos de{" "}
-                  {users.find((u) => u.dni === selectedUser)?.name}
+                  Documentos de {users.find(u => u.dni === selectedUser)?.name}
                 </h2>
                 <button
                   onClick={() => setShowDocumentManager(false)}
@@ -541,12 +504,7 @@ export default function AdminPanel() {
                       type="text"
                       placeholder="Nombramiento de Caballero"
                       value={documentForm.name}
-                      onChange={(e) =>
-                        setDocumentForm({
-                          ...documentForm,
-                          name: e.target.value,
-                        })
-                      }
+                      onChange={(e) => setDocumentForm({...documentForm, name: e.target.value})}
                       className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                                  rounded-lg text-parchment-100 placeholder-parchment-400
                                  focus:border-alanizGold-600"
@@ -558,12 +516,7 @@ export default function AdminPanel() {
                     </label>
                     <select
                       value={documentForm.type}
-                      onChange={(e) =>
-                        setDocumentForm({
-                          ...documentForm,
-                          type: e.target.value,
-                        })
-                      }
+                      onChange={(e) => setDocumentForm({...documentForm, type: e.target.value})}
                       className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                                  rounded-lg text-parchment-100 focus:border-alanizGold-600"
                     >
@@ -598,7 +551,7 @@ export default function AdminPanel() {
                       <span>Subiendo a Cloudinary...</span>
                     </div>
                   ) : (
-                    "☁️ Subir Documento"
+                    '☁️ Subir Documento'
                   )}
                 </button>
               </div>
@@ -608,37 +561,27 @@ export default function AdminPanel() {
                 <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
                   Documentos Existentes ({userDocuments.length})
                 </h3>
-
+                
                 {userDocuments.length === 0 ? (
                   <div className="text-center py-8">
-                    <div className="text-4xl text-alanizGold-600/30 mb-2">
-                      📄
-                    </div>
-                    <p className="text-parchment-400">
-                      No hay documentos para este usuario
-                    </p>
+                    <div className="text-4xl text-alanizGold-600/30 mb-2">📄</div>
+                    <p className="text-parchment-400">No hay documentos para este usuario</p>
                   </div>
                 ) : (
                   <div className="space-y-3">
                     {userDocuments.map((doc) => (
-                      <div
-                        key={doc.id}
-                        className="bg-alanizGreen-800/30 rounded-lg p-4"
-                      >
+                      <div key={doc.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3">
                             <div className="w-8 h-8 bg-red-500/20 rounded flex items-center justify-center">
                               <span className="text-red-400 text-sm">
-                                {doc.type === "Recompensas" ? "🏆" : "⚔️"}
+                                {doc.type === 'Recompensas' ? '🏆' : '⚔️'}
                               </span>
                             </div>
                             <div>
-                              <h4 className="font-medium text-alanizGold-600">
-                                {doc.name}
-                              </h4>
+                              <h4 className="font-medium text-alanizGold-600">{doc.name}</h4>
                               <p className="text-sm text-parchment-400">
-                                {doc.type} • {doc.size} • {doc.uploadDate} •
-                                Cloudinary
+                                {doc.type} • {doc.size} • {doc.uploadDate} • Cloudinary
                               </p>
                             </div>
                           </div>
@@ -678,25 +621,15 @@ export default function AdminPanel() {
           <div className="bg-alanizGreen-900/30 rounded-lg p-4">
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
-                <h4 className="font-semibold text-alanizGold-600 mb-2">
-                  Estado del Sistema
-                </h4>
+                <h4 className="font-semibold text-alanizGold-600 mb-2">Estado del Sistema</h4>
                 <p className="text-green-400">✅ Operativo</p>
-                <p className="text-parchment-400">
-                  Última actualización: {new Date().toLocaleString()}
-                </p>
+                <p className="text-parchment-400">Última actualización: {new Date().toLocaleString()}</p>
               </div>
               <div>
-                <h4 className="font-semibold text-alanizGold-600 mb-2">
-                  Almacenamiento
-                </h4>
+                <h4 className="font-semibold text-alanizGold-600 mb-2">Almacenamiento</h4>
                 <p className="text-parchment-400">☁️ Cloudinary Storage</p>
-                <p className="text-parchment-400">
-                  🔒 Documentos seguros en la nube
-                </p>
-                <p className="text-green-400 text-xs">
-                  Cloud Name: {CLOUDINARY_CLOUD_NAME}
-                </p>
+                <p className="text-parchment-400">🔒 Documentos seguros en la nube</p>
+                <p className="text-green-400 text-xs">Cloud Name: {CLOUDINARY_CLOUD_NAME}</p>
               </div>
             </div>
           </div>

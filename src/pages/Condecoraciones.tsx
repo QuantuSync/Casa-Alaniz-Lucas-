@@ -34,7 +34,7 @@ const condecoraciones: Condecoracion[] = [
     fundamento: 'Creada como segunda distinción en orden de precedencia, la Cruz del Honor y el Mérito es una condecoración destinada a destacar la conducta ejemplar, la integridad personal y el compromiso inquebrantable con los valores que la Casa Alaniz preserva desde generaciones. No es una recompensa material, sino la confirmación pública de que el portador ha obrado conforme a los más altos principios.',
     motivo: 'Se concede a quienes, mediante actos voluntarios o servicios desinteresados, hayan demostrado un compromiso activo y constante en beneficio de la Casa o de su comunidad cercana, siempre en concordancia con los valores de honor, respeto y nobleza que definen al linaje Alaniz.',
     descripcion: 'Su diseño presenta una cruz esmaltada en blanco marfil, cuyos brazos se extienden con firmeza en las cuatro direcciones, simbolizando la proyección de la virtud en todos los ámbitos de la vida. En el centro, una estrella dorada recuerda que los principios rectores deben brillar incluso en la oscuridad. La cinta combina tonos cálidos y terrosos, evocando la raíz y la fortaleza que unen a las personas de recto proceder.',
-    imagen: '/images/condecoraciones/HonoyMerito.png',
+    imagen: '/images/condecoraciones/HonoryMerito.png',
     orden: 2
   }
 ];

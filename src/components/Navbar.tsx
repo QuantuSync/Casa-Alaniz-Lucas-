@@ -18,12 +18,15 @@ const navigationItems = [
 const Logo = () => (
   <NavLink
     to="/"
-    className="flex items-center space-x-2 group transition-all duration-300"
+    className="flex items-center space-x-3 group transition-all duration-300"
   >
     <div className="relative flex items-center">
       <div
-        className="w-8 h-8 text-alanizGold-600 group-hover:text-alanizGold-500 
-                      transition-colors duration-300 drop-shadow-gold flex items-center justify-center text-xl"
+        className="w-10 h-10 bg-gradient-to-br from-alanizGold-500 to-alanizGold-700 
+                   rounded-full flex items-center justify-center text-alanizGreen-950 text-xl
+                   group-hover:from-alanizGold-400 group-hover:to-alanizGold-600
+                   transition-all duration-300 shadow-lg ring-2 ring-alanizGold-600/30
+                   group-hover:ring-alanizGold-500/50 group-hover:shadow-xl"
       >
         🛡️
       </div>
@@ -34,13 +37,15 @@ const Logo = () => (
     </div>
     <div className="hidden lg:flex flex-col justify-center">
       <h1
-        className="text-xl font-display font-bold text-alanizGold-600 
-                     group-hover:text-alanizGold-500 transition-colors duration-300
-                     drop-shadow-gold leading-tight mb-0"
+        className="text-xl font-display font-bold text-alanizGold-500 
+                     group-hover:text-alanizGold-400 transition-colors duration-300
+                     drop-shadow-lg leading-tight mb-0 tracking-wide"
       >
         Casa Alaniz
       </h1>
-      <p className="text-xs text-alanizGold-600/70 italic leading-none -mt-0.5">
+      <p className="text-xs text-alanizGold-500/70 italic leading-none -mt-0.5 
+                   group-hover:text-alanizGold-400/70 transition-colors duration-300
+                   font-light tracking-wider">
         Memoria Ardet
       </p>
     </div>

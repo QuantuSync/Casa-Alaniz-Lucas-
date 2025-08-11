@@ -22,10 +22,15 @@ const Logo = () => (
   >
     <div className="relative flex items-center">
       <div
-        className="w-8 h-8 text-alanizGold-600 group-hover:text-alanizGold-500 
-                      transition-colors duration-300 drop-shadow-gold flex items-center justify-center text-xl"
+        className="w-8 h-8 rounded overflow-hidden 
+                   group-hover:shadow-lg transition-all duration-300"
       >
-        🛡️
+        <img 
+          src="/src/assets/Miniatura.jpg" 
+          alt="Casa Alaniz"
+          className="w-full h-full object-cover transition-transform duration-300 
+                     group-hover:scale-110"
+        />
       </div>
     </div>
     <div className="hidden lg:flex items-baseline">

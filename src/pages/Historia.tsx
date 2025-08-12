@@ -157,7 +157,7 @@ export default function Historia() {
                 recuperadas y en la mejora de rutas comerciales interiores.
               </p>
               <p>
-                Es en este contexto donde se les otorga un señorío en el 
+                Es en este contexto donde se les otorga un señorío en el{' '}
                 <strong className="text-alanizGold-400 text-lg">Valle de Monterrey</strong>, una tierra de importancia 
                 estratégica y simbólica en Galicia, junto a la frontera portuguesa. Desde este enclave 
                 ejercen <em className="text-alanizGold-400">autoridad territorial, justicia menor y responsabilidad 
@@ -192,13 +192,13 @@ export default function Historia() {
             
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                Durante los siglos posteriores, la Casa Alaniz mantiene su posición como 
+                Durante los siglos posteriores, la Casa Alaniz mantiene su posición como{' '}
                 <strong className="text-alanizGold-400">familia noble menor</strong> con señorío propio, 
                 participando en la administración local, la protección del valle y el sostenimiento 
                 de su identidad territorial.
               </p>
               <p>
-                Aunque no forma parte de la alta nobleza cortesana, sí goza de 
+                Aunque no forma parte de la alta nobleza cortesana, sí goza de{' '}
                 <strong className="text-alanizGold-400">pleno reconocimiento como casa señorial</strong>. 
                 Su escudo original, hoy reconstruido, habría sido usado en sellos, banderas y armamento, 
                 y su linaje fue transmitido por vía directa.
@@ -277,7 +277,7 @@ export default function Historia() {
                 </p>
                 <p className="text-alanizGold-500 text-sm italic">
                   La sucesión del señorío del Valle de Monterrey recae en <strong>Abril</strong>, 
-                  la hija mayor y heredera legítima, quien junto a sus hermanas <strong>Diana</strong> y 
+                  la hija mayor y heredera legítima, quien junto a sus hermanas <strong>Diana</strong> y{' '}
                   <strong>Martina</strong>, representa la continuidad del linaje y la proyección futura 
                   de la Casa Alaniz.
                 </p>

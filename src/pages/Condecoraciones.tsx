@@ -248,7 +248,7 @@ export default function Condecoraciones() {
                 {/* Imagen de la condecoración */}
                 <div className="lg:col-span-1">
                   <div className="text-center">
-                    <div className="w-64 h-64 mx-auto mb-4 bg-gradient-to-br from-slate-50 to-stone-100 rounded-lg flex items-center justify-center overflow-hidden border-4 border-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 shadow-lg">
+                    <div className="w-64 h-64 mx-auto mb-4 bg-stone-50 rounded-lg flex items-center justify-center overflow-hidden border-4 border-yellow-400 shadow-lg">
                       <img
                         src={condecoracion.imagen}
                         alt={condecoracion.nombre}

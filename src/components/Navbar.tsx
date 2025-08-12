@@ -23,7 +23,7 @@ const Logo = () => (
     <div className="relative flex items-center">
       <div
         className="w-8 h-8 group-hover:scale-110 transition-transform duration-300 
-                   drop-shadow-lg flex items-center justify-center"
+                   drop-shadow-lg flex items-center justify-center treasure-glow"
       >
         <img 
           src="/SelloSinFondo.ico" 
@@ -32,11 +32,11 @@ const Logo = () => (
         />
       </div>
     </div>
-    <div className="hidden lg:flex items-baseline relative">
+    <div className="hidden lg:flex items-center relative min-h-[2rem]">
       <h1
         className="text-xl font-display font-semibold text-alanizGold-600 
                    group-hover:text-alanizGold-500 transition-colors duration-300
-                   drop-shadow-gold relative particles-text"
+                   drop-shadow-gold relative particles-text leading-none"
       >
         Casa Alaniz
       </h1>
@@ -219,6 +219,9 @@ export default function Navbar() {
         font-family: 'EB Garamond', serif !important;
         position: relative;
         text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: middle;
       }
       
       .particles-text::before,
@@ -233,18 +236,68 @@ export default function Navbar() {
           0 0 6px #ffd700,
           0 0 12px rgba(255, 215, 0, 0.6);
         pointer-events: none;
+        z-index: 10;
       }
       
       .particles-text::before {
-        top: -12px;
+        top: -8px;
         left: 15%;
         animation: orbit1 5s linear infinite;
       }
       
       .particles-text::after {
-        bottom: -12px;
+        top: -8px;
         right: 15%;
         animation: orbit2 7s linear infinite reverse;
+      }
+      
+      /* Efecto brillo latente para la imagen (cofre del tesoro) */
+      .treasure-glow {
+        position: relative;
+        overflow: visible;
+      }
+      
+      .treasure-glow::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: treasureGlow 3s ease-in-out infinite;
+        z-index: -1;
+      }
+      
+      .treasure-glow::after {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+        border-radius: 50%;
+        animation: treasureShimmer 4s linear infinite;
+        z-index: 1;
+        pointer-events: none;
+      }
+      
+      @keyframes treasureGlow {
+        0%, 100% { 
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        50% { 
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes treasureShimmer {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
       
       /* Partículas adicionales */
@@ -263,26 +316,26 @@ export default function Navbar() {
       
       @keyframes orbit1 {
         0% { 
-          transform: rotate(0deg) translateX(40px) rotate(0deg) scale(0.8);
+          transform: rotate(0deg) translateX(50px) rotate(0deg) scale(0.8);
           opacity: 0;
         }
         10% { opacity: 1; }
         90% { opacity: 1; }
         100% { 
-          transform: rotate(360deg) translateX(40px) rotate(-360deg) scale(1.2);
+          transform: rotate(360deg) translateX(50px) rotate(-360deg) scale(1.2);
           opacity: 0;
         }
       }
       
       @keyframes orbit2 {
         0% { 
-          transform: rotate(0deg) translateX(35px) rotate(0deg) scale(1);
+          transform: rotate(0deg) translateX(45px) rotate(0deg) scale(1);
           opacity: 0;
         }
         15% { opacity: 1; }
         85% { opacity: 1; }
         100% { 
-          transform: rotate(-360deg) translateX(35px) rotate(360deg) scale(0.6);
+          transform: rotate(-360deg) translateX(45px) rotate(360deg) scale(0.6);
           opacity: 0;
         }
       }
@@ -300,6 +353,11 @@ export default function Navbar() {
           0 0 16px rgba(255, 215, 0, 0.8);
       }
       
+      .group:hover .treasure-glow::before {
+        animation-duration: 2s;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.5) 0%, transparent 70%);
+      }
+      
       /* Para pantallas móviles - partículas más pequeñas */
       @media (max-width: 1024px) {
         .particles-text::before,
@@ -310,28 +368,35 @@ export default function Navbar() {
         
         @keyframes orbit1 {
           0% { 
-            transform: rotate(0deg) translateX(25px) rotate(0deg) scale(0.6);
+            transform: rotate(0deg) translateX(30px) rotate(0deg) scale(0.6);
             opacity: 0;
           }
           10% { opacity: 1; }
           90% { opacity: 1; }
           100% { 
-            transform: rotate(360deg) translateX(25px) rotate(-360deg) scale(1);
+            transform: rotate(360deg) translateX(30px) rotate(-360deg) scale(1);
             opacity: 0;
           }
         }
         
         @keyframes orbit2 {
           0% { 
-            transform: rotate(0deg) translateX(20px) rotate(0deg) scale(0.8);
+            transform: rotate(0deg) translateX(25px) rotate(0deg) scale(0.8);
             opacity: 0;
           }
           15% { opacity: 1; }
           85% { opacity: 1; }
           100% { 
-            transform: rotate(-360deg) translateX(20px) rotate(360deg) scale(0.4);
+            transform: rotate(-360deg) translateX(25px) rotate(360deg) scale(0.4);
             opacity: 0;
           }
+        }
+        
+        .treasure-glow::before {
+          top: -1px;
+          left: -1px;
+          right: -1px;
+          bottom: -1px;
         }
       }
     `;

@@ -158,7 +158,7 @@ export default function Home() {
           <div className="text-center space-y-8">
             
             {/* Escudo con animación */}
-            <div className="relative">
+            <div className="relative w-52 h-64 lg:w-64 lg:h-72 mx-auto">
               <div className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                 <img 
                   src={escudo} 

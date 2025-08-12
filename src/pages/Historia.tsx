@@ -277,8 +277,8 @@ export default function Historia() {
                   que, lejos de extinguirse, arde con renovada fuerza.
                 </p>
                 <p className="text-alanizGold-500 text-sm italic">
-                  La sucesión del señorío del Valle de Monterrey recae en <strong>Abril</strong>, 
-                  la hija mayor y heredera legítima, quien junto a sus hermanas <strong>Diana</strong> y{' '}
+                  La sucesión de la jefatura de la Casa Alaniz, históricamente vinculada al territorio del Valle de Monterrey, 
+                  recae en <strong>Abril</strong>, la hija mayor y heredera legítima, quien junto a sus hermanas <strong>Diana</strong> y{' '}
                   <strong>Martina</strong>, representa la continuidad del linaje y la proyección futura 
                   de la Casa Alaniz.
                 </p>

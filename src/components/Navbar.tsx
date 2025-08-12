@@ -14,7 +14,7 @@ const navigationItems = [
   { path: "/login", label: "Miembros", icon: "🛡️" },
 ] as const;
 
-// Componente del logo
+// Componente del logo con efecto de partículas
 const Logo = () => (
   <NavLink
     to="/"
@@ -32,11 +32,11 @@ const Logo = () => (
         />
       </div>
     </div>
-    <div className="hidden lg:flex items-baseline">
+    <div className="hidden lg:flex items-baseline relative">
       <h1
-        className="text-xl font-display font-bold text-alanizGold-600 
-                     group-hover:text-alanizGold-500 transition-colors duration-300
-                     drop-shadow-gold"
+        className="text-xl font-display font-semibold text-alanizGold-600 
+                   group-hover:text-alanizGold-500 transition-colors duration-300
+                   drop-shadow-gold relative particles-text"
       >
         Casa Alaniz
       </h1>
@@ -208,6 +208,139 @@ export default function Navbar() {
 
     return () => document.removeEventListener("keydown", handleEsc);
   }, [isMobileMenuOpen]);
+
+  // Añadir estilos CSS para las partículas
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
+      
+      .particles-text {
+        font-family: 'EB Garamond', serif !important;
+        position: relative;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+      }
+      
+      .particles-text::before,
+      .particles-text::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
+        border-radius: 50%;
+        box-shadow: 
+          0 0 6px #ffd700,
+          0 0 12px rgba(255, 215, 0, 0.6);
+        pointer-events: none;
+      }
+      
+      .particles-text::before {
+        top: -12px;
+        left: 15%;
+        animation: orbit1 5s linear infinite;
+      }
+      
+      .particles-text::after {
+        bottom: -12px;
+        right: 15%;
+        animation: orbit2 7s linear infinite reverse;
+      }
+      
+      /* Partículas adicionales */
+      .particles-text {
+        --particle1: '✦';
+        --particle2: '✦';
+      }
+      
+      .particles-text:hover::before {
+        animation-duration: 3s;
+      }
+      
+      .particles-text:hover::after {
+        animation-duration: 4s;
+      }
+      
+      @keyframes orbit1 {
+        0% { 
+          transform: rotate(0deg) translateX(40px) rotate(0deg) scale(0.8);
+          opacity: 0;
+        }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { 
+          transform: rotate(360deg) translateX(40px) rotate(-360deg) scale(1.2);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes orbit2 {
+        0% { 
+          transform: rotate(0deg) translateX(35px) rotate(0deg) scale(1);
+          opacity: 0;
+        }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { 
+          transform: rotate(-360deg) translateX(35px) rotate(360deg) scale(0.6);
+          opacity: 0;
+        }
+      }
+      
+      /* Efecto adicional al hacer hover en el logo completo */
+      .group:hover .particles-text::before {
+        box-shadow: 
+          0 0 8px #ffd700,
+          0 0 16px rgba(255, 215, 0, 0.8);
+      }
+      
+      .group:hover .particles-text::after {
+        box-shadow: 
+          0 0 8px #ffd700,
+          0 0 16px rgba(255, 215, 0, 0.8);
+      }
+      
+      /* Para pantallas móviles - partículas más pequeñas */
+      @media (max-width: 1024px) {
+        .particles-text::before,
+        .particles-text::after {
+          width: 3px;
+          height: 3px;
+        }
+        
+        @keyframes orbit1 {
+          0% { 
+            transform: rotate(0deg) translateX(25px) rotate(0deg) scale(0.6);
+            opacity: 0;
+          }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { 
+            transform: rotate(360deg) translateX(25px) rotate(-360deg) scale(1);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes orbit2 {
+          0% { 
+            transform: rotate(0deg) translateX(20px) rotate(0deg) scale(0.8);
+            opacity: 0;
+          }
+          15% { opacity: 1; }
+          85% { opacity: 1; }
+          100% { 
+            transform: rotate(-360deg) translateX(20px) rotate(360deg) scale(0.4);
+            opacity: 0;
+          }
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   return (
     <>

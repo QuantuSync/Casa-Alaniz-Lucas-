@@ -32,11 +32,12 @@ const Logo = () => (
         />
       </div>
     </div>
-    <div className="hidden lg:flex items-center relative">
+    <div className="hidden lg:flex items-center relative logo-text-container">
       <h1
         className="text-xl font-display font-semibold text-alanizGold-600 
                    group-hover:text-alanizGold-500 transition-colors duration-300
-                   drop-shadow-gold relative particles-text leading-none flex items-center h-8"
+                   drop-shadow-gold relative particles-text leading-none"
+        style={{ height: '32px', display: 'flex', alignItems: 'center' }}
       >
         Casa Alaniz
       </h1>
@@ -220,9 +221,6 @@ export default function Navbar() {
         position: relative;
         text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         white-space: nowrap;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
       
       /* Partícula 1 - Arriba izquierda */
@@ -261,39 +259,8 @@ export default function Navbar() {
         animation: orbit2 7s linear infinite reverse;
       }
       
-      /* Partículas adicionales usando el contenedor padre */
-      .particles-text {
-        overflow: visible;
-      }
-      
-      /* Crear partículas adicionales con JavaScript-like behavior usando CSS */
-      .group:hover .particles-text {
-        position: relative;
-      }
-      
-      .group .particles-text {
-        --particle3-x: 0;
-        --particle3-y: 0;
-        --particle4-x: 0;
-        --particle4-y: 0;
-      }
-      
-      /* Partícula 3 - Lado izquierdo */
-      .particles-text {
-        position: relative;
-      }
-      
-      .particles-text:before,
-      .particles-text:after {
-        animation-fill-mode: both;
-      }
-      
-      /* Crear más partículas usando un wrapper adicional */
-      .group {
-        position: relative;
-      }
-      
-      .group::before {
+      /* Partículas adicionales SOLO para el contenedor del logo */
+      .logo-text-container::before {
         content: '';
         position: absolute;
         width: 3px;
@@ -305,14 +272,14 @@ export default function Navbar() {
           0 0 8px rgba(255, 215, 0, 0.5);
         pointer-events: none;
         z-index: 10;
-        left: 42px;
+        left: -10px;
         top: 50%;
         transform: translateY(-50%);
         animation: orbit3 6s ease-in-out infinite;
         opacity: 0.8;
       }
       
-      .group::after {
+      .logo-text-container::after {
         content: '';
         position: absolute;
         width: 3px;
@@ -324,7 +291,7 @@ export default function Navbar() {
           0 0 8px rgba(255, 215, 0, 0.5);
         pointer-events: none;
         z-index: 10;
-        right: -20px;
+        right: -15px;
         top: 30%;
         animation: orbit4 4s ease-in-out infinite reverse;
         opacity: 0.7;
@@ -432,7 +399,7 @@ export default function Navbar() {
         }
       }
       
-      /* Efectos al hacer hover */
+      /* Efectos al hacer hover SOLO en el grupo del logo */
       .group:hover .particles-text::before {
         animation-duration: 3s;
         box-shadow: 
@@ -447,12 +414,12 @@ export default function Navbar() {
           0 0 16px rgba(255, 215, 0, 0.8);
       }
       
-      .group:hover::before {
+      .group:hover .logo-text-container::before {
         animation-duration: 3s;
         transform: translateY(-50%) scale(1.3);
       }
       
-      .group:hover::after {
+      .group:hover .logo-text-container::after {
         animation-duration: 2s;
         transform: scale(1.3);
       }
@@ -470,18 +437,18 @@ export default function Navbar() {
           height: 3px;
         }
         
-        .group::before,
-        .group::after {
+        .logo-text-container::before,
+        .logo-text-container::after {
           width: 2px;
           height: 2px;
         }
         
-        .group::before {
-          left: 35px;
+        .logo-text-container::before {
+          left: -8px;
         }
         
-        .group::after {
-          right: -15px;
+        .logo-text-container::after {
+          right: -10px;
         }
         
         @keyframes orbit1 {

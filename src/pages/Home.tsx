@@ -158,8 +158,20 @@ export default function Home() {
           <div className="text-center space-y-8">
             
             {/* Escudo con animación */}
-            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto">
+            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto mb-12">
               <div className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+                <img 
+                  src={escudo} 
+                  alt="Escudo de la Casa Alaniz" 
+                  className="w-full h-full object-contain rounded-lg shadow-2xl image-glow"
+                  onLoad={() => setImageLoaded(true)}
+                />
+              </div>
+              
+              {/* Efectos de resplandor */}
+              <div className="absolute inset-0 bg-alanizGold-600/20 rounded-lg blur-xl -z-10 animate-pulse"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-alanizGold-600/10 to-transparent rounded-full blur-2xl -z-20"></div>
+            </div>-0 scale-95'}`}>
                 <img 
                   src={escudo} 
                   alt="Escudo de la Casa Alaniz" 

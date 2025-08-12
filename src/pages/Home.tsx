@@ -171,18 +171,6 @@ export default function Home() {
               {/* Efectos de resplandor */}
               <div className="absolute inset-0 bg-alanizGold-600/20 rounded-lg blur-xl -z-10 animate-pulse"></div>
               <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-alanizGold-600/10 to-transparent rounded-full blur-2xl -z-20"></div>
-            </div>-0 scale-95'}`}>
-                <img 
-                  src={escudo} 
-                  alt="Escudo de la Casa Alaniz" 
-                  className="w-full h-full object-contain rounded-lg shadow-2xl image-glow"
-                  onLoad={() => setImageLoaded(true)}
-                />
-              </div>
-              
-              {/* Efectos de resplandor */}
-              <div className="absolute inset-0 bg-alanizGold-600/20 rounded-lg blur-xl -z-10 animate-pulse"></div>
-              <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-alanizGold-600/10 to-transparent rounded-full blur-2xl -z-20"></div>
             </div>
             
             {/* Título principal */}

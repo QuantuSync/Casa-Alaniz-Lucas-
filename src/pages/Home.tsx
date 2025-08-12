@@ -163,8 +163,7 @@ export default function Home() {
                 <img 
                   src={escudo} 
                   alt="Escudo de la Casa Alaniz" 
-                  className="w-40 h-48 lg:w-48 lg:h-56 mx-auto object-cover rounded-lg shadow-2xl 
-                             image-glow border-2 border-alanizGold-600/30"
+                  className="w-50 h-60 lg:w-60 lg:h-70 mx-auto object-cover rounded-lg shadow-2xl image-glow"
                   onLoad={() => setImageLoaded(true)}
                 />
               </div>

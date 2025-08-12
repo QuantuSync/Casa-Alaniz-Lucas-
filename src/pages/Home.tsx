@@ -158,7 +158,7 @@ export default function Home() {
           <div className="text-center space-y-8">
             
             {/* Escudo con animación */}
-            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto mb-16">
+            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto mb-20">
               <div className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                 <img 
                   src={escudo} 
@@ -174,7 +174,7 @@ export default function Home() {
             </div>
             
             {/* Título principal */}
-            <div className="space-y-4">
+            <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-alanizGold-600 
                              animate-fade-in-up drop-shadow-gold">
                 Casa Alaniz

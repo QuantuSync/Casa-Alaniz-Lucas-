@@ -14,7 +14,7 @@ const navigationItems = [
   { path: "/login", label: "Miembros", icon: "🛡️" },
 ] as const;
 
-// Componente del logo con efecto de partículas
+// Componente del logo
 const Logo = () => (
   <NavLink
     to="/"
@@ -23,7 +23,7 @@ const Logo = () => (
     <div className="relative flex items-center">
       <div
         className="w-10 h-10 group-hover:scale-110 transition-transform duration-300 
-                   drop-shadow-lg flex items-center justify-center treasure-glow"
+                   drop-shadow-lg flex items-center justify-center subtle-glow"
       >
         <img 
           src="/SelloSinFondo.ico" 
@@ -32,11 +32,11 @@ const Logo = () => (
         />
       </div>
     </div>
-    <div className="hidden lg:flex items-center relative logo-text-container">
+    <div className="hidden lg:flex items-center relative">
       <h1
         className="text-xl font-display font-semibold text-alanizGold-600 
                    group-hover:text-alanizGold-500 transition-colors duration-300
-                   drop-shadow-gold relative particles-text leading-none"
+                   drop-shadow-gold relative leading-none"
         style={{ height: '40px', display: 'flex', alignItems: 'center' }}
       >
         Casa Alaniz
@@ -214,299 +214,58 @@ export default function Navbar() {
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
-      
-      .particles-text {
-        font-family: 'EB Garamond', serif !important;
-        position: relative;
-        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        white-space: nowrap;
-      }
-      
-      /* Partícula 1 - Arriba izquierda */
-      .particles-text::before {
-        content: '';
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
-        border-radius: 50%;
-        box-shadow: 
-          0 0 6px #ffd700,
-          0 0 12px rgba(255, 215, 0, 0.6);
-        pointer-events: none;
-        z-index: 10;
-        top: -10px;
-        left: 10%;
-        animation: orbit1 5s linear infinite;
-      }
-      
-      /* Partícula 2 - Arriba derecha */
-      .particles-text::after {
-        content: '';
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
-        border-radius: 50%;
-        box-shadow: 
-          0 0 6px #ffd700,
-          0 0 12px rgba(255, 215, 0, 0.6);
-        pointer-events: none;
-        z-index: 10;
-        top: -10px;
-        right: 10%;
-        animation: orbit2 7s linear infinite reverse;
-      }
-      
-      /* Partículas adicionales SOLO para el contenedor del logo */
-      .logo-text-container::before {
-        content: '';
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
-        border-radius: 50%;
-        box-shadow: 
-          0 0 4px #ffd700,
-          0 0 8px rgba(255, 215, 0, 0.5);
-        pointer-events: none;
-        z-index: 10;
-        left: -10px;
-        top: 50%;
-        transform: translateY(-50%);
-        animation: orbit3 6s ease-in-out infinite;
-        opacity: 0.8;
-      }
-      
-      .logo-text-container::after {
-        content: '';
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
-        border-radius: 50%;
-        box-shadow: 
-          0 0 4px #ffd700,
-          0 0 8px rgba(255, 215, 0, 0.5);
-        pointer-events: none;
-        z-index: 10;
-        right: -15px;
-        top: 30%;
-        animation: orbit4 4s ease-in-out infinite reverse;
-        opacity: 0.7;
-      }
-      
-      /* Efecto resplandor para la imagen */
-      .treasure-glow {
+      /* Efecto brillo sutil para la imagen */
+      .subtle-glow {
         position: relative;
         overflow: visible;
       }
       
-      .treasure-glow::before {
+      .subtle-glow::before {
         content: '';
         position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
         background: none;
-        border: 2px solid rgba(255, 215, 0, 0.4);
+        box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
         border-radius: 50%;
-        filter: blur(2px);
-        animation: glowPulse 3s ease-in-out infinite;
+        opacity: 0.7;
+        animation: subtleGlow 4s ease-in-out infinite;
         z-index: -1;
-      }
-      
-      .treasure-glow::after {
-        content: '';
-        position: absolute;
-        top: -6px;
-        left: -6px;
-        right: -6px;
-        bottom: -6px;
-        background: none;
-        box-shadow: 
-          0 0 10px rgba(255, 215, 0, 0.3),
-          0 0 20px rgba(255, 215, 0, 0.2),
-          0 0 30px rgba(255, 215, 0, 0.1);
-        border-radius: 50%;
-        animation: outerGlow 4s ease-in-out infinite;
-        z-index: -2;
         pointer-events: none;
       }
       
-      @keyframes glowPulse {
+      @keyframes subtleGlow {
         0%, 100% { 
-          border-color: rgba(255, 215, 0, 0.3);
-          transform: scale(1);
+          box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+          opacity: 0.7;
         }
         50% { 
-          border-color: rgba(255, 215, 0, 0.6);
-          transform: scale(1.1);
-        }
-      }
-      
-      @keyframes outerGlow {
-        0%, 100% { 
-          box-shadow: 
-            0 0 10px rgba(255, 215, 0, 0.2),
-            0 0 20px rgba(255, 215, 0, 0.1),
-            0 0 30px rgba(255, 215, 0, 0.05);
-        }
-        50% { 
-          box-shadow: 
-            0 0 15px rgba(255, 215, 0, 0.4),
-            0 0 30px rgba(255, 215, 0, 0.3),
-            0 0 45px rgba(255, 215, 0, 0.2);
-        }
-      }
-      
-      /* Animaciones de órbitas para las partículas */
-      @keyframes orbit1 {
-        0% { 
-          transform: rotate(0deg) translateX(50px) rotate(0deg) scale(0.8);
-          opacity: 0;
-        }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { 
-          transform: rotate(360deg) translateX(50px) rotate(-360deg) scale(1.2);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes orbit2 {
-        0% { 
-          transform: rotate(0deg) translateX(45px) rotate(0deg) scale(1);
-          opacity: 0;
-        }
-        15% { opacity: 1; }
-        85% { opacity: 1; }
-        100% { 
-          transform: rotate(-360deg) translateX(45px) rotate(360deg) scale(0.6);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes orbit3 {
-        0%, 100% { 
-          transform: translateY(-50%) translateX(0px) scale(0.8);
-          opacity: 0.6;
-        }
-        33% { 
-          transform: translateY(-70%) translateX(15px) scale(1.1);
-          opacity: 1;
-        }
-        66% { 
-          transform: translateY(-30%) translateX(-10px) scale(0.9);
-          opacity: 0.8;
-        }
-      }
-      
-      @keyframes orbit4 {
-        0%, 100% { 
-          transform: translateY(0px) translateX(0px) scale(0.9);
-          opacity: 0.5;
-        }
-        50% { 
-          transform: translateY(-25px) translateX(15px) scale(1.2);
+          box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
           opacity: 1;
         }
       }
       
-      /* Efectos al hacer hover SOLO en el grupo del logo */
-      .group:hover .particles-text::before {
-        animation-duration: 3s;
-        box-shadow: 
-          0 0 8px #ffd700,
-          0 0 16px rgba(255, 215, 0, 0.8);
-      }
-      
-      .group:hover .particles-text::after {
-        animation-duration: 4s;
-        box-shadow: 
-          0 0 8px #ffd700,
-          0 0 16px rgba(255, 215, 0, 0.8);
-      }
-      
-      .group:hover .logo-text-container::before {
-        animation-duration: 3s;
-        transform: translateY(-50%) scale(1.3);
-      }
-      
-      .group:hover .logo-text-container::after {
+      /* Efecto al hacer hover */
+      .group:hover .subtle-glow::before {
         animation-duration: 2s;
-        transform: scale(1.3);
-      }
-      
-      .group:hover .treasure-glow::before {
-        animation-duration: 2s;
-        border-color: rgba(255, 215, 0, 0.8);
-        transform: scale(1.2);
-      }
-      
-      .group:hover .treasure-glow::after {
-        animation-duration: 2.5s;
-        box-shadow: 
-          0 0 20px rgba(255, 215, 0, 0.5),
-          0 0 40px rgba(255, 215, 0, 0.4),
-          0 0 60px rgba(255, 215, 0, 0.3);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        opacity: 1;
       }
       
       /* Para pantallas móviles */
       @media (max-width: 1024px) {
-        .particles-text::before,
-        .particles-text::after {
-          width: 3px;
-          height: 3px;
-        }
-        
-        .logo-text-container::before,
-        .logo-text-container::after {
-          width: 2px;
-          height: 2px;
-        }
-        
-        .logo-text-container::before {
-          left: -8px;
-        }
-        
-        .logo-text-container::after {
-          right: -10px;
-        }
-        
-        @keyframes orbit1 {
-          0% { 
-            transform: rotate(0deg) translateX(30px) rotate(0deg) scale(0.6);
-            opacity: 0;
-          }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { 
-            transform: rotate(360deg) translateX(30px) rotate(-360deg) scale(1);
-            opacity: 0;
-          }
-        }
-        
-        @keyframes orbit2 {
-          0% { 
-            transform: rotate(0deg) translateX(25px) rotate(0deg) scale(0.8);
-            opacity: 0;
-          }
-          15% { opacity: 1; }
-          85% { opacity: 1; }
-          100% { 
-            transform: rotate(-360deg) translateX(25px) rotate(360deg) scale(0.4);
-            opacity: 0;
-          }
-        }
-        
-        .treasure-glow::before {
+        .subtle-glow::before {
           top: -1px;
           left: -1px;
           right: -1px;
           bottom: -1px;
+          box-shadow: 0 0 6px rgba(212, 175, 55, 0.15);
+        }
+        
+        .group:hover .subtle-glow::before {
+          box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
       }
     `;

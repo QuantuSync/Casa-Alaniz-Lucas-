@@ -158,12 +158,12 @@ export default function Home() {
           <div className="text-center space-y-8">
             
             {/* Escudo con animación */}
-            <div className="relative w-52 h-64 lg:w-64 lg:h-72 mx-auto">
+            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto">
               <div className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                 <img 
                   src={escudo} 
                   alt="Escudo de la Casa Alaniz" 
-                  className="w-50 h-60 lg:w-60 lg:h-70 mx-auto object-cover rounded-lg shadow-2xl image-glow"
+                  className="w-full h-full object-contain rounded-lg shadow-2xl image-glow"
                   onLoad={() => setImageLoaded(true)}
                 />
               </div>

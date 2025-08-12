@@ -32,11 +32,11 @@ const Logo = () => (
         />
       </div>
     </div>
-    <div className="hidden lg:flex items-center relative min-h-[2rem]">
+    <div className="hidden lg:flex items-center relative">
       <h1
         className="text-xl font-display font-semibold text-alanizGold-600 
                    group-hover:text-alanizGold-500 transition-colors duration-300
-                   drop-shadow-gold relative particles-text leading-none"
+                   drop-shadow-gold relative particles-text leading-none flex items-center h-8"
       >
         Casa Alaniz
       </h1>
@@ -220,11 +220,30 @@ export default function Navbar() {
         position: relative;
         text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         white-space: nowrap;
-        display: inline-block;
-        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       
-      .particles-text::before,
+      /* Partícula 1 - Arriba izquierda */
+      .particles-text::before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
+        border-radius: 50%;
+        box-shadow: 
+          0 0 6px #ffd700,
+          0 0 12px rgba(255, 215, 0, 0.6);
+        pointer-events: none;
+        z-index: 10;
+        top: -10px;
+        left: 10%;
+        animation: orbit1 5s linear infinite;
+      }
+      
+      /* Partícula 2 - Arriba derecha */
       .particles-text::after {
         content: '';
         position: absolute;
@@ -237,18 +256,78 @@ export default function Navbar() {
           0 0 12px rgba(255, 215, 0, 0.6);
         pointer-events: none;
         z-index: 10;
-      }
-      
-      .particles-text::before {
-        top: -8px;
-        left: 15%;
-        animation: orbit1 5s linear infinite;
-      }
-      
-      .particles-text::after {
-        top: -8px;
-        right: 15%;
+        top: -10px;
+        right: 10%;
         animation: orbit2 7s linear infinite reverse;
+      }
+      
+      /* Partículas adicionales usando el contenedor padre */
+      .particles-text {
+        overflow: visible;
+      }
+      
+      /* Crear partículas adicionales con JavaScript-like behavior usando CSS */
+      .group:hover .particles-text {
+        position: relative;
+      }
+      
+      .group .particles-text {
+        --particle3-x: 0;
+        --particle3-y: 0;
+        --particle4-x: 0;
+        --particle4-y: 0;
+      }
+      
+      /* Partícula 3 - Lado izquierdo */
+      .particles-text {
+        position: relative;
+      }
+      
+      .particles-text:before,
+      .particles-text:after {
+        animation-fill-mode: both;
+      }
+      
+      /* Crear más partículas usando un wrapper adicional */
+      .group {
+        position: relative;
+      }
+      
+      .group::before {
+        content: '';
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
+        border-radius: 50%;
+        box-shadow: 
+          0 0 4px #ffd700,
+          0 0 8px rgba(255, 215, 0, 0.5);
+        pointer-events: none;
+        z-index: 10;
+        left: 42px;
+        top: 50%;
+        transform: translateY(-50%);
+        animation: orbit3 6s ease-in-out infinite;
+        opacity: 0.8;
+      }
+      
+      .group::after {
+        content: '';
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, transparent 100%);
+        border-radius: 50%;
+        box-shadow: 
+          0 0 4px #ffd700,
+          0 0 8px rgba(255, 215, 0, 0.5);
+        pointer-events: none;
+        z-index: 10;
+        right: -20px;
+        top: 30%;
+        animation: orbit4 4s ease-in-out infinite reverse;
+        opacity: 0.7;
       }
       
       /* Efecto brillo latente para la imagen (cofre del tesoro) */
@@ -300,20 +379,7 @@ export default function Navbar() {
         100% { transform: rotate(360deg); }
       }
       
-      /* Partículas adicionales */
-      .particles-text {
-        --particle1: '✦';
-        --particle2: '✦';
-      }
-      
-      .particles-text:hover::before {
-        animation-duration: 3s;
-      }
-      
-      .particles-text:hover::after {
-        animation-duration: 4s;
-      }
-      
+      /* Animaciones de órbitas para las partículas */
       @keyframes orbit1 {
         0% { 
           transform: rotate(0deg) translateX(50px) rotate(0deg) scale(0.8);
@@ -340,17 +406,55 @@ export default function Navbar() {
         }
       }
       
-      /* Efecto adicional al hacer hover en el logo completo */
+      @keyframes orbit3 {
+        0%, 100% { 
+          transform: translateY(-50%) translateX(0px) scale(0.8);
+          opacity: 0.6;
+        }
+        33% { 
+          transform: translateY(-70%) translateX(15px) scale(1.1);
+          opacity: 1;
+        }
+        66% { 
+          transform: translateY(-30%) translateX(-10px) scale(0.9);
+          opacity: 0.8;
+        }
+      }
+      
+      @keyframes orbit4 {
+        0%, 100% { 
+          transform: translateY(0px) translateX(0px) scale(0.9);
+          opacity: 0.5;
+        }
+        50% { 
+          transform: translateY(-25px) translateX(15px) scale(1.2);
+          opacity: 1;
+        }
+      }
+      
+      /* Efectos al hacer hover */
       .group:hover .particles-text::before {
+        animation-duration: 3s;
         box-shadow: 
           0 0 8px #ffd700,
           0 0 16px rgba(255, 215, 0, 0.8);
       }
       
       .group:hover .particles-text::after {
+        animation-duration: 4s;
         box-shadow: 
           0 0 8px #ffd700,
           0 0 16px rgba(255, 215, 0, 0.8);
+      }
+      
+      .group:hover::before {
+        animation-duration: 3s;
+        transform: translateY(-50%) scale(1.3);
+      }
+      
+      .group:hover::after {
+        animation-duration: 2s;
+        transform: scale(1.3);
       }
       
       .group:hover .treasure-glow::before {
@@ -358,12 +462,26 @@ export default function Navbar() {
         background: radial-gradient(circle, rgba(255, 215, 0, 0.5) 0%, transparent 70%);
       }
       
-      /* Para pantallas móviles - partículas más pequeñas */
+      /* Para pantallas móviles */
       @media (max-width: 1024px) {
         .particles-text::before,
         .particles-text::after {
           width: 3px;
           height: 3px;
+        }
+        
+        .group::before,
+        .group::after {
+          width: 2px;
+          height: 2px;
+        }
+        
+        .group::before {
+          left: 35px;
+        }
+        
+        .group::after {
+          right: -15px;
         }
         
         @keyframes orbit1 {

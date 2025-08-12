@@ -22,7 +22,7 @@ const Logo = () => (
   >
     <div className="relative flex items-center">
       <div
-        className="w-8 h-8 group-hover:scale-110 transition-transform duration-300 
+        className="w-10 h-10 group-hover:scale-110 transition-transform duration-300 
                    drop-shadow-lg flex items-center justify-center treasure-glow"
       >
         <img 
@@ -37,7 +37,7 @@ const Logo = () => (
         className="text-xl font-display font-semibold text-alanizGold-600 
                    group-hover:text-alanizGold-500 transition-colors duration-300
                    drop-shadow-gold relative particles-text leading-none"
-        style={{ height: '32px', display: 'flex', alignItems: 'center' }}
+        style={{ height: '40px', display: 'flex', alignItems: 'center' }}
       >
         Casa Alaniz
       </h1>
@@ -297,7 +297,7 @@ export default function Navbar() {
         opacity: 0.7;
       }
       
-      /* Efecto brillo latente para la imagen (cofre del tesoro) */
+      /* Efecto resplandor para la imagen */
       .treasure-glow {
         position: relative;
         overflow: visible;
@@ -306,44 +306,60 @@ export default function Navbar() {
       .treasure-glow::before {
         content: '';
         position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        background: none;
+        border: 2px solid rgba(255, 215, 0, 0.4);
         border-radius: 50%;
-        animation: treasureGlow 3s ease-in-out infinite;
+        filter: blur(2px);
+        animation: glowPulse 3s ease-in-out infinite;
         z-index: -1;
       }
       
       .treasure-glow::after {
         content: '';
         position: absolute;
-        top: -1px;
-        left: -1px;
-        right: -1px;
-        bottom: -1px;
-        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        background: none;
+        box-shadow: 
+          0 0 10px rgba(255, 215, 0, 0.3),
+          0 0 20px rgba(255, 215, 0, 0.2),
+          0 0 30px rgba(255, 215, 0, 0.1);
         border-radius: 50%;
-        animation: treasureShimmer 4s linear infinite;
-        z-index: 1;
+        animation: outerGlow 4s ease-in-out infinite;
+        z-index: -2;
         pointer-events: none;
       }
       
-      @keyframes treasureGlow {
+      @keyframes glowPulse {
         0%, 100% { 
+          border-color: rgba(255, 215, 0, 0.3);
           transform: scale(1);
-          opacity: 0.6;
         }
         50% { 
-          transform: scale(1.2);
-          opacity: 1;
+          border-color: rgba(255, 215, 0, 0.6);
+          transform: scale(1.1);
         }
       }
       
-      @keyframes treasureShimmer {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      @keyframes outerGlow {
+        0%, 100% { 
+          box-shadow: 
+            0 0 10px rgba(255, 215, 0, 0.2),
+            0 0 20px rgba(255, 215, 0, 0.1),
+            0 0 30px rgba(255, 215, 0, 0.05);
+        }
+        50% { 
+          box-shadow: 
+            0 0 15px rgba(255, 215, 0, 0.4),
+            0 0 30px rgba(255, 215, 0, 0.3),
+            0 0 45px rgba(255, 215, 0, 0.2);
+        }
       }
       
       /* Animaciones de órbitas para las partículas */
@@ -426,7 +442,16 @@ export default function Navbar() {
       
       .group:hover .treasure-glow::before {
         animation-duration: 2s;
-        background: radial-gradient(circle, rgba(255, 215, 0, 0.5) 0%, transparent 70%);
+        border-color: rgba(255, 215, 0, 0.8);
+        transform: scale(1.2);
+      }
+      
+      .group:hover .treasure-glow::after {
+        animation-duration: 2.5s;
+        box-shadow: 
+          0 0 20px rgba(255, 215, 0, 0.5),
+          0 0 40px rgba(255, 215, 0, 0.4),
+          0 0 60px rgba(255, 215, 0, 0.3);
       }
       
       /* Para pantallas móviles */

@@ -157,8 +157,9 @@ export default function Historia() {
                 recuperadas y en la mejora de rutas comerciales interiores.
               </p>
               <p>
-                Es en este contexto donde se les otorga un señorío en el{' '}
-                <strong className="text-alanizGold-400 text-lg">Valle de Monterrey</strong>, una tierra de importancia 
+                Es en este contexto donde se les otorga una <strong className="text-alanizGold-500">posesión señorial 
+                en el territorio del{' '}
+                <strong className="text-alanizGold-400 text-lg">Valle de Monterrey</strong></strong>, una tierra de importancia 
                 estratégica y simbólica en Galicia, junto a la frontera portuguesa. Desde este enclave 
                 ejercen <em className="text-alanizGold-400">autoridad territorial, justicia menor y responsabilidad 
                 sobre la defensa del territorio</em>.
@@ -193,7 +194,7 @@ export default function Historia() {
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
                 Durante los siglos posteriores, la Casa Alaniz mantiene su posición como{' '}
-                <strong className="text-alanizGold-400">familia noble menor</strong> con señorío propio, 
+                <strong className="text-alanizGold-400">familia noble menor</strong> con posesión señorial propia, 
                 participando en la administración local, la protección del valle y el sostenimiento 
                 de su identidad territorial.
               </p>

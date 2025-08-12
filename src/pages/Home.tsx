@@ -147,7 +147,7 @@ export default function Home() {
     <div className="min-h-screen">
       
       {/* Hero Section */}
-      <section className="relative py-8 lg:py-16 overflow-hidden">
+      <section className="relative py-4 lg:py-8 overflow-hidden">
         {/* Background decorativo */}
         <div className="absolute inset-0 bg-gradient-to-b from-alanizGreen-900/50 to-alanizGreen-950"></div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-alanizGold-600/10 rounded-full blur-3xl animate-float"></div>
@@ -158,7 +158,7 @@ export default function Home() {
           <div className="text-center space-y-8">
             
             {/* Escudo con animación */}
-            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto mb-12">
+            <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto mb-16">
               <div className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                 <img 
                   src={escudo} 

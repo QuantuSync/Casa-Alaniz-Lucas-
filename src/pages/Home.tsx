@@ -147,7 +147,7 @@ export default function Home() {
     <div className="min-h-screen">
       
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
+      <section className="relative py-8 lg:py-16 overflow-hidden">
         {/* Background decorativo */}
         <div className="absolute inset-0 bg-gradient-to-b from-alanizGreen-900/50 to-alanizGreen-950"></div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-alanizGold-600/10 rounded-full blur-3xl animate-float"></div>

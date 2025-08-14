@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-// Configuración de navegación - AÑADIDO "Chat Familiar"
+// Configuración de navegación - AÑADIDA "Condecoraciones"
 const navigationItems = [
   { path: "/", label: "Inicio", icon: "🏠" },
   { path: "/historia", label: "Historia", icon: "📜" },
@@ -9,7 +9,6 @@ const navigationItems = [
   { path: "/legado", label: "Legado", icon: "👑" },
   { path: "/documentos", label: "Documentos", icon: "📚" },
   { path: "/condecoraciones", label: "Condecoraciones", icon: "🏆" },
-  { path: "/chat", label: "Chat Familiar", icon: "💬", highlight: true },
   { path: "/sede-electronica", label: "Sede Electrónica", icon: "🏛️" },
   { path: "/contacto", label: "Contacto", icon: "📧" },
   { path: "/login", label: "Miembros", icon: "🛡️" },
@@ -51,13 +50,11 @@ const NavItem = ({
   path,
   label,
   icon,
-  highlight,
   onClick,
 }: {
   path: string;
   label: string;
   icon: string;
-  highlight?: boolean;
   onClick?: () => void;
 }) => (
   <NavLink
@@ -69,23 +66,16 @@ const NavItem = ({
       ${
         isActive
           ? "text-alanizGold-500 bg-alanizGold-600/10"
-          : highlight
-          ? "text-alanizGold-400 hover:text-alanizGold-300 hover:bg-alanizGold-600/10"
           : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/5"
       }
     `}
   >
     {({ isActive }) => (
       <>
-        <span className={`text-sm transition-transform duration-300 group-hover:scale-110 ${
-          highlight && !isActive ? 'animate-pulse' : ''
-        }`}>
+        <span className="text-sm transition-transform duration-300 group-hover:scale-110">
           {icon}
         </span>
         <span className="text-sm font-semibold tracking-wide">{label}</span>
-        {highlight && !isActive && (
-          <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-        )}
         {isActive && (
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
@@ -163,7 +153,6 @@ const MobileMenu = ({
                 path={item.path}
                 label={item.label}
                 icon={item.icon}
-                highlight={item.highlight}
                 onClick={onClose}
               />
             ))}
@@ -310,7 +299,6 @@ export default function Navbar() {
                   path={item.path}
                   label={item.label}
                   icon={item.icon}
-                  highlight={item.highlight}
                 />
               ))}
             </div>

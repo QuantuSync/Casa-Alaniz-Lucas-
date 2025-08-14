@@ -1,51 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
   <url>
     <loc>https://www.casaalaniz.es/</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>1.0</priority>
     <changefreq>monthly</changefreq>
+    <!-- Casa Alaniz - Archivo Heráldico Familiar oficial. Custodios de la memoria familiar desde 1117. Historia de la noble familia Alaniz, símbolos heráldicos, documentos históricos, genealogía, legado familiar español, tradiciones aristocráticas y preservación del patrimonio heráldico. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/historia</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
+    <!-- Historia completa de la Casa Alaniz desde 1117. Cronología detallada del linaje familiar, acontecimientos históricos relevantes, personajes destacados de la familia Alaniz, evolución del apellido a través de los siglos, batallas, honores, títulos nobiliarios y contribuciones históricas de la Casa. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/simbolos</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <!-- Símbolos heráldicos y escudo de armas de la Casa Alaniz. Significado de los emblemas familiares, colores heráldicos, blasones, simbología medieval, interpretación de elementos heráldicos, tradición armorial española y herencia simbólica de la familia. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/legado</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <!-- Legado y patrimonio de la Casa Alaniz. Contribuciones culturales, sociales e históricas de la familia. Tradiciones familiares, valores transmitidos a través de generaciones, influencia en la sociedad española, mecenazgo, obras benéficas y preservación del patrimonio cultural. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/documentos</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+    <!-- Archivo documental histórico de la Casa Alaniz. Documentos originales, pergaminos, cartas patentes, ejecutorias de hidalguía, testamentos históricos, registros genealógicos, correspondencia familiar, títulos nobiliarios y manuscritos conservados en el archivo familiar. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/condecoraciones</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+    <!-- Condecoraciones, honores y reconocimientos otorgados a miembros de la Casa Alaniz. Medallas militares, distinciones civiles, órdenes de caballería, cruces de honor, reconocimientos institucionales y premios recibidos por la familia a lo largo de la historia. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/sede-electronica</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <!-- Sede electrónica oficial de la Casa Alaniz. Servicios digitales para miembros de la familia, consultas genealógicas, solicitud de documentación, certificaciones heráldicas, trámites administrativos del archivo familiar y comunicación oficial con la Casa. -->
   </url>
+  
   <url>
     <loc>https://www.casaalaniz.es/contacto</loc>
     <lastmod>2025-08-14</lastmod>
     <priority>0.5</priority>
     <changefreq>yearly</changefreq>
+    <!-- Contacto oficial con la Casa Alaniz. Información para consultas genealógicas, investigación heráldica, solicitudes de documentación, colaboraciones académicas, consultas sobre el archivo familiar y comunicación con los custodios del legado Alaniz. -->
   </url>
+  
 </urlset>

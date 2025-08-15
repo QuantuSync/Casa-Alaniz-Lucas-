@@ -176,7 +176,8 @@ export default function Simbolos() {
                       <span className="mr-2">🐺</span> El Lobo Guardián
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Figura central que simboliza la <em>inteligencia antes que la fuerza</em>. 
+                      Figura central que simboliza la{' '}
+                      <em>inteligencia antes que la fuerza</em>. 
                       Representa la vigilancia perpetua, la valentía sin temeridad y la fidelidad 
                       inquebrantable al honor familiar. El lobo no es salvaje, es noble.
                     </p>
@@ -189,7 +190,8 @@ export default function Simbolos() {
                     <p className="text-sm text-parchment-300">
                       Situada en el corazón del escudo, esta esfera dorada representa la llama 
                       interior que nunca se extingue. Simboliza la pasión por preservar la memoria 
-                      y el fuego sagrado del lema <em>"Memoria Ardet"</em>.
+                      y el fuego sagrado del lema{' '}
+                      <em>"Memoria Ardet"</em>.
                     </p>
                   </div>
                 </div>
@@ -200,8 +202,10 @@ export default function Simbolos() {
                       <span className="mr-2">⭐</span> Las Tres Estrellas
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Representan las luminarias del linaje vivo: <strong>Abril</strong> la heredera del señorío, 
-                      <strong>Diana</strong> la valiente, y <strong>Martina</strong> la protectora. 
+                      Representan las luminarias del linaje vivo:{' '}
+                      <strong>Abril</strong>{' '}la heredera del señorío,{' '}
+                      <strong>Diana</strong>{' '}la valiente, y{' '}
+                      <strong>Martina</strong>{' '}la protectora. 
                       Cada estrella simboliza la continuidad y la esperanza del futuro de la Casa.
                     </p>
                   </div>
@@ -224,11 +228,11 @@ export default function Simbolos() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="flex items-center space-x-2">
                     <div className="w-4 h-4 bg-alanizGreen-600 rounded-full border border-alanizGold-600"></div>
-                    <span className="text-parchment-300"><strong>Verde Alaniz:</strong> Esperanza, honor, lealtad</span>
+                    <span className="text-parchment-300"><strong>Verde Alaniz:</strong>{' '}Esperanza, honor, lealtad</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-4 h-4 bg-alanizGold-600 rounded-full border border-alanizGreen-600"></div>
-                    <span className="text-parchment-300"><strong>Oro Señorial:</strong> Excelencia, sabiduría, nobleza</span>
+                    <span className="text-parchment-300"><strong>Oro Señorial:</strong>{' '}Excelencia, sabiduría, nobleza</span>
                   </div>
                 </div>
               </div>
@@ -256,8 +260,10 @@ export default function Simbolos() {
                 <div className="space-y-3">
                   <h5 className="font-display font-semibold text-alanizGold-500">Simbolismo de Colores</h5>
                   <p className="text-sm text-parchment-300">
-                    El <strong className="text-alanizGold-400">verde</strong> representa la esperanza eterna y la 
-                    conexión con la tierra ancestral del Valle de Monterrey. El <strong className="text-alanizGold-400">oro</strong> 
+                    El{' '}
+                    <strong className="text-alanizGold-400">verde</strong>{' '}representa la esperanza eterna y la 
+                    conexión con la tierra ancestral del Valle de Monterrey. El{' '}
+                    <strong className="text-alanizGold-400">oro</strong>{' '}
                     simboliza la excelencia y la nobleza de nuestros principios.
                   </p>
                 </div>
@@ -266,8 +272,10 @@ export default function Simbolos() {
               <div className="bg-alanizGold-600/10 rounded-lg p-4 mt-4">
                 <h6 className="font-display font-semibold text-alanizGold-500 mb-2">Las Tres Estrellas</h6>
                 <p className="text-sm text-parchment-300">
-                  Como en el escudo, las tres estrellas de la bandera representan a <strong>Abril</strong>, 
-                  <strong>Diana</strong> y <strong>Martina</strong>, las luminarias que aseguran 
+                  Como en el escudo, las tres estrellas de la bandera representan a{' '}
+                  <strong>Abril</strong>,{' '}
+                  <strong>Diana</strong>{' '}y{' '}
+                  <strong>Martina</strong>, las luminarias que aseguran 
                   la continuidad del linaje y proyectan la Casa Alaniz hacia el futuro.
                 </p>
               </div>
@@ -290,7 +298,8 @@ export default function Simbolos() {
                     </h5>
                     <p className="text-sm text-parchment-300">
                       La piedra central del anillo es el mismo orbe de ámbar que aparece en el escudo. 
-                      Esta gema única simboliza la llama interior del lema <em>"Memoria Ardet"</em> y 
+                      Esta gema única simboliza la llama interior del lema{' '}
+                      <em>"Memoria Ardet"</em> y 
                       representa la autoridad ininterrumpida del Señor de la Casa Alaniz.
                     </p>
                   </div>

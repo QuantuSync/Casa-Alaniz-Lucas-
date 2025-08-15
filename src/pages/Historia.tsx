@@ -207,10 +207,58 @@ export default function Historia() {
             </div>
           </div>
 
+          {/* Tradición Militar Moderna - 2011-2025 */}
+          <div className="card-elegant observe-me opacity-0 translate-y-8" 
+               style={{ animationDelay: '1000ms' }}>
+            <div className="flex items-start space-x-6 mb-6">
+              <div className="flex-shrink-0">
+                <div className="inline-flex items-center justify-center w-14 h-14 
+                                bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full shadow-lg">
+                  <span className="text-white text-xl">🎖️</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center space-x-3 mb-3">
+                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold 
+                                   bg-alanizGold-600 text-alanizGreen-950">
+                    2011 - 2025
+                  </span>
+                  <div className="h-px flex-1 bg-alanizGold-600/30"></div>
+                </div>
+                <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-4">
+                  Tradición Militar y Formación de Valores
+                </h3>
+              </div>
+            </div>
+            
+            <div className="space-y-4 text-parchment-200 leading-relaxed">
+              <p>
+                Desde el año <strong className="text-alanizGold-500">2011</strong>, la Casa Alaniz ha desarrollado 
+                una marcada <strong className="text-alanizGold-400">tradición militar</strong> que honra el legado 
+                ancestral de sus antepasados como ingenieros y estrategas militares. Esta tradición no se 
+                limita al ámbito castrense, sino que se extiende como filosofía de vida basada en la 
+                <em className="text-alanizGold-400">disciplina, el honor y el servicio</em>.
+              </p>
+              <p>
+                Paralelamente, la Casa ha asumido un <strong className="text-alanizGold-500">fuerte compromiso 
+                con la formación en valores de los jóvenes</strong>, entendiendo que la verdadera nobleza 
+                se manifiesta en el servicio a las futuras generaciones. A través de principios como la 
+                <em className="text-alanizGold-400">integridad, el liderazgo responsable y la excelencia personal</em>, 
+                se prepara el camino hacia la refundación formal del linaje.
+              </p>
+              <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30 mt-4">
+                <p className="text-alanizGold-400 text-sm italic">
+                  "El verdadero valor no reside en la espada, sino en el corazón que la empuña 
+                  al servicio de la justicia y la formación de las generaciones venideras."
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Renacimiento - Siglo XXI */}
           <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 
                           border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1000ms' }}>
+               style={{ animationDelay: '1200ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
@@ -288,7 +336,7 @@ export default function Historia() {
 
           {/* Cita final inspiracional */}
           <div className="text-center mt-16 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1200ms' }}>
+               style={{ animationDelay: '1400ms' }}>
             <div className="bg-alanizGreen-800/50 rounded-xl p-8 border border-alanizGold-600/20 
                             backdrop-blur-sm shadow-elegant">
               <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">

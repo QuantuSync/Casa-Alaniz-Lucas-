@@ -7,28 +7,28 @@ const featuredSections = [
   {
     icon: '📚',
     title: 'Historia Familiar',
-    description: 'Descubre la rica crónica de los Alaniz desde 1117 d.C., con relatos de honor, valor y legado.',
+    description: 'Descubre la rica crónica de la Casa Alaniz desde el siglo XII, con relatos de honor, valor y legado señorial.',
     link: '/historia',
     color: 'from-blue-500 to-blue-600'
   },
   {
     icon: '🛡️',
     title: 'Símbolos Heráldicos',
-    description: 'Explora el significado del escudo, bandera y anillo que identifican nuestra noble casa.',
+    description: 'Explora el significado del escudo, bandera y anillo que identifican a nuestra noble casa señorial.',
     link: '/simbolos',
     color: 'from-green-500 to-green-600'
   },
   {
     icon: '👑',
-    title: 'El Legado Vivo',
-    description: 'Conoce cómo el legado de la Casa Alaniz continúa guiando a las nuevas generaciones.',
+    title: 'El Legado Inmutable',
+    description: 'Conoce cómo el legado territorial y militar de la Casa Alaniz perdura a través de los siglos.',
     link: '/legado',
     color: 'from-purple-500 to-purple-600'
   },
   {
     icon: '📜',
     title: 'Archivo Documental',
-    description: 'Accede a documentos históricos, cartas y tratados que narran nuestra historia.',
+    description: 'Accede a documentos históricos, cartas y tratados que narran nuestra historia señorial.',
     link: '/documentos',
     color: 'from-amber-500 to-amber-600'
   }
@@ -194,15 +194,15 @@ export default function Home() {
               <p className="text-lg md:text-xl text-parchment-200 leading-relaxed animate-fade-in-up"
                  style={{ animationDelay: '200ms' }}>
                 Bienvenido al archivo heráldico oficial de la Casa Alaniz. Durante más de 
-                novecientos años, hemos sido custodios de la memoria familiar, preservando 
-                nuestro legado para las generaciones futuras.
+                novecientos años, hemos sido una casa señorial con tradición militar, 
+                preservando nuestro legado territorial y familiar para las generaciones futuras.
               </p>
               
               <p className="text-base md:text-lg text-parchment-300 leading-relaxed animate-fade-in-up"
                  style={{ animationDelay: '400ms' }}>
-                Desde las brumas del año 1117, cuando <em>Eslogar</em>, el "Lobo Guardián", 
-                protegía los valles septentrionales, nuestra casa ha mantenido vivos los 
-                valores de honor, valor y unión con la tierra ancestral.
+                Desde el siglo XII, cuando nuestros ancestros servían como ingenieros y estrategas militares, 
+                la Casa Alaniz ha mantenido vivos los valores de honor, disciplina y la responsabilidad 
+                señorial sobre el <em className="text-alanizGold-400">Valle de Monterrey</em>.
               </p>
             </div>
             
@@ -251,7 +251,7 @@ export default function Home() {
             <div className="divider-ornamental"></div>
             <p className="text-lg text-parchment-300 max-w-2xl mx-auto">
               Explora los diferentes aspectos de la historia, símbolos y documentos 
-              que conforman el rico patrimonio de la Casa Alaniz.
+              que conforman el rico patrimonio señorial de la Casa Alaniz.
             </p>
           </div>
           
@@ -286,8 +286,9 @@ export default function Home() {
                 ¿Formas parte de la Casa Alaniz?
               </h2>
               <p className="text-parchment-300 max-w-2xl mx-auto">
-                Si eres descendiente de nuestra noble casa o necesitas información sobre 
-                documentos genealógicos, no dudes en contactar con nuestra administración.
+                Si eres descendiente de nuestra casa señorial o necesitas información sobre 
+                documentos genealógicos y territoriales, no dudes en contactar con la administración 
+                de la Casa bajo la jefatura del Señor de la Casa Alaniz.
               </p>
             </div>
             

@@ -68,14 +68,14 @@ export default function Legado() {
                 El <strong className="text-alanizGold-500">Valle de Monterrey</strong> representa mucho más que una posesión; 
                 constituye el corazón territorial de la Casa Alaniz, una responsabilidad señorial que ha pasado de 
                 generación en generación desde el siglo XV. Este valle fronterizo con Portugal simboliza 
-                la <em className="text-alanizGold-400">autoridad territorial, la justicia menor y la defensa del territorio</em> 
+                la <em className="text-alanizGold-400">autoridad territorial, la justicia menor y la defensa del territorio</em>{' '}
                 que define nuestra naturaleza señorial.
               </p>
               <p>
                 La herencia territorial conlleva no solo derechos, sino deberes sagrados: la protección de 
                 quienes habitan bajo nuestro amparo, la administración justa y la preservación de la paz 
-                en nuestras tierras. <strong className="text-alanizGold-500">Abril</strong>, como heredera legítima, 
-                asume esta responsabilidad ancestral que conecta el pasado medieval con el presente.
+                en nuestras tierras. El <strong className="text-alanizGold-500">Señor de la Casa Alaniz</strong> ostenta 
+                actualmente esta responsabilidad ancestral que conecta el pasado medieval con el presente.
               </p>
             </div>
           </div>
@@ -273,11 +273,10 @@ export default function Legado() {
             
             <div className="space-y-4 text-parchment-100 leading-relaxed">
               <p>
-                La <strong className="text-alanizGold-400">sucesión en Abril</strong> como heredera legítima 
-                del señorío trasciende un acto meramente simbólico, constituyendo la culminación natural de ocho siglos 
-                de transmisión directa del linaje. Junto a sus hermanas <strong className="text-alanizGold-400">Diana</strong> y{' '}
-                <strong className="text-alanizGold-400">Martina</strong>, representa la garantía de que el legado 
-                Alaniz perdurará y se proyectará con renovada fuerza hacia el futuro.
+                La <strong className="text-alanizGold-400">sucesión del señorío</strong> trasciende un acto meramente simbólico, 
+                constituyendo la culminación natural de ocho siglos de transmisión directa del linaje. 
+                Bajo la actual jefatura del <strong className="text-alanizGold-400">Señor de la Casa Alaniz</strong>, 
+                se garantiza que el legado perdurará y se proyectará con renovada fuerza hacia el futuro.
               </p>
               <p>
                 Esta continuidad trasciende lo genealógico para convertirse en <em className="text-alanizGold-400">responsabilidad 

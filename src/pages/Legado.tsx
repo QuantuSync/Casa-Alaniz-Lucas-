@@ -65,8 +65,8 @@ export default function Legado() {
             
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                El <strong className="text-alanizGold-500">Valle de Monterrey</strong> representa mucho más que una posesión; 
-                constituye el corazón territorial de la Casa Alaniz, una responsabilidad señorial que ha pasado de 
+                El <strong className="text-alanizGold-500">Valle de Monterrey</strong> constituye mucho más que una posesión; 
+                representa el corazón territorial de la Casa Alaniz, una responsabilidad señorial que ha pasado de 
                 generación en generación desde el siglo XV. Este valle fronterizo con Portugal simboliza 
                 la <em className="text-alanizGold-400">autoridad territorial, la justicia menor y la defensa del territorio</em>{' '}
                 que define nuestra naturaleza señorial.

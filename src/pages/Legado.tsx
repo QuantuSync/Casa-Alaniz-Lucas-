@@ -65,8 +65,8 @@ export default function Legado() {
             
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                El <strong className="text-alanizGold-500">Valle de Monterrey</strong> no es simplemente una posesión; 
-                es el corazón territorial de la Casa Alaniz, una responsabilidad señorial que ha pasado de 
+                El <strong className="text-alanizGold-500">Valle de Monterrey</strong> representa mucho más que una posesión; 
+                constituye el corazón territorial de la Casa Alaniz, una responsabilidad señorial que ha pasado de 
                 generación en generación desde el siglo XV. Este valle fronterizo con Portugal simboliza 
                 la <em className="text-alanizGold-400">autoridad territorial, la justicia menor y la defensa del territorio</em> 
                 que define nuestra naturaleza señorial.
@@ -107,8 +107,8 @@ export default function Legado() {
               </p>
               <p>
                 La <strong className="text-alanizGold-500">tradición militar moderna</strong>, renovada desde 2011, 
-                honra este legado ancestral adaptándolo a los tiempos presentes. No se trata de nostalgia, 
-                sino de la aplicación práctica de principios eternos: disciplina, estrategia, honor y servicio.
+                honra este legado ancestral adaptándolo a los tiempos presentes. Lejos de tratarse de nostalgia, 
+                representa la aplicación práctica de principios eternos: disciplina, estrategia, honor y servicio.
               </p>
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30 mt-6">
@@ -156,8 +156,8 @@ export default function Legado() {
             
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                El <strong className="text-alanizGold-500">escudo de armas reconstituido</strong> en 2025 no es una 
-                creación caprichosa, sino la recuperación formal de símbolos que han definido nuestra 
+                El <strong className="text-alanizGold-500">escudo de armas reconstituido</strong> en 2025 trasciende una 
+                creación caprichosa, constituyendo la recuperación formal de símbolos que han definido nuestra 
                 identidad durante siglos. Cada elemento porta significado profundo y conecta el presente 
                 con la memoria ancestral.
               </p>
@@ -231,16 +231,16 @@ export default function Legado() {
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
                 <em className="text-alanizGold-400 text-xl">"Memoria Ardet"</em> — "La memoria arde" — 
-                no es simplemente un lema, sino la filosofía fundamental que guía cada acción de la Casa Alaniz. 
+                trasciende un simple lema, constituyendo la filosofía fundamental que guía cada acción de la Casa Alaniz. 
                 Esta llama interior impulsa la preservación consciente de nuestro legado y la transmisión 
                 responsable a las generaciones futuras.
               </p>
               <p>
                 El <strong className="text-alanizGold-500">compromiso con la formación de los jóvenes</strong> constituye 
-                la expresión práctica de este legado. Entendemos que la verdadera nobleza no reside en 
-                títulos vacíos, sino en la capacidad de forjar caracteres íntegros basados en{' '}
+                la expresión práctica de este legado. Entendemos que la verdadera nobleza reside 
+                en la capacidad de forjar caracteres íntegros basados en{' '}
                 <em className="text-alanizGold-400">la disciplina, el honor, la integridad, el liderazgo responsable 
-                y la excelencia personal</em>.
+                y la excelencia personal</em>, jamás en títulos vacíos.
               </p>
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30 mt-6">
@@ -274,10 +274,10 @@ export default function Legado() {
             <div className="space-y-4 text-parchment-100 leading-relaxed">
               <p>
                 La <strong className="text-alanizGold-400">sucesión en Abril</strong> como heredera legítima 
-                del señorío no es un acto meramente simbólico, sino la culminación natural de ocho siglos 
+                del señorío trasciende un acto meramente simbólico, constituyendo la culminación natural de ocho siglos 
                 de transmisión directa del linaje. Junto a sus hermanas <strong className="text-alanizGold-400">Diana</strong> y{' '}
                 <strong className="text-alanizGold-400">Martina</strong>, representa la garantía de que el legado 
-                Alaniz no solo perdurará, sino que se proyectará con renovada fuerza hacia el futuro.
+                Alaniz perdurará y se proyectará con renovada fuerza hacia el futuro.
               </p>
               <p>
                 Esta continuidad trasciende lo genealógico para convertirse en <em className="text-alanizGold-400">responsabilidad 

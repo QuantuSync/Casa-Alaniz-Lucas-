@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-// Configuración de navegación - AÑADIDA "Día de la Casa"
-const navigationItems = [
+// Configuración de navegación - REORGANIZADA EN DOS NIVELES
+const primaryNavigation = [
   { path: "/", label: "Inicio", icon: "🏠" },
   { path: "/historia", label: "Historia", icon: "📜" },
   { path: "/simbolos", label: "Símbolos", icon: "⚔️" },
   { path: "/legado", label: "Legado", icon: "👑" },
+  { path: "/contacto", label: "Contacto", icon: "📧" },
+  { path: "/login", label: "Miembros", icon: "🛡️" },
+] as const;
+
+const secondaryNavigation = [
   { path: "/documentos", label: "Documentos", icon: "📚" },
   { path: "/condecoraciones", label: "Condecoraciones", icon: "🏆" },
   { path: "/dia-casa", label: "Día de la Casa", icon: "🎖️" },
   { path: "/sede-electronica", label: "Sede Electrónica", icon: "🏛️" },
-  { path: "/contacto", label: "Contacto", icon: "📧" },
-  { path: "/login", label: "Miembros", icon: "🛡️" },
 ] as const;
 
 // Componente del logo
@@ -52,11 +55,13 @@ const NavItem = ({
   label,
   icon,
   onClick,
+  isSecondary = false,
 }: {
   path: string;
   label: string;
   icon: string;
   onClick?: () => void;
+  isSecondary?: boolean;
 }) => (
   <NavLink
     to={path}
@@ -64,6 +69,7 @@ const NavItem = ({
     className={({ isActive }) => `
       relative flex items-center space-x-2 px-3 py-2 rounded-lg
       font-medium transition-all duration-300 group
+      ${isSecondary ? 'text-xs' : 'text-sm'}
       ${
         isActive
           ? "text-alanizGold-500 bg-alanizGold-600/10"
@@ -73,10 +79,14 @@ const NavItem = ({
   >
     {({ isActive }) => (
       <>
-        <span className="text-sm transition-transform duration-300 group-hover:scale-110">
+        <span className={`transition-transform duration-300 group-hover:scale-110 ${
+          isSecondary ? 'text-xs' : 'text-sm'
+        }`}>
           {icon}
         </span>
-        <span className="text-sm font-semibold tracking-wide">{label}</span>
+        <span className={`font-semibold tracking-wide ${
+          isSecondary ? 'text-xs' : 'text-sm'
+        }`}>{label}</span>
         {isActive && (
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
@@ -146,17 +156,41 @@ const MobileMenu = ({
         </div>
 
         {/* Navigation */}
-        <nav className="p-6">
-          <div className="space-y-2">
-            {navigationItems.map((item) => (
-              <NavItem
-                key={item.path}
-                path={item.path}
-                label={item.label}
-                icon={item.icon}
-                onClick={onClose}
-              />
-            ))}
+        <nav className="p-6 space-y-6">
+          {/* Primary Navigation */}
+          <div>
+            <h3 className="text-sm font-semibold text-alanizGold-600/60 uppercase tracking-wider mb-3">
+              Navegación Principal
+            </h3>
+            <div className="space-y-2">
+              {primaryNavigation.map((item) => (
+                <NavItem
+                  key={item.path}
+                  path={item.path}
+                  label={item.label}
+                  icon={item.icon}
+                  onClick={onClose}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Secondary Navigation */}
+          <div>
+            <h3 className="text-sm font-semibold text-alanizGold-600/60 uppercase tracking-wider mb-3">
+              Archivo & Ceremonias
+            </h3>
+            <div className="space-y-2">
+              {secondaryNavigation.map((item) => (
+                <NavItem
+                  key={item.path}
+                  path={item.path}
+                  label={item.label}
+                  icon={item.icon}
+                  onClick={onClose}
+                />
+              ))}
+            </div>
           </div>
         </nav>
 
@@ -288,13 +322,14 @@ export default function Navbar() {
                     }`}
       >
         <div className="content-container">
-          <nav className="flex items-center justify-between h-16 lg:h-20">
+          {/* Navbar principal */}
+          <nav className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
             <Logo />
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Primary Level */}
             <div className="hidden lg:flex items-center space-x-1 ml-12">
-              {navigationItems.map((item) => (
+              {primaryNavigation.map((item) => (
                 <NavItem
                   key={item.path}
                   path={item.path}
@@ -315,6 +350,23 @@ export default function Navbar() {
               <span className="block w-6 h-6 text-xl">☰</span>
             </button>
           </nav>
+
+          {/* Secondary Navigation Bar */}
+          <div className="hidden lg:block border-t border-alanizGold-600/10">
+            <nav className="flex items-center justify-center py-2">
+              <div className="flex items-center space-x-1">
+                {secondaryNavigation.map((item) => (
+                  <NavItem
+                    key={item.path}
+                    path={item.path}
+                    label={item.label}
+                    icon={item.icon}
+                    isSecondary={true}
+                  />
+                ))}
+              </div>
+            </nav>
+          </div>
         </div>
       </header>
 

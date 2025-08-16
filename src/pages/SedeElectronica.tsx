@@ -33,6 +33,170 @@ export default function SedeElectronica() {
   const [supabaseConnected, setSupabaseConnected] = useState(false);
   const navigate = useNavigate();
 
+  // Añadir estilos CSS necesarios
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .card-elegant {
+        background: rgba(26, 46, 26, 0.8);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        backdrop-filter: blur(8px);
+        box-shadow: 
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .btn-alaniz {
+        background: linear-gradient(135deg, #d4af37, #b8941f);
+        color: #1a2e1a;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-alaniz:hover {
+        background: linear-gradient(135deg, #b8941f, #d4af37);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+      }
+
+      .btn-alaniz:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-secondary {
+        background: rgba(212, 175, 55, 0.1);
+        color: #d4af37;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(212, 175, 55, 0.2);
+        border-color: rgba(212, 175, 55, 0.5);
+      }
+
+      .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .content-container {
+          padding: 0 2rem;
+        }
+        
+        .card-elegant {
+          padding: 2rem;
+        }
+      }
+
+      .text-alanizGold-600 {
+        color: #d4af37;
+      }
+
+      .text-alanizGold-500 {
+        color: #e6c547;
+      }
+
+      .text-parchment-100 {
+        color: #f5f3e7;
+      }
+
+      .text-parchment-200 {
+        color: #e8e4d3;
+      }
+
+      .text-parchment-300 {
+        color: #dbd5bf;
+      }
+
+      .text-parchment-400 {
+        color: #cdc5ab;
+      }
+
+      .text-parchment-500 {
+        color: #b8ad91;
+      }
+
+      .text-green-400 {
+        color: #4ade80;
+      }
+
+      .text-yellow-400 {
+        color: #facc15;
+      }
+
+      .text-red-400 {
+        color: #f87171;
+      }
+
+      .text-blue-400 {
+        color: #60a5fa;
+      }
+
+      .bg-alanizGreen-950 {
+        background-color: #0a1a0a;
+      }
+
+      .bg-alanizGreen-900 {
+        background-color: #1a2e1a;
+      }
+
+      .bg-alanizGreen-800 {
+        background-color: #2a3e2a;
+      }
+
+      .bg-alanizGold-600 {
+        background-color: #d4af37;
+      }
+
+      .font-display {
+        font-family: 'Playfair Display', serif;
+      }
+
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     loadUserDocuments();
   }, []);
@@ -232,7 +396,7 @@ export default function SedeElectronica() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950">
         <div className="text-center space-y-4">
-          <div className="w-12 h-12 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="text-alanizGold-600">Cargando documentos...</p>
         </div>
       </div>
@@ -242,11 +406,11 @@ export default function SedeElectronica() {
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950 p-4">
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-4 max-w-md mx-auto">
           <div className="text-6xl text-red-400 mb-4">⚠️</div>
           <h2 className="text-xl font-semibold text-red-400">Error al cargar</h2>
           <p className="text-parchment-300">{error}</p>
-          <div className="space-x-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button onClick={() => window.location.reload()} className="btn-alaniz">
               Reintentar
             </button>
@@ -260,23 +424,23 @@ export default function SedeElectronica() {
   }
 
   return (
-    <div className="min-h-screen bg-alanizGreen-950 py-8">
+    <div className="min-h-screen bg-alanizGreen-950 py-4 md:py-8">
       <div className="content-container">
         {/* Header */}
-        <div className="card-elegant mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-alanizGold-600 rounded-full flex items-center justify-center">
-                <span className="text-alanizGreen-950 text-xl">🏛️</span>
+        <div className="card-elegant mb-6 md:mb-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-6 space-y-4 lg:space-y-0">
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-alanizGold-600 rounded-full flex items-center justify-center mx-auto sm:mx-0">
+                <span className="text-alanizGreen-950 text-lg md:text-xl">🏛️</span>
               </div>
-              <div>
-                <h1 className="text-2xl font-display font-bold text-alanizGold-600">
+              <div className="text-center sm:text-left">
+                <h1 className="text-xl md:text-2xl font-display font-bold text-alanizGold-600">
                   Sede Electrónica
                 </h1>
-                <p className="text-parchment-300">
+                <p className="text-parchment-300 text-sm md:text-base">
                   Bienvenido, {userInfo?.name}
                 </p>
-                <div className="flex items-center space-x-2 mt-1">
+                <div className="flex items-center justify-center sm:justify-start space-x-2 mt-1">
                   <div className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
                   <span className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
                     {supabaseConnected ? 'Sistema global' : 'Modo local'}
@@ -284,31 +448,31 @@ export default function SedeElectronica() {
                 </div>
               </div>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <button
                 onClick={() => testSupabaseConnection()}
-                className="btn-secondary text-sm"
+                className="btn-secondary text-sm w-full sm:w-auto"
               >
                 🔄 Test
               </button>
-              <button onClick={handleLogout} className="btn-secondary">
+              <button onClick={handleLogout} className="btn-secondary w-full sm:w-auto">
                 Cerrar Sesión
               </button>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-alanizGreen-900/30 rounded-lg p-4">
-              <h3 className="font-semibold text-alanizGold-600 mb-2">DNI</h3>
-              <p className="text-parchment-300">{userInfo?.id || "N/A"}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+            <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 text-center">
+              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">DNI</h3>
+              <p className="text-parchment-300 text-sm md:text-base">{userInfo?.id || "N/A"}</p>
             </div>
-            <div className="bg-alanizGreen-900/30 rounded-lg p-4">
-              <h3 className="font-semibold text-alanizGold-600 mb-2">Documentos</h3>
-              <p className="text-parchment-300">{documents.length}</p>
+            <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 text-center">
+              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">Documentos</h3>
+              <p className="text-parchment-300 text-sm md:text-base">{documents.length}</p>
             </div>
-            <div className="bg-alanizGreen-900/30 rounded-lg p-4">
-              <h3 className="font-semibold text-alanizGold-600 mb-2">Estado</h3>
-              <p className={supabaseConnected ? "text-green-400" : "text-yellow-400"}>
+            <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 text-center">
+              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">Estado</h3>
+              <p className={`text-sm md:text-base ${supabaseConnected ? "text-green-400" : "text-yellow-400"}`}>
                 {supabaseConnected ? 'Global' : 'Local'}
               </p>
             </div>
@@ -317,40 +481,40 @@ export default function SedeElectronica() {
 
         {/* Documentos */}
         <div className="card-elegant">
-          <h2 className="text-xl font-display font-bold text-alanizGold-600 mb-6">
+          <h2 className="text-lg md:text-xl font-display font-bold text-alanizGold-600 mb-4 md:mb-6 text-center">
             Mis Documentos
           </h2>
 
           {documents.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl text-alanizGold-600/30 mb-4">📄</div>
-              <h3 className="text-lg font-medium text-alanizGold-600 mb-2">
+            <div className="text-center py-8 md:py-12">
+              <div className="text-4xl md:text-6xl text-alanizGold-600/30 mb-4">📄</div>
+              <h3 className="text-base md:text-lg font-medium text-alanizGold-600 mb-2">
                 No hay documentos disponibles
               </h3>
-              <p className="text-parchment-400">
+              <p className="text-parchment-400 text-sm md:text-base px-4">
                 Los documentos aparecerán aquí cuando sean asignados por la administración.
               </p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               {documents.map((doc) => (
                 <div
                   key={doc.id}
-                  className="bg-alanizGreen-900/30 rounded-lg p-4 hover:bg-alanizGreen-900/50 transition-colors"
+                  className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 hover:bg-alanizGreen-900/50 transition-colors"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-10 h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
-                        <span className="text-alanizGold-600">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
+                    <div className="flex items-start md:items-center space-x-3 md:space-x-4 flex-1">
+                      <div className="w-8 h-8 md:w-10 md:h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-alanizGold-600 text-sm md:text-base">
                           {doc.tipo === "Recompensas" ? "🏆" : 
                            doc.tipo === "Nombramientos" ? "⚔️" : "📄"}
                         </span>
                       </div>
-                      <div>
-                        <h3 className="font-medium text-alanizGold-600">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-medium text-alanizGold-600 text-sm md:text-base break-words">
                           {doc.nombre}
                         </h3>
-                        <p className="text-sm text-parchment-400">
+                        <p className="text-xs md:text-sm text-parchment-400 break-words">
                           {doc.tipo} • {doc.tamaño} • {doc.fecha_subida}
                         </p>
                         <p className="text-xs text-parchment-500">
@@ -358,16 +522,16 @@ export default function SedeElectronica() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full md:w-auto">
                       <button
                         onClick={() => handleViewDocument(doc)}
-                        className="btn-secondary text-sm"
+                        className="btn-secondary text-sm w-full sm:w-auto"
                       >
                         Ver
                       </button>
                       <button
                         onClick={() => handleDownload(doc)}
-                        className="btn-alaniz text-sm"
+                        className="btn-alaniz text-sm w-full sm:w-auto"
                         disabled={!doc.url_supabase || doc.url_supabase === "#"}
                       >
                         Descargar
@@ -381,12 +545,12 @@ export default function SedeElectronica() {
         </div>
 
         {/* Información adicional */}
-        <div className="card-elegant mt-8">
-          <h3 className="font-semibold text-alanizGold-600 mb-4">
+        <div className="card-elegant mt-6 md:mt-8">
+          <h3 className="font-semibold text-alanizGold-600 mb-3 md:mb-4 text-center text-base md:text-lg">
             Información Importante
           </h3>
-          <div className="bg-alanizGreen-900/30 rounded-lg p-4">
-            <ul className="space-y-2 text-parchment-300 text-sm">
+          <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4">
+            <ul className="space-y-2 text-parchment-300 text-xs md:text-sm">
               <li>• Los documentos están firmados digitalmente por la Casa Alaniz</li>
               <li>• Mantén tus credenciales seguras y no las compartas</li>
               <li>• Para solicitar nuevos documentos, contacta con la administración</li>
@@ -396,8 +560,8 @@ export default function SedeElectronica() {
           </div>
 
           {/* Información técnica */}
-          <div className="mt-4 p-3 bg-alanizGreen-800/20 rounded-lg">
-            <div className="flex items-center justify-between text-xs">
+          <div className="mt-3 md:mt-4 p-2 md:p-3 bg-alanizGreen-800/20 rounded-lg">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs space-y-2 sm:space-y-0">
               <span className="text-parchment-500">Estado del sistema:</span>
               <div className="flex items-center space-x-2">
                 <span className={supabaseConnected ? 'text-green-400' : 'text-yellow-400'}>

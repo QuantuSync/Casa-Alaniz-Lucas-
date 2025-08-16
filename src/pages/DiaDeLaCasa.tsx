@@ -1,45 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-// Interfaz para las fotos de la galería
-interface FotoGaleria {
-  id: string;
-  url: string;
-  descripcion: string;
-  año: number;
-  evento: string;
+// Interfaz para el contador
+interface TimeRemaining {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
 }
-
-// Datos de ejemplo para la galería (puedes reemplazar con fotos reales)
-const fotosGaleria: FotoGaleria[] = [
-  {
-    id: '1',
-    url: '/images/galeria/dia-casa-2025-ceremonia.jpg',
-    descripcion: 'Ceremonia de entrega de condecoraciones 2025',
-    año: 2025,
-    evento: 'Ceremonia Principal'
-  },
-  {
-    id: '2',
-    url: '/images/galeria/dia-casa-2025-banquete.jpg',
-    descripcion: 'Banquete familiar tras la ceremonia',
-    año: 2025,
-    evento: 'Banquete'
-  },
-  {
-    id: '3',
-    url: '/images/galeria/dia-casa-2025-lectura.jpg',
-    descripcion: 'Lectura solemne de la historia familiar',
-    año: 2025,
-    evento: 'Lectura Histórica'
-  },
-  {
-    id: '4',
-    url: '/images/galeria/dia-casa-2025-votos.jpg',
-    descripcion: 'Renovación de votos de lealtad',
-    año: 2025,
-    evento: 'Renovación de Votos'
-  }
-];
 
 // Programa del día
 const programaDia = [
@@ -95,39 +62,44 @@ const protocoloVestimenta = [
 ];
 
 export default function DiaDeLaCasa() {
-  const [selectedPhoto, setSelectedPhoto] = useState<FotoGaleria | null>(null);
   const [condecorados, setCondecorados] = useState<any[]>([]);
+  const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
 
-  useEffect(() => {
-    // Intersection Observer para animaciones
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const elementsToObserve = document.querySelectorAll('.observe-me');
-    elementsToObserve.forEach(el => observer.observe(el));
-
-    // Cargar condecorados del localStorage
-    const savedCondecorados = localStorage.getItem('alanizCondecorados');
-    if (savedCondecorados) {
-      setCondecorados(JSON.parse(savedCondecorados));
+  // Función para calcular el tiempo restante
+  const calculateTimeRemaining = (): TimeRemaining => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    let diaDelaCasa = new Date(currentYear, 8, 22, 10, 0, 0); // 22 de septiembre a las 10:00 AM
+    
+    // Si ya pasó este año, mostrar el del próximo año
+    if (now > diaDelaCasa) {
+      diaDelaCasa = new Date(currentYear + 1, 8, 22, 10, 0, 0);
     }
-
-    return () => observer.disconnect();
-  }, []);
+    
+    const difference = diaDelaCasa.getTime() - now.getTime();
+    
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+    
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    
+    return { days, hours, minutes, seconds };
+  };
 
   // Función para obtener próxima fecha del Día de la Casa
   const getProximaFecha = () => {
     const now = new Date();
     const currentYear = now.getFullYear();
-    let diaDelaCasa = new Date(currentYear, 8, 22); // 22 de septiembre (mes 8 = septiembre)
+    let diaDelaCasa = new Date(currentYear, 8, 22); // 22 de septiembre
     
     // Si ya pasó este año, mostrar el del próximo año
     if (now > diaDelaCasa) {
@@ -136,9 +108,6 @@ export default function DiaDeLaCasa() {
     
     return diaDelaCasa;
   };
-
-  const proximaFecha = getProximaFecha();
-  const diasRestantes = Math.ceil((proximaFecha.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 
   // Obtener condecorados de este año
   const condecoradosEsteAño = condecorados.filter(c => {
@@ -170,25 +139,92 @@ export default function DiaDeLaCasa() {
             excepcionales a la Casa Alaniz.
           </p>
 
-          {/* Próxima celebración */}
-          <div className="bg-alanizGreen-800/50 rounded-xl p-6 max-w-2xl mx-auto border border-alanizGold-600/20">
-            <h3 className="text-xl font-display font-semibold text-alanizGold-500 mb-3">
-              Próxima Celebración
+          {/* Fecha de la celebración */}
+          <div className="bg-alanizGreen-800/50 rounded-xl p-8 max-w-2xl mx-auto border border-alanizGold-600/20 mb-8">
+            <h3 className="text-2xl font-display font-semibold text-alanizGold-500 mb-6 text-center">
+              Fecha de la Celebración
             </h3>
-            <div className="flex items-center justify-center space-x-6">
+            <div className="flex items-center justify-center space-x-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-alanizGold-600">22</div>
-                <div className="text-sm text-parchment-400">Septiembre</div>
+                <div className="text-4xl font-bold text-alanizGold-600 mb-2">22</div>
+                <div className="text-sm text-parchment-400 uppercase tracking-wider">Septiembre</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-alanizGold-600">{proximaFecha.getFullYear()}</div>
-                <div className="text-sm text-parchment-400">Año</div>
+                <div className="text-4xl font-bold text-alanizGold-600 mb-2">{proximaFecha.getFullYear()}</div>
+                <div className="text-sm text-parchment-400 uppercase tracking-wider">Año</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-alanizGold-600">{diasRestantes}</div>
-                <div className="text-sm text-parchment-400">Días restantes</div>
+                <div className="text-4xl font-bold text-alanizGold-600 mb-2">10:00</div>
+                <div className="text-sm text-parchment-400 uppercase tracking-wider">Inicio</div>
               </div>
             </div>
+          </div>
+
+          {/* Contador regresivo */}
+          <div className="bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 rounded-xl p-8 max-w-4xl mx-auto border-2 border-alanizGold-600/40">
+            <h3 className="text-2xl font-display font-semibold text-alanizGold-500 mb-6 text-center">
+              Tiempo Restante
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="bg-alanizGold-600/10 rounded-lg p-4 border border-alanizGold-600/30">
+                  <div className="text-3xl md:text-4xl font-bold text-alanizGold-600 mb-2 font-mono">
+                    {String(timeRemaining.days).padStart(2, '0')}
+                  </div>
+                  <div className="text-sm text-parchment-400 uppercase tracking-wider font-semibold">
+                    Días
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-alanizGold-600/10 rounded-lg p-4 border border-alanizGold-600/30">
+                  <div className="text-3xl md:text-4xl font-bold text-alanizGold-600 mb-2 font-mono">
+                    {String(timeRemaining.hours).padStart(2, '0')}
+                  </div>
+                  <div className="text-sm text-parchment-400 uppercase tracking-wider font-semibold">
+                    Horas
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-alanizGold-600/10 rounded-lg p-4 border border-alanizGold-600/30">
+                  <div className="text-3xl md:text-4xl font-bold text-alanizGold-600 mb-2 font-mono">
+                    {String(timeRemaining.minutes).padStart(2, '0')}
+                  </div>
+                  <div className="text-sm text-parchment-400 uppercase tracking-wider font-semibold">
+                    Minutos
+                  </div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-alanizGold-600/10 rounded-lg p-4 border border-alanizGold-600/30">
+                  <div className="text-3xl md:text-4xl font-bold text-alanizGold-600 mb-2 font-mono animate-pulse">
+                    {String(timeRemaining.seconds).padStart(2, '0')}
+                  </div>
+                  <div className="text-sm text-parchment-400 uppercase tracking-wider font-semibold">
+                    Segundos
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Mensaje especial cuando falte poco tiempo */}
+            {timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes < 60 && (
+              <div className="mt-6 text-center">
+                <p className="text-alanizGold-400 font-semibold animate-pulse">
+                  🎖️ ¡La celebración está a punto de comenzar! 🎖️
+                </p>
+              </div>
+            )}
+            
+            {/* Mensaje cuando es el día */}
+            {timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes === 0 && timeRemaining.seconds === 0 && (
+              <div className="mt-6 text-center">
+                <p className="text-alanizGold-400 font-bold text-xl animate-bounce">
+                  🎉 ¡Hoy es el Día de la Casa Alaniz! 🎉
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -358,87 +394,9 @@ export default function DiaDeLaCasa() {
           )}
         </div>
 
-        {/* Galería de fotos */}
-        <div className="card-elegant observe-me opacity-0 translate-y-8 mb-12" 
-             style={{ animationDelay: '1000ms' }}>
-          <div className="flex items-start space-x-6 mb-6">
-            <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14 
-                              bg-gradient-to-r from-green-500 to-green-600 rounded-full shadow-lg">
-                <span className="text-white text-xl">📸</span>
-              </div>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-4">
-                Galería de Celebraciones
-              </h3>
-            </div>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {fotosGaleria.map((foto) => (
-              <div 
-                key={foto.id} 
-                className="group cursor-pointer"
-                onClick={() => setSelectedPhoto(foto)}
-              >
-                <div className="aspect-square bg-alanizGreen-800/50 rounded-lg overflow-hidden 
-                                border-2 border-alanizGold-600/20 group-hover:border-alanizGold-600/60 
-                                transition-all duration-300 group-hover:scale-105 shadow-lg">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="text-center text-alanizGold-600/60">
-                      <div className="text-4xl mb-2">📷</div>
-                      <div className="text-sm font-medium">{foto.evento}</div>
-                      <div className="text-xs text-parchment-400">{foto.año}</div>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm text-parchment-300 mt-2 text-center px-2">
-                  {foto.descripcion}
-                </p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-6">
-            <p className="text-parchment-400 text-sm">
-              📷 Las fotografías de las celebraciones se subirán tras cada evento anual
-            </p>
-          </div>
-        </div>
-
-        {/* Modal de foto ampliada */}
-        {selectedPhoto && (
-          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-               onClick={() => setSelectedPhoto(null)}>
-            <div className="bg-alanizGreen-900 rounded-lg p-6 max-w-2xl w-full">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-display font-bold text-alanizGold-600">
-                  {selectedPhoto.evento} - {selectedPhoto.año}
-                </h3>
-                <button
-                  onClick={() => setSelectedPhoto(null)}
-                  className="text-alanizGold-600 hover:text-alanizGold-500 text-2xl"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="aspect-video bg-alanizGreen-800/50 rounded-lg mb-4 flex items-center justify-center">
-                <div className="text-center text-alanizGold-600/60">
-                  <div className="text-6xl mb-4">📷</div>
-                  <div className="text-lg">{selectedPhoto.evento}</div>
-                </div>
-              </div>
-              <p className="text-parchment-300">
-                {selectedPhoto.descripcion}
-              </p>
-            </div>
-          </div>
-        )}
-
         {/* Mensaje final */}
         <div className="text-center observe-me opacity-0 translate-y-8" 
-             style={{ animationDelay: '1200ms' }}>
+             style={{ animationDelay: '1000ms' }}>
           <div className="bg-alanizGreen-800/50 rounded-xl p-8 border border-alanizGold-600/20 
                           backdrop-blur-sm shadow-elegant">
             <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-// Configuración de navegación - AÑADIDA "Condecoraciones"
+// Configuración de navegación - AÑADIDA "Día de la Casa"
 const navigationItems = [
   { path: "/", label: "Inicio", icon: "🏠" },
   { path: "/historia", label: "Historia", icon: "📜" },
@@ -9,6 +9,7 @@ const navigationItems = [
   { path: "/legado", label: "Legado", icon: "👑" },
   { path: "/documentos", label: "Documentos", icon: "📚" },
   { path: "/condecoraciones", label: "Condecoraciones", icon: "🏆" },
+  { path: "/dia-casa", label: "Día de la Casa", icon: "🎖️" },
   { path: "/sede-electronica", label: "Sede Electrónica", icon: "🏛️" },
   { path: "/contacto", label: "Contacto", icon: "📧" },
   { path: "/login", label: "Miembros", icon: "🛡️" },

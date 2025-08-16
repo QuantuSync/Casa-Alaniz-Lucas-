@@ -274,23 +274,6 @@ export default function Condecoraciones() {
           ))}
         </div>
 
-        {/* Información sobre Supabase */}
-        <div className="card-elegant mt-8 bg-alanizGreen-800/20">
-          <div className="text-center">
-            <div className="inline-flex items-center space-x-2 mb-4">
-              <span className="text-2xl">☁️</span>
-              <h3 className="text-lg font-display font-semibold text-alanizGold-600">
-                Sistema Global
-              </h3>
-            </div>
-            <p className="text-parchment-300 text-sm max-w-2xl mx-auto">
-              Las condecoraciones mostradas se almacenan en Supabase y son visibles para todos los visitantes 
-              desde cualquier parte del mundo. Los datos se actualizan automáticamente cuando se realizan cambios 
-              desde el Panel de Administración.
-            </p>
-          </div>
-        </div>
-
       </div>
     </div>
   );

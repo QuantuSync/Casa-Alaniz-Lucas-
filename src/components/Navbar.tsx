@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 // Configuración de navegación - CON SUBMENÚS
@@ -23,11 +23,30 @@ const navigationItems = [
   { path: "/login", label: "Miembros", icon: "🛡️" },
 ] as const;
 
+// Hook personalizado para manejar clicks fuera del componente
+const useClickOutside = (callback: () => void) => {
+  const [ref, setRef] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref && !ref.contains(event.target as Node)) {
+        callback();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [ref, callback]);
+
+  return setRef;
+};
+
 // Componente del logo
-const Logo = () => (
+const Logo = React.memo(() => (
   <NavLink
     to="/"
     className="flex items-center space-x-3 group transition-all duration-300"
+    aria-label="Casa Alaniz - Inicio"
   >
     <div className="relative flex items-center">
       <div
@@ -38,6 +57,7 @@ const Logo = () => (
           src="/SelloSinFondo.ico" 
           alt="Escudo Casa Alaniz" 
           className="w-full h-full object-contain filter brightness-110 group-hover:brightness-125 transition-all duration-300"
+          loading="eager"
         />
       </div>
     </div>
@@ -52,10 +72,10 @@ const Logo = () => (
       </h1>
     </div>
   </NavLink>
-);
+));
 
 // Componente de link de navegación simple
-const NavItem = ({
+const NavItem = React.memo(({
   path,
   label,
   icon,
@@ -78,10 +98,15 @@ const NavItem = ({
           : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/5"
       }
     `}
+    aria-label={`Ir a ${label}`}
   >
     {({ isActive }) => (
       <>
-        <span className="text-sm transition-transform duration-300 group-hover:scale-110">
+        <span 
+          className="text-sm transition-transform duration-300 group-hover:scale-110"
+          role="img"
+          aria-label={`Icono de ${label}`}
+        >
           {icon}
         </span>
         <span className="text-sm font-semibold tracking-wide">{label}</span>
@@ -89,19 +114,21 @@ const NavItem = ({
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
                           w-6 h-0.5 bg-alanizGold-600 rounded-full"
+            aria-hidden="true"
           ></div>
         )}
         <div
           className="absolute inset-0 bg-alanizGold-600/10 rounded-lg scale-0 
                         group-hover:scale-100 transition-transform duration-300 -z-10"
+          aria-hidden="true"
         ></div>
       </>
     )}
   </NavLink>
-);
+));
 
 // Componente de navegación con submenú desplegable
-const DropdownNavItem = ({
+const DropdownNavItem = React.memo(({
   item,
   isOpen,
   onToggle,
@@ -115,16 +142,34 @@ const DropdownNavItem = ({
   const location = useLocation();
   const isSubmenuActive = item.submenu?.some((subitem: any) => location.pathname === subitem.path);
   
-  const handleToggle = (e: React.MouseEvent) => {
+  const dropdownRef = useClickOutside(onClose);
+  
+  const handleToggle = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     onToggle();
-  };
+  }, [onToggle]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onToggle();
+    } else if (e.key === 'Escape' && isOpen) {
+      onClose();
+    }
+  }, [onToggle, onClose, isOpen]);
   
   return (
-    <div className="relative" onClick={(e) => e.stopPropagation()}>
+    <div 
+      ref={dropdownRef}
+      className="relative"
+    >
       <button
         onClick={handleToggle}
+        onKeyDown={handleKeyDown}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-label={`${item.label} - Menú desplegable`}
         className={`
           relative flex items-center space-x-2 px-3 py-2 rounded-lg
           font-medium transition-all duration-300 group text-sm
@@ -135,64 +180,76 @@ const DropdownNavItem = ({
           }
         `}
       >
-        <span className="text-sm transition-transform duration-300 group-hover:scale-110">
+        <span 
+          className="text-sm transition-transform duration-300 group-hover:scale-110"
+          role="img"
+          aria-label={`Icono de ${item.label}`}
+        >
           {item.icon}
         </span>
         <span className="text-sm font-semibold tracking-wide">{item.label}</span>
-        <span className={`text-xs transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+        <span 
+          className={`text-xs transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          aria-hidden="true"
+        >
           ▼
         </span>
         {isSubmenuActive && (
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
                           w-6 h-0.5 bg-alanizGold-600 rounded-full"
+            aria-hidden="true"
           ></div>
         )}
         <div
           className="absolute inset-0 bg-alanizGold-600/10 rounded-lg scale-0 
                         group-hover:scale-100 transition-transform duration-300 -z-10"
+          aria-hidden="true"
         ></div>
       </button>
 
       {/* Submenú desplegable */}
       {isOpen && (
-        <>
-          {/* Overlay invisible para cerrar al hacer click fuera */}
-          <div 
-            className="fixed inset-0 z-40"
-            onClick={onClose}
-          />
-          <div className="absolute top-full left-0 mt-2 w-56 bg-alanizGreen-800 border border-alanizGold-600/20 
-                          rounded-lg shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
-            <div className="py-2">
-              {item.submenu.map((subitem: any) => (
-                <NavLink
-                  key={subitem.path}
-                  to={subitem.path}
-                  onClick={onClose}
-                  className={({ isActive }) => `
-                    flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200
-                    ${
-                      isActive
-                        ? "text-alanizGold-500 bg-alanizGold-600/20"
-                        : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/10"
-                    }
-                  `}
-                >
-                  <span className="text-sm">{subitem.icon}</span>
-                  <span className="font-medium">{subitem.label}</span>
-                </NavLink>
-              ))}
-            </div>
+        <div 
+          className="absolute top-full left-0 mt-2 w-56 bg-alanizGreen-800 border border-alanizGold-600/20 
+                     rounded-lg shadow-2xl backdrop-blur-sm z-50 overflow-hidden
+                     animate-fade-in-down"
+          role="menu"
+          aria-label={`Submenú de ${item.label}`}
+        >
+          <div className="py-2">
+            {item.submenu.map((subitem: any, index: number) => (
+              <NavLink
+                key={subitem.path}
+                to={subitem.path}
+                onClick={onClose}
+                role="menuitem"
+                tabIndex={isOpen ? 0 : -1}
+                className={({ isActive }) => `
+                  flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200
+                  focus:outline-none focus:bg-alanizGold-600/20
+                  ${
+                    isActive
+                      ? "text-alanizGold-500 bg-alanizGold-600/20"
+                      : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/10"
+                  }
+                `}
+              >
+                <span className="text-sm" role="img" aria-label={`Icono de ${subitem.label}`}>
+                  {subitem.icon}
+                </span>
+                <span className="font-medium">{subitem.label}</span>
+              </NavLink>
+            ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
-};
+});
 
 // Componente del menú móvil
-const MobileMenu = ({
+const MobileMenu = React.memo(({
   isOpen,
   onClose,
 }: {
@@ -214,9 +271,15 @@ const MobileMenu = ({
     };
   }, [isOpen]);
 
-  const toggleSubmenu = (label: string) => {
-    setOpenSubmenu(openSubmenu === label ? null : label);
-  };
+  const toggleSubmenu = useCallback((label: string) => {
+    setOpenSubmenu(prev => prev === label ? null : label);
+  }, []);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  }, [onClose]);
 
   return (
     <div
@@ -224,11 +287,15 @@ const MobileMenu = ({
                      ${
                        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
                      }`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú de navegación móvil"
     >
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-alanizGreen-950/90 backdrop-blur-sm"
         onClick={onClose}
+        aria-hidden="true"
       ></div>
 
       {/* Menu panel */}
@@ -238,53 +305,70 @@ const MobileMenu = ({
                        border-l border-alanizGold-600/20 shadow-2xl
                        transform transition-transform duration-300 ease-out
                        ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        onKeyDown={handleKeyDown}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-alanizGold-600/20">
           <Logo />
           <button
             onClick={onClose}
+            aria-label="Cerrar menú"
             className="p-2 text-alanizGold-600 hover:text-alanizGold-500 
-                       hover:bg-alanizGold-600/10 rounded-lg transition-all duration-200"
+                       hover:bg-alanizGold-600/10 rounded-lg transition-all duration-200
+                       focus:outline-none focus:ring-2 focus:ring-alanizGold-600"
           >
-            <span className="block w-6 h-6 text-xl">✕</span>
+            <span className="block w-6 h-6 text-xl" aria-hidden="true">✕</span>
           </button>
         </div>
 
         {/* Navigation */}
-        <nav className="p-6 space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
+        <nav 
+          className="p-6 space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]"
+          role="navigation"
+          aria-label="Navegación principal"
+        >
           {navigationItems.map((item) => (
             <div key={item.path}>
               {item.hasSubmenu ? (
                 <div>
                   <button
                     onClick={() => toggleSubmenu(item.label)}
+                    aria-expanded={openSubmenu === item.label}
+                    aria-label={`${item.label} - Expandir submenú`}
                     className="w-full flex items-center justify-between space-x-2 px-3 py-2 rounded-lg
                                font-medium transition-all duration-300 group text-sm
-                               text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/5"
+                               text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/5
+                               focus:outline-none focus:bg-alanizGold-600/10"
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm">{item.icon}</span>
+                      <span className="text-sm" role="img" aria-label={`Icono de ${item.label}`}>
+                        {item.icon}
+                      </span>
                       <span className="text-sm font-semibold tracking-wide">{item.label}</span>
                     </div>
-                    <span className={`text-xs transition-transform duration-300 ${
-                      openSubmenu === item.label ? 'rotate-180' : ''
-                    }`}>
+                    <span 
+                      className={`text-xs transition-transform duration-300 ${
+                        openSubmenu === item.label ? 'rotate-180' : ''
+                      }`}
+                      aria-hidden="true"
+                    >
                       ▼
                     </span>
                   </button>
                   
                   {/* Submenú en móvil */}
                   {openSubmenu === item.label && (
-                    <div className="ml-4 mt-2 space-y-1">
+                    <div className="ml-4 mt-2 space-y-1 animate-fade-in-down" role="menu">
                       {item.submenu.map((subitem) => (
                         <NavLink
                           key={subitem.path}
                           to={subitem.path}
                           onClick={onClose}
+                          role="menuitem"
                           className={({ isActive }) => `
                             flex items-center space-x-2 px-3 py-2 rounded-lg
                             font-medium transition-all duration-300 text-sm
+                            focus:outline-none focus:bg-alanizGold-600/10
                             ${
                               isActive
                                 ? "text-alanizGold-500 bg-alanizGold-600/10"
@@ -292,7 +376,9 @@ const MobileMenu = ({
                             }
                           `}
                         >
-                          <span className="text-sm">{subitem.icon}</span>
+                          <span className="text-sm" role="img" aria-label={`Icono de ${subitem.label}`}>
+                            {subitem.icon}
+                          </span>
                           <span className="text-sm font-semibold tracking-wide">{subitem.label}</span>
                         </NavLink>
                       ))}
@@ -323,7 +409,7 @@ const MobileMenu = ({
       </div>
     </div>
   );
-};
+});
 
 // Componente principal del Navbar
 export default function Navbar() {
@@ -345,21 +431,9 @@ export default function Navbar() {
       setIsScrolled(scrolled);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Cerrar dropdown al hacer click fuera
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (openDropdown) {
-        setOpenDropdown(null);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [openDropdown]);
 
   // Manejar ESC key
   useEffect(() => {
@@ -374,11 +448,23 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", handleEsc);
   }, []);
 
-  const toggleDropdown = (label: string) => {
-    setOpenDropdown(openDropdown === label ? null : label);
-  };
+  const toggleDropdown = useCallback((label: string) => {
+    setOpenDropdown(prev => prev === label ? null : label);
+  }, []);
 
-  // Añadir estilos CSS
+  const closeDropdown = useCallback(() => {
+    setOpenDropdown(null);
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  // Añadir estilos CSS mejorados
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -419,6 +505,21 @@ export default function Navbar() {
         box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         opacity: 1;
       }
+
+      .animate-fade-in-down {
+        animation: fadeInDown 0.3s ease-out;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
       
       @media (max-width: 1024px) {
         .subtle-glow::before {
@@ -431,6 +532,15 @@ export default function Navbar() {
         
         .group:hover .subtle-glow::before {
           box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .subtle-glow::before {
+          animation: none;
+        }
+        .animate-fade-in-down {
+          animation: none;
         }
       }
     `;
@@ -452,9 +562,14 @@ export default function Navbar() {
                         ? "bg-alanizGreen-950/95 backdrop-blur-md shadow-lg border-b border-alanizGold-600/20"
                         : "bg-alanizGreen-950/90 backdrop-blur-sm"
                     }`}
+        role="banner"
       >
         <div className="content-container">
-          <nav className="flex items-center justify-between h-16 lg:h-20">
+          <nav 
+            className="flex items-center justify-between h-16 lg:h-20"
+            role="navigation"
+            aria-label="Navegación principal"
+          >
             {/* Logo */}
             <Logo />
 
@@ -467,7 +582,7 @@ export default function Navbar() {
                     item={item}
                     isOpen={openDropdown === item.label}
                     onToggle={() => toggleDropdown(item.label)}
-                    onClose={() => setOpenDropdown(null)}
+                    onClose={closeDropdown}
                   />
                 ) : (
                   <NavItem
@@ -482,13 +597,14 @@ export default function Navbar() {
 
             {/* Mobile menu button */}
             <button
-              onClick={() => setIsMobileMenuOpen(true)}
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+              aria-expanded={isMobileMenuOpen}
               className="lg:hidden p-2 text-alanizGold-600 hover:text-alanizGold-500
                          hover:bg-alanizGold-600/10 rounded-lg transition-all duration-200
                          focus:outline-none focus:ring-2 focus:ring-alanizGold-600 focus:ring-opacity-50"
-              aria-label="Abrir menú de navegación"
             >
-              <span className="block w-6 h-6 text-xl">☰</span>
+              <span className="block w-6 h-6 text-xl" aria-hidden="true">☰</span>
             </button>
           </nav>
         </div>
@@ -497,7 +613,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
+        onClose={closeMobileMenu}
       />
     </>
   );

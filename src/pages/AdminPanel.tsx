@@ -5,17 +5,28 @@ import { useNavigate } from 'react-router-dom';
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
-interface Document {
-  id: string;
-  name: string;
-  type: string;
-  uploadDate: string;
-  size: string;
-  url: string;
+interface Usuario {
+  id?: string;
+  dni: string;
+  nombre: string;
+  password: string;
+  tipo: 'admin' | 'user';
+  created_at?: string;
+}
+
+interface DocumentoUsuario {
+  id?: string;
+  usuario_dni: string;
+  nombre: string;
+  tipo: string;
+  fecha_subida: string;
+  tamaño: string;
+  url_supabase: string;
+  created_at?: string;
 }
 
 interface Condecorado {
-  id: string;
+  id?: string;
   nombre: string;
   fecha_otorgamiento: string;
   motivo: string;
@@ -35,15 +46,18 @@ export default function AdminPanel() {
     totalCondecoraciones: 0,
     activeUsers: 0
   });
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<Usuario[]>([]);
   const [condecorados, setCondecorados] = useState<Condecorado[]>([]);
   const [showCreateUser, setShowCreateUser] = useState(false);
   const [showDocumentManager, setShowDocumentManager] = useState(false);
   const [showCondecoracionesManager, setShowCondecoracionesManager] = useState(false);
   const [selectedUser, setSelectedUser] = useState<string>('');
-  const [userDocuments, setUserDocuments] = useState<Document[]>([]);
+  const [userDocuments, setUserDocuments] = useState<DocumentoUsuario[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [loadingUsers, setLoadingUsers] = useState(false);
   const [loadingCondecoraciones, setLoadingCondecoraciones] = useState(false);
+  const [loadingDocuments, setLoadingDocuments] = useState(false);
+  const [supabaseConnected, setSupabaseConnected] = useState(false);
   const [newUser, setNewUser] = useState({
     dni: '',
     name: '',
@@ -62,7 +76,225 @@ export default function AdminPanel() {
   });
   const navigate = useNavigate();
 
-  // Función para cargar condecoraciones desde Supabase
+  // ========== FUNCIONES DE CONEXIÓN ==========
+
+  const testSupabaseConnection = async () => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      setSupabaseConnected(response.ok);
+      return response.ok;
+    } catch (error) {
+      console.error('Error conectando con Supabase:', error);
+      setSupabaseConnected(false);
+      return false;
+    }
+  };
+
+  // ========== FUNCIONES USUARIOS ==========
+
+  const loadUsersFromSupabase = async () => {
+    setLoadingUsers(true);
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al cargar usuarios desde Supabase');
+      }
+
+      const data = await response.json();
+      setUsers(data);
+      return data.length;
+    } catch (error) {
+      console.error('Error cargando usuarios:', error);
+      // Fallback a localStorage
+      const usersData = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
+      const usersList = Object.entries(usersData).map(([dni, userData]: [string, any]) => ({
+        dni,
+        nombre: userData.name,
+        password: userData.password,
+        tipo: userData.type,
+        created_at: userData.createdDate
+      }));
+      setUsers(usersList);
+      return usersList.length;
+    } finally {
+      setLoadingUsers(false);
+    }
+  };
+
+  const createUserInSupabase = async (usuario: Omit<Usuario, 'id' | 'created_at'>) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify(usuario)
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(`Error al crear usuario: ${error}`);
+      }
+
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error('Error creando usuario:', error);
+      throw error;
+    }
+  };
+
+  const deleteUserFromSupabase = async (dni: string) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios?dni=eq.${dni}`, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar usuario de Supabase');
+      }
+    } catch (error) {
+      console.error('Error eliminando usuario:', error);
+      throw error;
+    }
+  };
+
+  // ========== FUNCIONES DOCUMENTOS ==========
+
+  const loadDocumentsFromSupabase = async (userDni: string) => {
+    setLoadingDocuments(true);
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?usuario_dni=eq.${userDni}&select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al cargar documentos desde Supabase');
+      }
+
+      const data = await response.json();
+      setUserDocuments(data);
+      return data.length;
+    } catch (error) {
+      console.error('Error cargando documentos:', error);
+      // Fallback a localStorage
+      const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
+      const docs = allDocuments[userDni] || [];
+      const convertedDocs = docs.map((doc: any) => ({
+        id: doc.id,
+        usuario_dni: userDni,
+        nombre: doc.name,
+        tipo: doc.type,
+        fecha_subida: doc.uploadDate,
+        tamaño: doc.size,
+        url_supabase: doc.url,
+        created_at: new Date().toISOString()
+      }));
+      setUserDocuments(convertedDocs);
+      return convertedDocs.length;
+    } finally {
+      setLoadingDocuments(false);
+    }
+  };
+
+  const getTotalDocumentsFromSupabase = async () => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?select=id&count=exact`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Range': '0-0'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al contar documentos');
+      }
+
+      const countHeader = response.headers.get('Content-Range');
+      if (countHeader) {
+        const total = parseInt(countHeader.split('/')[1]);
+        return total;
+      }
+      return 0;
+    } catch (error) {
+      console.error('Error contando documentos:', error);
+      return 0;
+    }
+  };
+
+  const addDocumentToSupabase = async (documento: Omit<DocumentoUsuario, 'id' | 'created_at'>) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify(documento)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al añadir documento a Supabase');
+      }
+
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error('Error añadiendo documento:', error);
+      throw error;
+    }
+  };
+
+  const deleteDocumentFromSupabase = async (id: string) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?id=eq.${id}`, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar documento de Supabase');
+      }
+    } catch (error) {
+      console.error('Error eliminando documento:', error);
+      throw error;
+    }
+  };
+
+  // ========== FUNCIONES CONDECORACIONES ==========
+
   const loadCondecoracionesFromSupabase = async () => {
     setLoadingCondecoraciones(true);
     try {
@@ -83,7 +315,6 @@ export default function AdminPanel() {
       return data.length;
     } catch (error) {
       console.error('Error cargando condecoraciones:', error);
-      // Fallback a localStorage si falla Supabase
       const savedCondecorados = localStorage.getItem('alanizCondecorados');
       if (savedCondecorados) {
         const localData = JSON.parse(savedCondecorados);
@@ -96,7 +327,6 @@ export default function AdminPanel() {
     }
   };
 
-  // Función para añadir condecoración a Supabase
   const addCondecoracionToSupabase = async (condecoracion: Omit<Condecorado, 'id' | 'created_at'>) => {
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones`, {
@@ -122,7 +352,6 @@ export default function AdminPanel() {
     }
   };
 
-  // Función para eliminar condecoración de Supabase
   const deleteCondecoracionFromSupabase = async (id: string) => {
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?id=eq.${id}`, {
@@ -143,224 +372,8 @@ export default function AdminPanel() {
     }
   };
 
-  // Inicializar solo administrador
-  const initializeAdmin = () => {
-    const existingUsers = localStorage.getItem('alanizUsers');
-    
-    if (!existingUsers) {
-      const adminUser = {
-        '34323575P': {
-          name: 'Administrador',
-          password: '110788',
-          type: 'admin',
-          createdDate: new Date().toISOString()
-        }
-      };
-      
-      localStorage.setItem('alanizUsers', JSON.stringify(adminUser));
-      localStorage.setItem('alanizDocuments', JSON.stringify({}));
-    }
-  };
+  // ========== FUNCIONES STORAGE ==========
 
-  useEffect(() => {
-    initializeAdmin();
-    loadStats();
-    loadUsers();
-  }, []);
-
-  const loadStats = async () => {
-    const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
-    const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-    
-    let totalDocs = 0;
-    Object.values(documents).forEach((userDocs: any) => {
-      totalDocs += userDocs.length;
-    });
-
-    // Cargar condecoraciones desde Supabase
-    const totalCondecoraciones = await loadCondecoracionesFromSupabase();
-
-    setStats({
-      totalUsers: Object.keys(users).length,
-      totalDocuments: totalDocs,
-      totalCondecoraciones: totalCondecoraciones,
-      activeUsers: Object.keys(users).length
-    });
-  };
-
-  const loadUsers = () => {
-    const usersData = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
-    const usersList = Object.entries(usersData).map(([dni, userData]: [string, any]) => ({
-      dni,
-      ...userData
-    }));
-    setUsers(usersList);
-  };
-
-  const loadUserDocuments = (userDni: string) => {
-    const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-    const docs = allDocuments[userDni] || [];
-    setUserDocuments(docs);
-  };
-
-  const generateRandomPassword = () => {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < 8; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  };
-
-  const handleCreateUser = () => {
-    if (!newUser.dni || !newUser.name) {
-      alert('DNI y nombre son obligatorios');
-      return;
-    }
-
-    const existingUsers = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
-    
-    if (existingUsers[newUser.dni.toUpperCase()]) {
-      alert('Ya existe un usuario con ese DNI');
-      return;
-    }
-
-    const password = generateRandomPassword();
-    const userData = {
-      name: newUser.name,
-      password: password,
-      type: newUser.type,
-      createdDate: new Date().toISOString()
-    };
-
-    existingUsers[newUser.dni.toUpperCase()] = userData;
-    localStorage.setItem('alanizUsers', JSON.stringify(existingUsers));
-    
-    // Crear carpeta de documentos vacía para el usuario
-    const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-    documents[newUser.dni.toUpperCase()] = [];
-    localStorage.setItem('alanizDocuments', JSON.stringify(documents));
-
-    setShowCreateUser(false);
-    setNewUser({ dni: '', name: '', type: 'user' });
-    loadStats();
-    loadUsers();
-    
-    alert(`Usuario creado exitosamente.\n\nDNI: ${newUser.dni.toUpperCase()}\nContraseña: ${password}\n\n¡Guarda esta información!`);
-  };
-
-  const handleCreateCondecorado = async () => {
-    if (!condecoracionForm.nombre || !condecoracionForm.fechaOtorgamiento || !condecoracionForm.motivo || !condecoracionForm.condecoracion) {
-      alert('Todos los campos son obligatorios');
-      return;
-    }
-
-    setLoadingCondecoraciones(true);
-
-    try {
-      // Intentar añadir a Supabase primero
-      const nuevoCondecorado = await addCondecoracionToSupabase({
-        nombre: condecoracionForm.nombre,
-        fecha_otorgamiento: condecoracionForm.fechaOtorgamiento,
-        motivo: condecoracionForm.motivo,
-        condecoracion: condecoracionForm.condecoracion
-      });
-
-      // Actualizar estado local
-      setCondecorados(prev => [nuevoCondecorado, ...prev]);
-
-      // También guardar en localStorage como backup
-      const nuevosCondecorados = [nuevoCondecorado, ...condecorados];
-      localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
-
-      setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
-      loadStats();
-      
-      alert('Condecorado añadido exitosamente a Supabase');
-    } catch (error) {
-      // Si falla Supabase, usar localStorage como fallback
-      console.error('Error con Supabase, usando localStorage:', error);
-      
-      const nuevoCondecorado: Condecorado = {
-        id: Date.now().toString(),
-        nombre: condecoracionForm.nombre,
-        fecha_otorgamiento: condecoracionForm.fechaOtorgamiento,
-        motivo: condecoracionForm.motivo,
-        condecoracion: condecoracionForm.condecoracion
-      };
-
-      const nuevosCondecorados = [...condecorados, nuevoCondecorado];
-      setCondecorados(nuevosCondecorados);
-      localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
-
-      setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
-      loadStats();
-      
-      alert('Condecorado añadido (modo offline)');
-    } finally {
-      setLoadingCondecoraciones(false);
-    }
-  };
-
-  const handleDeleteCondecorado = async (id: string) => {
-    if (!confirm('¿Estás seguro de eliminar este condecorado?')) return;
-
-    setLoadingCondecoraciones(true);
-
-    try {
-      // Intentar eliminar de Supabase
-      await deleteCondecoracionFromSupabase(id);
-
-      // Actualizar estado local
-      const nuevosCondecorados = condecorados.filter(c => c.id !== id);
-      setCondecorados(nuevosCondecorados);
-      localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
-      
-      loadStats();
-      alert('Condecorado eliminado exitosamente');
-    } catch (error) {
-      console.error('Error eliminando de Supabase:', error);
-      alert('Error al eliminar. Intenta de nuevo.');
-    } finally {
-      setLoadingCondecoraciones(false);
-    }
-  };
-
-  const handleDeleteUser = (dni: string) => {
-    if (!confirm(`¿Estás seguro de eliminar al usuario ${dni}?`)) {
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
-    const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-    
-    delete users[dni];
-    delete documents[dni];
-    
-    localStorage.setItem('alanizUsers', JSON.stringify(users));
-    localStorage.setItem('alanizDocuments', JSON.stringify(documents));
-    
-    loadStats();
-    loadUsers();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.type !== 'application/pdf') {
-        alert('Solo se permiten archivos PDF');
-        return;
-      }
-      
-      setDocumentForm({
-        ...documentForm,
-        file: file,
-        name: documentForm.name || file.name.replace('.pdf', '')
-      });
-    }
-  };
-
-  // Función para subir archivo a Supabase Storage
   const uploadToSupabase = async (file: File, dni: string): Promise<string> => {
     const fileName = `${dni}/${Date.now()}_${file.name}`;
     
@@ -383,9 +396,156 @@ export default function AdminPanel() {
       throw new Error(`Error al subir archivo: ${error}`);
     }
 
-    // Generar URL pública del archivo
     const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/documentos/${fileName}`;
     return publicUrl;
+  };
+
+  // ========== HANDLERS PARTE 1 ==========
+
+  useEffect(() => {
+    const initializeApp = async () => {
+      await testSupabaseConnection();
+      await loadStats();
+    };
+    initializeApp();
+  }, []);
+
+  const loadStats = async () => {
+    const totalUsers = await loadUsersFromSupabase();
+    const totalDocuments = await getTotalDocumentsFromSupabase();
+    const totalCondecoraciones = await loadCondecoracionesFromSupabase();
+
+    setStats({
+      totalUsers,
+      totalDocuments,
+      totalCondecoraciones,
+      activeUsers: totalUsers
+    });
+  };
+
+  const generateRandomPassword = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 8; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  };
+
+// CONTINÚA EN LA PARTE 2...
+
+// CONTINÚA DESDE LA PARTE 1...
+
+  // ========== HANDLERS PARTE 2 ==========
+
+  const handleCreateUser = async () => {
+    if (!newUser.dni || !newUser.name) {
+      alert('DNI y nombre son obligatorios');
+      return;
+    }
+
+    setLoadingUsers(true);
+
+    try {
+      const password = generateRandomPassword();
+      const nuevoUsuario = await createUserInSupabase({
+        dni: newUser.dni.toUpperCase(),
+        nombre: newUser.name,
+        password: password,
+        tipo: newUser.type
+      });
+
+      setUsers(prev => [nuevoUsuario, ...prev]);
+      setShowCreateUser(false);
+      setNewUser({ dni: '', name: '', type: 'user' });
+      loadStats();
+      
+      alert(`Usuario creado exitosamente en Supabase.\n\nDNI: ${nuevoUsuario.dni}\nContraseña: ${password}\n\n¡Guarda esta información!`);
+    } catch (error) {
+      alert('Error al crear usuario: ' + (error as Error).message);
+    } finally {
+      setLoadingUsers(false);
+    }
+  };
+
+  const handleDeleteUser = async (dni: string) => {
+    if (!confirm(`¿Estás seguro de eliminar al usuario ${dni}?`)) {
+      return;
+    }
+
+    setLoadingUsers(true);
+
+    try {
+      await deleteUserFromSupabase(dni);
+      setUsers(prev => prev.filter(u => u.dni !== dni));
+      loadStats();
+      alert('Usuario eliminado exitosamente');
+    } catch (error) {
+      alert('Error al eliminar usuario: ' + (error as Error).message);
+    } finally {
+      setLoadingUsers(false);
+    }
+  };
+
+  const handleCreateCondecorado = async () => {
+    if (!condecoracionForm.nombre || !condecoracionForm.fechaOtorgamiento || !condecoracionForm.motivo || !condecoracionForm.condecoracion) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+
+    setLoadingCondecoraciones(true);
+
+    try {
+      const nuevoCondecorado = await addCondecoracionToSupabase({
+        nombre: condecoracionForm.nombre,
+        fecha_otorgamiento: condecoracionForm.fechaOtorgamiento,
+        motivo: condecoracionForm.motivo,
+        condecoracion: condecoracionForm.condecoracion
+      });
+
+      setCondecorados(prev => [nuevoCondecorado, ...prev]);
+      setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
+      loadStats();
+      
+      alert('Condecorado añadido exitosamente a Supabase');
+    } catch (error) {
+      alert('Error al añadir condecorado: ' + (error as Error).message);
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
+  };
+
+  const handleDeleteCondecorado = async (id: string) => {
+    if (!confirm('¿Estás seguro de eliminar este condecorado?')) return;
+
+    setLoadingCondecoraciones(true);
+
+    try {
+      await deleteCondecoracionFromSupabase(id);
+      setCondecorados(prev => prev.filter(c => c.id !== id));
+      loadStats();
+      alert('Condecorado eliminado exitosamente');
+    } catch (error) {
+      alert('Error al eliminar condecorado: ' + (error as Error).message);
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.type !== 'application/pdf') {
+        alert('Solo se permiten archivos PDF');
+        return;
+      }
+      
+      setDocumentForm({
+        ...documentForm,
+        file: file,
+        name: documentForm.name || file.name.replace('.pdf', '')
+      });
+    }
   };
 
   const handleUploadDocument = async () => {
@@ -397,37 +557,25 @@ export default function AdminPanel() {
     setUploading(true);
 
     try {
-      // Subir a Supabase
       const fileUrl = await uploadToSupabase(documentForm.file, selectedUser);
       const fileSize = (documentForm.file.size / (1024 * 1024)).toFixed(1) + ' MB';
       
-      const newDocument: Document = {
-        id: Date.now().toString(),
-        name: documentForm.name + '.pdf',
-        type: documentForm.type,
-        uploadDate: new Date().toLocaleDateString(),
-        size: fileSize,
-        url: fileUrl
-      };
+      const nuevoDocumento = await addDocumentToSupabase({
+        usuario_dni: selectedUser,
+        nombre: documentForm.name + '.pdf',
+        tipo: documentForm.type,
+        fecha_subida: new Date().toISOString().split('T')[0],
+        tamaño: fileSize,
+        url_supabase: fileUrl
+      });
 
-      // Añadir documento al usuario
-      const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-      if (!allDocuments[selectedUser]) {
-        allDocuments[selectedUser] = [];
-      }
-      
-      allDocuments[selectedUser].push(newDocument);
-      localStorage.setItem('alanizDocuments', JSON.stringify(allDocuments));
-
-      // Resetear formulario
+      setUserDocuments(prev => [nuevoDocumento, ...prev]);
       setDocumentForm({ name: '', type: '', file: null });
-      loadUserDocuments(selectedUser);
       loadStats();
       
-      alert('Documento subido exitosamente');
+      alert('Documento subido exitosamente a Supabase');
     } catch (error) {
-      console.error('Error:', error);
-      alert('Error al subir el documento: ' + (error as Error).message);
+      alert('Error al subir documento: ' + (error as Error).message);
     } finally {
       setUploading(false);
     }
@@ -438,15 +586,15 @@ export default function AdminPanel() {
       return;
     }
 
+    setLoadingDocuments(true);
+
     try {
       const document = userDocuments.find(doc => doc.id === documentId);
-      if (document && document.url) {
-        // Extraer el path del archivo de la URL de Supabase
-        const urlParts = document.url.split('/storage/v1/object/public/documentos/');
+      if (document && document.url_supabase) {
+        const urlParts = document.url_supabase.split('/storage/v1/object/public/documentos/');
         if (urlParts.length > 1) {
           const filePath = urlParts[1];
           
-          // Eliminar archivo de Supabase Storage
           const deleteResponse = await fetch(
             `${SUPABASE_URL}/storage/v1/object/documentos/${filePath}`,
             {
@@ -458,29 +606,26 @@ export default function AdminPanel() {
           );
 
           if (!deleteResponse.ok) {
-            console.warn('No se pudo eliminar el archivo del storage, pero se eliminará de la lista');
+            console.warn('No se pudo eliminar el archivo del storage');
           }
         }
       }
 
-      // Eliminar de la lista local
-      const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-      allDocuments[selectedUser] = allDocuments[selectedUser].filter((doc: Document) => doc.id !== documentId);
-      localStorage.setItem('alanizDocuments', JSON.stringify(allDocuments));
-      
-      loadUserDocuments(selectedUser);
+      await deleteDocumentFromSupabase(documentId);
+      setUserDocuments(prev => prev.filter(doc => doc.id !== documentId));
       loadStats();
       
       alert('Documento eliminado correctamente');
     } catch (error) {
-      console.error('Error al eliminar documento:', error);
-      alert('Error al eliminar el documento');
+      alert('Error al eliminar documento: ' + (error as Error).message);
+    } finally {
+      setLoadingDocuments(false);
     }
   };
 
   const openDocumentManager = (userDni: string) => {
     setSelectedUser(userDni);
-    loadUserDocuments(userDni);
+    loadDocumentsFromSupabase(userDni);
     setShowDocumentManager(true);
   };
 
@@ -495,6 +640,8 @@ export default function AdminPanel() {
     localStorage.removeItem('alanizUserName');
     navigate('/login');
   };
+
+  // ========== JSX RENDER ==========
 
   return (
     <div className="min-h-screen bg-alanizGreen-950 py-8">
@@ -512,16 +659,24 @@ export default function AdminPanel() {
                   Panel de Administración
                 </h1>
                 <p className="text-parchment-300">
-                  Gestión del sistema Casa Alaniz • Supabase conectado ✅
+                  Sistema global con Supabase • Usuarios, Documentos y Condecoraciones {supabaseConnected ? '✅' : '❌'}
                 </p>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="btn-secondary"
-            >
-              Cerrar Sesión
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={testSupabaseConnection}
+                className="btn-secondary text-sm"
+              >
+                🔄 Test Conexión
+              </button>
+              <button
+                onClick={handleLogout}
+                className="btn-secondary"
+              >
+                Cerrar Sesión
+              </button>
+            </div>
           </div>
         </div>
 
@@ -537,7 +692,7 @@ export default function AdminPanel() {
                   Usuarios
                 </h3>
                 <p className="text-2xl font-bold text-parchment-100">
-                  {stats.totalUsers}
+                  {loadingUsers ? '⏳' : stats.totalUsers}
                 </p>
               </div>
             </div>
@@ -585,7 +740,7 @@ export default function AdminPanel() {
                   Storage
                 </h3>
                 <p className="text-2xl font-bold text-parchment-100">
-                  Supabase
+                  {supabaseConnected ? 'Online' : 'Offline'}
                 </p>
               </div>
             </div>
@@ -737,7 +892,7 @@ export default function AdminPanel() {
                             </p>
                           </div>
                           <button
-                            onClick={() => handleDeleteCondecorado(condecorado.id)}
+                            onClick={() => handleDeleteCondecorado(condecorado.id!)}
                             className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors
                                        disabled:opacity-50 disabled:cursor-not-allowed"
                             title="Eliminar condecorado"
@@ -824,8 +979,9 @@ export default function AdminPanel() {
                 <button
                   onClick={handleCreateUser}
                   className="btn-alaniz"
+                  disabled={loadingUsers}
                 >
-                  Crear Usuario
+                  {loadingUsers ? 'Creando...' : 'Crear Usuario'}
                 </button>
                 <button
                   onClick={() => setShowCreateUser(false)}
@@ -845,16 +1001,16 @@ export default function AdminPanel() {
                   <div className="flex items-center space-x-4">
                     <div className="w-10 h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
                       <span className="text-alanizGold-600">
-                        {user.type === 'admin' ? '👑' : '👤'}
+                        {user.tipo === 'admin' ? '👑' : '👤'}
                       </span>
                     </div>
                     <div>
                       <h3 className="font-medium text-alanizGold-600">
-                        {user.name}
+                        {user.nombre}
                       </h3>
                       <p className="text-sm text-parchment-400">
-                        DNI: {user.dni} • Contraseña: {user.password} • {user.type === 'admin' ? 'Administrador' : 'Usuario'} • 
-                        Creado: {new Date(user.createdDate).toLocaleDateString()}
+                        DNI: {user.dni} • Contraseña: {user.password} • {user.tipo === 'admin' ? 'Administrador' : 'Usuario'} • 
+                        Creado: {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
                       </p>
                     </div>
                   </div>
@@ -865,11 +1021,12 @@ export default function AdminPanel() {
                     >
                       📄 Documentos
                     </button>
-                    {user.type !== 'admin' && (
+                    {user.tipo !== 'admin' && (
                       <button
                         onClick={() => handleDeleteUser(user.dni)}
                         className="px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
                                    hover:bg-red-500/30 transition-colors"
+                        disabled={loadingUsers}
                       >
                         Eliminar
                       </button>
@@ -887,7 +1044,7 @@ export default function AdminPanel() {
             <div className="bg-alanizGreen-900 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-display font-bold text-alanizGold-600">
-                  Documentos de {users.find(u => u.dni === selectedUser)?.name}
+                  Documentos de {users.find(u => u.dni === selectedUser)?.nombre}
                 </h2>
                 <button
                   onClick={() => setShowDocumentManager(false)}
@@ -982,19 +1139,19 @@ export default function AdminPanel() {
                           <div className="flex items-center space-x-3">
                             <div className="w-8 h-8 bg-red-500/20 rounded flex items-center justify-center">
                               <span className="text-red-400 text-sm">
-                                {doc.type === 'Recompensas' ? '🏆' : '⚔️'}
+                                {doc.tipo === 'Recompensas' ? '🏆' : '⚔️'}
                               </span>
                             </div>
                             <div>
-                              <h4 className="font-medium text-alanizGold-600">{doc.name}</h4>
+                              <h4 className="font-medium text-alanizGold-600">{doc.nombre}</h4>
                               <p className="text-sm text-parchment-400">
-                                {doc.type} • {doc.size} • {doc.uploadDate} • Supabase
+                                {doc.tipo} • {doc.tamaño} • {doc.fecha_subida} • Supabase
                               </p>
                             </div>
                           </div>
                           <div className="flex space-x-2">
                             <a
-                              href={doc.url}
+                              href={doc.url_supabase}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded text-sm
@@ -1003,9 +1160,10 @@ export default function AdminPanel() {
                               Ver PDF
                             </a>
                             <button
-                              onClick={() => handleDeleteDocument(doc.id)}
+                              onClick={() => handleDeleteDocument(doc.id!)}
                               className="px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
                                          hover:bg-red-500/30 transition-colors"
+                              disabled={loadingDocuments}
                             >
                               Eliminar
                             </button>
@@ -1029,14 +1187,16 @@ export default function AdminPanel() {
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
                 <h4 className="font-semibold text-alanizGold-600 mb-2">Estado del Sistema</h4>
-                <p className="text-green-400">✅ Operativo</p>
+                <p className={supabaseConnected ? "text-green-400" : "text-red-400"}>
+                  {supabaseConnected ? '✅ Supabase Conectado' : '❌ Supabase Desconectado'}
+                </p>
                 <p className="text-parchment-400">Última actualización: {new Date().toLocaleString()}</p>
               </div>
               <div>
                 <h4 className="font-semibold text-alanizGold-600 mb-2">Almacenamiento</h4>
                 <p className="text-parchment-400">☁️ Supabase Storage (Documentos)</p>
-                <p className="text-parchment-400">🗄️ Supabase Database (Condecoraciones)</p>
-                <p className="text-green-400 text-xs">Global access enabled</p>
+                <p className="text-parchment-400">🗄️ Supabase Database (Usuarios y Condecoraciones)</p>
+                <p className="text-green-400 text-xs">Global access enabled with RLS</p>
               </div>
             </div>
           </div>

@@ -17,9 +17,10 @@ interface Document {
 interface Condecorado {
   id: string;
   nombre: string;
-  fechaOtorgamiento: string;
+  fecha_otorgamiento: string;
   motivo: string;
   condecoracion: string;
+  created_at?: string;
 }
 
 const condecoraciones = [
@@ -42,6 +43,7 @@ export default function AdminPanel() {
   const [selectedUser, setSelectedUser] = useState<string>('');
   const [userDocuments, setUserDocuments] = useState<Document[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [loadingCondecoraciones, setLoadingCondecoraciones] = useState(false);
   const [newUser, setNewUser] = useState({
     dni: '',
     name: '',
@@ -60,6 +62,87 @@ export default function AdminPanel() {
   });
   const navigate = useNavigate();
 
+  // Función para cargar condecoraciones desde Supabase
+  const loadCondecoracionesFromSupabase = async () => {
+    setLoadingCondecoraciones(true);
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al cargar condecoraciones desde Supabase');
+      }
+
+      const data = await response.json();
+      setCondecorados(data);
+      return data.length;
+    } catch (error) {
+      console.error('Error cargando condecoraciones:', error);
+      // Fallback a localStorage si falla Supabase
+      const savedCondecorados = localStorage.getItem('alanizCondecorados');
+      if (savedCondecorados) {
+        const localData = JSON.parse(savedCondecorados);
+        setCondecorados(localData);
+        return localData.length;
+      }
+      return 0;
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
+  };
+
+  // Función para añadir condecoración a Supabase
+  const addCondecoracionToSupabase = async (condecoracion: Omit<Condecorado, 'id' | 'created_at'>) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify(condecoracion)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al añadir condecoración a Supabase');
+      }
+
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error('Error añadiendo condecoración:', error);
+      throw error;
+    }
+  };
+
+  // Función para eliminar condecoración de Supabase
+  const deleteCondecoracionFromSupabase = async (id: string) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?id=eq.${id}`, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar condecoración de Supabase');
+      }
+    } catch (error) {
+      console.error('Error eliminando condecoración:', error);
+      throw error;
+    }
+  };
+
   // Inicializar solo administrador
   const initializeAdmin = () => {
     const existingUsers = localStorage.getItem('alanizUsers');
@@ -76,7 +159,6 @@ export default function AdminPanel() {
       
       localStorage.setItem('alanizUsers', JSON.stringify(adminUser));
       localStorage.setItem('alanizDocuments', JSON.stringify({}));
-      localStorage.setItem('alanizCondecorados', JSON.stringify([]));
     }
   };
 
@@ -84,23 +166,24 @@ export default function AdminPanel() {
     initializeAdmin();
     loadStats();
     loadUsers();
-    loadCondecorados();
   }, []);
 
-  const loadStats = () => {
+  const loadStats = async () => {
     const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
     const documents = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
-    const condecorados = JSON.parse(localStorage.getItem('alanizCondecorados') || '[]');
     
     let totalDocs = 0;
     Object.values(documents).forEach((userDocs: any) => {
       totalDocs += userDocs.length;
     });
 
+    // Cargar condecoraciones desde Supabase
+    const totalCondecoraciones = await loadCondecoracionesFromSupabase();
+
     setStats({
       totalUsers: Object.keys(users).length,
       totalDocuments: totalDocs,
-      totalCondecoraciones: condecorados.length,
+      totalCondecoraciones: totalCondecoraciones,
       activeUsers: Object.keys(users).length
     });
   };
@@ -112,13 +195,6 @@ export default function AdminPanel() {
       ...userData
     }));
     setUsers(usersList);
-  };
-
-  const loadCondecorados = () => {
-    const savedCondecorados = localStorage.getItem('alanizCondecorados');
-    if (savedCondecorados) {
-      setCondecorados(JSON.parse(savedCondecorados));
-    }
   };
 
   const loadUserDocuments = (userDni: string) => {
@@ -173,37 +249,81 @@ export default function AdminPanel() {
     alert(`Usuario creado exitosamente.\n\nDNI: ${newUser.dni.toUpperCase()}\nContraseña: ${password}\n\n¡Guarda esta información!`);
   };
 
-  const handleCreateCondecorado = () => {
+  const handleCreateCondecorado = async () => {
     if (!condecoracionForm.nombre || !condecoracionForm.fechaOtorgamiento || !condecoracionForm.motivo || !condecoracionForm.condecoracion) {
       alert('Todos los campos son obligatorios');
       return;
     }
 
-    const nuevoCondecorado: Condecorado = {
-      id: Date.now().toString(),
-      nombre: condecoracionForm.nombre,
-      fechaOtorgamiento: condecoracionForm.fechaOtorgamiento,
-      motivo: condecoracionForm.motivo,
-      condecoracion: condecoracionForm.condecoracion
-    };
+    setLoadingCondecoraciones(true);
 
-    const nuevosCondecorados = [...condecorados, nuevoCondecorado];
-    setCondecorados(nuevosCondecorados);
-    localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
+    try {
+      // Intentar añadir a Supabase primero
+      const nuevoCondecorado = await addCondecoracionToSupabase({
+        nombre: condecoracionForm.nombre,
+        fecha_otorgamiento: condecoracionForm.fechaOtorgamiento,
+        motivo: condecoracionForm.motivo,
+        condecoracion: condecoracionForm.condecoracion
+      });
 
-    setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
-    loadStats();
-    
-    alert('Condecorado añadido exitosamente');
+      // Actualizar estado local
+      setCondecorados(prev => [nuevoCondecorado, ...prev]);
+
+      // También guardar en localStorage como backup
+      const nuevosCondecorados = [nuevoCondecorado, ...condecorados];
+      localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
+
+      setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
+      loadStats();
+      
+      alert('Condecorado añadido exitosamente a Supabase');
+    } catch (error) {
+      // Si falla Supabase, usar localStorage como fallback
+      console.error('Error con Supabase, usando localStorage:', error);
+      
+      const nuevoCondecorado: Condecorado = {
+        id: Date.now().toString(),
+        nombre: condecoracionForm.nombre,
+        fecha_otorgamiento: condecoracionForm.fechaOtorgamiento,
+        motivo: condecoracionForm.motivo,
+        condecoracion: condecoracionForm.condecoracion
+      };
+
+      const nuevosCondecorados = [...condecorados, nuevoCondecorado];
+      setCondecorados(nuevosCondecorados);
+      localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
+
+      setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
+      loadStats();
+      
+      alert('Condecorado añadido (modo offline)');
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
   };
 
-  const handleDeleteCondecorado = (id: string) => {
+  const handleDeleteCondecorado = async (id: string) => {
     if (!confirm('¿Estás seguro de eliminar este condecorado?')) return;
 
-    const nuevosCondecorados = condecorados.filter(c => c.id !== id);
-    setCondecorados(nuevosCondecorados);
-    localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
-    loadStats();
+    setLoadingCondecoraciones(true);
+
+    try {
+      // Intentar eliminar de Supabase
+      await deleteCondecoracionFromSupabase(id);
+
+      // Actualizar estado local
+      const nuevosCondecorados = condecorados.filter(c => c.id !== id);
+      setCondecorados(nuevosCondecorados);
+      localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
+      
+      loadStats();
+      alert('Condecorado eliminado exitosamente');
+    } catch (error) {
+      console.error('Error eliminando de Supabase:', error);
+      alert('Error al eliminar. Intenta de nuevo.');
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
   };
 
   const handleDeleteUser = (dni: string) => {
@@ -449,7 +569,7 @@ export default function AdminPanel() {
                   Condecoraciones
                 </h3>
                 <p className="text-2xl font-bold text-parchment-100">
-                  {stats.totalCondecoraciones}
+                  {loadingCondecoraciones ? '⏳' : stats.totalCondecoraciones}
                 </p>
               </div>
             </div>
@@ -481,6 +601,7 @@ export default function AdminPanel() {
             <button
               onClick={() => setShowCondecoracionesManager(!showCondecoracionesManager)}
               className="btn-alaniz"
+              disabled={loadingCondecoraciones}
             >
               🏆 {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
             </button>
@@ -504,6 +625,7 @@ export default function AdminPanel() {
                                rounded-lg text-parchment-100 placeholder-parchment-400
                                focus:border-alanizGold-600"
                     placeholder="Don Fernando de Castilla"
+                    disabled={loadingCondecoraciones}
                   />
                 </div>
                 <div>
@@ -516,6 +638,7 @@ export default function AdminPanel() {
                     onChange={(e) => setCondecoracionForm({...condecoracionForm, fechaOtorgamiento: e.target.value})}
                     className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                                rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                    disabled={loadingCondecoraciones}
                   />
                 </div>
               </div>
@@ -529,6 +652,7 @@ export default function AdminPanel() {
                   onChange={(e) => setCondecoracionForm({...condecoracionForm, condecoracion: e.target.value})}
                   className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
                              rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                  disabled={loadingCondecoraciones}
                 >
                   <option value="">Seleccionar condecoración</option>
                   {condecoraciones.map(condecoracion => (
@@ -551,27 +675,43 @@ export default function AdminPanel() {
                              rounded-lg text-parchment-100 placeholder-parchment-400
                              focus:border-alanizGold-600 resize-none"
                   placeholder="Descripción del motivo por el cual se otorga la condecoración..."
+                  disabled={loadingCondecoraciones}
                 />
               </div>
 
               <div className="flex space-x-4 mb-6">
                 <button
                   onClick={handleCreateCondecorado}
-                  className="btn-alaniz"
+                  className="btn-alaniz disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={loadingCondecoraciones}
                 >
-                  Añadir Condecorado
+                  {loadingCondecoraciones ? (
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent rounded-full animate-spin"></div>
+                      <span>Añadiendo...</span>
+                    </div>
+                  ) : (
+                    'Añadir Condecorado'
+                  )}
+                </button>
+                <button
+                  onClick={() => loadCondecoracionesFromSupabase()}
+                  className="btn-secondary"
+                  disabled={loadingCondecoraciones}
+                >
+                  🔄 Recargar
                 </button>
               </div>
 
               {/* Lista de condecorados */}
               <div>
                 <h4 className="text-lg font-semibold text-alanizGold-600 mb-4">
-                  Condecorados Registrados ({condecorados.length})
+                  Condecorados Registrados ({condecorados.length}) {loadingCondecoraciones && '⏳'}
                 </h4>
                 
                 {condecorados.length === 0 ? (
                   <p className="text-parchment-400 italic text-center py-4">
-                    No hay condecorados registrados aún.
+                    {loadingCondecoraciones ? 'Cargando condecoraciones...' : 'No hay condecorados registrados aún.'}
                   </p>
                 ) : (
                   <div className="space-y-3">
@@ -586,7 +726,7 @@ export default function AdminPanel() {
                               {getCondecoracionName(condecorado.condecoracion)}
                             </p>
                             <p className="text-sm text-parchment-400 mb-2">
-                              Otorgada el {new Date(condecorado.fechaOtorgamiento).toLocaleDateString('es-ES', {
+                              Otorgada el {new Date(condecorado.fecha_otorgamiento).toLocaleDateString('es-ES', {
                                 year: 'numeric',
                                 month: 'long',
                                 day: 'numeric'
@@ -598,8 +738,10 @@ export default function AdminPanel() {
                           </div>
                           <button
                             onClick={() => handleDeleteCondecorado(condecorado.id)}
-                            className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
+                            className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors
+                                       disabled:opacity-50 disabled:cursor-not-allowed"
                             title="Eliminar condecorado"
+                            disabled={loadingCondecoraciones}
                           >
                             <span className="text-sm">🗑️</span>
                           </button>
@@ -892,8 +1034,8 @@ export default function AdminPanel() {
               </div>
               <div>
                 <h4 className="font-semibold text-alanizGold-600 mb-2">Almacenamiento</h4>
-                <p className="text-parchment-400">☁️ Supabase Storage</p>
-                <p className="text-parchment-400">🔒 Documentos seguros en la nube</p>
+                <p className="text-parchment-400">☁️ Supabase Storage (Documentos)</p>
+                <p className="text-parchment-400">🗄️ Supabase Database (Condecoraciones)</p>
                 <p className="text-green-400 text-xs">Global access enabled</p>
               </div>
             </div>

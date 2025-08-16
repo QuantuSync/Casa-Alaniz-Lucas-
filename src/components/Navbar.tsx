@@ -327,8 +327,8 @@ export default function Navbar() {
             {/* Logo */}
             <Logo />
 
-            {/* Desktop Navigation - Primary Level */}
-            <div className="hidden lg:flex items-center space-x-1 ml-12">
+            {/* Desktop Navigation - Primary Level - CENTRADO */}
+            <div className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
               {primaryNavigation.map((item) => (
                 <NavItem
                   key={item.path}
@@ -338,6 +338,9 @@ export default function Navbar() {
                 />
               ))}
             </div>
+
+            {/* Espacio vacío para mantener el logo centrado */}
+            <div className="hidden lg:block w-32"></div>
 
             {/* Mobile menu button */}
             <button

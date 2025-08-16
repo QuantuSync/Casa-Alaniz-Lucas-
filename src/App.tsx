@@ -15,6 +15,7 @@ const Miembros = React.lazy(() => import('./pages/Miembros'));
 const SedeElectronica = React.lazy(() => import('./pages/SedeElectronica'));
 const AdminPanel = React.lazy(() => import('./pages/AdminPanel'));
 const Condecoraciones = React.lazy(() => import('./pages/Condecoraciones'));
+const DiaDeLaCasa = React.lazy(() => import('./pages/DiaDeLaCasa'));
 
 // Componente de carga para transiciones
 const PageLoader = () => (
@@ -65,6 +66,7 @@ const useScrollToTop = () => {
       '/legado': 'El Legado Vivo - Casa Alaniz',
       '/documentos': 'Archivo Documental - Casa Alaniz',
       '/condecoraciones': 'Condecoraciones - Casa Alaniz',
+      '/dia-casa': 'Día de la Casa - Casa Alaniz',
       '/contacto': 'Contacto - Casa Alaniz',
       '/login': 'Acceso Miembros - Casa Alaniz',
       '/miembros': 'Área Privada - Casa Alaniz',
@@ -83,6 +85,7 @@ const useScrollToTop = () => {
       '/legado': 'El legado vivo de la Casa Alaniz y su impacto en las generaciones futuras.',
       '/documentos': 'Acceso al archivo documental con cartas, tratados y crónicas restauradas.',
       '/condecoraciones': 'Condecoraciones y distinciones otorgadas por la Casa Alaniz en reconocimiento al honor y mérito.',
+      '/dia-casa': 'La celebración anual más solemne de la Casa Alaniz: ceremonia de condecoraciones y renovación de votos.',
       '/contacto': 'Contacta con la administración oficial de la Casa Alaniz.',
       '/login': 'Acceso exclusivo para miembros verificados de la Casa Alaniz.',
       '/miembros': 'Área privada para guardians y miembros de la Casa Alaniz.',
@@ -181,6 +184,7 @@ export default function App() {
             <Route path="/legado" element={<Legado />} />
             <Route path="/documentos" element={<Documentos />} />
             <Route path="/condecoraciones" element={<Condecoraciones />} />
+            <Route path="/dia-casa" element={<DiaDeLaCasa />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
             

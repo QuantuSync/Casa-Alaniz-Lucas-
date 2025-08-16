@@ -16,20 +16,19 @@ interface DocumentoUsuario {
   usuario_dni: string;
   nombre: string;
   tipo: string;
-  fecha_subida: string;
+  fecha_subida: string; // DATE en BD, lo formateamos en UI
   tamaño: string;
   url_supabase: string;
   created_at: string;
 }
 
 interface UserInfo {
-  id: string; // en tu app suele ser el DNI
+  id: string; // DNI
   name: string;
   type?: "admin" | "user";
 }
 
-// Nombre real de la tabla (según tu AdminPanel): documentos_usuarios
-const TABLE = "documentos_usuarios";
+const TABLE = "documentos_usuarios"; // nombre real de la tabla
 
 export default function SedeElectronica() {
   const navigate = useNavigate();
@@ -40,15 +39,14 @@ export default function SedeElectronica() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   // =====================
-  // Utilidades
+  // Helpers
   // =====================
   const getLoggedUser = (): UserInfo | null => {
-    // AdminPanel usa estos keys: alanizUserId (DNI), alanizUserName, alanizUserType, alanizAuth
+    // Claves usadas en el proyecto
     const isAuth = localStorage.getItem("alanizAuth");
     const id = localStorage.getItem("alanizUserId") || ""; // DNI
     const name = localStorage.getItem("alanizUserName") || "";
     const type = (localStorage.getItem("alanizUserType") as "admin" | "user" | null) || undefined;
-
     if (!isAuth || !id) return null;
     return { id, name, type };
   };
@@ -66,12 +64,11 @@ export default function SedeElectronica() {
   };
 
   // =====================
-  // Carga de documentos desde Supabase (REST)
+  // Carga de documentos (REST)
   // =====================
   const loadUserDocumentsFromSupabase = async (userDni: string) => {
     setLoading(true);
     setError("");
-
     try {
       const url = `${SUPABASE_URL}/rest/v1/${TABLE}?usuario_dni=eq.${encodeURIComponent(
         userDni
@@ -92,7 +89,7 @@ export default function SedeElectronica() {
 
       const data: DocumentoUsuario[] = await response.json();
       setDocuments(data);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error cargando documentos:", err);
       setError("No se pudieron cargar tus documentos. Inténtalo de nuevo.");
       setDocuments([]);
@@ -102,121 +99,155 @@ export default function SedeElectronica() {
   };
 
   // =====================
-  // Efecto inicial: obtener usuario y cargar documentos
+  // Animaciones de entrada y carga inicial
   // =====================
   useEffect(() => {
+    // Observer para animaciones (coherente con Historia.tsx)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in-up");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    const toObserve = document.querySelectorAll(".observe-me");
+    toObserve.forEach((el) => observer.observe(el));
+
     const u = getLoggedUser();
     if (!u) {
-      // No hay sesión válida
       navigate("/login");
-      return;
+    } else {
+      setUserInfo(u);
+      loadUserDocumentsFromSupabase(u.id);
     }
-    setUserInfo(u);
-    loadUserDocumentsFromSupabase(u.id);
+
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   // =====================
   // Render
   // =====================
   return (
-    <div className="min-h-screen bg-alanizGreen-950 py-8">
+    <div className="min-h-screen py-16 overflow-x-hidden">
       <div className="content-container">
-        {/* Header */}
-        <div className="card-elegant mb-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-alanizGold-600 rounded-full flex items-center justify-center">
-                <span className="text-alanizGreen-950 text-xl">🏛️</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-display font-bold text-alanizGold-600">
-                  Sede Electrónica
-                </h1>
-                <p className="text-parchment-300">
-                  Documentación personal vinculada a tu DNI
-                  {userInfo?.id ? `: ${userInfo.id}` : ""}
-                </p>
-              </div>
-            </div>
-            <div className="flex space-x-2">
-              <button
-                onClick={() => userInfo && loadUserDocumentsFromSupabase(userInfo.id)}
-                className="btn-secondary text-sm"
-              >
-                🔄 Recargar
-              </button>
-              <button
-                onClick={() => navigate("/")}
-                className="btn-secondary text-sm"
-              >
-                ← Volver
-              </button>
-            </div>
+        {/* HERO / CABECERA */}
+        <section className="text-center mb-16 observe-me opacity-0 translate-y-8">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-6"
+            aria-hidden
+          >
+            <span className="text-alanizGreen-950 text-2xl">🏛️</span>
           </div>
-        </div>
 
-        {/* Contenido */}
-        <div className="card-elegant">
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
+            Sede Electrónica
+          </h1>
+
+          <div className="divider-ornamental"></div>
+
+          <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
+            Accede a tu documentación personal vinculada a tu DNI
+            {userInfo?.id ? (
+              <span className="text-parchment-200">: {userInfo.id}</span>
+            ) : null}
+          </p>
+
+          <div className="mt-6 flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-center">
+            <button
+              onClick={() => userInfo && loadUserDocumentsFromSupabase(userInfo.id)}
+              className="btn-secondary text-sm"
+            >
+              🔄 Recargar
+            </button>
+            <button onClick={() => navigate("/")} className="btn-secondary text-sm">
+              ← Volver
+            </button>
+          </div>
+        </section>
+
+        {/* LISTA DE DOCUMENTOS */}
+        <article className="max-w-5xl mx-auto space-y-6 observe-me opacity-0 translate-y-8" style={{ animationDelay: "200ms" }}>
+          {/* Estados */}
           {loading && (
-            <div className="py-8 text-center text-parchment-300">Cargando documentos…</div>
+            <div className="card-elegant text-center">
+              <div className="flex items-center justify-center space-x-2 py-6">
+                <div className="w-6 h-6 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-alanizGold-600">Cargando documentos…</span>
+              </div>
+            </div>
           )}
 
           {!loading && error && (
-            <div className="py-6 px-4 mb-4 rounded-lg bg-red-500/10 text-red-300 border border-red-500/30">
-              {error}
+            <div className="card-elegant">
+              <div className="py-4 px-4 rounded-lg bg-red-500/10 text-red-300 border border-red-500/30">
+                {error}
+              </div>
             </div>
           )}
 
           {!loading && !error && documents.length === 0 && (
-            <div className="py-10 text-center">
+            <div className="card-elegant text-center">
               <div className="text-4xl text-alanizGold-600/30 mb-2">📄</div>
               <p className="text-parchment-400">No hay documentos asociados a tu cuenta por el momento.</p>
             </div>
           )}
 
           {!loading && !error && documents.length > 0 && (
-            <div>
-              <h2 className="text-xl font-display font-bold text-alanizGold-600 mb-4">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-display font-semibold text-alanizGold-600 mb-2">
                 Tus documentos ({documents.length})
               </h2>
-              <div className="space-y-3">
-                {documents.map((doc) => (
-                  <div key={doc.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-red-500/20 rounded flex items-center justify-center">
-                          <span className="text-red-400 text-sm">
-                            {doc.tipo === "Recompensas" ? "🏆" : "⚔️"}
-                          </span>
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-alanizGold-600">{doc.nombre}</h3>
-                          <p className="text-sm text-parchment-400">
-                            {doc.tipo} • {doc.tamaño} • {formatDate(doc.fecha_subida)}
-                          </p>
-                        </div>
+
+              {documents.map((doc) => (
+                <div key={doc.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 max-w-full">
+                    {/* Izquierda: icono + textos */}
+                    <div className="flex items-start md:items-center gap-3 min-w-0">
+                      <div className="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span className="text-red-400 text-lg" aria-hidden>
+                          {doc.tipo === "Recompensas" ? "🏆" : "⚔️"}
+                        </span>
                       </div>
-                      <div className="flex space-x-2">
-                        <a
-                          href={doc.url_supabase}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded text-sm hover:bg-blue-500/30 transition-colors"
-                        >
-                          Ver PDF
-                        </a>
+                      <div className="min-w-0">
+                        <h3 className="font-medium text-alanizGold-600 truncate" title={doc.nombre}>
+                          {doc.nombre}
+                        </h3>
+                        <p className="text-sm text-parchment-400 whitespace-normal break-words">
+                          {doc.tipo} • {doc.tamaño} • {formatDate(doc.fecha_subida)}
+                        </p>
                       </div>
                     </div>
+
+                    {/* Derecha: acciones */}
+                    <div className="md:w-auto w-full">
+                      <a
+                        href={doc.url_supabase}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex justify-center w-full md:w-auto px-3 py-2 bg-blue-500/20 text-blue-400 rounded text-sm hover:bg-blue-500/30 transition-colors"
+                      >
+                        Ver PDF
+                      </a>
+                    </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           )}
-        </div>
+        </article>
 
-        {/* Pie */}
-        <div className="mt-8 text-center text-parchment-400 text-sm">
-          Última actualización: {new Date().toLocaleString("es-ES")}
+        {/* PIE */}
+        <div className="text-center mt-16">
+          <div className="bg-alanizGreen-800/50 rounded-xl p-6 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant inline-block">
+            <p className="text-parchment-400 text-sm">
+              Última actualización: {new Date().toLocaleString("es-ES")}
+            </p>
+          </div>
         </div>
       </div>
     </div>

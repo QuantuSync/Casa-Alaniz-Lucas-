@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-// Configuración de navegación - REORGANIZADA EN DOS NIVELES
-const primaryNavigation = [
+// Configuración de navegación - CON SUBMENÚS
+const navigationItems = [
   { path: "/", label: "Inicio", icon: "🏠" },
   { path: "/historia", label: "Historia", icon: "📜" },
   { path: "/simbolos", label: "Símbolos", icon: "⚔️" },
   { path: "/legado", label: "Legado", icon: "👑" },
+  {
+    path: "/archivo",
+    label: "Archivo",
+    icon: "📚",
+    hasSubmenu: true,
+    submenu: [
+      { path: "/documentos", label: "Documentos", icon: "📄" },
+      { path: "/condecoraciones", label: "Condecoraciones", icon: "🏆" },
+      { path: "/dia-casa", label: "Día de la Casa", icon: "🎖️" },
+    ]
+  },
+  { path: "/sede-electronica", label: "Portal", icon: "🏛️" },
   { path: "/contacto", label: "Contacto", icon: "📧" },
   { path: "/login", label: "Miembros", icon: "🛡️" },
-] as const;
-
-const secondaryNavigation = [
-  { path: "/documentos", label: "Documentos", icon: "📚" },
-  { path: "/condecoraciones", label: "Condecoraciones", icon: "🏆" },
-  { path: "/dia-casa", label: "Día de la Casa", icon: "🎖️" },
-  { path: "/sede-electronica", label: "Sede Electrónica", icon: "🏛️" },
 ] as const;
 
 // Componente del logo
@@ -49,27 +54,24 @@ const Logo = () => (
   </NavLink>
 );
 
-// Componente de link de navegación
+// Componente de link de navegación simple
 const NavItem = ({
   path,
   label,
   icon,
   onClick,
-  isSecondary = false,
 }: {
   path: string;
   label: string;
   icon: string;
   onClick?: () => void;
-  isSecondary?: boolean;
 }) => (
   <NavLink
     to={path}
     onClick={onClick}
     className={({ isActive }) => `
       relative flex items-center space-x-2 px-3 py-2 rounded-lg
-      font-medium transition-all duration-300 group
-      ${isSecondary ? 'text-xs' : 'text-sm'}
+      font-medium transition-all duration-300 group text-sm
       ${
         isActive
           ? "text-alanizGold-500 bg-alanizGold-600/10"
@@ -79,14 +81,10 @@ const NavItem = ({
   >
     {({ isActive }) => (
       <>
-        <span className={`transition-transform duration-300 group-hover:scale-110 ${
-          isSecondary ? 'text-xs' : 'text-sm'
-        }`}>
+        <span className="text-sm transition-transform duration-300 group-hover:scale-110">
           {icon}
         </span>
-        <span className={`font-semibold tracking-wide ${
-          isSecondary ? 'text-xs' : 'text-sm'
-        }`}>{label}</span>
+        <span className="text-sm font-semibold tracking-wide">{label}</span>
         {isActive && (
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
@@ -102,6 +100,84 @@ const NavItem = ({
   </NavLink>
 );
 
+// Componente de navegación con submenú desplegable
+const DropdownNavItem = ({
+  item,
+  isOpen,
+  onToggle,
+  onClose,
+}: {
+  item: any;
+  isOpen: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+}) => {
+  const location = useLocation();
+  const isSubmenuActive = item.submenu?.some((subitem: any) => location.pathname === subitem.path);
+  
+  return (
+    <div className="relative">
+      <button
+        onClick={onToggle}
+        className={`
+          relative flex items-center space-x-2 px-3 py-2 rounded-lg
+          font-medium transition-all duration-300 group text-sm
+          ${
+            isSubmenuActive || isOpen
+              ? "text-alanizGold-500 bg-alanizGold-600/10"
+              : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/5"
+          }
+        `}
+      >
+        <span className="text-sm transition-transform duration-300 group-hover:scale-110">
+          {item.icon}
+        </span>
+        <span className="text-sm font-semibold tracking-wide">{item.label}</span>
+        <span className={`text-xs transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          ▼
+        </span>
+        {isSubmenuActive && (
+          <div
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
+                          w-6 h-0.5 bg-alanizGold-600 rounded-full"
+          ></div>
+        )}
+        <div
+          className="absolute inset-0 bg-alanizGold-600/10 rounded-lg scale-0 
+                        group-hover:scale-100 transition-transform duration-300 -z-10"
+        ></div>
+      </button>
+
+      {/* Submenú desplegable */}
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-2 w-56 bg-alanizGreen-800 border border-alanizGold-600/20 
+                        rounded-lg shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
+          <div className="py-2">
+            {item.submenu.map((subitem: any) => (
+              <NavLink
+                key={subitem.path}
+                to={subitem.path}
+                onClick={onClose}
+                className={({ isActive }) => `
+                  flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200
+                  ${
+                    isActive
+                      ? "text-alanizGold-500 bg-alanizGold-600/20"
+                      : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/10"
+                  }
+                `}
+              >
+                <span className="text-sm">{subitem.icon}</span>
+                <span className="font-medium">{subitem.label}</span>
+              </NavLink>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Componente del menú móvil
 const MobileMenu = ({
   isOpen,
@@ -110,17 +186,24 @@ const MobileMenu = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      setOpenSubmenu(null);
     }
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  const toggleSubmenu = (label: string) => {
+    setOpenSubmenu(openSubmenu === label ? null : label);
+  };
 
   return (
     <div
@@ -156,42 +239,63 @@ const MobileMenu = ({
         </div>
 
         {/* Navigation */}
-        <nav className="p-6 space-y-6">
-          {/* Primary Navigation */}
-          <div>
-            <h3 className="text-sm font-semibold text-alanizGold-600/60 uppercase tracking-wider mb-3">
-              Navegación Principal
-            </h3>
-            <div className="space-y-2">
-              {primaryNavigation.map((item) => (
+        <nav className="p-6 space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
+          {navigationItems.map((item) => (
+            <div key={item.path}>
+              {item.hasSubmenu ? (
+                <div>
+                  <button
+                    onClick={() => toggleSubmenu(item.label)}
+                    className="w-full flex items-center justify-between space-x-2 px-3 py-2 rounded-lg
+                               font-medium transition-all duration-300 group text-sm
+                               text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/5"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm">{item.icon}</span>
+                      <span className="text-sm font-semibold tracking-wide">{item.label}</span>
+                    </div>
+                    <span className={`text-xs transition-transform duration-300 ${
+                      openSubmenu === item.label ? 'rotate-180' : ''
+                    }`}>
+                      ▼
+                    </span>
+                  </button>
+                  
+                  {/* Submenú en móvil */}
+                  {openSubmenu === item.label && (
+                    <div className="ml-4 mt-2 space-y-1">
+                      {item.submenu.map((subitem) => (
+                        <NavLink
+                          key={subitem.path}
+                          to={subitem.path}
+                          onClick={onClose}
+                          className={({ isActive }) => `
+                            flex items-center space-x-2 px-3 py-2 rounded-lg
+                            font-medium transition-all duration-300 text-sm
+                            ${
+                              isActive
+                                ? "text-alanizGold-500 bg-alanizGold-600/10"
+                                : "text-alanizGold-600/60 hover:text-alanizGold-500 hover:bg-alanizGold-600/5"
+                            }
+                          `}
+                        >
+                          <span className="text-sm">{subitem.icon}</span>
+                          <span className="text-sm font-semibold tracking-wide">{subitem.label}</span>
+                        </NavLink>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
                 <NavItem
-                  key={item.path}
                   path={item.path}
                   label={item.label}
                   icon={item.icon}
                   onClick={onClose}
                 />
-              ))}
+              )}
             </div>
-          </div>
-
-          {/* Secondary Navigation */}
-          <div>
-            <h3 className="text-sm font-semibold text-alanizGold-600/60 uppercase tracking-wider mb-3">
-              Archivo & Ceremonias
-            </h3>
-            <div className="space-y-2">
-              {secondaryNavigation.map((item) => (
-                <NavItem
-                  key={item.path}
-                  path={item.path}
-                  label={item.label}
-                  icon={item.icon}
-                  onClick={onClose}
-                />
-              ))}
-            </div>
-          </div>
+          ))}
         </nav>
 
         {/* Footer info */}
@@ -212,11 +316,13 @@ const MobileMenu = ({
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
 
   // Cerrar menú móvil al cambiar de ruta
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setOpenDropdown(null);
   }, [location]);
 
   // Efecto de scroll para el navbar
@@ -230,26 +336,39 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Manejar ESC key para cerrar menú móvil
+  // Cerrar dropdown al hacer click fuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (openDropdown) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [openDropdown]);
+
+  // Manejar ESC key
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsMobileMenuOpen(false);
+        setOpenDropdown(null);
       }
     };
 
-    if (isMobileMenuOpen) {
-      document.addEventListener("keydown", handleEsc);
-    }
-
+    document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
-  }, [isMobileMenuOpen]);
+  }, []);
 
-  // Añadir estilos CSS para las partículas
+  const toggleDropdown = (label: string) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  // Añadir estilos CSS
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
-      /* Efecto brillo sutil para la imagen */
       .subtle-glow {
         position: relative;
         overflow: visible;
@@ -282,14 +401,12 @@ export default function Navbar() {
         }
       }
       
-      /* Efecto al hacer hover */
       .group:hover .subtle-glow::before {
         animation-duration: 2s;
         box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         opacity: 1;
       }
       
-      /* Para pantallas móviles */
       @media (max-width: 1024px) {
         .subtle-glow::before {
           top: -1px;
@@ -307,7 +424,9 @@ export default function Navbar() {
     document.head.appendChild(style);
 
     return () => {
-      document.head.removeChild(style);
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
     };
   }, []);
 
@@ -322,25 +441,31 @@ export default function Navbar() {
                     }`}
       >
         <div className="content-container">
-          {/* Navbar principal */}
-          <nav className="flex items-center justify-between h-16 lg:h-18">
+          <nav className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Logo />
 
-            {/* Desktop Navigation - Primary Level - CENTRADO */}
-            <div className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
-              {primaryNavigation.map((item) => (
-                <NavItem
-                  key={item.path}
-                  path={item.path}
-                  label={item.label}
-                  icon={item.icon}
-                />
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-1 ml-12">
+              {navigationItems.map((item) => (
+                item.hasSubmenu ? (
+                  <DropdownNavItem
+                    key={item.path}
+                    item={item}
+                    isOpen={openDropdown === item.label}
+                    onToggle={() => toggleDropdown(item.label)}
+                    onClose={() => setOpenDropdown(null)}
+                  />
+                ) : (
+                  <NavItem
+                    key={item.path}
+                    path={item.path}
+                    label={item.label}
+                    icon={item.icon}
+                  />
+                )
               ))}
             </div>
-
-            {/* Espacio vacío para mantener el logo centrado */}
-            <div className="hidden lg:block w-32"></div>
 
             {/* Mobile menu button */}
             <button
@@ -353,23 +478,6 @@ export default function Navbar() {
               <span className="block w-6 h-6 text-xl">☰</span>
             </button>
           </nav>
-
-          {/* Secondary Navigation Bar */}
-          <div className="hidden lg:block border-t border-alanizGold-600/10">
-            <nav className="flex items-center justify-center py-2">
-              <div className="flex items-center space-x-1">
-                {secondaryNavigation.map((item) => (
-                  <NavItem
-                    key={item.path}
-                    path={item.path}
-                    label={item.label}
-                    icon={item.icon}
-                    isSecondary={true}
-                  />
-                ))}
-              </div>
-            </nav>
-          </div>
         </div>
       </header>
 

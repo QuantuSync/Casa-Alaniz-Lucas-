@@ -359,6 +359,23 @@ export default function DiaDeLaCasa() {
             </div>
           </div>
           
+        {/* Condecoraciones otorgadas */}
+        <div className="card-elegant observe-me opacity-0 translate-y-8 mb-12" 
+             style={{ animationDelay: '800ms' }}>
+          <div className="flex items-start space-x-6 mb-6">
+            <div className="flex-shrink-0">
+              <div className="inline-flex items-center justify-center w-14 h-14 
+                              bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg">
+                <span className="text-white text-xl">🏅</span>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-4">
+                Condecoraciones del Año {new Date().getFullYear()}
+              </h3>
+            </div>
+          </div>
+          
           {condecoradosEsteAño.length === 0 ? (
             <div className="text-center py-8">
               <div className="text-4xl text-alanizGold-600/30 mb-4">🏆</div>

@@ -1,284 +1,421 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// =====================
-// CONFIGURACIÓN SUPABASE (usa variables de entorno en producción)
-// =====================
-const SUPABASE_URL = "https://rbicywnjsbrbezomrnss.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw";
+// CONFIGURACIÓN SUPABASE
+const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
-// =====================
-// Tipados
-// =====================
 interface DocumentoUsuario {
   id: string;
   usuario_dni: string;
   nombre: string;
   tipo: string;
-  fecha_subida: string; // DATE en BD, lo formateamos en UI
+  fecha_subida: string;
   tamaño: string;
   url_supabase: string;
   created_at: string;
 }
 
-interface UserInfo {
-  id: string; // DNI
+interface Document {
+  id: string;
   name: string;
-  type?: "admin" | "user";
+  type: string;
+  uploadDate: string;
+  size: string;
+  url: string;
 }
 
-const TABLE = "documentos_usuarios"; // nombre real de la tabla
-
 export default function SedeElectronica() {
+  const [documents, setDocuments] = useState<DocumentoUsuario[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState<{ id: string; name: string } | null>(null);
+  const [error, setError] = useState<string>("");
+  const [supabaseConnected, setSupabaseConnected] = useState(false);
   const navigate = useNavigate();
 
-  const [documents, setDocuments] = useState<DocumentoUsuario[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  useEffect(() => {
+    loadUserDocuments();
+  }, []);
 
-  // =====================
-  // Helpers
-  // =====================
-  const getLoggedUser = (): UserInfo | null => {
-    // Claves usadas en el proyecto
-    const isAuth = localStorage.getItem("alanizAuth");
-    const id = localStorage.getItem("alanizUserId") || ""; // DNI
-    const name = localStorage.getItem("alanizUserName") || "";
-    const type = (localStorage.getItem("alanizUserType") as "admin" | "user" | null) || undefined;
-    if (!isAuth || !id) return null;
-    return { id, name, type };
-  };
-
-  const formatDate = (iso: string) => {
+  // Test de conexión a Supabase
+  const testSupabaseConnection = async () => {
     try {
-      return new Date(iso).toLocaleDateString("es-ES", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
       });
-    } catch {
-      return iso;
+      setSupabaseConnected(response.ok);
+      return response.ok;
+    } catch (error) {
+      console.error('Error conectando con Supabase:', error);
+      setSupabaseConnected(false);
+      return false;
     }
   };
 
-  // =====================
-  // Carga de documentos (REST)
-  // =====================
+  // Función para cargar documentos desde Supabase
   const loadUserDocumentsFromSupabase = async (userDni: string) => {
-    setLoading(true);
-    setError("");
     try {
-      const url = `${SUPABASE_URL}/rest/v1/${TABLE}?usuario_dni=eq.${encodeURIComponent(
-        userDni
-      )}&select=*&order=created_at.desc`;
-
-      const response = await fetch(url, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?usuario_dni=eq.${userDni}&select=*&order=created_at.desc`, {
         headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          "Content-Type": "application/json",
-        },
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
       });
 
       if (!response.ok) {
-        const msg = await response.text();
-        throw new Error(msg || "Error al cargar documentos desde Supabase");
+        throw new Error('Error al cargar documentos desde Supabase');
       }
 
-      const data: DocumentoUsuario[] = await response.json();
-      setDocuments(data);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error cargando documentos de Supabase:', error);
+      return null;
+    }
+  };
+
+  // Función fallback para cargar documentos desde localStorage
+  const loadUserDocumentsFromLocalStorage = (userDni: string): DocumentoUsuario[] => {
+    try {
+      const allDocuments = JSON.parse(localStorage.getItem("alanizDocuments") || "{}");
+      const userDocuments = allDocuments[userDni] || [];
+      
+      // Convertir formato antiguo al nuevo
+      return userDocuments.map((doc: Document) => ({
+        id: doc.id,
+        usuario_dni: userDni,
+        nombre: doc.name,
+        tipo: doc.type,
+        fecha_subida: doc.uploadDate,
+        tamaño: doc.size,
+        url_supabase: doc.url,
+        created_at: new Date().toISOString()
+      }));
+    } catch (error) {
+      console.error('Error cargando documentos de localStorage:', error);
+      return [];
+    }
+  };
+
+  const loadUserDocuments = async () => {
+    try {
+      const userId = localStorage.getItem("alanizUserId");
+      const userName = localStorage.getItem("alanizUserName");
+      const authStatus = localStorage.getItem("alanizAuth");
+
+      if (!userId || !authStatus || authStatus !== "ok") {
+        navigate("/login");
+        return;
+      }
+
+      // Test conexión Supabase
+      const connected = await testSupabaseConnection();
+
+      // Simular carga
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      let userDocuments: DocumentoUsuario[] = [];
+
+      // Intentar cargar desde Supabase primero
+      if (connected) {
+        const supabaseDocuments = await loadUserDocumentsFromSupabase(userId);
+        if (supabaseDocuments) {
+          userDocuments = supabaseDocuments;
+        }
+      }
+
+      // Si no hay documentos en Supabase o no está conectado, usar localStorage
+      if (userDocuments.length === 0) {
+        userDocuments = loadUserDocumentsFromLocalStorage(userId);
+      }
+
+      setDocuments(userDocuments);
+      setUserInfo({ id: userId, name: userName || "Usuario" });
+      setLoading(false);
     } catch (err) {
       console.error("Error cargando documentos:", err);
-      setError("No se pudieron cargar tus documentos. Inténtalo de nuevo.");
-      setDocuments([]);
-    } finally {
+      setError("Error al cargar los documentos");
       setLoading(false);
     }
   };
 
-  // =====================
-  // Sesión y navegación
-  // =====================
+  const handleDownload = async (document: DocumentoUsuario) => {
+    try {
+      // Si el documento tiene URL de Supabase, usar esa
+      if (document.url_supabase && document.url_supabase.includes('supabase')) {
+        // Abrir directamente la URL de Supabase
+        window.open(document.url_supabase, '_blank');
+        return;
+      }
+
+      // Fallback: buscar en localStorage (formato antiguo)
+      const base64Data = localStorage.getItem(`file_${document.url_supabase}`);
+      if (!base64Data) {
+        alert("El archivo no está disponible para descarga.");
+        return;
+      }
+
+      // Convertir base64 a blob
+      const byteCharacters = atob(base64Data.split(",")[1]);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: "application/pdf" });
+
+      // Crear URL temporal y descargar
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = document.nombre;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Limpiar URL temporal
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error al descargar:", error);
+      alert("Error al descargar el documento.");
+    }
+  };
+
+  const handleViewDocument = (document: DocumentoUsuario) => {
+    try {
+      // Si el documento tiene URL de Supabase, usar esa
+      if (document.url_supabase && document.url_supabase.includes('supabase')) {
+        window.open(document.url_supabase, '_blank');
+        return;
+      }
+
+      // Fallback: buscar en localStorage (formato antiguo)
+      const base64Data = localStorage.getItem(`file_${document.url_supabase}`);
+      if (base64Data) {
+        const byteCharacters = atob(base64Data.split(",")[1]);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+      } else {
+        alert("No se puede visualizar el documento.");
+      }
+    } catch (error) {
+      console.error("Error al ver documento:", error);
+      alert("Error al visualizar el documento.");
+    }
+  };
+
   const handleLogout = () => {
     try {
       localStorage.removeItem("alanizAuth");
       localStorage.removeItem("alanizUserId");
       localStorage.removeItem("alanizUserType");
       localStorage.removeItem("alanizUserName");
-    } catch (e) {
-      // noop
+      navigate("/login");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      window.location.href = "/login";
     }
-    navigate("/login");
   };
 
-  // =====================
-  // Animaciones de entrada y carga inicial
-  // =====================
-  useEffect(() => {
-    // Observer para animaciones (coherente con Historia.tsx)
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950">
+        <div className="text-center space-y-4">
+          <div className="w-12 h-12 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-alanizGold-600">Cargando documentos...</p>
+        </div>
+      </div>
     );
+  }
 
-    const toObserve = document.querySelectorAll(".observe-me");
-    toObserve.forEach((el) => observer.observe(el));
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950 p-4">
+        <div className="text-center space-y-4">
+          <div className="text-6xl text-red-400 mb-4">⚠️</div>
+          <h2 className="text-xl font-semibold text-red-400">Error al cargar</h2>
+          <p className="text-parchment-300">{error}</p>
+          <div className="space-x-4">
+            <button onClick={() => window.location.reload()} className="btn-alaniz">
+              Reintentar
+            </button>
+            <button onClick={handleLogout} className="btn-secondary">
+              Volver al Login
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-    const u = getLoggedUser();
-    if (!u) {
-      navigate("/login");
-    } else {
-      setUserInfo(u);
-      loadUserDocumentsFromSupabase(u.id);
-    }
-
-    return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
-
-  // =====================
-  // Render
-  // =====================
   return (
-    <div className="min-h-screen py-16 overflow-x-hidden">
+    <div className="min-h-screen bg-alanizGreen-950 py-8">
       <div className="content-container">
-        {/* HERO / CABECERA */}
-        <section className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div
-            className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-6"
-            aria-hidden
-          >
-            <span className="text-alanizGreen-950 text-2xl">🏛️</span>
-          </div>
-
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
-            Sede Electrónica
-          </h1>
-
-          <div className="divider-ornamental"></div>
-
-          <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
-            Accede a tu documentación personal vinculada a tu DNI
-            {userInfo?.id ? (
-              <span className="text-parchment-200">: {userInfo.id}</span>
-            ) : null}
-          </p>
-
-          <div className="mt-6 flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-center">
-            <button
-              onClick={() => userInfo && loadUserDocumentsFromSupabase(userInfo.id)}
-              className="btn-secondary text-sm w-full md:w-auto"
-            >
-              🔄 Recargar
-            </button>
-
-            {userInfo?.type === 'admin' && (
+        {/* Header */}
+        <div className="card-elegant mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-alanizGold-600 rounded-full flex items-center justify-center">
+                <span className="text-alanizGreen-950 text-xl">🏛️</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-display font-bold text-alanizGold-600">
+                  Sede Electrónica
+                </h1>
+                <p className="text-parchment-300">
+                  Bienvenido, {userInfo?.name}
+                </p>
+                <div className="flex items-center space-x-2 mt-1">
+                  <div className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
+                  <span className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                    {supabaseConnected ? 'Sistema global' : 'Modo local'}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="flex space-x-2">
               <button
-                onClick={() => navigate('/admin')}
-                className="btn-secondary text-sm w-full md:w-auto"
+                onClick={() => testSupabaseConnection()}
+                className="btn-secondary text-sm"
               >
-                🛡️ Panel de Administración
+                🔄 Test
               </button>
-            )}
-
-            <button
-              onClick={handleLogout}
-              className="btn-secondary text-sm w-full md:w-auto"
-            >
-              ⎋ Cerrar sesión
-            </button>
-
-            <button onClick={() => navigate('/')} className="btn-secondary text-sm w-full md:w-auto">
-              ← Volver
-            </button>
+              <button onClick={handleLogout} className="btn-secondary">
+                Cerrar Sesión
+              </button>
+            </div>
           </div>
-        </section>
 
-        {/* LISTA DE DOCUMENTOS */}
-        <article className="max-w-5xl mx-auto space-y-6 observe-me opacity-0 translate-y-8" style={{ animationDelay: "200ms" }}>
-          {/* Estados */}
-          {loading && (
-            <div className="card-elegant text-center">
-              <div className="flex items-center justify-center space-x-2 py-6">
-                <div className="w-6 h-6 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
-                <span className="text-alanizGold-600">Cargando documentos…</span>
-              </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-alanizGreen-900/30 rounded-lg p-4">
+              <h3 className="font-semibold text-alanizGold-600 mb-2">DNI</h3>
+              <p className="text-parchment-300">{userInfo?.id || "N/A"}</p>
             </div>
-          )}
-
-          {!loading && error && (
-            <div className="card-elegant">
-              <div className="py-4 px-4 rounded-lg bg-red-500/10 text-red-300 border border-red-500/30">
-                {error}
-              </div>
+            <div className="bg-alanizGreen-900/30 rounded-lg p-4">
+              <h3 className="font-semibold text-alanizGold-600 mb-2">Documentos</h3>
+              <p className="text-parchment-300">{documents.length}</p>
             </div>
-          )}
-
-          {!loading && !error && documents.length === 0 && (
-            <div className="card-elegant text-center">
-              <div className="text-4xl text-alanizGold-600/30 mb-2">📄</div>
-              <p className="text-parchment-400">No hay documentos asociados a tu cuenta por el momento.</p>
+            <div className="bg-alanizGreen-900/30 rounded-lg p-4">
+              <h3 className="font-semibold text-alanizGold-600 mb-2">Estado</h3>
+              <p className={supabaseConnected ? "text-green-400" : "text-yellow-400"}>
+                {supabaseConnected ? 'Global' : 'Local'}
+              </p>
             </div>
-          )}
+          </div>
+        </div>
 
-          {!loading && !error && documents.length > 0 && (
+        {/* Documentos */}
+        <div className="card-elegant">
+          <h2 className="text-xl font-display font-bold text-alanizGold-600 mb-6">
+            Mis Documentos
+          </h2>
+
+          {documents.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-6xl text-alanizGold-600/30 mb-4">📄</div>
+              <h3 className="text-lg font-medium text-alanizGold-600 mb-2">
+                No hay documentos disponibles
+              </h3>
+              <p className="text-parchment-400">
+                Los documentos aparecerán aquí cuando sean asignados por la administración.
+              </p>
+            </div>
+          ) : (
             <div className="space-y-4">
-              <h2 className="text-2xl font-display font-semibold text-alanizGold-600 mb-2">
-                Tus documentos ({documents.length})
-              </h2>
-
               {documents.map((doc) => (
-                <div key={doc.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 max-w-full">
-                    {/* Izquierda: icono + textos */}
-                    <div className="flex items-start md:items-center gap-3 min-w-0">
-                      <div className="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-red-400 text-lg" aria-hidden>
-                          {doc.tipo === "Recompensas" ? "🏆" : "⚔️"}
+                <div
+                  key={doc.id}
+                  className="bg-alanizGreen-900/30 rounded-lg p-4 hover:bg-alanizGreen-900/50 transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
+                        <span className="text-alanizGold-600">
+                          {doc.tipo === "Recompensas" ? "🏆" : 
+                           doc.tipo === "Nombramientos" ? "⚔️" : "📄"}
                         </span>
                       </div>
-                      <div className="min-w-0">
-                        <h3 className="font-medium text-alanizGold-600 truncate" title={doc.nombre}>
+                      <div>
+                        <h3 className="font-medium text-alanizGold-600">
                           {doc.nombre}
                         </h3>
-                        <p className="text-sm text-parchment-400 whitespace-normal break-words">
-                          {doc.tipo} • {doc.tamaño} • {formatDate(doc.fecha_subida)}
+                        <p className="text-sm text-parchment-400">
+                          {doc.tipo} • {doc.tamaño} • {doc.fecha_subida}
+                        </p>
+                        <p className="text-xs text-parchment-500">
+                          {doc.url_supabase?.includes('supabase') ? '☁️ Global' : '💾 Local'}
                         </p>
                       </div>
                     </div>
-
-                    {/* Derecha: acciones */}
-                    <div className="md:w-auto w-full">
-                      <a
-                        href={doc.url_supabase}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex justify-center w-full md:w-auto px-3 py-2 bg-blue-500/20 text-blue-400 rounded text-sm hover:bg-blue-500/30 transition-colors"
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => handleViewDocument(doc)}
+                        className="btn-secondary text-sm"
                       >
-                        Ver PDF
-                      </a>
+                        Ver
+                      </button>
+                      <button
+                        onClick={() => handleDownload(doc)}
+                        className="btn-alaniz text-sm"
+                        disabled={!doc.url_supabase || doc.url_supabase === "#"}
+                      >
+                        Descargar
+                      </button>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           )}
-        </article>
+        </div>
 
-        {/* PIE */}
-        <div className="text-center mt-16">
-          <div className="bg-alanizGreen-800/50 rounded-xl p-6 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant inline-block">
-            <p className="text-parchment-400 text-sm">
-              Última actualización: {new Date().toLocaleString("es-ES")}
-            </p>
+        {/* Información adicional */}
+        <div className="card-elegant mt-8">
+          <h3 className="font-semibold text-alanizGold-600 mb-4">
+            Información Importante
+          </h3>
+          <div className="bg-alanizGreen-900/30 rounded-lg p-4">
+            <ul className="space-y-2 text-parchment-300 text-sm">
+              <li>• Los documentos están firmados digitalmente por la Casa Alaniz</li>
+              <li>• Mantén tus credenciales seguras y no las compartas</li>
+              <li>• Para solicitar nuevos documentos, contacta con la administración</li>
+              <li>• Los documentos tienen validez oficial para trámites genealógicos</li>
+              <li>• {supabaseConnected ? 'Sistema sincronizado globalmente' : 'Modo offline - documentos locales'}</li>
+            </ul>
+          </div>
+
+          {/* Información técnica */}
+          <div className="mt-4 p-3 bg-alanizGreen-800/20 rounded-lg">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-parchment-500">Estado del sistema:</span>
+              <div className="flex items-center space-x-2">
+                <span className={supabaseConnected ? 'text-green-400' : 'text-yellow-400'}>
+                  {supabaseConnected ? '☁️ Supabase conectado' : '💾 Solo localStorage'}
+                </span>
+                <button
+                  onClick={async () => {
+                    const connected = await testSupabaseConnection();
+                    if (connected) {
+                      loadUserDocuments();
+                    }
+                  }}
+                  className="text-alanizGold-600 hover:text-alanizGold-500 text-xs underline"
+                >
+                  Actualizar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

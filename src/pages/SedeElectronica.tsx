@@ -99,6 +99,21 @@ export default function SedeElectronica() {
   };
 
   // =====================
+  // Sesión y navegación
+  // =====================
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("alanizAuth");
+      localStorage.removeItem("alanizUserId");
+      localStorage.removeItem("alanizUserType");
+      localStorage.removeItem("alanizUserName");
+    } catch (e) {
+      // noop
+    }
+    navigate("/login");
+  };
+
+  // =====================
   // Animaciones de entrada y carga inicial
   // =====================
   useEffect(() => {
@@ -157,14 +172,31 @@ export default function SedeElectronica() {
             ) : null}
           </p>
 
-          <div className="mt-6 flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-center">
+          <div className=\"mt-6 flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-center\">
             <button
               onClick={() => userInfo && loadUserDocumentsFromSupabase(userInfo.id)}
-              className="btn-secondary text-sm"
+              className=\"btn-secondary text-sm w-full md:w-auto\"
             >
               🔄 Recargar
             </button>
-            <button onClick={() => navigate("/")} className="btn-secondary text-sm">
+
+            {userInfo?.type === 'admin' && (
+              <button
+                onClick={() => navigate('/admin')}
+                className=\"btn-secondary text-sm w-full md:w-auto\"
+              >
+                🛡️ Panel de Administración
+              </button>
+            )}
+
+            <button
+              onClick={handleLogout}
+              className=\"btn-secondary text-sm w-full md:w-auto\"
+            >
+              ⎋ Cerrar sesión
+            </button>
+
+            <button onClick={() => navigate('/')} className=\"btn-secondary text-sm w-full md:w-auto\">
               ← Volver
             </button>
           </div>

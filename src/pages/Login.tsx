@@ -1,82 +1,183 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// CONFIGURACIÓN SUPABASE
+const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+
+interface Usuario {
+  dni: string;
+  nombre: string;
+  password: string;
+  tipo: 'admin' | 'user';
+  created_at: string;
+}
 
 export default function Login() {
-  const [dni, setDni] = useState("");
-  const [pass, setPass] = useState("");
-  const [error, setError] = useState("");
+  const [dni, setDni] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [supabaseConnected, setSupabaseConnected] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setMounted(true);
     initializeAdmin();
+    testSupabaseConnection();
 
     // Verificar si ya está autenticado
-    const authStatus = localStorage.getItem("alanizAuth");
-    if (authStatus === "ok") {
-      const userType = localStorage.getItem("alanizUserType");
-      if (userType === "admin") {
-        navigate("/admin");
+    const authStatus = localStorage.getItem('alanizAuth');
+    if (authStatus === 'ok') {
+      const userType = localStorage.getItem('alanizUserType');
+      if (userType === 'admin') {
+        navigate('/admin');
       } else {
-        navigate("/sede-electronica");
+        navigate('/sede-electronica');
       }
     }
   }, [navigate]);
 
-  // Inicializar solo administrador
+  // Test de conexión a Supabase
+  const testSupabaseConnection = async () => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      setSupabaseConnected(response.ok);
+    } catch (error) {
+      console.error('Error conectando con Supabase:', error);
+      setSupabaseConnected(false);
+    }
+  };
+
+  // Inicializar admin local (fallback)
   const initializeAdmin = () => {
-    const existingUsers = localStorage.getItem("alanizUsers");
+    const existingUsers = localStorage.getItem('alanizUsers');
 
     if (!existingUsers) {
       const adminUser = {
-        "34323575P": {
-          name: "Administrador",
-          password: "110788",
-          type: "admin",
+        '34323575P': {
+          name: 'Administrador',
+          password: '110788',
+          type: 'admin',
           createdDate: new Date().toISOString(),
         },
       };
 
-      localStorage.setItem("alanizUsers", JSON.stringify(adminUser));
-      localStorage.setItem("alanizDocuments", JSON.stringify({}));
+      localStorage.setItem('alanizUsers', JSON.stringify(adminUser));
+      localStorage.setItem('alanizDocuments', JSON.stringify({}));
+    }
+  };
+
+  // Función para autenticar usuario con Supabase
+  const authenticateUserWithSupabase = async (dni: string, password: string): Promise<Usuario | null> => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios?dni=eq.${dni.toUpperCase()}&password=eq.${password}&select=*`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al consultar la base de datos');
+      }
+
+      const data = await response.json();
+      return data.length > 0 ? data[0] : null;
+    } catch (error) {
+      console.error('Error autenticando con Supabase:', error);
+      return null;
+    }
+  };
+
+  // Función fallback para autenticar con localStorage
+  const authenticateUserWithLocalStorage = (dni: string, password: string): Usuario | null => {
+    try {
+      const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
+      const userData = users[dni.toUpperCase()];
+      
+      if (userData && userData.password === password) {
+        return {
+          dni: dni.toUpperCase(),
+          nombre: userData.name,
+          password: userData.password,
+          tipo: userData.type,
+          created_at: userData.createdDate || new Date().toISOString()
+        };
+      }
+      return null;
+    } catch (error) {
+      console.error('Error autenticando con localStorage:', error);
+      return null;
     }
   };
 
   const handle = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setError('');
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!dni || !pass) {
+      setError('Por favor, completa todos los campos');
+      setIsLoading(false);
+      return;
+    }
 
-    // Obtener usuarios del sistema
-    const users = JSON.parse(localStorage.getItem("alanizUsers") || "{}");
+    if (dni.length !== 9) {
+      setError('El DNI debe tener 9 caracteres');
+      setIsLoading(false);
+      return;
+    }
 
-    // Buscar usuario por DNI
-    const user = users[dni.toUpperCase()];
+    // Simular delay para UX
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-    if (user && user.password === pass) {
-      // Guardar autenticación
-      localStorage.setItem("alanizAuth", "ok");
-      localStorage.setItem("alanizAuthTimestamp", Date.now().toString());
-      localStorage.setItem("alanizUserId", dni.toUpperCase());
-      localStorage.setItem("alanizUserType", user.type);
-      localStorage.setItem("alanizUserName", user.name);
+    try {
+      let user: Usuario | null = null;
 
-      setError("success");
-      setTimeout(() => {
-        // Redirigir según tipo de usuario
-        if (user.type === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/sede-electronica");
-        }
-      }, 1000);
-    } else {
-      setError("DNI o contraseña incorrectos.");
+      // Intentar autenticar con Supabase primero
+      if (supabaseConnected) {
+        user = await authenticateUserWithSupabase(dni, pass);
+      }
+      
+      // Si falla Supabase o no está conectado, usar localStorage como fallback
+      if (!user) {
+        console.log('Supabase falló o no disponible, intentando con localStorage...');
+        user = authenticateUserWithLocalStorage(dni, pass);
+      }
+
+      if (user) {
+        // Autenticación exitosa
+        localStorage.setItem('alanizAuth', 'ok');
+        localStorage.setItem('alanizAuthTimestamp', Date.now().toString());
+        localStorage.setItem('alanizUserId', user.dni);
+        localStorage.setItem('alanizUserType', user.tipo);
+        localStorage.setItem('alanizUserName', user.nombre);
+
+        setError('success');
+        setTimeout(() => {
+          // Redirigir según tipo de usuario
+          if (user.tipo === 'admin') {
+            navigate('/admin');
+          } else {
+            navigate('/sede-electronica');
+          }
+        }, 1000);
+      } else {
+        setError('DNI o contraseña incorrectos.');
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Error durante el login:', error);
+      setError('Error de conexión. Intenta de nuevo.');
       setIsLoading(false);
     }
   };
@@ -96,7 +197,7 @@ export default function Login() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-alanizGold-600/5 rounded-full blur-3xl animate-float"></div>
         <div
           className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-alanizGold-600/3 rounded-full blur-2xl animate-float"
-          style={{ animationDelay: "2s" }}
+          style={{ animationDelay: '2s' }}
         ></div>
       </div>
 
@@ -105,10 +206,7 @@ export default function Login() {
         <div className="card-elegant animate-fade-in-up shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <div
-              className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
-                            rounded-full shadow-lg mb-6"
-            >
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-6">
               <span className="w-8 h-8 text-alanizGreen-950 text-2xl">🛡️</span>
             </div>
 
@@ -116,31 +214,31 @@ export default function Login() {
               Acceso Privado
             </h1>
 
-            <p className="text-parchment-300 text-sm">
+            <p className="text-parchment-300 text-sm mb-3">
               Área reservada para miembros verificados de la Casa Alaniz
             </p>
+
+            {/* Indicador de estado de conexión */}
+            <div className="flex items-center justify-center space-x-2">
+              <div className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
+              <span className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                {supabaseConnected ? 'Sistema global activo' : 'Modo local activo'}
+              </span>
+            </div>
           </div>
 
           {/* Mensajes de estado */}
-          {error && error !== "success" && (
-            <div
-              className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg 
-                            animate-fade-in-down"
-            >
+          {error && error !== 'success' && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg animate-fade-in-down">
               <div className="flex items-start space-x-3">
-                <span className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5">
-                  ⚠️
-                </span>
+                <span className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5">⚠️</span>
                 <p className="text-red-400 text-sm font-medium">{error}</p>
               </div>
             </div>
           )}
 
-          {error === "success" && (
-            <div
-              className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg 
-                            animate-fade-in-down"
-            >
+          {error === 'success' && (
+            <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg animate-fade-in-down">
               <div className="flex items-center space-x-3">
                 <span className="w-5 h-5 text-green-400">✅</span>
                 <p className="text-green-400 text-sm font-medium">
@@ -154,10 +252,7 @@ export default function Login() {
           <form onSubmit={handle} className="form-elegant">
             {/* Campo de DNI */}
             <div>
-              <label
-                htmlFor="dni"
-                className="block text-sm font-medium text-alanizGold-600 mb-2"
-              >
+              <label htmlFor="dni" className="block text-sm font-medium text-alanizGold-600 mb-2">
                 DNI
               </label>
               <div className="relative">
@@ -185,10 +280,7 @@ export default function Login() {
 
             {/* Campo de contraseña */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-alanizGold-600 mb-2"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-alanizGold-600 mb-2">
                 Contraseña
               </label>
               <div className="relative">
@@ -197,7 +289,7 @@ export default function Login() {
                 </div>
                 <input
                   id="password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Ingrese su contraseña"
                   value={pass}
                   onChange={(e) => setPass(e.target.value)}
@@ -236,10 +328,7 @@ export default function Login() {
             >
               {isLoading ? (
                 <div className="flex items-center justify-center space-x-2">
-                  <div
-                    className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent 
-                                  rounded-full animate-spin"
-                  ></div>
+                  <div className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent rounded-full animate-spin"></div>
                   <span>Verificando...</span>
                 </div>
               ) : (
@@ -258,8 +347,7 @@ export default function Login() {
                 Solo para Miembros Verificados
               </h3>
               <p className="text-xs text-parchment-400 leading-relaxed mb-3">
-                El acceso está restringido a miembros oficiales de la Casa
-                Alaniz con credenciales válidas.
+                El acceso está restringido a miembros oficiales de la Casa Alaniz con credenciales válidas.
               </p>
               <div className="flex items-center justify-between text-xs text-parchment-500">
                 <span>¿No tienes acceso?</span>
@@ -270,6 +358,24 @@ export default function Login() {
                 >
                   Contactar administración
                 </a>
+              </div>
+            </div>
+
+            {/* Información técnica */}
+            <div className="mt-4 p-3 bg-alanizGreen-800/20 rounded-lg">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-parchment-500">Estado del sistema:</span>
+                <div className="flex items-center space-x-2">
+                  <span className={supabaseConnected ? 'text-green-400' : 'text-yellow-400'}>
+                    {supabaseConnected ? '☁️ Global' : '💾 Local'}
+                  </span>
+                  <button
+                    onClick={testSupabaseConnection}
+                    className="text-alanizGold-600 hover:text-alanizGold-500 text-xs underline"
+                  >
+                    Test
+                  </button>
+                </div>
               </div>
             </div>
           </div>

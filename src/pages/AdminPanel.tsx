@@ -644,26 +644,137 @@ export default function AdminPanel() {
   // ========== JSX RENDER ==========
 
   return (
-    <div className="min-h-screen bg-alanizGreen-950 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-900">
+      <style jsx>{`
+        .content-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 1rem;
+        }
+        
+        .card-elegant {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 16px;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          padding: 1.5rem;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-alaniz {
+          background: linear-gradient(135deg, #d4af37, #b8941f);
+          color: #1a4d3a;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+        
+        .btn-alaniz:hover {
+          background: linear-gradient(135deg, #b8941f, #d4af37);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-secondary {
+          background: rgba(255, 255, 255, 0.1);
+          color: #d4af37;
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          padding: 0.5rem 1rem;
+          border-radius: 6px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+          background: rgba(212, 175, 55, 0.1);
+          border-color: #d4af37;
+        }
+        
+        @media (max-width: 768px) {
+          .content-container {
+            padding: 0.5rem;
+          }
+          
+          .card-elegant {
+            padding: 1rem;
+            margin-bottom: 1rem;
+          }
+          
+          .mobile-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          
+          .mobile-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+          }
+          
+          .mobile-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+          
+          .mobile-text-sm {
+            font-size: 0.875rem;
+          }
+          
+          .mobile-hidden {
+            display: none;
+          }
+          
+          .mobile-full {
+            width: 100%;
+          }
+          
+          .btn-alaniz {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+          }
+          
+          .btn-secondary {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.875rem;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .mobile-grid-2 {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
+      
       <div className="content-container">
         
         {/* Header */}
-        <div className="card-elegant mb-8">
-          <div className="flex items-center justify-between">
+        <div className="card-elegant mb-4 md:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-alanizGold-600 rounded-full flex items-center justify-center">
-                <span className="text-alanizGreen-950 text-xl">⚙️</span>
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                <span className="text-green-900 text-lg md:text-xl">⚙️</span>
               </div>
               <div>
-                <h1 className="text-2xl font-display font-bold text-alanizGold-600">
+                <h1 className="text-xl md:text-2xl font-bold text-yellow-400">
                   Panel de Administración
                 </h1>
-                <p className="text-parchment-300">
-                  Sistema global con Supabase • Usuarios, Documentos y Condecoraciones {supabaseConnected ? '✅' : '❌'}
+                <p className="text-sm md:text-base text-yellow-200">
+                  Sistema global con Supabase {supabaseConnected ? '✅' : '❌'}
                 </p>
               </div>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={testSupabaseConnection}
                 className="btn-secondary text-sm"
@@ -681,17 +792,17 @@ export default function AdminPanel() {
         </div>
 
         {/* Estadísticas */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="mobile-grid md:grid md:grid-cols-4 gap-4 md:gap-6 mb-4 md:mb-8">
           <div className="card-elegant">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-blue-400 text-xl">👥</span>
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <span className="text-blue-400 text-lg md:text-xl">👥</span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-alanizGold-600">
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
                   Usuarios
                 </h3>
-                <p className="text-2xl font-bold text-parchment-100">
+                <p className="text-lg md:text-2xl font-bold text-white">
                   {loadingUsers ? '⏳' : stats.totalUsers}
                 </p>
               </div>
@@ -699,15 +810,15 @@ export default function AdminPanel() {
           </div>
 
           <div className="card-elegant">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-green-400 text-xl">📄</span>
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                <span className="text-green-400 text-lg md:text-xl">📄</span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-alanizGold-600">
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
                   Documentos
                 </h3>
-                <p className="text-2xl font-bold text-parchment-100">
+                <p className="text-lg md:text-2xl font-bold text-white">
                   {stats.totalDocuments}
                 </p>
               </div>
@@ -715,15 +826,15 @@ export default function AdminPanel() {
           </div>
 
           <div className="card-elegant">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-yellow-400 text-xl">🏆</span>
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                <span className="text-yellow-400 text-lg md:text-xl">🏆</span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-alanizGold-600">
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
                   Condecoraciones
                 </h3>
-                <p className="text-2xl font-bold text-parchment-100">
+                <p className="text-lg md:text-2xl font-bold text-white">
                   {loadingCondecoraciones ? '⏳' : stats.totalCondecoraciones}
                 </p>
               </div>
@@ -731,15 +842,15 @@ export default function AdminPanel() {
           </div>
 
           <div className="card-elegant">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-purple-400 text-xl">☁️</span>
+            <div className="flex items-center space-x-3 md:space-x-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                <span className="text-purple-400 text-lg md:text-xl">☁️</span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-alanizGold-600">
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
                   Storage
                 </h3>
-                <p className="text-2xl font-bold text-parchment-100">
+                <p className="text-lg md:text-2xl font-bold text-white">
                   {supabaseConnected ? 'Online' : 'Offline'}
                 </p>
               </div>
@@ -748,14 +859,14 @@ export default function AdminPanel() {
         </div>
 
         {/* Gestión de condecoraciones */}
-        <div className="card-elegant mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-display font-bold text-alanizGold-600">
+        <div className="card-elegant mb-4 md:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <h2 className="text-lg md:text-xl font-bold text-yellow-400">
               Gestión de Condecoraciones
             </h2>
             <button
               onClick={() => setShowCondecoracionesManager(!showCondecoracionesManager)}
-              className="btn-alaniz"
+              className="btn-alaniz mobile-full sm:w-auto"
               disabled={loadingCondecoraciones}
             >
               🏆 {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
@@ -763,50 +874,50 @@ export default function AdminPanel() {
           </div>
 
           {showCondecoracionesManager && (
-            <div className="bg-alanizGreen-900/30 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
+            <div className="bg-green-800/30 rounded-lg p-4 md:p-6">
+              <h3 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
                 Añadir Nuevo Condecorado
               </h3>
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="mobile-grid md:grid md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">
                     Nombre completo
                   </label>
                   <input
                     type="text"
                     value={condecoracionForm.nombre}
                     onChange={(e) => setCondecoracionForm({...condecoracionForm, nombre: e.target.value})}
-                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                               rounded-lg text-parchment-100 placeholder-parchment-400
-                               focus:border-alanizGold-600"
+                    className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                               rounded-lg text-white placeholder-gray-400
+                               focus:border-yellow-400"
                     placeholder="Don Fernando de Castilla"
                     disabled={loadingCondecoraciones}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">
                     Fecha de otorgamiento
                   </label>
                   <input
                     type="date"
                     value={condecoracionForm.fechaOtorgamiento}
                     onChange={(e) => setCondecoracionForm({...condecoracionForm, fechaOtorgamiento: e.target.value})}
-                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                               rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                    className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                               rounded-lg text-white focus:border-yellow-400"
                     disabled={loadingCondecoraciones}
                   />
                 </div>
               </div>
               
               <div className="mb-4">
-                <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                <label className="block text-sm font-medium text-yellow-400 mb-2">
                   Condecoración otorgada
                 </label>
                 <select
                   value={condecoracionForm.condecoracion}
                   onChange={(e) => setCondecoracionForm({...condecoracionForm, condecoracion: e.target.value})}
-                  className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                             rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                  className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                             rounded-lg text-white focus:border-yellow-400"
                   disabled={loadingCondecoraciones}
                 >
                   <option value="">Seleccionar condecoración</option>
@@ -819,30 +930,30 @@ export default function AdminPanel() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                <label className="block text-sm font-medium text-yellow-400 mb-2">
                   Motivo del otorgamiento
                 </label>
                 <textarea
                   value={condecoracionForm.motivo}
                   onChange={(e) => setCondecoracionForm({...condecoracionForm, motivo: e.target.value})}
                   rows={3}
-                  className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                             rounded-lg text-parchment-100 placeholder-parchment-400
-                             focus:border-alanizGold-600 resize-none"
+                  className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                             rounded-lg text-white placeholder-gray-400
+                             focus:border-yellow-400 resize-none"
                   placeholder="Descripción del motivo por el cual se otorga la condecoración..."
                   disabled={loadingCondecoraciones}
                 />
               </div>
 
-              <div className="flex space-x-4 mb-6">
+              <div className="mobile-stack sm:flex sm:flex-row sm:space-x-4 mb-6">
                 <button
                   onClick={handleCreateCondecorado}
-                  className="btn-alaniz disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-alaniz disabled:opacity-50 disabled:cursor-not-allowed mobile-full sm:w-auto"
                   disabled={loadingCondecoraciones}
                 >
                   {loadingCondecoraciones ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent rounded-full animate-spin"></div>
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-4 h-4 border-2 border-green-900 border-t-transparent rounded-full animate-spin"></div>
                       <span>Añadiendo...</span>
                     </div>
                   ) : (
@@ -851,7 +962,7 @@ export default function AdminPanel() {
                 </button>
                 <button
                   onClick={() => loadCondecoracionesFromSupabase()}
-                  className="btn-secondary"
+                  className="btn-secondary mobile-full sm:w-auto"
                   disabled={loadingCondecoraciones}
                 >
                   🔄 Recargar
@@ -860,41 +971,41 @@ export default function AdminPanel() {
 
               {/* Lista de condecorados */}
               <div>
-                <h4 className="text-lg font-semibold text-alanizGold-600 mb-4">
+                <h4 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
                   Condecorados Registrados ({condecorados.length}) {loadingCondecoraciones && '⏳'}
                 </h4>
                 
                 {condecorados.length === 0 ? (
-                  <p className="text-parchment-400 italic text-center py-4">
+                  <p className="text-gray-400 italic text-center py-4">
                     {loadingCondecoraciones ? 'Cargando condecoraciones...' : 'No hay condecorados registrados aún.'}
                   </p>
                 ) : (
                   <div className="space-y-3">
                     {condecorados.map((condecorado) => (
-                      <div key={condecorado.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
-                        <div className="flex items-start justify-between">
+                      <div key={condecorado.id} className="bg-green-800/30 rounded-lg p-4">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                           <div className="flex-1">
-                            <h5 className="font-semibold text-alanizGold-600">
+                            <h5 className="font-semibold text-yellow-400 mobile-text-sm">
                               {condecorado.nombre}
                             </h5>
-                            <p className="text-sm text-parchment-400 mb-1">
+                            <p className="text-sm text-gray-400 mb-1">
                               {getCondecoracionName(condecorado.condecoracion)}
                             </p>
-                            <p className="text-sm text-parchment-400 mb-2">
+                            <p className="text-sm text-gray-400 mb-2">
                               Otorgada el {new Date(condecorado.fecha_otorgamiento).toLocaleDateString('es-ES', {
                                 year: 'numeric',
                                 month: 'long',
                                 day: 'numeric'
                               })}
                             </p>
-                            <p className="text-parchment-200 text-sm">
+                            <p className="text-white text-sm">
                               {condecorado.motivo}
                             </p>
                           </div>
                           <button
                             onClick={() => handleDeleteCondecorado(condecorado.id!)}
-                            className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors
-                                       disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors
+                                       disabled:opacity-50 disabled:cursor-not-allowed self-end sm:self-start"
                             title="Eliminar condecorado"
                             disabled={loadingCondecoraciones}
                           >
@@ -911,14 +1022,14 @@ export default function AdminPanel() {
         </div>
 
         {/* Gestión de usuarios */}
-        <div className="card-elegant mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-display font-bold text-alanizGold-600">
+        <div className="card-elegant mb-4 md:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <h2 className="text-lg md:text-xl font-bold text-yellow-400">
               Gestión de Usuarios
             </h2>
             <button
               onClick={() => setShowCreateUser(true)}
-              className="btn-alaniz"
+              className="btn-alaniz mobile-full sm:w-auto"
             >
               + Crear Usuario
             </button>
@@ -926,13 +1037,13 @@ export default function AdminPanel() {
 
           {/* Formulario crear usuario */}
           {showCreateUser && (
-            <div className="bg-alanizGreen-900/30 rounded-lg p-6 mb-6">
-              <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
+            <div className="bg-green-800/30 rounded-lg p-4 md:p-6 mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
                 Crear Nuevo Usuario
               </h3>
-              <div className="grid md:grid-cols-3 gap-4">
+              <div className="mobile-grid md:grid md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">
                     DNI
                   </label>
                   <input
@@ -941,13 +1052,13 @@ export default function AdminPanel() {
                     value={newUser.dni}
                     onChange={(e) => setNewUser({...newUser, dni: e.target.value.toUpperCase()})}
                     maxLength={9}
-                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                               rounded-lg text-parchment-100 placeholder-parchment-400
-                               focus:border-alanizGold-600 uppercase"
+                    className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                               rounded-lg text-white placeholder-gray-400
+                               focus:border-yellow-400 uppercase"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">
                     Nombre Completo
                   </label>
                   <input
@@ -955,37 +1066,37 @@ export default function AdminPanel() {
                     placeholder="Juan Alaniz López"
                     value={newUser.name}
                     onChange={(e) => setNewUser({...newUser, name: e.target.value})}
-                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                               rounded-lg text-parchment-100 placeholder-parchment-400
-                               focus:border-alanizGold-600"
+                    className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                               rounded-lg text-white placeholder-gray-400
+                               focus:border-yellow-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">
                     Tipo
                   </label>
                   <select
                     value={newUser.type}
                     onChange={(e) => setNewUser({...newUser, type: e.target.value as 'admin' | 'user'})}
-                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                               rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                    className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                               rounded-lg text-white focus:border-yellow-400"
                   >
                     <option value="user">Usuario</option>
                     <option value="admin">Administrador</option>
                   </select>
                 </div>
               </div>
-              <div className="flex space-x-4 mt-4">
+              <div className="mobile-stack sm:flex sm:flex-row sm:space-x-4 mt-4">
                 <button
                   onClick={handleCreateUser}
-                  className="btn-alaniz"
+                  className="btn-alaniz mobile-full sm:w-auto"
                   disabled={loadingUsers}
                 >
                   {loadingUsers ? 'Creando...' : 'Crear Usuario'}
                 </button>
                 <button
                   onClick={() => setShowCreateUser(false)}
-                  className="btn-secondary"
+                  className="btn-secondary mobile-full sm:w-auto"
                 >
                   Cancelar
                 </button>
@@ -996,36 +1107,47 @@ export default function AdminPanel() {
           {/* Lista de usuarios */}
           <div className="space-y-4">
             {users.map((user) => (
-              <div key={user.dni} className="bg-alanizGreen-900/30 rounded-lg p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-10 h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
-                      <span className="text-alanizGold-600">
+              <div key={user.dni} className="bg-green-800/30 rounded-lg p-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="flex items-start space-x-3 md:space-x-4">
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 sm:mt-0">
+                      <span className="text-yellow-400 text-sm md:text-base">
                         {user.tipo === 'admin' ? '👑' : '👤'}
                       </span>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-alanizGold-600">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-medium text-yellow-400 mobile-text-sm">
                         {user.nombre}
                       </h3>
-                      <p className="text-sm text-parchment-400">
-                        DNI: {user.dni} • Contraseña: {user.password} • {user.tipo === 'admin' ? 'Administrador' : 'Usuario'} • 
-                        Creado: {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
-                      </p>
+                      <div className="text-xs md:text-sm text-gray-400 break-all">
+                        <div className="mobile-hidden sm:inline">
+                          DNI: {user.dni} • Contraseña: {user.password} • {user.tipo === 'admin' ? 'Administrador' : 'Usuario'}
+                        </div>
+                        <div className="sm:hidden">
+                          <div>DNI: {user.dni}</div>
+                          <div>Pass: {user.password}</div>
+                          <div>{user.tipo === 'admin' ? 'Admin' : 'Usuario'}</div>
+                        </div>
+                        {user.created_at && (
+                          <div className="mt-1">
+                            Creado: {new Date(user.created_at).toLocaleDateString()}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex space-x-2">
+                  <div className="mobile-grid-2 sm:flex sm:flex-row sm:space-x-2 sm:space-y-0">
                     <button
                       onClick={() => openDocumentManager(user.dni)}
-                      className="btn-alaniz text-sm"
+                      className="btn-alaniz text-sm mobile-full"
                     >
-                      📄 Documentos
+                      📄 Docs
                     </button>
                     {user.tipo !== 'admin' && (
                       <button
                         onClick={() => handleDeleteUser(user.dni)}
-                        className="px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
-                                   hover:bg-red-500/30 transition-colors"
+                        className="px-2 md:px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
+                                   hover:bg-red-500/30 transition-colors mobile-full"
                         disabled={loadingUsers}
                       >
                         Eliminar
@@ -1040,28 +1162,28 @@ export default function AdminPanel() {
 
         {/* Modal de gestión de documentos */}
         {showDocumentManager && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-alanizGreen-900 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-display font-bold text-alanizGold-600">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 md:p-4">
+            <div className="bg-green-900 rounded-lg p-4 md:p-6 w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-4 md:mb-6">
+                <h2 className="text-lg md:text-xl font-bold text-yellow-400">
                   Documentos de {users.find(u => u.dni === selectedUser)?.nombre}
                 </h2>
                 <button
                   onClick={() => setShowDocumentManager(false)}
-                  className="text-alanizGold-600 hover:text-alanizGold-500 text-2xl"
+                  className="text-yellow-400 hover:text-yellow-300 text-xl md:text-2xl"
                 >
                   ✕
                 </button>
               </div>
 
               {/* Formulario subir documento */}
-              <div className="bg-alanizGreen-800/30 rounded-lg p-4 mb-6">
-                <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
+              <div className="bg-green-800/30 rounded-lg p-3 md:p-4 mb-4 md:mb-6">
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
                   Subir Nuevo Documento
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="mobile-grid md:grid md:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                    <label className="block text-sm font-medium text-yellow-400 mb-2">
                       Nombre del Documento
                     </label>
                     <input
@@ -1069,20 +1191,20 @@ export default function AdminPanel() {
                       placeholder="Nombramiento de Caballero"
                       value={documentForm.name}
                       onChange={(e) => setDocumentForm({...documentForm, name: e.target.value})}
-                      className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                                 rounded-lg text-parchment-100 placeholder-parchment-400
-                                 focus:border-alanizGold-600"
+                      className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                                 rounded-lg text-white placeholder-gray-400
+                                 focus:border-yellow-400"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                    <label className="block text-sm font-medium text-yellow-400 mb-2">
                       Tipo de Documento
                     </label>
                     <select
                       value={documentForm.type}
                       onChange={(e) => setDocumentForm({...documentForm, type: e.target.value})}
-                      className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                                 rounded-lg text-parchment-100 focus:border-alanizGold-600"
+                      className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                                 rounded-lg text-white focus:border-yellow-400"
                     >
                       <option value="">Seleccionar tipo</option>
                       <option value="Recompensas">🏆 Recompensas</option>
@@ -1091,27 +1213,27 @@ export default function AdminPanel() {
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-alanizGold-600 mb-2">
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">
                     Archivo PDF
                   </label>
                   <input
                     type="file"
                     accept=".pdf"
                     onChange={handleFileChange}
-                    className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                               rounded-lg text-parchment-100 file:mr-4 file:py-1 file:px-3
-                               file:rounded file:border-0 file:bg-alanizGold-600 file:text-alanizGreen-950
-                               file:font-medium hover:file:bg-alanizGold-500"
+                    className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
+                               rounded-lg text-white file:mr-2 md:file:mr-4 file:py-1 file:px-2 md:file:px-3
+                               file:rounded file:border-0 file:bg-yellow-400 file:text-green-900
+                               file:font-medium hover:file:bg-yellow-300 file:text-xs md:file:text-sm"
                   />
                 </div>
                 <button
                   onClick={handleUploadDocument}
                   disabled={uploading}
-                  className="btn-alaniz disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-alaniz disabled:opacity-50 disabled:cursor-not-allowed mobile-full md:w-auto"
                 >
                   {uploading ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-alanizGreen-950 border-t-transparent rounded-full animate-spin"></div>
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-4 h-4 border-2 border-green-900 border-t-transparent rounded-full animate-spin"></div>
                       <span>Subiendo...</span>
                     </div>
                   ) : (
@@ -1122,47 +1244,47 @@ export default function AdminPanel() {
 
               {/* Lista de documentos */}
               <div>
-                <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
                   Documentos Existentes ({userDocuments.length})
                 </h3>
                 
                 {userDocuments.length === 0 ? (
                   <div className="text-center py-8">
-                    <div className="text-4xl text-alanizGold-600/30 mb-2">📄</div>
-                    <p className="text-parchment-400">No hay documentos para este usuario</p>
+                    <div className="text-3xl md:text-4xl text-yellow-400/30 mb-2">📄</div>
+                    <p className="text-gray-400">No hay documentos para este usuario</p>
                   </div>
                 ) : (
                   <div className="space-y-3">
                     {userDocuments.map((doc) => (
-                      <div key={doc.id} className="bg-alanizGreen-800/30 rounded-lg p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-red-500/20 rounded flex items-center justify-center">
-                              <span className="text-red-400 text-sm">
+                      <div key={doc.id} className="bg-green-800/30 rounded-lg p-3 md:p-4">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-500/20 rounded flex items-center justify-center flex-shrink-0">
+                              <span className="text-red-400 text-xs md:text-sm">
                                 {doc.tipo === 'Recompensas' ? '🏆' : '⚔️'}
                               </span>
                             </div>
-                            <div>
-                              <h4 className="font-medium text-alanizGold-600">{doc.nombre}</h4>
-                              <p className="text-sm text-parchment-400">
-                                {doc.tipo} • {doc.tamaño} • {doc.fecha_subida} • Supabase
+                            <div className="min-w-0 flex-1">
+                              <h4 className="font-medium text-yellow-400 mobile-text-sm break-words">{doc.nombre}</h4>
+                              <p className="text-xs md:text-sm text-gray-400">
+                                {doc.tipo} • {doc.tamaño} • {doc.fecha_subida}
                               </p>
                             </div>
                           </div>
-                          <div className="flex space-x-2">
+                          <div className="mobile-grid-2 sm:flex sm:flex-row sm:space-x-2 sm:space-y-0">
                             <a
                               href={doc.url_supabase}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded text-sm
-                                         hover:bg-blue-500/30 transition-colors"
+                              className="px-2 md:px-3 py-1 bg-blue-500/20 text-blue-400 rounded text-sm
+                                         hover:bg-blue-500/30 transition-colors text-center mobile-full"
                             >
                               Ver PDF
                             </a>
                             <button
                               onClick={() => handleDeleteDocument(doc.id!)}
-                              className="px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
-                                         hover:bg-red-500/30 transition-colors"
+                              className="px-2 md:px-3 py-1 bg-red-500/20 text-red-400 rounded text-sm
+                                         hover:bg-red-500/30 transition-colors mobile-full"
                               disabled={loadingDocuments}
                             >
                               Eliminar
@@ -1180,22 +1302,22 @@ export default function AdminPanel() {
 
         {/* Información del sistema */}
         <div className="card-elegant">
-          <h2 className="text-xl font-display font-bold text-alanizGold-600 mb-4">
+          <h2 className="text-lg md:text-xl font-bold text-yellow-400 mb-4">
             Información del Sistema
           </h2>
-          <div className="bg-alanizGreen-900/30 rounded-lg p-4">
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
+          <div className="bg-green-800/30 rounded-lg p-4">
+            <div className="mobile-grid md:grid md:grid-cols-2 gap-4 text-xs md:text-sm">
               <div>
-                <h4 className="font-semibold text-alanizGold-600 mb-2">Estado del Sistema</h4>
+                <h4 className="font-semibold text-yellow-400 mb-2">Estado del Sistema</h4>
                 <p className={supabaseConnected ? "text-green-400" : "text-red-400"}>
                   {supabaseConnected ? '✅ Supabase Conectado' : '❌ Supabase Desconectado'}
                 </p>
-                <p className="text-parchment-400">Última actualización: {new Date().toLocaleString()}</p>
+                <p className="text-gray-400">Última actualización: {new Date().toLocaleString()}</p>
               </div>
               <div>
-                <h4 className="font-semibold text-alanizGold-600 mb-2">Almacenamiento</h4>
-                <p className="text-parchment-400">☁️ Supabase Storage (Documentos)</p>
-                <p className="text-parchment-400">🗄️ Supabase Database (Usuarios y Condecoraciones)</p>
+                <h4 className="font-semibold text-yellow-400 mb-2">Almacenamiento</h4>
+                <p className="text-gray-400">☁️ Supabase Storage (Documentos)</p>
+                <p className="text-gray-400">🗄️ Supabase Database (Usuarios y Condecoraciones)</p>
                 <p className="text-green-400 text-xs">Global access enabled with RLS</p>
               </div>
             </div>

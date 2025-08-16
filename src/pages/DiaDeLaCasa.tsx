@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
+// CONFIGURACIÓN SUPABASE
+const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+
 // Interfaz para el contador
 interface TimeRemaining {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
+}
+
+// Interfaz para condecoraciones de Supabase
+interface Condecorado {
+  id: string;
+  nombre: string;
+  fecha_otorgamiento: string;
+  motivo: string;
+  condecoracion: string;
+  created_at?: string;
 }
 
 // Programa del día
@@ -62,13 +76,53 @@ const protocoloVestimenta = [
 ];
 
 export default function DiaDeLaCasa() {
-  const [condecorados, setCondecorados] = useState<any[]>([]);
+  const [condecorados, setCondecorados] = useState<Condecorado[]>([]);
+  const [loadingCondecoraciones, setLoadingCondecoraciones] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
+
+  // Función para cargar condecoraciones desde Supabase
+  const loadCondecoracionesFromSupabase = async () => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al cargar condecoraciones desde Supabase');
+      }
+
+      const data = await response.json();
+      setCondecorados(data);
+    } catch (error) {
+      console.error('Error cargando condecoraciones desde Supabase:', error);
+      // Fallback a localStorage si falla Supabase
+      const savedCondecorados = localStorage.getItem('alanizCondecorados');
+      if (savedCondecorados) {
+        const localData = JSON.parse(savedCondecorados);
+        // Convertir formato localStorage a formato Supabase
+        const convertedData = localData.map((item: any) => ({
+          id: item.id,
+          nombre: item.nombre,
+          fecha_otorgamiento: item.fechaOtorgamiento || item.fecha_otorgamiento,
+          motivo: item.motivo,
+          condecoracion: item.condecoracion,
+          created_at: item.created_at || new Date().toISOString()
+        }));
+        setCondecorados(convertedData);
+      }
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
+  };
 
   // Función para calcular el tiempo restante
   const calculateTimeRemaining = (): TimeRemaining => {
@@ -112,7 +166,7 @@ export default function DiaDeLaCasa() {
   // Calcular valores una sola vez
   const proximaFecha = getProximaFecha();
   const condecoradosEsteAño = condecorados.filter(c => {
-    const fechaOtorgamiento = new Date(c.fechaOtorgamiento);
+    const fechaOtorgamiento = new Date(c.fecha_otorgamiento);
     return fechaOtorgamiento.getFullYear() === 2025;
   });
 
@@ -132,11 +186,8 @@ export default function DiaDeLaCasa() {
     const elementsToObserve = document.querySelectorAll('.observe-me');
     elementsToObserve.forEach(el => observer.observe(el));
 
-    // Cargar condecorados del localStorage
-    const savedCondecorados = localStorage.getItem('alanizCondecorados');
-    if (savedCondecorados) {
-      setCondecorados(JSON.parse(savedCondecorados));
-    }
+    // Cargar condecoraciones desde Supabase
+    loadCondecoracionesFromSupabase();
 
     // Actualizar contador cada segundo
     const updateTimer = () => {
@@ -399,7 +450,14 @@ export default function DiaDeLaCasa() {
             </div>
           </div>
           
-          {condecoradosEsteAño.length === 0 ? (
+          {loadingCondecoraciones ? (
+            <div className="text-center py-8">
+              <div className="flex items-center justify-center space-x-2 mb-4">
+                <div className="w-6 h-6 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-alanizGold-600">Cargando condecoraciones...</span>
+              </div>
+            </div>
+          ) : condecoradosEsteAño.length === 0 ? (
             <div className="text-center py-8">
               <div className="text-4xl text-alanizGold-600/30 mb-4">🏆</div>
               <p className="text-parchment-400">

@@ -18,7 +18,7 @@ const navigationItems = [
       { path: "/dia-casa", label: "Día de la Casa", icon: "🎖️" },
     ]
   },
-  { path: "/sede-electronica", label: "Portal", icon: "🏛️" },
+  { path: "/sede-electronica", label: "Sede Electrónica", icon: "🏛️" },
   { path: "/contacto", label: "Contacto", icon: "📧" },
   { path: "/login", label: "Miembros", icon: "🛡️" },
 ] as const;
@@ -115,10 +115,16 @@ const DropdownNavItem = ({
   const location = useLocation();
   const isSubmenuActive = item.submenu?.some((subitem: any) => location.pathname === subitem.path);
   
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onToggle();
+  };
+  
   return (
-    <div className="relative">
+    <div className="relative" onClick={(e) => e.stopPropagation()}>
       <button
-        onClick={onToggle}
+        onClick={handleToggle}
         className={`
           relative flex items-center space-x-2 px-3 py-2 rounded-lg
           font-medium transition-all duration-300 group text-sm
@@ -150,29 +156,36 @@ const DropdownNavItem = ({
 
       {/* Submenú desplegable */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-56 bg-alanizGreen-800 border border-alanizGold-600/20 
-                        rounded-lg shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
-          <div className="py-2">
-            {item.submenu.map((subitem: any) => (
-              <NavLink
-                key={subitem.path}
-                to={subitem.path}
-                onClick={onClose}
-                className={({ isActive }) => `
-                  flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200
-                  ${
-                    isActive
-                      ? "text-alanizGold-500 bg-alanizGold-600/20"
-                      : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/10"
-                  }
-                `}
-              >
-                <span className="text-sm">{subitem.icon}</span>
-                <span className="font-medium">{subitem.label}</span>
-              </NavLink>
-            ))}
+        <>
+          {/* Overlay invisible para cerrar al hacer click fuera */}
+          <div 
+            className="fixed inset-0 z-40"
+            onClick={onClose}
+          />
+          <div className="absolute top-full left-0 mt-2 w-56 bg-alanizGreen-800 border border-alanizGold-600/20 
+                          rounded-lg shadow-2xl backdrop-blur-sm z-50 overflow-hidden">
+            <div className="py-2">
+              {item.submenu.map((subitem: any) => (
+                <NavLink
+                  key={subitem.path}
+                  to={subitem.path}
+                  onClick={onClose}
+                  className={({ isActive }) => `
+                    flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200
+                    ${
+                      isActive
+                        ? "text-alanizGold-500 bg-alanizGold-600/20"
+                        : "text-alanizGold-600/80 hover:text-alanizGold-500 hover:bg-alanizGold-600/10"
+                    }
+                  `}
+                >
+                  <span className="text-sm">{subitem.icon}</span>
+                  <span className="font-medium">{subitem.label}</span>
+                </NavLink>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

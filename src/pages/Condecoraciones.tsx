@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
+// CONFIGURACIÓN SUPABASE
+const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+
 interface Condecorado {
   id: string;
   nombre: string;
-  fechaOtorgamiento: string;
+  fecha_otorgamiento: string;
   motivo: string;
   condecoracion: string;
+  created_at?: string;
 }
 
 interface Condecoracion {
@@ -42,13 +47,46 @@ const condecoraciones: Condecoracion[] = [
 export default function Condecoraciones() {
   const [condecorados, setCondecorados] = useState<Condecorado[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    nombre: '',
-    fechaOtorgamiento: '',
-    motivo: '',
-    condecoracion: ''
-  });
+  const [loadingCondecoraciones, setLoadingCondecoraciones] = useState(true);
+
+  // Función para cargar condecoraciones desde Supabase
+  const loadCondecoracionesFromSupabase = async () => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al cargar condecoraciones desde Supabase');
+      }
+
+      const data = await response.json();
+      setCondecorados(data);
+    } catch (error) {
+      console.error('Error cargando condecoraciones desde Supabase:', error);
+      // Fallback a localStorage si falla Supabase
+      const savedCondecorados = localStorage.getItem('alanizCondecorados');
+      if (savedCondecorados) {
+        const localData = JSON.parse(savedCondecorados);
+        // Convertir formato localStorage a formato Supabase
+        const convertedData = localData.map((item: any) => ({
+          id: item.id,
+          nombre: item.nombre,
+          fecha_otorgamiento: item.fechaOtorgamiento || item.fecha_otorgamiento,
+          motivo: item.motivo,
+          condecoracion: item.condecoracion,
+          created_at: item.created_at || new Date().toISOString()
+        }));
+        setCondecorados(convertedData);
+      }
+    } finally {
+      setLoadingCondecoraciones(false);
+    }
+  };
 
   useEffect(() => {
     // Verificar si el usuario es admin
@@ -56,45 +94,9 @@ export default function Condecoraciones() {
     const userType = localStorage.getItem('alanizUserType');
     setIsAdmin(adminAuth === 'true' && userType === 'admin');
 
-    // Cargar condecorados existentes
-    const savedCondecorados = localStorage.getItem('alanizCondecorados');
-    if (savedCondecorados) {
-      setCondecorados(JSON.parse(savedCondecorados));
-    }
+    // Cargar condecoraciones desde Supabase
+    loadCondecoracionesFromSupabase();
   }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.nombre || !formData.fechaOtorgamiento || !formData.motivo || !formData.condecoracion) {
-      alert('Todos los campos son obligatorios');
-      return;
-    }
-
-    const nuevoCondecorado: Condecorado = {
-      id: Date.now().toString(),
-      nombre: formData.nombre,
-      fechaOtorgamiento: formData.fechaOtorgamiento,
-      motivo: formData.motivo,
-      condecoracion: formData.condecoracion
-    };
-
-    const nuevosCondecorados = [...condecorados, nuevoCondecorado];
-    setCondecorados(nuevosCondecorados);
-    localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
-
-    // Limpiar formulario
-    setFormData({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
-    setShowForm(false);
-    alert('Condecorado añadido exitosamente');
-  };
-
-  const handleDelete = (id: string) => {
-    if (!confirm('¿Estás seguro de eliminar este condecorado?')) return;
-
-    const nuevosCondecorados = condecorados.filter(c => c.id !== id);
-    setCondecorados(nuevosCondecorados);
-    localStorage.setItem('alanizCondecorados', JSON.stringify(nuevosCondecorados));
-  };
 
   const getCondecoracionName = (id: string) => {
     return condecoraciones.find(c => c.id === id)?.nombre || id;
@@ -123,119 +125,37 @@ export default function Condecoraciones() {
               Distinciones otorgadas en reconocimiento a quienes han demostrado valores excepcionales 
               de honor, lealtad y servicio, contribuyendo al engrandecimiento del linaje Alaniz.
             </p>
+            
+            {/* Información de carga */}
+            {loadingCondecoraciones && (
+              <div className="flex items-center justify-center space-x-2 mt-4">
+                <div className="w-5 h-5 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-alanizGold-600 text-sm">Cargando condecoraciones...</span>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Panel de administración - Solo visible para admins */}
+        {/* Nota para administradores */}
         {isAdmin && (
-          <div className="card-elegant mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <Shield className="w-6 h-6 text-alanizGold-600" />
-                <h2 className="text-xl font-display font-bold text-alanizGold-600">
-                  Panel de Administración
-                </h2>
+          <div className="card-elegant mb-8 bg-alanizGold-600/5 border border-alanizGold-600/20">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="w-6 h-6 bg-alanizGold-600 rounded-full flex items-center justify-center">
+                <span className="text-alanizGreen-950 text-sm">👑</span>
               </div>
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="btn-alaniz flex items-center space-x-2"
-              >
-                <span className="text-lg">➕</span>
-                <span>Añadir Condecorado</span>
-              </button>
+              <h2 className="text-lg font-display font-bold text-alanizGold-600">
+                Panel de Administrador
+              </h2>
             </div>
-
-            {showForm && (
-              <div className="bg-alanizGreen-900/30 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-alanizGold-600 mb-4">
-                  Nuevo Condecorado
-                </h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-alanizGold-600 mb-2">
-                        Nombre completo
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.nombre}
-                        onChange={(e) => setFormData({...formData, nombre: e.target.value})}
-                        className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                                   rounded-lg text-parchment-100 placeholder-parchment-400
-                                   focus:border-alanizGold-600"
-                        placeholder="Don Fernando de Castilla"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-alanizGold-600 mb-2">
-                        Fecha de otorgamiento
-                      </label>
-                      <input
-                        type="date"
-                        value={formData.fechaOtorgamiento}
-                        onChange={(e) => setFormData({...formData, fechaOtorgamiento: e.target.value})}
-                        className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                                   rounded-lg text-parchment-100 focus:border-alanizGold-600"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-alanizGold-600 mb-2">
-                      Condecoración otorgada
-                    </label>
-                    <select
-                      value={formData.condecoracion}
-                      onChange={(e) => setFormData({...formData, condecoracion: e.target.value})}
-                      className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                                 rounded-lg text-parchment-100 focus:border-alanizGold-600"
-                      required
-                    >
-                      <option value="">Seleccionar condecoración</option>
-                      {condecoraciones.map(condecoracion => (
-                        <option key={condecoracion.id} value={condecoracion.id}>
-                          {condecoracion.nombre}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-alanizGold-600 mb-2">
-                      Motivo del otorgamiento
-                    </label>
-                    <textarea
-                      value={formData.motivo}
-                      onChange={(e) => setFormData({...formData, motivo: e.target.value})}
-                      rows={3}
-                      className="w-full px-3 py-2 bg-alanizGreen-800/50 border border-alanizGold-600/30 
-                                 rounded-lg text-parchment-100 placeholder-parchment-400
-                                 focus:border-alanizGold-600 resize-none"
-                      placeholder="Descripción del motivo por el cual se otorga la condecoración..."
-                      required
-                    />
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <button
-                      type="submit"
-                      className="btn-alaniz"
-                    >
-                      Añadir Condecorado
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(false)}
-                      className="btn-secondary"
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+            <p className="text-parchment-300 text-sm">
+              Las condecoraciones ahora se gestionan desde Supabase. Utiliza el <strong>Panel de Administración</strong> para añadir, editar o eliminar condecoraciones. Los cambios se reflejarán automáticamente para todos los usuarios.
+            </p>
+            <div className="mt-4">
+              <a href="/admin" className="btn-alaniz">
+                <span className="text-lg mr-2">⚙️</span>
+                Ir al Panel de Administración
+              </a>
+            </div>
           </div>
         )}
 
@@ -308,8 +228,15 @@ export default function Condecoraciones() {
                   <div>
                     <h3 className="text-lg font-display font-semibold text-alanizGold-600 mb-3">
                       Condecorados
+                      {loadingCondecoraciones && <span className="ml-2 text-sm">⏳</span>}
                     </h3>
-                    {getCondecoradosPorCondecoracion(condecoracion.id).length === 0 ? (
+                    
+                    {loadingCondecoraciones ? (
+                      <div className="flex items-center space-x-2 py-4">
+                        <div className="w-4 h-4 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
+                        <span className="text-parchment-400 text-sm">Cargando condecorados...</span>
+                      </div>
+                    ) : getCondecoradosPorCondecoracion(condecoracion.id).length === 0 ? (
                       <p className="text-parchment-400 italic">
                         Aún no se han otorgado condecoraciones de este tipo.
                       </p>
@@ -324,7 +251,7 @@ export default function Condecoraciones() {
                                 </h4>
                                 <div className="flex items-center space-x-2 mb-3">
                                   <span className="inline-flex items-center px-2 py-1 bg-alanizGold-600/20 rounded-full text-xs font-medium text-alanizGold-400">
-                                    {new Date(condecorado.fechaOtorgamiento).toLocaleDateString('es-ES', {
+                                    {new Date(condecorado.fecha_otorgamiento).toLocaleDateString('es-ES', {
                                       year: 'numeric',
                                       month: 'long',
                                       day: 'numeric'
@@ -335,26 +262,33 @@ export default function Condecoraciones() {
                                   "{condecorado.motivo}"
                                 </p>
                               </div>
-                              {isAdmin && (
-                                <button
-                                  onClick={() => handleDelete(condecorado.id)}
-                                  className="ml-6 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
-                                  title="Eliminar condecorado"
-                                >
-                                  <span className="text-sm">🗑️</span>
-                                </button>
-                              )}
                             </div>
                           </div>
                         ))}
                       </div>
                     )}
                   </div>
-
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Información sobre Supabase */}
+        <div className="card-elegant mt-8 bg-alanizGreen-800/20">
+          <div className="text-center">
+            <div className="inline-flex items-center space-x-2 mb-4">
+              <span className="text-2xl">☁️</span>
+              <h3 className="text-lg font-display font-semibold text-alanizGold-600">
+                Sistema Global
+              </h3>
+            </div>
+            <p className="text-parchment-300 text-sm max-w-2xl mx-auto">
+              Las condecoraciones mostradas se almacenan en Supabase y son visibles para todos los visitantes 
+              desde cualquier parte del mundo. Los datos se actualizan automáticamente cuando se realizan cambios 
+              desde el Panel de Administración.
+            </p>
+          </div>
         </div>
 
       </div>

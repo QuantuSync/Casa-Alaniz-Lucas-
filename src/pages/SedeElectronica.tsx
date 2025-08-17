@@ -33,7 +33,7 @@ export default function SedeElectronica() {
   const [supabaseConnected, setSupabaseConnected] = useState(false);
   const navigate = useNavigate();
 
-  // Añadir estilos CSS necesarios
+  // Añadir estilos CSS necesarios con paleta unificada elegante
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -50,7 +50,7 @@ export default function SedeElectronica() {
 
       .btn-alaniz {
         background: linear-gradient(135deg, #d4af37, #b8941f);
-        color: #1a2e1a;
+        color: #0a1a0a;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
         font-weight: 600;
@@ -111,12 +111,17 @@ export default function SedeElectronica() {
         }
       }
 
+      /* Paleta unificada elegante */
       .text-alanizGold-600 {
         color: #d4af37;
       }
 
       .text-alanizGold-500 {
         color: #e6c547;
+      }
+
+      .text-alanizGold-400 {
+        color: #f0d858;
       }
 
       .text-parchment-100 {
@@ -155,6 +160,7 @@ export default function SedeElectronica() {
         color: #60a5fa;
       }
 
+      /* Verdes elegantes unificados */
       .bg-alanizGreen-950 {
         background-color: #0a1a0a;
       }
@@ -171,6 +177,23 @@ export default function SedeElectronica() {
         background-color: #d4af37;
       }
 
+      /* Fondos con transparencia elegante */
+      .bg-alanizGreen-900-30 {
+        background-color: rgba(26, 46, 26, 0.3);
+      }
+
+      .bg-alanizGreen-900-50 {
+        background-color: rgba(26, 46, 26, 0.5);
+      }
+
+      .bg-alanizGreen-800-20 {
+        background-color: rgba(42, 62, 42, 0.2);
+      }
+
+      .bg-alanizGold-600-20 {
+        background-color: rgba(212, 175, 55, 0.2);
+      }
+
       .font-display {
         font-family: 'Playfair Display', serif;
       }
@@ -185,6 +208,25 @@ export default function SedeElectronica() {
         }
         to {
           transform: rotate(360deg);
+        }
+      }
+
+      /* Hover elegante para documentos */
+      .document-item {
+        background: rgba(26, 46, 26, 0.3);
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        transition: all 0.3s ease;
+      }
+
+      .document-item:hover {
+        background: rgba(26, 46, 26, 0.5);
+        transform: translateY(-1px);
+      }
+
+      @media (min-width: 768px) {
+        .document-item {
+          padding: 1rem;
         }
       }
     `;
@@ -462,15 +504,15 @@ export default function SedeElectronica() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-            <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 text-center">
+            <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4 text-center">
               <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">DNI</h3>
               <p className="text-parchment-300 text-sm md:text-base">{userInfo?.id || "N/A"}</p>
             </div>
-            <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 text-center">
+            <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4 text-center">
               <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">Documentos</h3>
               <p className="text-parchment-300 text-sm md:text-base">{documents.length}</p>
             </div>
-            <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 text-center">
+            <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4 text-center">
               <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">Estado</h3>
               <p className={`text-sm md:text-base ${supabaseConnected ? "text-green-400" : "text-yellow-400"}`}>
                 {supabaseConnected ? 'Global' : 'Local'}
@@ -500,11 +542,11 @@ export default function SedeElectronica() {
               {documents.map((doc) => (
                 <div
                   key={doc.id}
-                  className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4 hover:bg-alanizGreen-900/50 transition-colors"
+                  className="document-item"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
                     <div className="flex items-start md:items-center space-x-3 md:space-x-4 flex-1">
-                      <div className="w-8 h-8 md:w-10 md:h-10 bg-alanizGold-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 md:w-10 md:h-10 bg-alanizGold-600-20 rounded-lg flex items-center justify-center flex-shrink-0">
                         <span className="text-alanizGold-600 text-sm md:text-base">
                           {doc.tipo === "Recompensas" ? "🏆" : 
                            doc.tipo === "Nombramientos" ? "⚔️" : "📄"}
@@ -549,7 +591,7 @@ export default function SedeElectronica() {
           <h3 className="font-semibold text-alanizGold-600 mb-3 md:mb-4 text-center text-base md:text-lg">
             Información Importante
           </h3>
-          <div className="bg-alanizGreen-900/30 rounded-lg p-3 md:p-4">
+          <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4">
             <ul className="space-y-2 text-parchment-300 text-xs md:text-sm">
               <li>• Los documentos están firmados digitalmente por la Casa Alaniz</li>
               <li>• Mantén tus credenciales seguras y no las compartas</li>
@@ -560,7 +602,7 @@ export default function SedeElectronica() {
           </div>
 
           {/* Información técnica */}
-          <div className="mt-3 md:mt-4 p-2 md:p-3 bg-alanizGreen-800/20 rounded-lg">
+          <div className="mt-3 md:mt-4 p-2 md:p-3 bg-alanizGreen-800-20 rounded-lg">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs space-y-2 sm:space-y-0">
               <span className="text-parchment-500">Estado del sistema:</span>
               <div className="flex items-center space-x-2">

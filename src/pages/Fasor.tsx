@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import fasorLogo from '../assets/fasor.jpg';
 
 export default function Fasor() {
   useEffect(() => {
@@ -26,9 +27,14 @@ export default function Fasor() {
         
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-red-600 
-                          rounded-full shadow-lg mb-6 animate-pulse">
-            <span className="text-white text-3xl font-bold">🚨</span>
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-red-600/20 
+                          rounded-full shadow-lg mb-6 overflow-hidden border-2 border-red-600/40">
+            <img 
+              src={fasorLogo} 
+              alt="Logo FASOR - Fuerza de Auxilio, Soporte y Rescate" 
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-red-600 mb-4">

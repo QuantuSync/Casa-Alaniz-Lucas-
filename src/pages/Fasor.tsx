@@ -1,29 +1,8 @@
-<div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 
-                          border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '200ms' }}>
-            <div className="text-center mb-8">
-              <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-4">
-                Misión Principal
-              </h3>
-              <p className="text-xl text-parchment-100 leading-relaxed">
-                <strong className="text-alanizGold-400">Estar presentes allí donde la adversidad golpea</strong>, 
-                ya sea en incendios, inundaciones, catástrofes naturales o emergencias que requieran 
-                manos firmes y corazones preparados.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-4 gap-6 mt-8">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <span className="text-alanizGreen-950 text-2xl">⚖️</span>
-                </div>
-                <h4 className="font-display fontimport React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import fasorLogo from '../assets/fasor.jpg';
 
 export default function Fasor() {
   useEffect(() => {
-    // Intersection Observer para animaciones
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,11 +23,8 @@ export default function Fasor() {
   return (
     <div className="min-h-screen py-16">
       <div className="content-container">
-        
-        {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-60 h-60 bg-red-600/20 
-                          rounded-full shadow-2xl mb-8 overflow-hidden border-4 border-red-600/40">
+          <div className="inline-flex items-center justify-center w-60 h-60 bg-red-600/20 rounded-full shadow-2xl mb-8 overflow-hidden border-4 border-red-600/40">
             <img 
               src={fasorLogo} 
               alt="Logo FASOR - Fuerza de Auxilio, Soporte y Rescate" 
@@ -57,9 +33,7 @@ export default function Fasor() {
             />
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-alanizGold-600 mb-4 tracking-wider
-                         drop-shadow-lg" 
-              style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
+          <h1 className="text-5xl md:text-7xl font-bold text-alanizGold-600 mb-4 tracking-wider drop-shadow-lg" style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
             FASOR
           </h1>
           
@@ -74,19 +48,14 @@ export default function Fasor() {
             Una fuerza civil organizada, siempre lista para responder cuando más se necesita.
           </p>
           
-          <div className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full 
-                          font-bold text-lg shadow-lg animate-bounce">
+          <div className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full font-bold text-lg shadow-lg animate-bounce">
             <span className="w-3 h-3 bg-green-400 rounded-full mr-3 animate-ping"></span>
             OPERATIVO - EN SERVICIO
           </div>
         </div>
 
-        {/* Misión y Valores */}
         <div className="max-w-5xl mx-auto space-y-12">
-          
-          <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 
-                          border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '200ms' }}>
+          <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '200ms' }}>
             <div className="text-center mb-8">
               <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-4">
                 Misión Principal
@@ -100,8 +69,7 @@ export default function Fasor() {
             
             <div className="grid md:grid-cols-4 gap-6 mt-8">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">⚖️</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Disciplina</h4>
@@ -109,8 +77,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">🤝</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Coordinación</h4>
@@ -118,8 +85,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">⚡</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Sacrificio</h4>
@@ -127,8 +93,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">🛡️</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
@@ -137,18 +102,15 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Áreas de Actuación */}
           <div className="observe-me opacity-0 translate-y-8" style={{ animationDelay: '400ms' }}>
             <h3 className="text-3xl font-display font-bold text-alanizGold-600 text-center mb-8">
               Áreas de Actuación
             </h3>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="card-elegant bg-gradient-to-br from-orange-800/60 to-red-800/60 
-                              border border-orange-600/40">
+              <div className="card-elegant bg-gradient-to-br from-orange-800/60 to-red-800/60 border border-orange-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-orange-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-600 rounded-full">
                     <span className="text-white text-xl">🔥</span>
                   </div>
                   <h4 className="font-display font-semibold text-orange-400">
@@ -160,11 +122,9 @@ export default function Fasor() {
                 </p>
               </div>
               
-              <div className="card-elegant bg-gradient-to-br from-blue-800/60 to-cyan-800/60 
-                              border border-blue-600/40">
+              <div className="card-elegant bg-gradient-to-br from-blue-800/60 to-cyan-800/60 border border-blue-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-blue-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
                     <span className="text-white text-xl">🌊</span>
                   </div>
                   <h4 className="font-display font-semibold text-blue-400">
@@ -176,11 +136,9 @@ export default function Fasor() {
                 </p>
               </div>
               
-              <div className="card-elegant bg-gradient-to-br from-amber-800/60 to-yellow-800/60 
-                              border border-amber-600/40">
+              <div className="card-elegant bg-gradient-to-br from-amber-800/60 to-yellow-800/60 border border-amber-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-amber-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-600 rounded-full">
                     <span className="text-white text-xl">⛰️</span>
                   </div>
                   <h4 className="font-display font-semibold text-amber-400">
@@ -192,11 +150,9 @@ export default function Fasor() {
                 </p>
               </div>
               
-              <div className="card-elegant bg-gradient-to-br from-red-800/60 to-pink-800/60 
-                              border border-red-600/40">
+              <div className="card-elegant bg-gradient-to-br from-red-800/60 to-pink-800/60 border border-red-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-red-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-red-600 rounded-full">
                     <span className="text-white text-xl">🚨</span>
                   </div>
                   <h4 className="font-display font-semibold text-red-400">
@@ -208,11 +164,9 @@ export default function Fasor() {
                 </p>
               </div>
               
-              <div className="card-elegant bg-gradient-to-br from-green-800/60 to-emerald-800/60 
-                              border border-green-600/40">
+              <div className="card-elegant bg-gradient-to-br from-green-800/60 to-emerald-800/60 border border-green-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-green-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full">
                     <span className="text-white text-xl">🏥</span>
                   </div>
                   <h4 className="font-display font-semibold text-green-400">
@@ -224,11 +178,9 @@ export default function Fasor() {
                 </p>
               </div>
               
-              <div className="card-elegant bg-gradient-to-br from-purple-800/60 to-indigo-800/60 
-                              border border-purple-600/40">
+              <div className="card-elegant bg-gradient-to-br from-purple-800/60 to-indigo-800/60 border border-purple-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-purple-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-600 rounded-full">
                     <span className="text-white text-xl">📊</span>
                   </div>
                   <h4 className="font-display font-semibold text-purple-400">
@@ -242,13 +194,10 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Estructura Organizativa */}
-          <div className="card-elegant observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '600ms' }}>
+          <div className="card-elegant observe-me opacity-0 translate-y-8" style={{ animationDelay: '600ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
                   <span className="text-alanizGreen-950 text-xl">⚔️</span>
                 </div>
               </div>
@@ -342,9 +291,7 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Especialidades */}
-          <div className="card-elegant observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '800ms' }}>
+          <div className="card-elegant observe-me opacity-0 translate-y-8" style={{ animationDelay: '800ms' }}>
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">
               Especialidades
             </h3>
@@ -420,9 +367,7 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Entrenamiento y Preparación */}
-          <div className="card-elegant observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1000ms' }}>
+          <div className="card-elegant observe-me opacity-0 translate-y-8" style={{ animationDelay: '1000ms' }}>
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">
               Entrenamiento y Preparación
             </h3>
@@ -434,8 +379,7 @@ export default function Fasor() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-alanizGold-600 rounded-full mb-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3">
                     <span className="text-alanizGreen-950 text-xl">💪</span>
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
@@ -449,8 +393,7 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-alanizGold-600 rounded-full mb-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3">
                     <span className="text-alanizGreen-950 text-xl">🛠️</span>
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
@@ -464,8 +407,7 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 
-                                  bg-alanizGold-600 rounded-full mb-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3">
                     <span className="text-alanizGreen-950 text-xl">🧠</span>
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
@@ -527,18 +469,14 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Protocolo de Activación */}
-          <div className="card-elegant bg-gradient-to-r from-orange-200/20 to-orange-300/30 
-                          border-2 border-orange-400/40 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1200ms' }}>
+          <div className="card-elegant bg-gradient-to-r from-orange-200/20 to-orange-300/30 border-2 border-orange-400/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '1200ms' }}>
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">
               Protocolo de Activación
             </h3>
             
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-green-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full shadow-lg mb-4">
                   <span className="text-white text-xl font-bold">1</span>
                 </div>
                 <h4 className="font-display font-semibold text-green-400 mb-2">Nivel Verde</h4>
@@ -550,8 +488,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-amber-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full shadow-lg mb-4">
                   <span className="text-white text-xl font-bold">2</span>
                 </div>
                 <h4 className="font-display font-semibold text-amber-400 mb-2">Nivel Ámbar</h4>
@@ -563,8 +500,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-red-600 rounded-full shadow-lg mb-4 animate-pulse">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full shadow-lg mb-4 animate-pulse">
                   <span className="text-white text-xl font-bold">3</span>
                 </div>
                 <h4 className="font-display font-semibold text-red-400 mb-2">Nivel Rojo</h4>
@@ -577,9 +513,7 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Principios Operativos */}
-          <div className="card-elegant observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1400ms' }}>
+          <div className="card-elegant observe-me opacity-0 translate-y-8" style={{ animationDelay: '1400ms' }}>
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">
               Principios Operativos
             </h3>
@@ -623,14 +557,10 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Compromiso con la Comunidad */}
-          <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 
-                          border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1600ms' }}>
+          <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '1600ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
                   <span className="text-alanizGreen-950 text-xl">❤️</span>
                 </div>
               </div>
@@ -663,8 +593,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center mt-8">
-                <div className="inline-flex items-center px-8 py-4 bg-alanizGold-600 text-alanizGreen-950 
-                                rounded-full font-bold text-lg shadow-lg">
+                <div className="inline-flex items-center px-8 py-4 bg-alanizGold-600 text-alanizGreen-950 rounded-full font-bold text-lg shadow-lg">
                   <span className="mr-3">🔥</span>
                   DISCIPLINA • VALOR • SERVICIO
                 </div>
@@ -672,11 +601,8 @@ export default function Fasor() {
             </div>
           </div>
 
-          {/* Cita final inspiracional */}
-          <div className="text-center mt-16 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '1800ms' }}>
-            <div className="bg-red-800/50 rounded-xl p-8 border border-red-600/20 
-                            backdrop-blur-sm shadow-elegant">
+          <div className="text-center mt-16 observe-me opacity-0 translate-y-8" style={{ animationDelay: '1800ms' }}>
+            <div className="bg-red-800/50 rounded-xl p-8 border border-red-600/20 backdrop-blur-sm shadow-elegant">
               <blockquote className="text-xl md:text-2xl font-display italic text-red-400 mb-4">
                 "Donde la memoria arde, también nace la fuerza de proteger."
               </blockquote>

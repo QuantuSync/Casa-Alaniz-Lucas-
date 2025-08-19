@@ -8,6 +8,7 @@ const Home = React.lazy(() => import('./pages/Home'));
 const Historia = React.lazy(() => import('./pages/Historia'));
 const Simbolos = React.lazy(() => import('./pages/Simbolos'));
 const Legado = React.lazy(() => import('./pages/Legado'));
+const Fasor = React.lazy(() => import('./pages/Fasor'));
 const Documentos = React.lazy(() => import('./pages/Documentos'));
 const Contacto = React.lazy(() => import('./pages/Contacto'));
 const Login = React.lazy(() => import('./pages/Login'));
@@ -64,6 +65,7 @@ const useScrollToTop = () => {
       '/historia': 'Historia - Casa Alaniz',
       '/simbolos': 'Símbolos Heráldicos - Casa Alaniz',
       '/legado': 'El Legado Vivo - Casa Alaniz',
+      '/fasor': 'FASOR - Fuerza de Auxilio, Soporte y Rescate - Casa Alaniz',
       '/documentos': 'Archivo Documental - Casa Alaniz',
       '/condecoraciones': 'Condecoraciones - Casa Alaniz',
       '/dia-casa': 'Día de la Casa - Casa Alaniz',
@@ -83,6 +85,7 @@ const useScrollToTop = () => {
       '/historia': 'Descubre la rica historia de la Casa Alaniz, desde 1117 d.C. hasta nuestros días.',
       '/simbolos': 'Explora los símbolos heráldicos de la Casa Alaniz: escudo, bandera y anillo familiar.',
       '/legado': 'El legado vivo de la Casa Alaniz y su impacto en las generaciones futuras.',
+      '/fasor': 'FASOR - Fuerza de Auxilio, Soporte y Rescate de la Casa Alaniz. Siempre listos, siempre vigilantes, siempre al servicio.',
       '/documentos': 'Acceso al archivo documental con cartas, tratados y crónicas restauradas.',
       '/condecoraciones': 'Condecoraciones y distinciones otorgadas por la Casa Alaniz en reconocimiento al honor y mérito.',
       '/dia-casa': 'La celebración anual más solemne de la Casa Alaniz: ceremonia de condecoraciones y renovación de votos.',
@@ -182,6 +185,7 @@ export default function App() {
             <Route path="/historia" element={<Historia />} />
             <Route path="/simbolos" element={<Simbolos />} />
             <Route path="/legado" element={<Legado />} />
+            <Route path="/fasor" element={<Fasor />} />
             <Route path="/documentos" element={<Documentos />} />
             <Route path="/condecoraciones" element={<Condecoraciones />} />
             <Route path="/dia-casa" element={<DiaDeLaCasa />} />

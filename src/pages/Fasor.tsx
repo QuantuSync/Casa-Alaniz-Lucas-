@@ -1,4 +1,24 @@
-import React, { useEffect } from 'react';
+<div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 
+                          border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" 
+               style={{ animationDelay: '200ms' }}>
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-4">
+                Misión Principal
+              </h3>
+              <p className="text-xl text-parchment-100 leading-relaxed">
+                <strong className="text-alanizGold-400">Estar presentes allí donde la adversidad golpea</strong>, 
+                ya sea en incendios, inundaciones, catástrofes naturales o emergencias que requieran 
+                manos firmes y corazones preparados.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-4 gap-6 mt-8">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 
+                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                  <span className="text-alanizGreen-950 text-2xl">⚖️</span>
+                </div>
+                <h4 className="font-display fontimport React, { useEffect } from 'react';
 import fasorLogo from '../assets/fasor.jpg';
 
 export default function Fasor() {
@@ -64,15 +84,15 @@ export default function Fasor() {
         {/* Misión y Valores */}
         <div className="max-w-5xl mx-auto space-y-12">
           
-          <div className="card-elegant bg-gradient-to-r from-red-800/80 to-red-900/80 
-                          border-2 border-red-600/40 observe-me opacity-0 translate-y-8" 
+          <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 
+                          border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" 
                style={{ animationDelay: '200ms' }}>
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-display font-bold text-red-400 mb-4">
+              <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-4">
                 Misión Principal
               </h3>
               <p className="text-xl text-parchment-100 leading-relaxed">
-                <strong className="text-red-400">Estar presentes allí donde la adversidad golpea</strong>, 
+                <strong className="text-alanizGold-400">Estar presentes allí donde la adversidad golpea</strong>, 
                 ya sea en incendios, inundaciones, catástrofes naturales o emergencias que requieran 
                 manos firmes y corazones preparados.
               </p>
@@ -81,37 +101,37 @@ export default function Fasor() {
             <div className="grid md:grid-cols-4 gap-6 mt-8">
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-red-600 rounded-full shadow-lg mb-4">
-                  <span className="text-white text-2xl">⚖️</span>
+                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                  <span className="text-alanizGreen-950 text-2xl">⚖️</span>
                 </div>
-                <h4 className="font-display font-semibold text-red-400 mb-2">Disciplina</h4>
+                <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Disciplina</h4>
                 <p className="text-sm text-parchment-300">Orden y método en cada actuación</p>
               </div>
               
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-red-600 rounded-full shadow-lg mb-4">
-                  <span className="text-white text-2xl">🤝</span>
+                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                  <span className="text-alanizGreen-950 text-2xl">🤝</span>
                 </div>
-                <h4 className="font-display font-semibold text-red-400 mb-2">Coordinación</h4>
+                <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Coordinación</h4>
                 <p className="text-sm text-parchment-300">Trabajo en equipo efectivo</p>
               </div>
               
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-red-600 rounded-full shadow-lg mb-4">
-                  <span className="text-white text-2xl">⚡</span>
+                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                  <span className="text-alanizGreen-950 text-2xl">⚡</span>
                 </div>
-                <h4 className="font-display font-semibold text-red-400 mb-2">Sacrificio</h4>
+                <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Sacrificio</h4>
                 <p className="text-sm text-parchment-300">Entrega total al servicio</p>
               </div>
               
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 
-                                bg-red-600 rounded-full shadow-lg mb-4">
-                  <span className="text-white text-2xl">🛡️</span>
+                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                  <span className="text-alanizGreen-950 text-2xl">🛡️</span>
                 </div>
-                <h4 className="font-display font-semibold text-red-400 mb-2">Fidelidad</h4>
+                <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
                 <p className="text-sm text-parchment-300">Lealtad inquebrantable al pueblo</p>
               </div>
             </div>
@@ -508,10 +528,10 @@ export default function Fasor() {
           </div>
 
           {/* Protocolo de Activación */}
-          <div className="card-elegant bg-gradient-to-r from-amber-800/80 to-orange-800/80 
-                          border-2 border-amber-600/40 observe-me opacity-0 translate-y-8" 
+          <div className="card-elegant bg-gradient-to-r from-orange-200/20 to-orange-300/30 
+                          border-2 border-orange-400/40 observe-me opacity-0 translate-y-8" 
                style={{ animationDelay: '1200ms' }}>
-            <h3 className="text-2xl font-display font-semibold text-amber-400 mb-6">
+            <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">
               Protocolo de Activación
             </h3>
             
@@ -646,7 +666,7 @@ export default function Fasor() {
                 <div className="inline-flex items-center px-8 py-4 bg-alanizGold-600 text-alanizGreen-950 
                                 rounded-full font-bold text-lg shadow-lg">
                   <span className="mr-3">🔥</span>
-                  SIEMPRE LISTOS • SIEMPRE VIGILANTES • SIEMPRE AL SERVICIO
+                  DISCIPLINA • VALOR • SERVICIO
                 </div>
               </div>
             </div>

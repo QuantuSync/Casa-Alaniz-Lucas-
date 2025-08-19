@@ -43,9 +43,21 @@ export default function Fasor() {
           
           <div className="divider-ornamental"></div>
           
-          <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed mb-6">
-            Expresión contemporánea del espíritu de servicio que ha definido a nuestro linaje durante siglos.
-            Una fuerza civil organizada, siempre lista para responder cuando más se necesita.
+          <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed mb-6">          
+            La Fuerza de Auxilio, Soporte y Rescate (FASOR) nace bajo el amparo de la Casa Alaniz
+            como reflejo de un deber ancestral: servir y proteger en los momentos en que la comunidad más lo necesita. 
+            
+            No es una idea abstracta, es una respuesta concreta a la realidad que vivimos hoy. Incendios que devoran bosques enteros, 
+            inundaciones que arrasan hogares, terremotos y tormentas que ponen a prueba nuestra resistencia como sociedad.
+            
+            Ante un mundo cada vez más vulnerable a la fuerza de la naturaleza, surge la necesidad de contar con una 
+            organización civil preparada, disciplinada y entregada, capaz de actuar con decisión en medio del caos. 
+            
+            FASOR representa esa voluntad: estar listos, con la mente clara y el corazón firme, 
+            para llevar auxilio donde la esperanza parece desvanecerse.
+            
+            Más que una fuerza organizada, FASOR es un compromiso vivo con la comunidad, un recordatorio de que el verdadero poder de un linaje 
+            se mide en su capacidad para proteger a los suyos y tender la mano cuando la adversidad golpea.
           </p>
           
           <div className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full font-bold text-lg shadow-lg animate-bounce">

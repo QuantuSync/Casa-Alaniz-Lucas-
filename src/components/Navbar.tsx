@@ -7,6 +7,7 @@ const navigationItems = [
   { path: "/historia", label: "Historia", icon: "📜" },
   { path: "/simbolos", label: "Símbolos", icon: "⚔️" },
   { path: "/legado", label: "Legado", icon: "👑" },
+  { path: "/fasor", label: "FASOR", icon: "🚨" },
   {
     path: "/archivo",
     label: "Archivo",

@@ -314,13 +314,7 @@ export default function Fasor() {
             </div>
           </div>
 
-        </div>
-      </div>
-    </div>
-  );
-}
-
-{/* Especialidades */}
+          {/* Especialidades */}
           <div className="card-elegant observe-me opacity-0 translate-y-8" 
                style={{ animationDelay: '800ms' }}>
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">

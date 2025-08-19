@@ -27,8 +27,8 @@ export default function Fasor() {
         
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-red-600/20 
-                          rounded-full shadow-lg mb-6 overflow-hidden border-2 border-red-600/40">
+          <div className="inline-flex items-center justify-center w-60 h-60 bg-red-600/20 
+                          rounded-full shadow-2xl mb-8 overflow-hidden border-4 border-red-600/40">
             <img 
               src={fasorLogo} 
               alt="Logo FASOR - Fuerza de Auxilio, Soporte y Rescate" 
@@ -37,7 +37,9 @@ export default function Fasor() {
             />
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-red-600 mb-4">
+          <h1 className="text-5xl md:text-7xl font-bold text-alanizGold-600 mb-4 tracking-wider
+                         drop-shadow-lg" 
+              style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
             FASOR
           </h1>
           

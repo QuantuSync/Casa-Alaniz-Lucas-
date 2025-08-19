@@ -3,6 +3,12 @@ import fasorLogo from '../assets/fasor.jpg';
 
 export default function Fasor() {
   useEffect(() => {
+    // Cargar fuente Impact desde Google Fonts
+    const link = document.createElement('link');
+    link.href = 'https://fonts.googleapis.com/css2?family=Anton&display=swap';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -45,7 +51,7 @@ export default function Fasor() {
           
           <div className="text-lg text-parchment-300 max-w-4xl mx-auto leading-relaxed mb-6 space-y-4">
             <p>
-              La Fuerza de Auxilio, Soporte y Rescate (FASOR) nace bajo el amparo de la Casa Alaniz como reflejo de un deber ancestral: servir y proteger en los momentos en que la comunidad más lo necesita. No es una idea abstracta, es una respuesta concreta a la realidad que vivimos hoy.
+              La Fuerza de Auxilio, Soporte y Rescate (FASOR) nace bajo el amparo de la <strong className="text-alanizGold-500">Casa Alaniz</strong> como reflejo de un deber ancestral: servir y proteger en los momentos en que la comunidad más lo necesita. No es una idea abstracta, es una respuesta concreta a la realidad que vivimos hoy.
             </p>
             <p>
               Incendios que devoran bosques enteros, inundaciones que arrasan hogares, terremotos y tormentas que ponen a prueba nuestra resistencia como sociedad. Ante un mundo cada vez más vulnerable a la fuerza de la naturaleza, surge la necesidad de contar con una organización civil preparada, disciplinada y entregada.

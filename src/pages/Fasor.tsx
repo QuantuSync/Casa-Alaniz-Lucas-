@@ -639,7 +639,7 @@ export default function Fasor() {
               </div>
               
               <div className="mt-8">
-                <div className="w-full max-w-4xl mx-auto">
+                <div className="w-full max-w-2xl mx-auto">
                   <img 
                     src={equipoImg} 
                     alt="Equipo FASOR - Fuerza de Auxilio, Soporte y Rescate Casa Alaniz" 

@@ -84,36 +84,36 @@ export default function Fasor() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">⚖️</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Disciplina</h4>
-                <p className="text-sm text-parchment-300">Orden y método en cada actuación</p>
+                <p className="text-sm text-parchment-300 text-center">Orden y método en cada actuación</p>
               </div>
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">🤝</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Coordinación</h4>
-                <p className="text-sm text-parchment-300">Trabajo en equipo efectivo</p>
+                <p className="text-sm text-parchment-300 text-center">Trabajo en equipo efectivo</p>
               </div>
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">⚡</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Sacrificio</h4>
-                <p className="text-sm text-parchment-300">Entrega total al servicio</p>
+                <p className="text-sm text-parchment-300 text-center">Entrega total al servicio</p>
               </div>
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
                   <span className="text-alanizGreen-950 text-2xl">🛡️</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
-                <p className="text-sm text-parchment-300">Lealtad inquebrantable al pueblo</p>
+                <p className="text-sm text-parchment-300 text-center">Lealtad inquebrantable al pueblo</p>
               </div>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function Fasor() {
                   </div>
                   <p className="text-sm text-parchment-300 leading-relaxed">
                     Máxima autoridad operativa y doctrinal. Dirige la estrategia general, aprueba despliegues 
-                    y representa a FASOR ante organismos oficiales. Su palabra es ley.
+                    y representa a FASOR ante organismos oficiales.
                   </p>
                 </div>
                 
@@ -513,36 +513,36 @@ export default function Fasor() {
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full shadow-lg mb-4 mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full shadow-lg mb-4">
                   <span className="text-white text-xl font-bold">1</span>
                 </div>
                 <h4 className="font-display font-semibold text-green-400 mb-3">Nivel Verde</h4>
-                <div className="text-left">
+                <div className="text-center">
                   <p className="text-sm text-parchment-300 font-semibold mb-1">Alerta Preventiva</p>
                   <p className="text-sm text-parchment-300 mb-1">Monitoreo y preparación.</p>
                   <p className="text-sm text-parchment-300">Tiempo de activación: 2-4 horas</p>
                 </div>
               </div>
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full shadow-lg mb-4 mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full shadow-lg mb-4">
                   <span className="text-white text-xl font-bold">2</span>
                 </div>
                 <h4 className="font-display font-semibold text-amber-400 mb-3">Nivel Ámbar</h4>
-                <div className="text-left">
+                <div className="text-center">
                   <p className="text-sm text-parchment-300 font-semibold mb-1">Emergencia Moderada</p>
                   <p className="text-sm text-parchment-300 mb-1">Despliegue parcial.</p>
                   <p className="text-sm text-parchment-300">Tiempo de activación: 30-60 min</p>
                 </div>
               </div>
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full shadow-lg mb-4 animate-pulse mx-auto">
+              <div className="flex flex-col items-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full shadow-lg mb-4 animate-pulse">
                   <span className="text-white text-xl font-bold">3</span>
                 </div>
                 <h4 className="font-display font-semibold text-red-400 mb-3">Nivel Rojo</h4>
-                <div className="text-left">
+                <div className="text-center">
                   <p className="text-sm text-parchment-300 font-semibold mb-1">Emergencia Crítica</p>
                   <p className="text-sm text-parchment-300 mb-1">Movilización total.</p>
                   <p className="text-sm text-parchment-300">Tiempo de activación: 10-15 min</p>

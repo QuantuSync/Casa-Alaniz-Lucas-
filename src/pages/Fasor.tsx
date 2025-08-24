@@ -222,7 +222,7 @@ export default function Fasor() {
                   Estructura Organizativa
                 </h3>
                 <p className="text-parchment-200 leading-relaxed">
-                  La Fuerza de Auxilio, Soporte y Rescate Casa Alaniz se organiza bajo principios 
+                  La Fuerza de Auxilio, Soporte y Rescate se organiza bajo principios 
                   de disciplina, responsabilidad y servicio. Cada nivel jerárquico tiene una función clara, 
                   garantizando que la misión se cumpla con eficacia en cualquier circunstancia.
                 </p>
@@ -262,7 +262,7 @@ export default function Fasor() {
                         2. Capitán de Unidad
                       </h5>
                       <p className="text-xs text-orange-300 font-semibold mb-2">
-                        Color de identificación: Naranja
+                        Color de identificación: Naranja vivo
                       </p>
                     </div>
                   </div>

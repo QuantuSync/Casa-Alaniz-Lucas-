@@ -76,7 +76,7 @@ export default function Fasor() {
               <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-6">
                 Misión Principal
               </h3>
-              <p className="text-xl text-parchment-100 leading-relaxed">
+              <p className="text-xl text-parchment-100 leading-relaxed text-center">
                 <strong className="text-alanizGold-400">Estar presentes allí donde la adversidad golpea</strong>, 
                 ya sea en incendios, inundaciones, catástrofes naturales o emergencias que requieran 
                 manos firmes y corazones preparados.
@@ -232,12 +232,8 @@ export default function Fasor() {
             <div className="space-y-6 mt-8">
               <h4 className="text-xl font-display font-semibold text-alanizGold-500 mb-6 flex items-center">
                 <span className="mr-2">⚔️</span>
-                Rangos Oficiales de FASOR
+                Escalafón Oficial de FASOR
               </h4>
-              
-              <p className="text-sm text-parchment-300 italic mb-8 text-center">
-                (estructura de 5 niveles, bien definidos e inconfundibles)
-              </p>
               
               <div className="space-y-4">
                 <div className="bg-red-900/30 rounded-lg p-5 border-l-4 border-red-600 border border-red-600/30">

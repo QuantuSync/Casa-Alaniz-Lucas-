@@ -73,7 +73,7 @@ export default function Fasor() {
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '200ms' }}>
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-4">
+              <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-6">
                 Misión Principal
               </h3>
               <p className="text-xl text-parchment-100 leading-relaxed">
@@ -83,9 +83,9 @@ export default function Fasor() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-4 gap-6 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
                   <span className="text-alanizGreen-950 text-2xl">⚖️</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Disciplina</h4>
@@ -93,7 +93,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
                   <span className="text-alanizGreen-950 text-2xl">🤝</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Coordinación</h4>
@@ -101,7 +101,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
                   <span className="text-alanizGreen-950 text-2xl">⚡</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Sacrificio</h4>
@@ -109,7 +109,7 @@ export default function Fasor() {
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4 mx-auto">
                   <span className="text-alanizGreen-950 text-2xl">🛡️</span>
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
@@ -123,10 +123,10 @@ export default function Fasor() {
               Áreas de Actuación
             </h3>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="card-elegant bg-gradient-to-br from-orange-800/60 to-red-800/60 border border-orange-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-600 rounded-full flex-shrink-0">
                     <span className="text-white text-xl">🔥</span>
                   </div>
                   <h4 className="font-display font-semibold text-orange-400">
@@ -140,7 +140,7 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-blue-800/60 to-cyan-800/60 border border-blue-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full flex-shrink-0">
                     <span className="text-white text-xl">🌊</span>
                   </div>
                   <h4 className="font-display font-semibold text-blue-400">
@@ -154,7 +154,7 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-amber-800/60 to-yellow-800/60 border border-amber-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-600 rounded-full flex-shrink-0">
                     <span className="text-white text-xl">⛰️</span>
                   </div>
                   <h4 className="font-display font-semibold text-amber-400">
@@ -168,7 +168,7 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-red-800/60 to-pink-800/60 border border-red-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-red-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-red-600 rounded-full flex-shrink-0">
                     <span className="text-white text-xl">🚨</span>
                   </div>
                   <h4 className="font-display font-semibold text-red-400">
@@ -182,7 +182,7 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-green-800/60 to-emerald-800/60 border border-green-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full flex-shrink-0">
                     <span className="text-white text-xl">🏥</span>
                   </div>
                   <h4 className="font-display font-semibold text-green-400">
@@ -196,7 +196,7 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-purple-800/60 to-indigo-800/60 border border-purple-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-600 rounded-full flex-shrink-0">
                     <span className="text-white text-xl">📊</span>
                   </div>
                   <h4 className="font-display font-semibold text-purple-400">
@@ -230,77 +230,103 @@ export default function Fasor() {
             </div>
             
             <div className="space-y-6 mt-8">
-              <h4 className="text-xl font-display font-semibold text-alanizGold-500 mb-4">
-                Jerarquía y Rangos
+              <h4 className="text-xl font-display font-semibold text-alanizGold-500 mb-6 flex items-center">
+                <span className="mr-2">⚔️</span>
+                Rangos Oficiales de FASOR
               </h4>
               
+              <p className="text-sm text-parchment-300 italic mb-8 text-center">
+                (estructura de 5 niveles, bien definidos e inconfundibles)
+              </p>
+              
               <div className="space-y-4">
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    🏛️ Comandancia de la Casa Alaniz
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    Órgano rector que marca las directrices estratégicas y vela por la fidelidad 
-                    a los principios fundacionales.
+                <div className="bg-red-900/30 rounded-lg p-5 border-l-4 border-red-600 border border-red-600/30">
+                  <div className="flex items-start space-x-3 mb-3">
+                    <span className="text-2xl">🟥</span>
+                    <div className="flex-1">
+                      <h5 className="font-display font-bold text-red-400 text-lg mb-1">
+                        1. Comandante
+                      </h5>
+                      <p className="text-xs text-red-300 font-semibold mb-2">
+                        Color de identificación: Rojo escarlata
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-parchment-300 leading-relaxed">
+                    Máxima autoridad operativa y doctrinal. Dirige la estrategia general, aprueba despliegues 
+                    y representa a FASOR ante organismos oficiales. Su palabra es ley.
                   </p>
                 </div>
                 
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    👨‍✈️ Oficiales de Coordinación
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    Responsables de dirigir las operaciones sobre el terreno y coordinar 
-                    recursos humanos y materiales.
+                <div className="bg-orange-900/30 rounded-lg p-5 border-l-4 border-orange-600 border border-orange-600/30">
+                  <div className="flex items-start space-x-3 mb-3">
+                    <span className="text-2xl">🟧</span>
+                    <div className="flex-1">
+                      <h5 className="font-display font-bold text-orange-400 text-lg mb-1">
+                        2. Capitán de Unidad
+                      </h5>
+                      <p className="text-xs text-orange-300 font-semibold mb-2">
+                        Color de identificación: Naranja
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-parchment-300 leading-relaxed">
+                    Mando superior sobre una Unidad Operativa (por territorio o especialidad). Coordina múltiples 
+                    equipos, autoriza intervenciones y lidera misiones complejas.
                   </p>
                 </div>
                 
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    🎓 Instructores Especializados
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    Encargados de la formación técnica y el entrenamiento continuo de los miembros.
+                <div className="bg-yellow-900/30 rounded-lg p-5 border-l-4 border-yellow-600 border border-yellow-600/30">
+                  <div className="flex items-start space-x-3 mb-3">
+                    <span className="text-2xl">🟨</span>
+                    <div className="flex-1">
+                      <h5 className="font-display font-bold text-yellow-400 text-lg mb-1">
+                        3. Teniente de Cuadrilla
+                      </h5>
+                      <p className="text-xs text-yellow-300 font-semibold mb-2">
+                        Color de identificación: Amarillo dorado
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-parchment-300 leading-relaxed">
+                    Mando directo sobre una cuadrilla de intervención. Ejecuta órdenes del Capitán, lidera en el 
+                    terreno y asegura disciplina y eficacia en situaciones reales.
                   </p>
                 </div>
                 
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    🚁 Secciones de Intervención
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    Unidades especializadas, cada una con un oficial al mando, preparadas 
-                    para actuar de manera rápida y precisa.
+                <div className="bg-green-900/30 rounded-lg p-5 border-l-4 border-green-600 border border-green-600/30">
+                  <div className="flex items-start space-x-3 mb-3">
+                    <span className="text-2xl">🟩</span>
+                    <div className="flex-1">
+                      <h5 className="font-display font-bold text-green-400 text-lg mb-1">
+                        4. Operador Táctico
+                      </h5>
+                      <p className="text-xs text-green-300 font-semibold mb-2">
+                        Color de identificación: Verde oliva
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-parchment-300 leading-relaxed">
+                    Miembro con formación completa y certificación operativa. Actúa con autonomía bajo mando superior. 
+                    Es la fuerza viva de FASOR.
                   </p>
                 </div>
                 
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    👥 Pelotones de Auxilio
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    La fuerza operativa básica, integrada por miembros capacitados en tareas 
-                    de rescate, apoyo y asistencia.
-                  </p>
-                </div>
-                
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    📦 Cuerpo de Apoyo y Logística
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    Encargados de garantizar suministros, transporte, comunicaciones 
-                    y sostenimiento de las operaciones.
-                  </p>
-                </div>
-                
-                <div className="bg-alanizGold-600/10 rounded-lg p-4 border-l-4 border-alanizGold-600">
-                  <h5 className="font-display font-semibold text-alanizGold-500 mb-2">
-                    🛡️ Reservistas
-                  </h5>
-                  <p className="text-sm text-parchment-300">
-                    Miembros experimentados en standby, disponibles para refuerzo en operaciones 
-                    de gran envergadura.
+                <div className="bg-blue-900/30 rounded-lg p-5 border-l-4 border-blue-600 border border-blue-600/30">
+                  <div className="flex items-start space-x-3 mb-3">
+                    <span className="text-2xl">🟦</span>
+                    <div className="flex-1">
+                      <h5 className="font-display font-bold text-blue-400 text-lg mb-1">
+                        5. Cadete en Formación
+                      </h5>
+                      <p className="text-xs text-blue-300 font-semibold mb-2">
+                        Color de identificación: Azul acero
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-parchment-300 leading-relaxed">
+                    Integrante en fase de instrucción. Participa en tareas de apoyo, prácticas y misiones no críticas. 
+                    Asimila doctrina, técnica y espíritu de la organización.
                   </p>
                 </div>
               </div>
@@ -316,7 +342,7 @@ export default function Fasor() {
               desplegar equipos versátiles y autosuficientes:
             </p>
             
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
@@ -392,10 +418,10 @@ export default function Fasor() {
               El entrenamiento combina resistencia física, fortaleza moral y pericia técnica.
             </p>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
                     <span className="text-alanizGreen-950 text-xl">💪</span>
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
@@ -409,7 +435,7 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
                     <span className="text-alanizGreen-950 text-xl">🛠️</span>
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
@@ -423,7 +449,7 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
                     <span className="text-alanizGreen-950 text-xl">🧠</span>
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
@@ -441,9 +467,9 @@ export default function Fasor() {
                 Programa de Entrenamiento
               </h4>
               
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1">🏃‍♂️</span>
+                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">🏃‍♂️</span>
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Simulacros Coordinados</h5>
                     <p className="text-xs text-parchment-300">
@@ -453,7 +479,7 @@ export default function Fasor() {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1">🎖️</span>
+                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">🎖️</span>
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Certificaciones Oficiales</h5>
                     <p className="text-xs text-parchment-300">
@@ -463,7 +489,7 @@ export default function Fasor() {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1">🔄</span>
+                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">🔄</span>
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Intercambio de Conocimientos</h5>
                     <p className="text-xs text-parchment-300">
@@ -473,7 +499,7 @@ export default function Fasor() {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1">⏱️</span>
+                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">⏱️</span>
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Protocolos de Activación</h5>
                     <p className="text-xs text-parchment-300">
@@ -486,45 +512,45 @@ export default function Fasor() {
           </div>
 
           <div className="card-elegant bg-gradient-to-r from-orange-200/20 to-orange-300/30 border-2 border-orange-400/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '1200ms' }}>
-            <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6">
+            <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6 text-center">
               Protocolo de Activación
             </h3>
             
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full shadow-lg mb-4 mx-auto">
                   <span className="text-white text-xl font-bold">1</span>
                 </div>
-                <h4 className="font-display font-semibold text-green-400 mb-2">Nivel Verde</h4>
-                <p className="text-sm text-parchment-300">
-                  <strong>Alerta Preventiva</strong><br/>
-                  Monitoreo y preparación.<br/>
-                  Tiempo de activación: 2-4 horas
-                </p>
+                <h4 className="font-display font-semibold text-green-400 mb-3">Nivel Verde</h4>
+                <div className="text-left">
+                  <p className="text-sm text-parchment-300 font-semibold mb-1">Alerta Preventiva</p>
+                  <p className="text-sm text-parchment-300 mb-1">Monitoreo y preparación.</p>
+                  <p className="text-sm text-parchment-300">Tiempo de activación: 2-4 horas</p>
+                </div>
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full shadow-lg mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full shadow-lg mb-4 mx-auto">
                   <span className="text-white text-xl font-bold">2</span>
                 </div>
-                <h4 className="font-display font-semibold text-amber-400 mb-2">Nivel Ámbar</h4>
-                <p className="text-sm text-parchment-300">
-                  <strong>Emergencia Moderada</strong><br/>
-                  Despliegue parcial.<br/>
-                  Tiempo de activación: 30-60 min
-                </p>
+                <h4 className="font-display font-semibold text-amber-400 mb-3">Nivel Ámbar</h4>
+                <div className="text-left">
+                  <p className="text-sm text-parchment-300 font-semibold mb-1">Emergencia Moderada</p>
+                  <p className="text-sm text-parchment-300 mb-1">Despliegue parcial.</p>
+                  <p className="text-sm text-parchment-300">Tiempo de activación: 30-60 min</p>
+                </div>
               </div>
               
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full shadow-lg mb-4 animate-pulse">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full shadow-lg mb-4 animate-pulse mx-auto">
                   <span className="text-white text-xl font-bold">3</span>
                 </div>
-                <h4 className="font-display font-semibold text-red-400 mb-2">Nivel Rojo</h4>
-                <p className="text-sm text-parchment-300">
-                  <strong>Emergencia Crítica</strong><br/>
-                  Movilización total.<br/>
-                  Tiempo de activación: 10-15 min
-                </p>
+                <h4 className="font-display font-semibold text-red-400 mb-3">Nivel Rojo</h4>
+                <div className="text-left">
+                  <p className="text-sm text-parchment-300 font-semibold mb-1">Emergencia Crítica</p>
+                  <p className="text-sm text-parchment-300 mb-1">Movilización total.</p>
+                  <p className="text-sm text-parchment-300">Tiempo de activación: 10-15 min</p>
+                </div>
               </div>
             </div>
           </div>

@@ -647,7 +647,7 @@ export default function Fasor() {
                     loading="lazy"
                   />
                   <p className="text-center text-parchment-400 text-sm mt-3 italic">
-                    Equipo FASOR preparado para servir a la comunidad
+                    FASOR: Honor, disciplina y servicio bajo la bandera de Casa Alaniz
                   </p>
                 </div>
               </div>

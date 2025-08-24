@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import fasorLogo from '../assets/fasor.jpg';
+import equipoImg from '../assets/Equipo.jpg';
 
 export default function Fasor() {
   useEffect(() => {
@@ -222,7 +223,7 @@ export default function Fasor() {
                   Estructura Organizativa
                 </h3>
                 <p className="text-parchment-200 leading-relaxed">
-                  La Fuerza de Auxilio, Soporte y Rescate se organiza bajo principios 
+                  La Fuerza de Auxilio, Soporte y Rescate Casa Alaniz se organiza bajo principios 
                   de disciplina, responsabilidad y servicio. Cada nivel jerárquico tiene una función clara, 
                   garantizando que la misión se cumpla con eficacia en cualquier circunstancia.
                 </p>
@@ -262,7 +263,7 @@ export default function Fasor() {
                         2. Capitán de Unidad
                       </h5>
                       <p className="text-xs text-orange-300 font-semibold mb-2">
-                        Color de identificación: Naranja vivo
+                        Color de identificación: Naranja
                       </p>
                     </div>
                   </div>
@@ -634,6 +635,20 @@ export default function Fasor() {
                 <div className="inline-flex items-center px-8 py-4 bg-alanizGold-600 text-alanizGreen-950 rounded-full font-bold text-lg shadow-lg">
                   <span className="mr-3">🔥</span>
                   DISCIPLINA • VALOR • SERVICIO
+                </div>
+              </div>
+              
+              <div className="mt-8">
+                <div className="w-full max-w-4xl mx-auto">
+                  <img 
+                    src={equipoImg} 
+                    alt="Equipo FASOR - Fuerza de Auxilio, Soporte y Rescate Casa Alaniz" 
+                    className="w-full h-auto rounded-xl shadow-2xl border-2 border-alanizGold-600/30"
+                    loading="lazy"
+                  />
+                  <p className="text-center text-parchment-400 text-sm mt-3 italic">
+                    Equipo FASOR preparado para servir a la comunidad
+                  </p>
                 </div>
               </div>
             </div>

@@ -178,7 +178,8 @@ export default function Fasor() {
               {units.map((unit) => (
                 <div key={unit.id} className="relative group">
                   <div 
-                    className="inline-flex items-center justify-center w-30 h-30 bg-red-600/20 rounded-full shadow-2xl border-4 border-red-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/60"
+                    className="inline-flex items-center justify-center bg-red-600/20 rounded-full shadow-2xl border-4 border-red-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/60"
+                    style={{width: '120px', height: '120px'}}
                     onClick={() => handleUnitClick(unit.id)}
                   >
                     <img 

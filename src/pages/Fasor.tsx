@@ -178,9 +178,8 @@ export default function Fasor() {
               {units.map((unit) => (
                 <div key={unit.id} className="relative group">
                   <div 
-                    className="inline-flex items-center justify-center bg-red-600/20 rounded-full shadow-2xl border-4 border-red-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/60"
-                    style={{width: '120px', height: '120px'}}
-                    onClick={() => handleUnitClick(unit.id)}
+                    className="inline-flex items-center justify-center bg-alanizGold-600/20 rounded-full shadow-2xl border-4 border-alanizGold-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/60"
+                    style={{width: '144px', height: '144px'}}
                   >
                     <img 
                       src={unit.logo} 
@@ -190,18 +189,16 @@ export default function Fasor() {
                     />
                   </div>
                   
-                  {activeUnit === unit.id && (
-                    <div className="absolute inset-0 bg-black/80 rounded-full flex items-center justify-center p-3 z-10 animate-fade-in">
-                      <div className="text-center">
-                        <h4 className="text-alanizGold-400 font-display font-semibold text-xs mb-2">
-                          {unit.name}
-                        </h4>
-                        <p className="text-parchment-300 text-xs leading-tight">
-                          {unit.description}
-                        </p>
-                      </div>
+                  <div className="absolute inset-0 bg-black/85 rounded-full items-center justify-center p-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden group-hover:flex">
+                    <div className="text-center max-w-[180px]">
+                      <h4 className="text-alanizGold-400 font-display font-semibold text-sm mb-2">
+                        {unit.name}
+                      </h4>
+                      <p className="text-parchment-300 text-xs leading-relaxed">
+                        {unit.description}
+                      </p>
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>

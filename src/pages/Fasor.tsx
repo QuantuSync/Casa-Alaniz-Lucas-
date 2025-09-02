@@ -1,8 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import fasorLogo from '../assets/fasor.jpg';
 import equipoImg from '../assets/Equipo.jpg';
+import buceadoresLogo from '../assets/buceadores-logo.jpg';
+import dronesLogo from '../assets/drones-logo.jpg';
+import forestalLogo from '../assets/forestal-logo.jpg';
+import terrestresLogo from '../assets/terrestres-logo.jpg';
+import sanitarioLogo from '../assets/sanitario-logo.jpg';
 
 export default function Fasor() {
+  const [activeUnit, setActiveUnit] = useState(null);
+
   useEffect(() => {
     // Cargar fuente Impact desde Google Fonts
     const link = document.createElement('link');
@@ -26,6 +33,43 @@ export default function Fasor() {
 
     return () => observer.disconnect();
   }, []);
+
+  const units = [
+    {
+      id: 'buceadores',
+      name: 'Buceadores de Rescate',
+      logo: buceadoresLogo,
+      description: 'Especialistas en rescate acuático, operaciones subacuáticas y salvamento en entornos fluviales, lacustres y costeros.'
+    },
+    {
+      id: 'drones',
+      name: 'Intervención Aérea',
+      logo: dronesLogo,
+      description: 'Operaciones con drones para reconocimiento aéreo, búsqueda de personas, evaluación de daños y coordinación táctica desde el aire.'
+    },
+    {
+      id: 'forestal',
+      name: 'Intervención Forestal',
+      logo: forestalLogo,
+      description: 'Combate y prevención de incendios forestales, rescate en montaña y operaciones en entornos naturales hostiles.'
+    },
+    {
+      id: 'terrestres',
+      name: 'Operaciones Terrestres',
+      logo: terrestresLogo,
+      description: 'Rescate urbano, apertura de rutas de acceso, búsqueda de personas desaparecidas y operaciones en terreno difícil.'
+    },
+    {
+      id: 'sanitario',
+      name: 'Sanitario',
+      logo: sanitarioLogo,
+      description: 'Asistencia médica de emergencia, estabilización de heridos, evacuaciones sanitarias y apoyo médico en catástrofes.'
+    }
+  ];
+
+  const handleUnitClick = (unitId) => {
+    setActiveUnit(activeUnit === unitId ? null : unitId);
+  };
 
   return (
     <div className="min-h-screen py-16">
@@ -116,6 +160,49 @@ export default function Fasor() {
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
                 <p className="text-sm text-parchment-300 text-center">Lealtad inquebrantable al pueblo</p>
               </div>
+            </div>
+          </div>
+
+          <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '300ms' }}>
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-6">
+                Unidades Especializadas
+              </h3>
+              <p className="text-lg text-parchment-100 leading-relaxed">
+                FASOR se organiza en <strong className="text-alanizGold-400">cinco unidades especializadas</strong>, 
+                cada una con capacidades específicas que garantizan una respuesta integral ante cualquier emergencia.
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+              {units.map((unit) => (
+                <div key={unit.id} className="relative group">
+                  <div 
+                    className="inline-flex items-center justify-center w-30 h-30 bg-red-600/20 rounded-full shadow-2xl border-4 border-red-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/60"
+                    onClick={() => handleUnitClick(unit.id)}
+                  >
+                    <img 
+                      src={unit.logo} 
+                      alt={`Logo ${unit.name} - FASOR`} 
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  
+                  {activeUnit === unit.id && (
+                    <div className="absolute inset-0 bg-black/80 rounded-full flex items-center justify-center p-3 z-10 animate-fade-in">
+                      <div className="text-center">
+                        <h4 className="text-alanizGold-400 font-display font-semibold text-xs mb-2">
+                          {unit.name}
+                        </h4>
+                        <p className="text-parchment-300 text-xs leading-tight">
+                          {unit.description}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 

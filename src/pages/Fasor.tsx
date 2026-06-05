@@ -1,4 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import {
+  BarChart3,
+  Brain,
+  Construction,
+  Dumbbell,
+  Flame,
+  Footprints,
+  Handshake,
+  HardHat,
+  Heart,
+  Hospital,
+  Medal,
+  Mountain,
+  RadioTower,
+  RefreshCw,
+  Scale,
+  Shield,
+  Siren,
+  Square,
+  Swords,
+  Target,
+  Timer,
+  Tornado,
+  Truck,
+  Waves,
+  Wrench,
+  Zap,
+} from 'lucide-react';
 import fasorLogo from '../assets/fasor.jpg';
 import equipoImg from '../assets/Equipo.jpg';
 import buceadoresLogo from '../assets/buceadores-logo.jpg';
@@ -131,7 +159,7 @@ export default function Fasor() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
               <div className="flex flex-col items-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <span className="text-alanizGreen-950 text-2xl">⚖️</span>
+                  <Scale className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Disciplina</h4>
                 <p className="text-sm text-parchment-300 text-center">Orden y método en cada actuación</p>
@@ -139,7 +167,7 @@ export default function Fasor() {
               
               <div className="flex flex-col items-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <span className="text-alanizGreen-950 text-2xl">🤝</span>
+                  <Handshake className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Coordinación</h4>
                 <p className="text-sm text-parchment-300 text-center">Trabajo en equipo efectivo</p>
@@ -147,7 +175,7 @@ export default function Fasor() {
               
               <div className="flex flex-col items-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <span className="text-alanizGreen-950 text-2xl">⚡</span>
+                  <Zap className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Sacrificio</h4>
                 <p className="text-sm text-parchment-300 text-center">Entrega total al servicio</p>
@@ -155,7 +183,7 @@ export default function Fasor() {
               
               <div className="flex flex-col items-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <span className="text-alanizGreen-950 text-2xl">🛡️</span>
+                  <Shield className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
                 <p className="text-sm text-parchment-300 text-center">Lealtad inquebrantable al pueblo</p>
@@ -213,7 +241,7 @@ export default function Fasor() {
               <div className="card-elegant bg-gradient-to-br from-orange-800/60 to-red-800/60 border border-orange-600/40">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-600 rounded-full flex-shrink-0">
-                    <span className="text-white text-xl">🔥</span>
+                    <Flame className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-orange-400">
                     Incendios
@@ -227,7 +255,7 @@ export default function Fasor() {
               <div className="card-elegant bg-gradient-to-br from-blue-800/60 to-cyan-800/60 border border-blue-600/40">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full flex-shrink-0">
-                    <span className="text-white text-xl">🌊</span>
+                    <Waves className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-blue-400">
                     Inundaciones
@@ -241,7 +269,7 @@ export default function Fasor() {
               <div className="card-elegant bg-gradient-to-br from-amber-800/60 to-yellow-800/60 border border-amber-600/40">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-600 rounded-full flex-shrink-0">
-                    <span className="text-white text-xl">⛰️</span>
+                    <Mountain className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-amber-400">
                     Catástrofes Naturales
@@ -255,7 +283,7 @@ export default function Fasor() {
               <div className="card-elegant bg-gradient-to-br from-red-800/60 to-pink-800/60 border border-red-600/40">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-red-600 rounded-full flex-shrink-0">
-                    <span className="text-white text-xl">🚨</span>
+                    <Siren className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-red-400">
                     Emergencias Civiles
@@ -269,7 +297,7 @@ export default function Fasor() {
               <div className="card-elegant bg-gradient-to-br from-green-800/60 to-emerald-800/60 border border-green-600/40">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full flex-shrink-0">
-                    <span className="text-white text-xl">🏥</span>
+                    <Hospital className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-green-400">
                     Apoyo Sanitario
@@ -283,7 +311,7 @@ export default function Fasor() {
               <div className="card-elegant bg-gradient-to-br from-purple-800/60 to-indigo-800/60 border border-purple-600/40">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-600 rounded-full flex-shrink-0">
-                    <span className="text-white text-xl">📊</span>
+                    <BarChart3 className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-purple-400">
                     Evaluación de Riesgos
@@ -300,7 +328,7 @@ export default function Fasor() {
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <span className="text-alanizGreen-950 text-xl">⚔️</span>
+                  <Swords className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -317,14 +345,14 @@ export default function Fasor() {
             
             <div className="space-y-6 mt-8">
               <h4 className="text-xl font-display font-semibold text-alanizGold-500 mb-6 flex items-center">
-                <span className="mr-2">⚔️</span>
+                <Swords className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                 Escalafón Oficial de FASOR
               </h4>
               
               <div className="space-y-4">
                 <div className="bg-red-900/30 rounded-lg p-5 border-l-4 border-red-600 border border-red-600/30">
                   <div className="flex items-start space-x-3 mb-3">
-                    <span className="text-2xl">🟥</span>
+                    <Square className="w-6 h-6 text-red-500 fill-red-500" aria-hidden="true" />
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-red-400 text-lg mb-1">
                         1. Comandante
@@ -342,7 +370,7 @@ export default function Fasor() {
                 
                 <div className="bg-orange-900/30 rounded-lg p-5 border-l-4 border-orange-600 border border-orange-600/30">
                   <div className="flex items-start space-x-3 mb-3">
-                    <span className="text-2xl">🟧</span>
+                    <Square className="w-6 h-6 text-orange-500 fill-orange-500" aria-hidden="true" />
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-orange-400 text-lg mb-1">
                         2. Capitán de Unidad
@@ -360,7 +388,7 @@ export default function Fasor() {
                 
                 <div className="bg-yellow-900/30 rounded-lg p-5 border-l-4 border-yellow-600 border border-yellow-600/30">
                   <div className="flex items-start space-x-3 mb-3">
-                    <span className="text-2xl">🟨</span>
+                    <Square className="w-6 h-6 text-yellow-400 fill-yellow-400" aria-hidden="true" />
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-yellow-400 text-lg mb-1">
                         3. Teniente de Cuadrilla
@@ -378,7 +406,7 @@ export default function Fasor() {
                 
                 <div className="bg-green-900/30 rounded-lg p-5 border-l-4 border-green-600 border border-green-600/30">
                   <div className="flex items-start space-x-3 mb-3">
-                    <span className="text-2xl">🟩</span>
+                    <Square className="w-6 h-6 text-green-500 fill-green-500" aria-hidden="true" />
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-green-400 text-lg mb-1">
                         4. Operador Táctico
@@ -396,7 +424,7 @@ export default function Fasor() {
                 
                 <div className="bg-blue-900/30 rounded-lg p-5 border-l-4 border-blue-600 border border-blue-600/30">
                   <div className="flex items-start space-x-3 mb-3">
-                    <span className="text-2xl">🟦</span>
+                    <Square className="w-6 h-6 text-blue-500 fill-blue-500" aria-hidden="true" />
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-blue-400 text-lg mb-1">
                         5. Cadete en Formación
@@ -428,7 +456,7 @@ export default function Fasor() {
               <div className="space-y-4">
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                    <span className="mr-2">🏗️</span>
+                    <Construction className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                     Ingeniería y Fortificaciones de Emergencia
                   </h5>
                   <p className="text-sm text-parchment-300">
@@ -438,7 +466,7 @@ export default function Fasor() {
                 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                    <span className="mr-2">🚛</span>
+                    <Truck className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                     Rescate y Movilidad Terrestre
                   </h5>
                   <p className="text-sm text-parchment-300">
@@ -448,7 +476,7 @@ export default function Fasor() {
                 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                    <span className="mr-2">🌪️</span>
+                    <Tornado className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                     Gestión de Catástrofes Naturales
                   </h5>
                   <p className="text-sm text-parchment-300">
@@ -460,7 +488,7 @@ export default function Fasor() {
               <div className="space-y-4">
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                    <span className="mr-2">⛑️</span>
+                    <HardHat className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                     Asistencia Sanitaria de Emergencia
                   </h5>
                   <p className="text-sm text-parchment-300">
@@ -470,7 +498,7 @@ export default function Fasor() {
                 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                    <span className="mr-2">📡</span>
+                    <RadioTower className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                     Logística y Comunicaciones
                   </h5>
                   <p className="text-sm text-parchment-300">
@@ -480,7 +508,7 @@ export default function Fasor() {
                 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30">
                   <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                    <span className="mr-2">🤝</span>
+                    <Handshake className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />
                     Coordinación Interinstitucional
                   </h5>
                   <p className="text-sm text-parchment-300">
@@ -504,7 +532,7 @@ export default function Fasor() {
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
-                    <span className="text-alanizGreen-950 text-xl">💪</span>
+                    <Dumbbell className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
                     Condición Física
@@ -518,7 +546,7 @@ export default function Fasor() {
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
-                    <span className="text-alanizGreen-950 text-xl">🛠️</span>
+                    <Wrench className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
                     Formación Técnica
@@ -532,7 +560,7 @@ export default function Fasor() {
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
-                    <span className="text-alanizGreen-950 text-xl">🧠</span>
+                    <Brain className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
                     Fortaleza Mental
@@ -551,7 +579,7 @@ export default function Fasor() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">🏃‍♂️</span>
+                  <Footprints className="w-5 h-5 text-alanizGold-400 mt-1 flex-shrink-0" aria-hidden="true" />
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Simulacros Coordinados</h5>
                     <p className="text-xs text-parchment-300">
@@ -561,7 +589,7 @@ export default function Fasor() {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">🎖️</span>
+                  <Medal className="w-5 h-5 text-alanizGold-400 mt-1 flex-shrink-0" aria-hidden="true" />
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Certificaciones Oficiales</h5>
                     <p className="text-xs text-parchment-300">
@@ -571,7 +599,7 @@ export default function Fasor() {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">🔄</span>
+                  <RefreshCw className="w-5 h-5 text-alanizGold-400 mt-1 flex-shrink-0" aria-hidden="true" />
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Intercambio de Conocimientos</h5>
                     <p className="text-xs text-parchment-300">
@@ -581,7 +609,7 @@ export default function Fasor() {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <span className="text-alanizGold-400 mt-1 flex-shrink-0">⏱️</span>
+                  <Timer className="w-5 h-5 text-alanizGold-400 mt-1 flex-shrink-0" aria-hidden="true" />
                   <div>
                     <h5 className="font-semibold text-alanizGold-500 text-sm">Protocolos de Activación</h5>
                     <p className="text-xs text-parchment-300">
@@ -645,7 +673,7 @@ export default function Fasor() {
             <div className="space-y-6">
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <h4 className="font-display font-semibold text-alanizGold-500 mb-3 flex items-center">
-                  <span className="mr-3 text-2xl">⚡</span>
+                  <Zap className="w-6 h-6 mr-3 text-alanizGold-600" aria-hidden="true" />
                   Respuesta Rápida y Coordinada
                 </h4>
                 <p className="text-parchment-200 text-sm leading-relaxed">
@@ -657,7 +685,7 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <h4 className="font-display font-semibold text-alanizGold-500 mb-3 flex items-center">
-                  <span className="mr-3 text-2xl">🤝</span>
+                  <Handshake className="w-6 h-6 mr-3 text-alanizGold-600" aria-hidden="true" />
                   Colaboración Institucional
                 </h4>
                 <p className="text-parchment-200 text-sm leading-relaxed">
@@ -669,7 +697,7 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <h4 className="font-display font-semibold text-alanizGold-500 mb-3 flex items-center">
-                  <span className="mr-3 text-2xl">🎯</span>
+                  <Target className="w-6 h-6 mr-3 text-alanizGold-600" aria-hidden="true" />
                   Eficacia y Profesionalidad
                 </h4>
                 <p className="text-parchment-200 text-sm leading-relaxed">
@@ -685,7 +713,7 @@ export default function Fasor() {
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <span className="text-alanizGreen-950 text-xl">❤️</span>
+                  <Heart className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -718,7 +746,7 @@ export default function Fasor() {
               
               <div className="text-center mt-8">
                 <div className="inline-flex items-center px-8 py-4 bg-alanizGold-600 text-alanizGreen-950 rounded-full font-bold text-lg shadow-lg">
-                  <span className="mr-3">🔥</span>
+                  <Flame className="w-5 h-5 mr-3" aria-hidden="true" />
                   DISCIPLINA • VALOR • SERVICIO
                 </div>
               </div>

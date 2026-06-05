@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Eye, Shield, Flag, Gem, PawPrint, Flame, Star, Leaf, Diamond, Award, User, Zap, type LucideIcon } from "lucide-react";
 import escudo from "../assets/Escudo.jpg";
 import bandera from "../assets/Bandera.jpg";
 import anillo from "../assets/Anillo.png";
@@ -14,7 +15,7 @@ const Card = ({
   src: string;
   title: string;
   children: React.ReactNode;
-  icon: string;
+  icon: LucideIcon;
   delay?: number;
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -52,7 +53,7 @@ const Card = ({
         >
           <div className="absolute bottom-4 left-4 right-4">
             <div className="flex items-center space-x-2 text-alanizGold-600">
-              <span className="w-4 h-4">👁️</span>
+              <Eye className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
               <span className="text-sm font-medium">Ver detalles</span>
             </div>
           </div>
@@ -81,9 +82,7 @@ const Card = ({
                             bg-alanizGold-600 rounded-full shadow-lg group-hover:scale-110 
                             transition-transform duration-300"
             >
-              <span className="w-5 h-5 text-alanizGreen-950 text-lg flex items-center justify-center">
-                {icon}
-              </span>
+              {React.createElement(icon, { className: 'w-5 h-5 text-alanizGreen-950', 'aria-hidden': 'true' })}
             </div>
           </div>
           <h3
@@ -142,7 +141,7 @@ export default function Simbolos() {
             className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
                           rounded-full shadow-lg mb-6"
           >
-            <span className="w-8 h-8 text-alanizGreen-950 text-2xl">🛡️</span>
+            <Shield className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
           </div>
 
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -162,7 +161,7 @@ export default function Simbolos() {
         <div className="grid gap-12 lg:grid-cols-1 xl:grid-cols-1 mb-16">
           
           {/* Escudo */}
-          <Card src={escudo} title="Escudo de Armas" icon="🛡️" delay={200}>
+          <Card src={escudo} title="Escudo de Armas" icon={Shield} delay={200}>
             <div className="bg-alanizGreen-900/30 rounded-lg p-6 border-l-4 border-alanizGold-600/50 space-y-4">
               <p className="text-parchment-200 leading-relaxed">
                 El escudo de la Casa Alaniz constituye la representación heráldica más completa de nuestra identidad señorial. 
@@ -173,7 +172,7 @@ export default function Simbolos() {
                 <div className="space-y-4">
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">🐺</span> El Lobo Guardián
+                      <PawPrint className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> El Lobo Guardián
                     </h5>
                     <p className="text-sm text-parchment-300">
                       Figura central que simboliza la{' '}
@@ -185,7 +184,7 @@ export default function Simbolos() {
                   
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">🔥</span> El Orbe de Ámbar
+                      <Flame className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> El Orbe de Ámbar
                     </h5>
                     <p className="text-sm text-parchment-300">
                       Situada en el corazón del escudo, esta esfera dorada representa la llama 
@@ -199,7 +198,7 @@ export default function Simbolos() {
                 <div className="space-y-4">
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">⭐</span> Las Tres Estrellas
+                      <Star className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> Las Tres Estrellas
                     </h5>
                     <p className="text-sm text-parchment-300">
                       Representan las luminarias del linaje vivo:{' '}
@@ -212,7 +211,7 @@ export default function Simbolos() {
                   
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">🌿</span> Las Raíces Profundas
+                      <Leaf className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> Las Raíces Profundas
                     </h5>
                     <p className="text-sm text-parchment-300">
                       En la base del escudo, simbolizan la profundidad de la memoria ancestral 
@@ -240,7 +239,7 @@ export default function Simbolos() {
           </Card>
 
           {/* Bandera */}
-          <Card src={bandera} title="Bandera Señorial" icon="🏳️" delay={400}>
+          <Card src={bandera} title="Bandera Señorial" icon={Flag} delay={400}>
             <div className="bg-alanizGreen-900/30 rounded-lg p-6 border-l-4 border-alanizGold-600/50 space-y-4">
               <p className="text-parchment-200 leading-relaxed">
                 La bandera de la Casa Alaniz ondea como símbolo de nuestra presencia territorial y autoridad señorial. 
@@ -283,7 +282,7 @@ export default function Simbolos() {
           </Card>
 
           {/* Anillo */}
-          <Card src={anillo} title="Anillo Señorial" icon="💍" delay={600}>
+          <Card src={anillo} title="Anillo Señorial" icon={Gem} delay={600}>
             <div className="bg-alanizGreen-900/30 rounded-lg p-6 border-l-4 border-alanizGold-600/50 space-y-4">
               <p className="text-parchment-200 leading-relaxed">
                 El anillo señorial de la Casa Alaniz constituye el símbolo más personal y sagrado de autoridad. 
@@ -294,7 +293,7 @@ export default function Simbolos() {
                 <div className="space-y-4">
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">🔶</span> El Orbe de Ámbar Central
+                      <Diamond className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> El Orbe de Ámbar Central
                     </h5>
                     <p className="text-sm text-parchment-300">
                       La piedra central del anillo es el mismo orbe de ámbar que aparece en el escudo. 
@@ -306,7 +305,7 @@ export default function Simbolos() {
                   
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">🥈</span> Plata y Oro Noble
+                      <Award className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> Plata y Oro Noble
                     </h5>
                     <p className="text-sm text-parchment-300">
                       La base de plata representa la pureza de intenciones, mientras que los detalles 
@@ -319,7 +318,7 @@ export default function Simbolos() {
                 <div className="space-y-4">
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">👤</span> Símbolo de Autoridad
+                      <User className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> Símbolo de Autoridad
                     </h5>
                     <p className="text-sm text-parchment-300">
                       Por este anillo se reconoce la autoridad legítima del linaje. Su presencia 
@@ -330,7 +329,7 @@ export default function Simbolos() {
                   
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
-                      <span className="mr-2">⚡</span> Reliquia Sagrada
+                      <Zap className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" /> Reliquia Sagrada
                     </h5>
                     <p className="text-sm text-parchment-300">
                       Más que una joya, el anillo es una reliquia sagrada que conecta al portador 
@@ -356,7 +355,7 @@ export default function Simbolos() {
             <div className="text-center space-y-6">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
                               rounded-full shadow-lg">
-                <span className="w-8 h-8 text-alanizGreen-950 text-2xl">🔥</span>
+                <Flame className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
               </div>
               
               <div className="space-y-4">
@@ -377,7 +376,7 @@ export default function Simbolos() {
               
               <div className="grid md:grid-cols-3 gap-6 mt-8">
                 <div className="text-center p-4 bg-alanizGreen-900/30 rounded-lg border border-alanizGold-600/20">
-                  <div className="text-2xl mb-2">⭐</div>
+                  <div className="mb-2 flex justify-center"><Star className="w-6 h-6 text-alanizGold-600" aria-hidden="true" /></div>
                   <h4 className="font-display font-semibold text-alanizGold-500 mb-2">
                     Abril
                   </h4>
@@ -390,7 +389,7 @@ export default function Simbolos() {
                 </div>
 
                 <div className="text-center p-4 bg-alanizGreen-900/30 rounded-lg border border-alanizGold-600/20">
-                  <div className="text-2xl mb-2">⭐</div>
+                  <div className="mb-2 flex justify-center"><Star className="w-6 h-6 text-alanizGold-600" aria-hidden="true" /></div>
                   <h4 className="font-display font-semibold text-alanizGold-500 mb-2">
                     Diana
                   </h4>
@@ -403,7 +402,7 @@ export default function Simbolos() {
                 </div>
 
                 <div className="text-center p-4 bg-alanizGreen-900/30 rounded-lg border border-alanizGold-600/20">
-                  <div className="text-2xl mb-2">⭐</div>
+                  <div className="mb-2 flex justify-center"><Star className="w-6 h-6 text-alanizGold-600" aria-hidden="true" /></div>
                   <h4 className="font-display font-semibold text-alanizGold-500 mb-2">
                     Martina
                   </h4>

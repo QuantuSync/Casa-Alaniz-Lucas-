@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Castle } from 'lucide-react';
 import Layout from './components/Layout';
 import ProtectedRoute from './routes/ProtectedRoute';
 
@@ -155,7 +156,9 @@ export default function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950">
         <div className="text-center space-y-6">
-          <div className="text-8xl text-alanizGold-600 animate-float">🏰</div>
+          <div className="flex justify-center text-alanizGold-600 animate-float">
+            <Castle className="w-24 h-24" aria-hidden="true" />
+          </div>
           <div className="space-y-2">
             <h1 className="text-3xl font-display text-alanizGold-600 font-bold">
               Casa Alaniz
@@ -224,7 +227,9 @@ export default function App() {
             <Route path="/404" element={
               <div className="min-h-[60vh] flex items-center justify-center px-4">
                 <div className="text-center space-y-4">
-                  <div className="text-8xl text-alanizGold-600">🏰</div>
+                  <div className="flex justify-center text-alanizGold-600">
+                    <Castle className="w-24 h-24" aria-hidden="true" />
+                  </div>
                   <h1 className="text-3xl font-display text-alanizGold-600 font-bold">
                     Página No Encontrada
                   </h1>

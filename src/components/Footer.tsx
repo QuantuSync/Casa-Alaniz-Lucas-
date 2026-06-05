@@ -1,4 +1,5 @@
 import React from 'react';
+import { Mail, MapPin, Calendar, Shield, ArrowUp } from 'lucide-react';
 
 // Componente de información de contacto
 const ContactInfo = () => (
@@ -8,7 +9,7 @@ const ContactInfo = () => (
     </h3>
     
     <div className="flex items-center space-x-3 text-sm text-parchment-300">
-      <span className="w-4 h-4 text-alanizGold-600 flex-shrink-0">📧</span>
+      <Mail className="w-4 h-4 text-alanizGold-600 flex-shrink-0" aria-hidden="true" />
       <a 
         href="mailto:administracion@casaalaniz.es"
         className="hover:text-alanizGold-600 transition-colors duration-200 underline-offset-2 hover:underline"
@@ -18,12 +19,12 @@ const ContactInfo = () => (
     </div>
     
     <div className="flex items-center space-x-3 text-sm text-parchment-300">
-      <span className="w-4 h-4 text-alanizGold-600 flex-shrink-0">📍</span>
+      <MapPin className="w-4 h-4 text-alanizGold-600 flex-shrink-0" aria-hidden="true" />
       <span>Archivo Heráldico, Castilla y León, España</span>
     </div>
     
     <div className="flex items-center space-x-3 text-sm text-parchment-300">
-      <span className="w-4 h-4 text-alanizGold-600 flex-shrink-0">📅</span>
+      <Calendar className="w-4 h-4 text-alanizGold-600 flex-shrink-0" aria-hidden="true" />
       <span>Fundada en 1117 d.C.</span>
     </div>
   </div>
@@ -66,7 +67,7 @@ const QuickLinks = () => {
 const HouseInfo = () => (
   <div className="space-y-4">
     <div className="flex items-center space-x-3 mb-4">
-      <span className="w-6 h-6 text-alanizGold-600 text-xl">🛡️</span>
+      <Shield className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
       <h3 className="text-lg font-display font-semibold text-alanizGold-600">
         Casa Alaniz
       </h3>
@@ -148,7 +149,7 @@ export default function Footer() {
                 className="hover:text-alanizGold-600 transition-colors duration-200 
                            underline-offset-2 hover:underline"
               >
-                Subir ↑
+                <span className="inline-flex items-center gap-1">Subir <ArrowUp className="w-3 h-3" aria-hidden="true" /></span>
               </button>
               <a 
                 href="/contacto" 

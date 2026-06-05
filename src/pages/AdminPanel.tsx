@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  Check,
+  Cloud,
+  Crown,
+  Database,
+  FileText,
+  Loader,
+  RefreshCw,
+  Settings,
+  Swords,
+  Trash2,
+  Trophy,
+  User,
+  Users,
+  X,
+} from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
@@ -763,14 +779,14 @@ export default function AdminPanel() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                <span className="text-green-900 text-lg md:text-xl">⚙️</span>
+                <Settings className="w-5 h-5 text-green-900" aria-hidden="true" />
               </div>
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-yellow-400">
                   Panel de Administración
                 </h1>
                 <p className="text-sm md:text-base text-yellow-200">
-                  Sistema global con Supabase {supabaseConnected ? '✅' : '❌'}
+                  Sistema global con Supabase {supabaseConnected ? <Check className="inline w-4 h-4 text-alanizGold-600" aria-hidden="true" /> : <X className="inline w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
                 </p>
               </div>
             </div>
@@ -779,7 +795,7 @@ export default function AdminPanel() {
                 onClick={testSupabaseConnection}
                 className="btn-secondary text-sm"
               >
-                🔄 Test Conexión
+                <RefreshCw className="w-4 h-4 mr-2 inline" aria-hidden="true" /> Test Conexión
               </button>
               <button
                 onClick={handleLogout}
@@ -796,14 +812,14 @@ export default function AdminPanel() {
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-blue-400 text-lg md:text-xl">👥</span>
+                <Users className="w-5 h-5 text-blue-400" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
                   Usuarios
                 </h3>
                 <p className="text-lg md:text-2xl font-bold text-white">
-                  {loadingUsers ? '⏳' : stats.totalUsers}
+                  {loadingUsers ? <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" /> : stats.totalUsers}
                 </p>
               </div>
             </div>
@@ -812,7 +828,7 @@ export default function AdminPanel() {
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-green-400 text-lg md:text-xl">📄</span>
+                <FileText className="w-5 h-5 text-green-400" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
@@ -828,14 +844,14 @@ export default function AdminPanel() {
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-yellow-400 text-lg md:text-xl">🏆</span>
+                <Trophy className="w-5 h-5 text-yellow-400" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
                   Condecoraciones
                 </h3>
                 <p className="text-lg md:text-2xl font-bold text-white">
-                  {loadingCondecoraciones ? '⏳' : stats.totalCondecoraciones}
+                  {loadingCondecoraciones ? <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" /> : stats.totalCondecoraciones}
                 </p>
               </div>
             </div>
@@ -844,7 +860,7 @@ export default function AdminPanel() {
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-purple-400 text-lg md:text-xl">☁️</span>
+                <Cloud className="w-5 h-5 text-purple-400" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
@@ -869,7 +885,7 @@ export default function AdminPanel() {
               className="btn-alaniz mobile-full sm:w-auto"
               disabled={loadingCondecoraciones}
             >
-              🏆 {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
+              <Trophy className="w-5 h-5 mr-2 inline" aria-hidden="true" /> {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
             </button>
           </div>
 
@@ -965,14 +981,14 @@ export default function AdminPanel() {
                   className="btn-secondary mobile-full sm:w-auto"
                   disabled={loadingCondecoraciones}
                 >
-                  🔄 Recargar
+                  <RefreshCw className="w-4 h-4 mr-2 inline" aria-hidden="true" /> Recargar
                 </button>
               </div>
 
               {/* Lista de condecorados */}
               <div>
                 <h4 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
-                  Condecorados Registrados ({condecorados.length}) {loadingCondecoraciones && '⏳'}
+                  Condecorados Registrados ({condecorados.length}) {loadingCondecoraciones && <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" />}
                 </h4>
                 
                 {condecorados.length === 0 ? (
@@ -1009,7 +1025,7 @@ export default function AdminPanel() {
                             title="Eliminar condecorado"
                             disabled={loadingCondecoraciones}
                           >
-                            <span className="text-sm">🗑️</span>
+                            <Trash2 className="w-4 h-4" aria-hidden="true" />
                           </button>
                         </div>
                       </div>
@@ -1111,9 +1127,9 @@ export default function AdminPanel() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-start space-x-3 md:space-x-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 sm:mt-0">
-                      <span className="text-yellow-400 text-sm md:text-base">
-                        {user.tipo === 'admin' ? '👑' : '👤'}
-                      </span>
+                      {user.tipo === 'admin'
+                        ? <Crown className="w-4 h-4 text-yellow-400" aria-hidden="true" />
+                        : <User className="w-4 h-4 text-yellow-400" aria-hidden="true" />}
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="font-medium text-yellow-400 mobile-text-sm">
@@ -1141,7 +1157,7 @@ export default function AdminPanel() {
                       onClick={() => openDocumentManager(user.dni)}
                       className="btn-alaniz text-sm mobile-full"
                     >
-                      📄 Docs
+                      <FileText className="w-4 h-4 mr-2 inline" aria-hidden="true" /> Docs
                     </button>
                     {user.tipo !== 'admin' && (
                       <button
@@ -1172,7 +1188,7 @@ export default function AdminPanel() {
                   onClick={() => setShowDocumentManager(false)}
                   className="text-yellow-400 hover:text-yellow-300 text-xl md:text-2xl"
                 >
-                  ✕
+                  <X className="w-6 h-6" aria-hidden="true" />
                 </button>
               </div>
 
@@ -1207,8 +1223,8 @@ export default function AdminPanel() {
                                  rounded-lg text-white focus:border-yellow-400"
                     >
                       <option value="">Seleccionar tipo</option>
-                      <option value="Recompensas">🏆 Recompensas</option>
-                      <option value="Nombramientos">⚔️ Nombramientos</option>
+                      <option value="Recompensas">Recompensas</option>
+                      <option value="Nombramientos">Nombramientos</option>
                     </select>
                   </div>
                 </div>
@@ -1237,7 +1253,7 @@ export default function AdminPanel() {
                       <span>Subiendo...</span>
                     </div>
                   ) : (
-                    '☁️ Subir Documento'
+                    <><Cloud className="w-5 h-5 mr-2 inline" aria-hidden="true" /> Subir Documento</>
                   )}
                 </button>
               </div>
@@ -1250,7 +1266,7 @@ export default function AdminPanel() {
                 
                 {userDocuments.length === 0 ? (
                   <div className="text-center py-8">
-                    <div className="text-3xl md:text-4xl text-yellow-400/30 mb-2">📄</div>
+                    <FileText className="w-8 h-8 text-yellow-400/30 mb-2 mx-auto" aria-hidden="true" />
                     <p className="text-gray-400">No hay documentos para este usuario</p>
                   </div>
                 ) : (
@@ -1260,9 +1276,9 @@ export default function AdminPanel() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                           <div className="flex items-start space-x-3">
                             <div className="w-6 h-6 md:w-8 md:h-8 bg-red-500/20 rounded flex items-center justify-center flex-shrink-0">
-                              <span className="text-red-400 text-xs md:text-sm">
-                                {doc.tipo === 'Recompensas' ? '🏆' : '⚔️'}
-                              </span>
+                              {doc.tipo === 'Recompensas'
+                                ? <Trophy className="w-4 h-4 text-red-400" aria-hidden="true" />
+                                : <Swords className="w-4 h-4 text-red-400" aria-hidden="true" />}
                             </div>
                             <div className="min-w-0 flex-1">
                               <h4 className="font-medium text-yellow-400 mobile-text-sm break-words">{doc.nombre}</h4>
@@ -1310,14 +1326,16 @@ export default function AdminPanel() {
               <div>
                 <h4 className="font-semibold text-yellow-400 mb-2">Estado del Sistema</h4>
                 <p className={supabaseConnected ? "text-green-400" : "text-red-400"}>
-                  {supabaseConnected ? '✅ Supabase Conectado' : '❌ Supabase Desconectado'}
+                  {supabaseConnected
+                    ? <><Check className="inline w-4 h-4 mr-1" aria-hidden="true" />Supabase Conectado</>
+                    : <><X className="inline w-4 h-4 mr-1" aria-hidden="true" />Supabase Desconectado</>}
                 </p>
                 <p className="text-gray-400">Última actualización: {new Date().toLocaleString()}</p>
               </div>
               <div>
                 <h4 className="font-semibold text-yellow-400 mb-2">Almacenamiento</h4>
-                <p className="text-gray-400">☁️ Supabase Storage (Documentos)</p>
-                <p className="text-gray-400">🗄️ Supabase Database (Usuarios y Condecoraciones)</p>
+                <p className="text-gray-400"><Cloud className="inline w-5 h-5 mr-1" aria-hidden="true" /> Supabase Storage (Documentos)</p>
+                <p className="text-gray-400"><Database className="inline w-5 h-5 mr-1" aria-hidden="true" /> Supabase Database (Usuarios y Condecoraciones)</p>
                 <p className="text-green-400 text-xs">Global access enabled with RLS</p>
               </div>
             </div>

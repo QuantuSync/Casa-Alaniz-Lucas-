@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Medal, Crown, Trophy, ScrollText, Clock, Briefcase, Users, PartyPopper } from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
@@ -213,9 +214,9 @@ export default function DiaDeLaCasa() {
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center space-x-4 mb-6">
-            <span className="text-4xl animate-float">🎖️</span>
-            <span className="text-5xl animate-float" style={{ animationDelay: '0.5s' }}>👑</span>
-            <span className="text-4xl animate-float" style={{ animationDelay: '1s' }}>🏆</span>
+            <Medal className="w-8 h-8 text-alanizGold-600 animate-float" aria-hidden="true" />
+            <Crown className="w-12 h-12 text-alanizGold-600 animate-float" style={{ animationDelay: '0.5s' }} aria-hidden="true" />
+            <Trophy className="w-8 h-8 text-alanizGold-600 animate-float" style={{ animationDelay: '1s' }} aria-hidden="true" />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -302,8 +303,8 @@ export default function DiaDeLaCasa() {
             {/* Mensaje especial cuando falte poco tiempo */}
             {timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes < 60 && (
               <div className="mt-6 text-center">
-                <p className="text-alanizGold-400 font-semibold animate-pulse">
-                  🎖️ ¡La celebración está a punto de comenzar! 🎖️
+                <p className="text-alanizGold-400 font-semibold animate-pulse inline-flex items-center justify-center gap-2">
+                  <Medal className="w-5 h-5" aria-hidden="true" /> ¡La celebración está a punto de comenzar! <Medal className="w-5 h-5" aria-hidden="true" />
                 </p>
               </div>
             )}
@@ -311,8 +312,8 @@ export default function DiaDeLaCasa() {
             {/* Mensaje cuando es el día */}
             {timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes === 0 && timeRemaining.seconds === 0 && (
               <div className="mt-6 text-center">
-                <p className="text-alanizGold-400 font-bold text-xl animate-bounce">
-                  🎉 ¡Hoy es el Día de la Casa Alaniz! 🎉
+                <p className="text-alanizGold-400 font-bold text-xl animate-bounce inline-flex items-center justify-center gap-2">
+                  <PartyPopper className="w-5 h-5" aria-hidden="true" /> ¡Hoy es el Día de la Casa Alaniz! <PartyPopper className="w-5 h-5" aria-hidden="true" />
                 </p>
               </div>
             )}
@@ -326,7 +327,7 @@ export default function DiaDeLaCasa() {
             <div className="flex-shrink-0">
               <div className="inline-flex items-center justify-center w-14 h-14 
                               bg-gradient-to-r from-amber-500 to-amber-600 rounded-full shadow-lg">
-                <span className="text-white text-xl">📜</span>
+                <ScrollText className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -365,7 +366,7 @@ export default function DiaDeLaCasa() {
             <div className="flex-shrink-0">
               <div className="inline-flex items-center justify-center w-14 h-14 
                               bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg">
-                <span className="text-white text-xl">⏰</span>
+                <Clock className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -403,7 +404,7 @@ export default function DiaDeLaCasa() {
             <div className="flex-shrink-0">
               <div className="inline-flex items-center justify-center w-14 h-14 
                               bg-gradient-to-r from-purple-500 to-purple-600 rounded-full shadow-lg">
-                <span className="text-white text-xl">👔</span>
+                <Briefcase className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -418,9 +419,13 @@ export default function DiaDeLaCasa() {
               <div key={index} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
                 <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg 
                                  bg-gradient-to-r ${protocolo.color} shadow-lg mb-4`}>
-                  <span className="text-white text-lg">
-                    {index === 0 ? '👑' : index === 1 ? '🏆' : '👥'}
-                  </span>
+                  {index === 0 ? (
+                    <Crown className="w-5 h-5 text-white" aria-hidden="true" />
+                  ) : index === 1 ? (
+                    <Trophy className="w-5 h-5 text-white" aria-hidden="true" />
+                  ) : (
+                    <Users className="w-5 h-5 text-white" aria-hidden="true" />
+                  )}
                 </div>
                 <h4 className="text-lg font-semibold text-alanizGold-500 mb-3">
                   {protocolo.categoria}
@@ -440,7 +445,7 @@ export default function DiaDeLaCasa() {
             <div className="flex-shrink-0">
               <div className="inline-flex items-center justify-center w-14 h-14 
                               bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg">
-                <span className="text-white text-xl">🏅</span>
+                <Medal className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -459,7 +464,7 @@ export default function DiaDeLaCasa() {
             </div>
           ) : condecoradosEsteAño.length === 0 ? (
             <div className="text-center py-8">
-              <div className="text-4xl text-alanizGold-600/30 mb-4">🏆</div>
+              <Trophy className="w-8 h-8 text-alanizGold-600/30 mb-4 mx-auto" aria-hidden="true" />
               <p className="text-parchment-400">
                 Las condecoraciones de este año se anunciarán próximamente por decisión del Consejo de la Casa.
               </p>
@@ -470,7 +475,7 @@ export default function DiaDeLaCasa() {
                 <div key={condecorado.id} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
-                      <span className="text-alanizGold-600 text-lg">🏆</span>
+                      <Trophy className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-display font-bold text-alanizGold-500 mb-2">

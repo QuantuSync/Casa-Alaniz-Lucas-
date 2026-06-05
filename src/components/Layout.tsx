@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ArrowUp } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -42,7 +43,7 @@ const ScrollToTopButton = () => {
                  focus:ring-alanizGold-600 focus:ring-opacity-50"
       aria-label="Volver arriba"
     >
-      <span className="w-5 h-5 block text-center">↑</span>
+      <ArrowUp className="w-5 h-5" aria-hidden="true" />
     </button>
   );
 };

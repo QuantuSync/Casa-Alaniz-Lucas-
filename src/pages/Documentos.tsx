@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { Library, Clock, Lock, AlertTriangle, ScrollText, FileText, Map } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 export default function Documentos() {
   useEffect(() => {
@@ -21,27 +23,27 @@ export default function Documentos() {
   }, []);
 
   // Datos de los tipos de documentos que estarán disponibles
-  const documentTypes = [
+  const documentTypes: { icon: LucideIcon; title: string; description: string; color: string }[] = [
     {
-      icon: '📜',
+      icon: ScrollText,
       title: 'Cartas Históricas',
       description: 'Correspondencia familiar y oficial preservada a través de los siglos',
       color: 'from-amber-500 to-amber-600'
     },
     {
-      icon: '📄',
+      icon: FileText,
       title: 'Tratados y Acuerdos',
       description: 'Documentos legales y alianzas establecidas por la Casa Alaniz',
       color: 'from-blue-500 to-blue-600'
     },
     {
-      icon: '🗺️',
+      icon: Map,
       title: 'Cartografía Ancestral',
       description: 'Mapas y planos de territorios y propiedades familiares',
       color: 'from-green-500 to-green-600'
     },
     {
-      icon: '📚',
+      icon: Library,
       title: 'Crónicas Restauradas',
       description: 'Relatos históricos y testimonios de eventos significativos',
       color: 'from-purple-500 to-purple-600'
@@ -56,7 +58,7 @@ export default function Documentos() {
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
                           rounded-full shadow-lg mb-6">
-            <span className="w-8 h-8 text-alanizGreen-950 text-2xl">📚</span>
+            <Library className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -81,7 +83,7 @@ export default function Documentos() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-lg">
-                  <span className="w-7 h-7 text-white text-2xl">⏰</span>
+                  <Clock className="w-7 h-7 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1 space-y-4">
@@ -123,7 +125,7 @@ export default function Documentos() {
                       <div className={`inline-flex items-center justify-center w-12 h-12 
                                        bg-gradient-to-r ${type.color} rounded-full shadow-lg 
                                        group-hover:scale-110 transition-transform duration-300`}>
-                        <span className="text-white text-xl">{type.icon}</span>
+                        {React.createElement(type.icon, { className: 'w-5 h-5 text-white', 'aria-hidden': 'true' })}
                       </div>
                       <div className="flex-1">
                         <h4 className="text-lg font-display font-semibold text-alanizGold-600 mb-2 
@@ -150,7 +152,7 @@ export default function Documentos() {
                 <div className="flex-shrink-0">
                   <div className="inline-flex items-center justify-center w-14 h-14 
                                   bg-alanizGold-600 rounded-full shadow-lg">
-                    <span className="w-7 h-7 text-alanizGreen-950 text-2xl">🔒</span>
+                    <Lock className="w-7 h-7 text-alanizGreen-950" aria-hidden="true" />
                   </div>
                 </div>
                 <div className="flex-1 space-y-4">
@@ -212,7 +214,7 @@ export default function Documentos() {
                style={{ animationDelay: '800ms' }}>
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-6">
               <div className="flex items-start space-x-4">
-                <span className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5">⚠️</span>
+                <AlertTriangle className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div className="flex-1">
                   <h4 className="font-semibold text-blue-400 mb-2">
                     Para Miembros de la Casa Alaniz
@@ -233,7 +235,7 @@ export default function Documentos() {
                       href="/login"
                       className="btn-alaniz text-center"
                     >
-                      <span className="w-4 h-4 mr-2">🔒</span>
+                      <Lock className="w-4 h-4 mr-2" aria-hidden="true" />
                       Acceso Miembros
                     </a>
                   </div>

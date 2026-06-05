@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Library, FileText, Crown, Shield, User, LogOut, Calendar, Clock, type LucideIcon } from "lucide-react";
 
 export default function Miembros() {
   const [mounted, setMounted] = useState(false);
@@ -38,23 +39,29 @@ export default function Miembros() {
   };
 
   // Funcionalidades disponibles (futuras)
-  const availableFeatures = [
+  const availableFeatures: {
+    icon: LucideIcon;
+    title: string;
+    description: string;
+    status: string;
+    color: string;
+  }[] = [
     {
-      icon: "📚",
+      icon: Library,
       title: "Archivo Documental",
       description: "Acceso a documentos históricos digitalizados",
       status: "En desarrollo",
       color: "from-blue-500 to-blue-600",
     },
     {
-      icon: "📄",
+      icon: FileText,
       title: "Registro Genealógico",
       description: "Gestión de árboles familiares y linajes",
       status: "Próximamente",
       color: "from-green-500 to-green-600",
     },
     {
-      icon: "👑",
+      icon: Crown,
       title: "Certificaciones",
       description: "Emisión de certificados heráldicos oficiales",
       status: "Planificado",
@@ -89,9 +96,7 @@ export default function Miembros() {
               className="inline-flex items-center justify-center w-20 h-20 bg-alanizGold-600 
                             rounded-full shadow-2xl mb-8 animate-float"
             >
-              <span className="w-10 h-10 text-alanizGreen-950 text-3xl">
-                🛡️
-              </span>
+              <Shield className="w-10 h-10 text-alanizGreen-950" aria-hidden="true" />
             </div>
 
             <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-4">
@@ -122,7 +127,7 @@ export default function Miembros() {
                       className="inline-flex items-center justify-center w-14 h-14 
                                     bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg"
                     >
-                      <span className="w-7 h-7 text-white text-2xl">👤</span>
+                      <User className="w-7 h-7 text-white" aria-hidden="true" />
                     </div>
                   </div>
                   <div className="flex-1 space-y-4">
@@ -175,9 +180,7 @@ export default function Miembros() {
                     className="inline-flex items-center justify-center w-16 h-16 
                                   bg-alanizGreen-800 rounded-full border-2 border-alanizGold-600/30"
                   >
-                    <span className="w-8 h-8 text-alanizGold-600 text-2xl">
-                      📚
-                    </span>
+                    <Library className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
                   </div>
 
                   <div className="space-y-4">
@@ -211,9 +214,10 @@ export default function Miembros() {
                               className={`inline-flex items-center justify-center w-10 h-10 
                                              bg-gradient-to-r ${feature.color} rounded-full shadow-lg`}
                             >
-                              <span className="text-white text-lg">
-                                {feature.icon}
-                              </span>
+                              {React.createElement(feature.icon, {
+                                className: "w-5 h-5 text-white",
+                                "aria-hidden": "true",
+                              })}
                             </div>
                             <div className="flex-1 text-left">
                               <h5 className="font-semibold text-alanizGold-600 text-sm">
@@ -257,7 +261,7 @@ export default function Miembros() {
                              hover:scale-105 active:scale-95 focus:outline-none 
                              focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                 >
-                  <span className="w-5 h-5">🚪</span>
+                  <LogOut className="w-5 h-5" aria-hidden="true" />
                   <span>Cerrar Sesión</span>
                 </button>
 
@@ -277,14 +281,14 @@ export default function Miembros() {
 
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center space-x-2">
-                    <span className="w-4 h-4 text-alanizGold-600">📅</span>
+                    <Calendar className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
                     <span className="text-parchment-300">
                       Última actualización:{" "}
                       {new Date().toLocaleDateString("es-ES")}
                     </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="w-4 h-4 text-alanizGold-600">⏰</span>
+                    <Clock className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
                     <span className="text-parchment-300">
                       Tiempo de sesión:{" "}
                       {Math.floor(

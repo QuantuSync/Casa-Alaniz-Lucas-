@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Library, Shield, Crown, ScrollText, Mail, ArrowRight, type LucideIcon } from 'lucide-react';
 import escudo from '../assets/Escudo.jpg';
 
 // Datos para las secciones destacadas
 const featuredSections = [
   {
-    icon: '📚',
+    icon: Library,
     title: 'Historia Familiar',
     description: 'Descubre la rica crónica de la Casa Alaniz desde el siglo XII, con relatos de honor, valor y legado señorial.',
     link: '/historia',
     color: 'from-blue-500 to-blue-600'
   },
   {
-    icon: '🛡️',
+    icon: Shield,
     title: 'Símbolos Heráldicos',
     description: 'Explora el significado del escudo, bandera y anillo que identifican a nuestra noble casa señorial.',
     link: '/simbolos',
     color: 'from-green-500 to-green-600'
   },
   {
-    icon: '👑',
+    icon: Crown,
     title: 'El Legado Inmutable',
     description: 'Conoce cómo el legado territorial y militar de la Casa Alaniz perdura a través de los siglos.',
     link: '/legado',
     color: 'from-purple-500 to-purple-600'
   },
   {
-    icon: '📜',
+    icon: ScrollText,
     title: 'Archivo Documental',
     description: 'Accede a documentos históricos, cartas y tratados que narran nuestra historia señorial.',
     link: '/documentos',
@@ -51,7 +52,7 @@ const SectionCard = ({
   color,
   delay = 0 
 }: {
-  icon: string;
+  icon: LucideIcon;
   title: string;
   description: string;
   link: string;
@@ -68,7 +69,7 @@ const SectionCard = ({
       <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg 
                        bg-gradient-to-r ${color} shadow-lg mb-4 group-hover:scale-110 
                        transition-transform duration-300`}>
-        <span className="text-white text-xl">{icon}</span>
+        <span className="text-white">{React.createElement(icon, { className: 'w-6 h-6' })}</span>
       </div>
       
       {/* Contenido */}
@@ -85,7 +86,7 @@ const SectionCard = ({
       <div className="flex items-center text-alanizGold-600 font-medium text-sm 
                       group-hover:text-alanizGold-500 transition-colors duration-300">
         <span>Explorar</span>
-        <span className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300">→</span>
+        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
       </div>
       
       {/* Efecto hover */}
@@ -210,11 +211,11 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 
                             animate-fade-in-up" style={{ animationDelay: '600ms' }}>
               <Link to="/historia" className="btn-alaniz">
-                <span className="w-5 h-5 mr-2">📚</span>
+                <Library className="w-5 h-5 mr-2" aria-hidden="true" />
                 Explorar Historia
               </Link>
               <Link to="/simbolos" className="btn-secondary">
-                <span className="w-5 h-5 mr-2">🛡️</span>
+                <Shield className="w-5 h-5 mr-2" aria-hidden="true" />
                 Ver Símbolos
               </Link>
             </div>
@@ -278,7 +279,7 @@ export default function Home() {
           <div className="text-center space-y-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
                             rounded-full shadow-lg mb-4">
-              <span className="w-8 h-8 text-alanizGreen-950 text-2xl">📧</span>
+              <Mail className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
             </div>
             
             <div className="space-y-4">
@@ -293,7 +294,7 @@ export default function Home() {
             </div>
             
             <Link to="/contacto" className="btn-alaniz">
-              <span className="w-5 h-5 mr-2">📧</span>
+              <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
               Contactar Administración
             </Link>
           </div>

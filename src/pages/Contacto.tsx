@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Mail, MapPin, Clock, Users, FileText, HelpCircle, Send, type LucideIcon } from 'lucide-react';
 
 export default function Contacto() {
   useEffect(() => {
@@ -113,23 +114,23 @@ export default function Contacto() {
   }, []);
 
   // Información de contacto y servicios
-  const contactInfo = [
+  const contactInfo: { icon: LucideIcon; title: string; content: string; description: string; color: string }[] = [
     {
-      icon: '📧',
+      icon: Mail,
       title: 'Correo Oficial',
       content: 'administracion@casaalaniz.es',
       description: 'Canal principal para asuntos administrativos y consultas oficiales',
       color: 'from-blue-500 to-blue-600'
     },
     {
-      icon: '📍',
+      icon: MapPin,
       title: 'Ubicación',
       content: 'Castilla y León, España',
       description: 'Sede del archivo heráldico y administración familiar',
       color: 'from-green-500 to-green-600'
     },
     {
-      icon: '⏰',
+      icon: Clock,
       title: 'Tiempo de Respuesta',
       content: '48-72 horas',
       description: 'Tiempo estimado para respuestas a consultas administrativas',
@@ -137,19 +138,19 @@ export default function Contacto() {
     }
   ];
 
-  const serviceTypes = [
+  const serviceTypes: { icon: LucideIcon; title: string; description: string }[] = [
     {
-      icon: '👥',
+      icon: Users,
       title: 'Consultas Genealógicas',
       description: 'Investigación de linajes y conexiones familiares con la Casa Alaniz'
     },
     {
-      icon: '📄',
+      icon: FileText,
       title: 'Solicitud de Archivos',
       description: 'Acceso a documentos históricos y certificaciones oficiales'
     },
     {
-      icon: '❓',
+      icon: HelpCircle,
       title: 'Asuntos Administrativos',
       description: 'Gestiones relacionadas con el archivo heráldico y membresía'
     }
@@ -163,7 +164,7 @@ export default function Contacto() {
         <div className="text-center mb-8 md:mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 
                           bg-alanizGold-600 rounded-full shadow-lg mb-4 md:mb-6">
-            <span className="text-alanizGreen-950 text-xl md:text-2xl">📤</span>
+            <Send className="w-5 h-5 md:w-6 md:h-6 text-alanizGreen-950" aria-hidden="true" />
           </div>
           
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-alanizGold-600 mb-4 md:mb-6 px-4">
@@ -193,7 +194,7 @@ export default function Contacto() {
                   <div className="flex-shrink-0 self-center md:self-start">
                     <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 
                                     bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                      <span className="text-white text-xl md:text-2xl">📧</span>
+                      <Mail className="w-5 h-5 md:w-6 md:h-6 text-white" aria-hidden="true" />
                     </div>
                   </div>
                   <div className="flex-1 space-y-4 text-center md:text-left">
@@ -244,7 +245,7 @@ export default function Contacto() {
                           <div className={`inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 
                                            bg-gradient-to-r ${info.color} rounded-full shadow-lg 
                                            group-hover:scale-110 transition-transform duration-300 self-center md:self-start`}>
-                            <span className="text-white text-lg md:text-xl">{info.icon}</span>
+                            {React.createElement(info.icon, { className: 'w-5 h-5 text-white', 'aria-hidden': 'true' })}
                           </div>
                           <div className="flex-1 text-center md:text-left">
                             <h4 className="text-base md:text-lg font-display font-semibold text-alanizGold-600 mb-1 
@@ -281,7 +282,7 @@ export default function Contacto() {
                                                           bg-alanizGreen-900/30 rounded-lg border border-alanizGold-600/10
                                                           hover:border-alanizGold-600/30 transition-all duration-300">
                         <div className="flex-shrink-0">
-                          <span className="text-alanizGold-600 mt-0.5 text-sm md:text-base">{service.icon}</span>
+                          {React.createElement(service.icon, { className: 'w-4 h-4 md:w-5 md:h-5 text-alanizGold-600 mt-0.5', 'aria-hidden': 'true' })}
                         </div>
                         <div>
                           <h4 className="font-semibold text-alanizGold-600 text-sm md:text-base mb-1">
@@ -318,7 +319,7 @@ export default function Contacto() {
               <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
                 <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 
                                 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <span className="text-alanizGreen-950 text-xl md:text-2xl">👥</span>
+                  <Users className="w-5 h-5 md:w-6 md:h-6 text-alanizGreen-950" aria-hidden="true" />
                 </div>
                 
                 <h3 className="text-xl md:text-2xl font-display font-bold text-alanizGold-600">
@@ -336,7 +337,7 @@ export default function Contacto() {
                     href="mailto:administracion@casaalaniz.es"
                     className="btn-alaniz w-full sm:w-auto"
                   >
-                    <span className="mr-2">📧</span>
+                    <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
                     Enviar Consulta
                   </a>
                   <a 

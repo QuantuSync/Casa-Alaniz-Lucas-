@@ -2,6 +2,7 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { Swords, Castle } from 'lucide-react';
 import App from './App';
 
 // Error boundary para capturar errores de React
@@ -27,7 +28,9 @@ class ErrorBoundary extends React.Component<
       return (
         <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950 px-4">
           <div className="text-center space-y-4">
-            <div className="text-6xl text-alanizGold-600">⚔️</div>
+            <div className="flex justify-center text-alanizGold-600">
+              <Swords className="w-16 h-16" aria-hidden="true" />
+            </div>
             <h1 className="text-2xl font-display text-alanizGold-600 font-bold">
               Error en el Archivo
             </h1>
@@ -54,7 +57,9 @@ class ErrorBoundary extends React.Component<
 const LoadingScreen = () => (
   <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950">
     <div className="text-center space-y-4">
-      <div className="text-6xl text-alanizGold-600 animate-pulse">🏰</div>
+      <div className="flex justify-center text-alanizGold-600 animate-pulse">
+        <Castle className="w-16 h-16" aria-hidden="true" />
+      </div>
       <h2 className="text-xl font-display text-alanizGold-600 font-semibold">
         Cargando Casa Alaniz<span className="loading-dots"></span>
       </h2>

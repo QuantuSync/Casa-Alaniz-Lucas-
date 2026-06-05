@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ScrollText, Landmark, Map, Swords, Crown, Castle, Star, Flame, Leaf } from 'lucide-react';
 
 export default function Historia() {
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Historia() {
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
                           rounded-full shadow-lg mb-6">
-            <span className="w-8 h-8 text-alanizGreen-950 text-2xl">📜</span>
+            <ScrollText className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -53,7 +54,7 @@ export default function Historia() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">🏛️</span>
+                  <Landmark className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -92,7 +93,7 @@ export default function Historia() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">🗺️</span>
+                  <Map className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -132,7 +133,7 @@ export default function Historia() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">⚔️</span>
+                  <Swords className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -174,7 +175,7 @@ export default function Historia() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">👑</span>
+                  <Crown className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -217,7 +218,7 @@ export default function Historia() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <span className="text-alanizGreen-950 text-xl">🏰</span>
+                  <Castle className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -277,16 +278,16 @@ export default function Historia() {
                 </h4>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start space-x-3">
-                    <span className="text-alanizGold-400 mt-1">⭐</span>
+                    <Star className="w-5 h-5 text-alanizGold-400 mt-1" aria-hidden="true" />
                     <span><strong>Tres estrellas</strong> con los nombres de las hijas del linaje vivo: 
                     Abril la heredera del señorío, Diana la valiente, y Martina la protectora</span>
                   </li>
                   <li className="flex items-start space-x-3">
-                    <span className="text-alanizGold-400 mt-1">🔥</span>
+                    <Flame className="w-5 h-5 text-alanizGold-400 mt-1" aria-hidden="true" />
                     <span><strong>Orbe de ámbar</strong> que representa la llama latente</span>
                   </li>
                   <li className="flex items-start space-x-3">
-                    <span className="text-alanizGold-400 mt-1">🌿</span>
+                    <Leaf className="w-5 h-5 text-alanizGold-400 mt-1" aria-hidden="true" />
                     <span><strong>Raíces</strong> que simbolizan la profundidad de la memoria</span>
                   </li>
                 </ul>

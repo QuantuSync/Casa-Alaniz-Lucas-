@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { Sparkles, Mountain, Settings, Shield, Swords, Map, Wrench, Castle, Flame, Crown } from 'lucide-react';
 
 export default function Legado() {
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Legado() {
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
                           rounded-full shadow-lg mb-6 animate-float">
-            <span className="w-8 h-8 text-alanizGreen-950 text-2xl">⚜️</span>
+            <Sparkles className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -53,7 +54,7 @@ export default function Legado() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">🏔️</span>
+                  <Mountain className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -87,7 +88,7 @@ export default function Legado() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">⚙️</span>
+                  <Settings className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -117,19 +118,19 @@ export default function Legado() {
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div className="flex items-center space-x-3">
-                    <span className="text-alanizGold-400">⚔️</span>
+                    <Swords className="w-5 h-5 text-alanizGold-400" aria-hidden="true" />
                     <span>Ingeniería militar y fortificaciones</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <span className="text-alanizGold-400">🗺️</span>
+                    <Map className="w-5 h-5 text-alanizGold-400" aria-hidden="true" />
                     <span>Cartografía y navegación terrestre</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <span className="text-alanizGold-400">🔧</span>
+                    <Wrench className="w-5 h-5 text-alanizGold-400" aria-hidden="true" />
                     <span>Mecánica aplicada y logística</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <span className="text-alanizGold-400">🏰</span>
+                    <Castle className="w-5 h-5 text-alanizGold-400" aria-hidden="true" />
                     <span>Administración territorial</span>
                   </div>
                 </div>
@@ -144,7 +145,7 @@ export default function Legado() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">🛡️</span>
+                  <Shield className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -218,7 +219,7 @@ export default function Legado() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg">
-                  <span className="text-white text-xl">🔥</span>
+                  <Flame className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -261,7 +262,7 @@ export default function Legado() {
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-14 h-14 
                                 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <span className="text-alanizGreen-950 text-xl">👑</span>
+                  <Crown className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">

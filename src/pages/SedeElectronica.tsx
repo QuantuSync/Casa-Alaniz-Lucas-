@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AlertTriangle, Landmark, RefreshCw, FileText, Trophy, Swords, Cloud, Save } from "lucide-react";
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
@@ -449,7 +450,7 @@ export default function SedeElectronica() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950 p-4">
         <div className="text-center space-y-4 max-w-md mx-auto">
-          <div className="text-6xl text-red-400 mb-4">⚠️</div>
+          <div className="mb-4 flex justify-center"><AlertTriangle className="w-16 h-16 text-red-400" aria-hidden="true" /></div>
           <h2 className="text-xl font-semibold text-red-400">Error al cargar</h2>
           <p className="text-parchment-300">{error}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -473,7 +474,7 @@ export default function SedeElectronica() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-6 space-y-4 lg:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-alanizGold-600 rounded-full flex items-center justify-center mx-auto sm:mx-0">
-                <span className="text-alanizGreen-950 text-lg md:text-xl">🏛️</span>
+                <Landmark className="w-5 h-5 md:w-6 md:h-6 text-alanizGreen-950" aria-hidden="true" />
               </div>
               <div className="text-center sm:text-left">
                 <h1 className="text-xl md:text-2xl font-display font-bold text-alanizGold-600">
@@ -495,7 +496,7 @@ export default function SedeElectronica() {
                 onClick={() => testSupabaseConnection()}
                 className="btn-secondary text-sm w-full sm:w-auto"
               >
-                🔄 Test
+                <RefreshCw className="w-4 h-4 mr-1" aria-hidden="true" /> Test
               </button>
               <button onClick={handleLogout} className="btn-secondary w-full sm:w-auto">
                 Cerrar Sesión
@@ -529,7 +530,7 @@ export default function SedeElectronica() {
 
           {documents.length === 0 ? (
             <div className="text-center py-8 md:py-12">
-              <div className="text-4xl md:text-6xl text-alanizGold-600/30 mb-4">📄</div>
+              <div className="mb-4 flex justify-center"><FileText className="w-8 h-8 md:w-16 md:h-16 text-alanizGold-600/30" aria-hidden="true" /></div>
               <h3 className="text-base md:text-lg font-medium text-alanizGold-600 mb-2">
                 No hay documentos disponibles
               </h3>
@@ -547,10 +548,13 @@ export default function SedeElectronica() {
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
                     <div className="flex items-start md:items-center space-x-3 md:space-x-4 flex-1">
                       <div className="w-8 h-8 md:w-10 md:h-10 bg-alanizGold-600-20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-alanizGold-600 text-sm md:text-base">
-                          {doc.tipo === "Recompensas" ? "🏆" : 
-                           doc.tipo === "Nombramientos" ? "⚔️" : "📄"}
-                        </span>
+                        {doc.tipo === "Recompensas" ? (
+                          <Trophy className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600" aria-hidden="true" />
+                        ) : doc.tipo === "Nombramientos" ? (
+                          <Swords className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600" aria-hidden="true" />
+                        ) : (
+                          <FileText className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600" aria-hidden="true" />
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-medium text-alanizGold-600 text-sm md:text-base break-words">
@@ -559,8 +563,16 @@ export default function SedeElectronica() {
                         <p className="text-xs md:text-sm text-parchment-400 break-words">
                           {doc.tipo} • {doc.tamaño} • {doc.fecha_subida}
                         </p>
-                        <p className="text-xs text-parchment-500">
-                          {doc.url_supabase?.includes('supabase') ? '☁️ Global' : '💾 Local'}
+                        <p className="text-xs text-parchment-500 inline-flex items-center gap-1">
+                          {doc.url_supabase?.includes('supabase') ? (
+                            <>
+                              <Cloud className="w-4 h-4" aria-hidden="true" /> Global
+                            </>
+                          ) : (
+                            <>
+                              <Save className="w-4 h-4" aria-hidden="true" /> Local
+                            </>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -606,8 +618,16 @@ export default function SedeElectronica() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs space-y-2 sm:space-y-0">
               <span className="text-parchment-500">Estado del sistema:</span>
               <div className="flex items-center space-x-2">
-                <span className={supabaseConnected ? 'text-green-400' : 'text-yellow-400'}>
-                  {supabaseConnected ? '☁️ Supabase conectado' : '💾 Solo localStorage'}
+                <span className={`inline-flex items-center gap-1 ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                  {supabaseConnected ? (
+                    <>
+                      <Cloud className="w-4 h-4" aria-hidden="true" /> Supabase conectado
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" aria-hidden="true" /> Solo localStorage
+                    </>
+                  )}
                 </span>
                 <button
                   onClick={async () => {

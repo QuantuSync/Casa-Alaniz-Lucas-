@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Shield, AlertTriangle, Check, IdCard, Lock, EyeOff, Eye, Cloud, Save, ArrowLeft } from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
@@ -207,7 +208,7 @@ export default function Login() {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-6">
-              <span className="w-8 h-8 text-alanizGreen-950 text-2xl">🛡️</span>
+              <Shield className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
             </div>
 
             <h1 className="text-2xl md:text-3xl font-display font-bold text-alanizGold-600 mb-2">
@@ -231,7 +232,7 @@ export default function Login() {
           {error && error !== 'success' && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg animate-fade-in-down">
               <div className="flex items-start space-x-3">
-                <span className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5">⚠️</span>
+                <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <p className="text-red-400 text-sm font-medium">{error}</p>
               </div>
             </div>
@@ -240,7 +241,7 @@ export default function Login() {
           {error === 'success' && (
             <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-lg animate-fade-in-down">
               <div className="flex items-center space-x-3">
-                <span className="w-5 h-5 text-green-400">✅</span>
+                <Check className="w-5 h-5 text-green-400" aria-hidden="true" />
                 <p className="text-green-400 text-sm font-medium">
                   Acceso autorizado. Redirigiendo...
                 </p>
@@ -257,7 +258,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="h-5 w-5 text-alanizGold-600/50">🆔</span>
+                  <IdCard className="h-5 w-5 text-alanizGold-600/50" aria-hidden="true" />
                 </div>
                 <input
                   id="dni"
@@ -285,7 +286,7 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="h-5 w-5 text-alanizGold-600/50">🔒</span>
+                  <Lock className="h-5 w-5 text-alanizGold-600/50" aria-hidden="true" />
                 </div>
                 <input
                   id="password"
@@ -311,9 +312,9 @@ export default function Login() {
                              disabled:opacity-50 transition-colors duration-200"
                 >
                   {showPassword ? (
-                    <span className="h-5 w-5">🙈</span>
+                    <EyeOff className="h-5 w-5" aria-hidden="true" />
                   ) : (
-                    <span className="h-5 w-5">👁️</span>
+                    <Eye className="h-5 w-5" aria-hidden="true" />
                   )}
                 </button>
               </div>
@@ -333,7 +334,7 @@ export default function Login() {
                 </div>
               ) : (
                 <div className="flex items-center justify-center space-x-2">
-                  <span className="w-5 h-5">🔒</span>
+                  <Lock className="w-5 h-5" aria-hidden="true" />
                   <span>Acceder al Sistema</span>
                 </div>
               )}
@@ -366,8 +367,16 @@ export default function Login() {
               <div className="flex items-center justify-between text-xs">
                 <span className="text-parchment-500">Estado del sistema:</span>
                 <div className="flex items-center space-x-2">
-                  <span className={supabaseConnected ? 'text-green-400' : 'text-yellow-400'}>
-                    {supabaseConnected ? '☁️ Global' : '💾 Local'}
+                  <span className={`inline-flex items-center gap-1 ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                    {supabaseConnected ? (
+                      <>
+                        <Cloud className="w-4 h-4" aria-hidden="true" /> Global
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4" aria-hidden="true" /> Local
+                      </>
+                    )}
                   </span>
                   <button
                     onClick={testSupabaseConnection}
@@ -395,7 +404,7 @@ export default function Login() {
             className="text-sm text-alanizGold-600/70 hover:text-alanizGold-600 
                        transition-colors duration-200 underline-offset-2 hover:underline"
           >
-            ← Volver al Archivo Principal
+            <ArrowLeft className="inline w-4 h-4 mr-1 align-text-bottom" aria-hidden="true" /> Volver al Archivo Principal
           </a>
         </div>
       </div>

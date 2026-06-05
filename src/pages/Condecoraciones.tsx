@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Trophy, Crown, Star, Settings, Loader } from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
@@ -114,9 +115,9 @@ export default function Condecoraciones() {
         <div className="card-elegant mb-8">
           <div className="text-center">
             <div className="flex justify-center items-center space-x-4 mb-4">
-              <span className="text-4xl">🏆</span>
-              <span className="text-5xl">👑</span>
-              <span className="text-4xl">⭐</span>
+              <Trophy className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
+              <Crown className="w-12 h-12 text-alanizGold-600" aria-hidden="true" />
+              <Star className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
             </div>
             <h1 className="text-4xl font-display font-bold text-alanizGold-600 mb-4">
               Condecoraciones de la Casa Alaniz
@@ -141,7 +142,7 @@ export default function Condecoraciones() {
           <div className="card-elegant mb-8 bg-alanizGold-600/5 border border-alanizGold-600/20">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-6 h-6 bg-alanizGold-600 rounded-full flex items-center justify-center">
-                <span className="text-alanizGreen-950 text-sm">👑</span>
+                <Crown className="w-4 h-4 text-alanizGreen-950" aria-hidden="true" />
               </div>
               <h2 className="text-lg font-display font-bold text-alanizGold-600">
                 Panel de Administrador
@@ -152,7 +153,7 @@ export default function Condecoraciones() {
             </p>
             <div className="mt-4">
               <a href="/admin" className="btn-alaniz">
-                <span className="text-lg mr-2">⚙️</span>
+                <Settings className="w-5 h-5 mr-2" aria-hidden="true" />
                 Ir al Panel de Administración
               </a>
             </div>
@@ -178,7 +179,7 @@ export default function Condecoraciones() {
                           target.style.display = 'none';
                           const parent = target.parentElement;
                           if (parent) {
-                            parent.innerHTML = '<span class="text-6xl">👑</span>';
+                            parent.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-alanizGold-600" aria-hidden="true"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>';
                           }
                         }}
                       />
@@ -228,7 +229,7 @@ export default function Condecoraciones() {
                   <div>
                     <h3 className="text-lg font-display font-semibold text-alanizGold-600 mb-3">
                       Condecorados
-                      {loadingCondecoraciones && <span className="ml-2 text-sm">⏳</span>}
+                      {loadingCondecoraciones && <Loader className="inline-block ml-2 w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
                     </h3>
                     
                     {loadingCondecoraciones ? (

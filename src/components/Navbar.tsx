@@ -1,27 +1,45 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import {
+  Home,
+  ScrollText,
+  Swords,
+  Crown,
+  Siren,
+  Library,
+  FileText,
+  Trophy,
+  Medal,
+  Landmark,
+  Mail,
+  Shield,
+  ChevronDown,
+  X,
+  Menu,
+  type LucideIcon,
+} from "lucide-react";
 
 // Configuración de navegación - CON SUBMENÚS
 const navigationItems = [
-  { path: "/", label: "Inicio", icon: "🏠" },
-  { path: "/historia", label: "Historia", icon: "📜" },
-  { path: "/simbolos", label: "Símbolos", icon: "⚔️" },
-  { path: "/legado", label: "Legado", icon: "👑" },
-  { path: "/fasor", label: "FASOR", icon: "🚨" },
+  { path: "/", label: "Inicio", icon: Home },
+  { path: "/historia", label: "Historia", icon: ScrollText },
+  { path: "/simbolos", label: "Símbolos", icon: Swords },
+  { path: "/legado", label: "Legado", icon: Crown },
+  { path: "/fasor", label: "FASOR", icon: Siren },
   {
     path: "/archivo",
     label: "Archivo",
-    icon: "📚",
+    icon: Library,
     hasSubmenu: true,
     submenu: [
-      { path: "/documentos", label: "Documentos", icon: "📄" },
-      { path: "/condecoraciones", label: "Condecoraciones", icon: "🏆" },
-      { path: "/dia-casa", label: "Día de la Casa", icon: "🎖️" },
+      { path: "/documentos", label: "Documentos", icon: FileText },
+      { path: "/condecoraciones", label: "Condecoraciones", icon: Trophy },
+      { path: "/dia-casa", label: "Día de la Casa", icon: Medal },
     ]
   },
-  { path: "/sede-electronica", label: "Sede Electrónica", icon: "🏛️" },
-  { path: "/contacto", label: "Contacto", icon: "📧" },
-  { path: "/login", label: "Miembros", icon: "🛡️" },
+  { path: "/sede-electronica", label: "Sede Electrónica", icon: Landmark },
+  { path: "/contacto", label: "Contacto", icon: Mail },
+  { path: "/login", label: "Miembros", icon: Shield },
 ] as const;
 
 // Hook personalizado para manejar clicks fuera del componente
@@ -84,7 +102,7 @@ const NavItem = React.memo(({
 }: {
   path: string;
   label: string;
-  icon: string;
+  icon: LucideIcon;
   onClick?: () => void;
 }) => (
   <NavLink
@@ -103,12 +121,11 @@ const NavItem = React.memo(({
   >
     {({ isActive }) => (
       <>
-        <span 
-          className="text-sm transition-transform duration-300 group-hover:scale-110"
-          role="img"
-          aria-label={`Icono de ${label}`}
+        <span
+          className="transition-transform duration-300 group-hover:scale-110"
+          aria-hidden="true"
         >
-          {icon}
+          {React.createElement(icon, { className: "w-4 h-4" })}
         </span>
         <span className="text-sm font-semibold tracking-wide">{label}</span>
         {isActive && (
@@ -181,20 +198,17 @@ const DropdownNavItem = React.memo(({
           }
         `}
       >
-        <span 
-          className="text-sm transition-transform duration-300 group-hover:scale-110"
-          role="img"
-          aria-label={`Icono de ${item.label}`}
-        >
-          {item.icon}
-        </span>
-        <span className="text-sm font-semibold tracking-wide">{item.label}</span>
-        <span 
-          className={`text-xs transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+        <span
+          className="transition-transform duration-300 group-hover:scale-110"
           aria-hidden="true"
         >
-          ▼
+          {React.createElement(item.icon, { className: "w-4 h-4" })}
         </span>
+        <span className="text-sm font-semibold tracking-wide">{item.label}</span>
+        <ChevronDown
+          className={`w-3 h-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          aria-hidden="true"
+        />
         {isSubmenuActive && (
           <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
@@ -236,8 +250,8 @@ const DropdownNavItem = React.memo(({
                   }
                 `}
               >
-                <span className="text-sm" role="img" aria-label={`Icono de ${subitem.label}`}>
-                  {subitem.icon}
+                <span aria-hidden="true">
+                  {React.createElement(subitem.icon, { className: "w-4 h-4" })}
                 </span>
                 <span className="font-medium">{subitem.label}</span>
               </NavLink>
@@ -318,7 +332,7 @@ const MobileMenu = React.memo(({
                        hover:bg-alanizGold-600/10 rounded-lg transition-all duration-200
                        focus:outline-none focus:ring-2 focus:ring-alanizGold-600"
           >
-            <span className="block w-6 h-6 text-xl" aria-hidden="true">✕</span>
+            <X className="w-6 h-6" aria-hidden="true" />
           </button>
         </div>
 
@@ -342,19 +356,17 @@ const MobileMenu = React.memo(({
                                focus:outline-none focus:bg-alanizGold-600/10"
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm" role="img" aria-label={`Icono de ${item.label}`}>
-                        {item.icon}
+                      <span aria-hidden="true">
+                        {React.createElement(item.icon, { className: "w-4 h-4" })}
                       </span>
                       <span className="text-sm font-semibold tracking-wide">{item.label}</span>
                     </div>
-                    <span 
-                      className={`text-xs transition-transform duration-300 ${
+                    <ChevronDown
+                      className={`w-3 h-3 transition-transform duration-300 ${
                         openSubmenu === item.label ? 'rotate-180' : ''
                       }`}
                       aria-hidden="true"
-                    >
-                      ▼
-                    </span>
+                    />
                   </button>
                   
                   {/* Submenú en móvil */}
@@ -377,8 +389,8 @@ const MobileMenu = React.memo(({
                             }
                           `}
                         >
-                          <span className="text-sm" role="img" aria-label={`Icono de ${subitem.label}`}>
-                            {subitem.icon}
+                          <span aria-hidden="true">
+                            {React.createElement(subitem.icon, { className: "w-4 h-4" })}
                           </span>
                           <span className="text-sm font-semibold tracking-wide">{subitem.label}</span>
                         </NavLink>
@@ -605,7 +617,7 @@ export default function Navbar() {
                          hover:bg-alanizGold-600/10 rounded-lg transition-all duration-200
                          focus:outline-none focus:ring-2 focus:ring-alanizGold-600 focus:ring-opacity-50"
             >
-              <span className="block w-6 h-6 text-xl" aria-hidden="true">☰</span>
+              <Menu className="w-6 h-6" aria-hidden="true" />
             </button>
           </nav>
         </div>

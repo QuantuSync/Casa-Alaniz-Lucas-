@@ -192,7 +192,7 @@ export default function Fasor() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
                   <Scale className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
@@ -202,7 +202,7 @@ export default function Fasor() {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
                   <Handshake className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
@@ -212,7 +212,7 @@ export default function Fasor() {
                 <p className="text-sm text-parchment-300 text-center">Trabajo en equipo efectivo</p>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
                   <Zap className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
@@ -220,7 +220,7 @@ export default function Fasor() {
                 <p className="text-sm text-parchment-300 text-center">Entrega total al servicio</p>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
                   <Shield className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
@@ -252,7 +252,7 @@ export default function Fasor() {
               {units.map((unit) => (
                 <div
                   key={unit.id}
-                  className="flex flex-col items-center rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-6 text-center transition-all duration-300 hover:border-alanizGold-600/60"
+                  className="stack-centered rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-6 transition-all duration-300 hover:border-alanizGold-600/60"
                 >
                   <div className="mb-4 inline-flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-alanizGold-600/40 bg-alanizGreen-900 shadow-lg">
                     <img
@@ -693,11 +693,11 @@ export default function Fasor() {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
                   <span className="text-alanizGold-600 text-xl font-bold">1</span>
                 </div>
-                <h4 className="font-display font-semibold text-green-400 mb-3">Nivel Verde</h4>
+                <h4 className="font-display font-semibold text-green-300/80 mb-3">Nivel Verde</h4>
                 <div className="text-center">
                   <p className="text-sm text-parchment-300 font-semibold mb-1">Alerta Preventiva</p>
                   <p className="text-sm text-parchment-300 mb-1">Monitoreo y preparación.</p>
@@ -705,11 +705,11 @@ export default function Fasor() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
                   <span className="text-alanizGold-600 text-xl font-bold">2</span>
                 </div>
-                <h4 className="font-display font-semibold text-amber-400 mb-3">Nivel Ámbar</h4>
+                <h4 className="font-display font-semibold text-amber-300/80 mb-3">Nivel Ámbar</h4>
                 <div className="text-center">
                   <p className="text-sm text-parchment-300 font-semibold mb-1">
                     Emergencia Moderada
@@ -719,11 +719,11 @@ export default function Fasor() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="stack-centered">
                 <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4 animate-pulse">
                   <span className="text-alanizGold-600 text-xl font-bold">3</span>
                 </div>
-                <h4 className="font-display font-semibold text-red-400 mb-3">Nivel Rojo</h4>
+                <h4 className="font-display font-semibold text-red-300/80 mb-3">Nivel Rojo</h4>
                 <div className="text-center">
                   <p className="text-sm text-parchment-300 font-semibold mb-1">
                     Emergencia Crítica
@@ -893,7 +893,7 @@ export default function Fasor() {
 
             {/* Móvil: vista previa + botón a pantalla completa (evita el conflicto zoom/scroll) */}
             <div className="mt-6 md:hidden">
-              <div className="flex flex-col items-center rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-8 text-center">
+              <div className="stack-centered rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-8">
                 <Map className="mb-3 h-10 w-10 text-alanizGold-600" aria-hidden="true" />
                 <p className="mb-4 text-sm text-parchment-300">
                   Para una mejor experiencia en el móvil, abre el mapa a pantalla completa.

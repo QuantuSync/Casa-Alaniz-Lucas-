@@ -105,7 +105,7 @@ export default function Home() {
         <div className="pointer-events-none absolute left-1/2 top-1/3 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-alanizGold-600/5 blur-3xl"></div>
 
         <div className="content-container relative z-10">
-          <div className="flex flex-col items-center space-y-6 text-center">
+          <div className="stack-centered space-y-6">
             {/* Escudo enmarcado */}
             <div className="w-52 lg:w-60">
               <div

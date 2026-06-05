@@ -26,15 +26,13 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950 px-4">
-          <div className="text-center space-y-4">
-            <div className="flex justify-center text-alanizGold-600">
-              <Swords className="w-16 h-16" aria-hidden="true" />
-            </div>
-            <h1 className="text-2xl font-display text-alanizGold-600 font-bold">
+        <div className="flex min-h-screen items-center justify-center bg-alanizGreen-950 px-4">
+          <div className="stack-centered max-w-md space-y-5">
+            <Swords className="h-16 w-16 text-alanizGold-600" aria-hidden="true" />
+            <h1 className="font-display text-2xl font-bold text-alanizGold-600">
               Error en el Archivo
             </h1>
-            <p className="text-parchment-200 max-w-md">
+            <p className="text-parchment-200">
               Ha ocurrido un error inesperado en el archivo heráldico. Los custodios han sido
               notificados.
             </p>

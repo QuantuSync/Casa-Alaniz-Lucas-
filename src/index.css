@@ -212,6 +212,15 @@
     @apply h-px w-16 bg-gradient-to-r from-transparent via-alanizGold-600/70 to-transparent;
   }
 
+  /* Bloque centrado: icono + título + mensaje + acción sobre el MISMO eje central.
+     Centra también los párrafos, que por defecto van alineados a la izquierda. */
+  .stack-centered {
+    @apply flex flex-col items-center text-center;
+  }
+  .stack-centered p {
+    text-align: center;
+  }
+
   /* Texto con efecto dorado */
   .text-gold-glow {
     @apply text-alanizGold-600;

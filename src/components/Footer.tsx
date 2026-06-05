@@ -64,9 +64,11 @@ const QuickLinks = () => {
 // Componente de información de la casa
 const HouseInfo = () => (
   <div className="space-y-4">
-    <div className="flex items-center space-x-3 mb-4">
-      <Shield className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
-      <h3 className="text-lg font-display font-semibold text-alanizGold-600">Casa Alaniz</h3>
+    <div className="flex items-center gap-3 mb-4">
+      <Shield className="h-6 w-6 shrink-0 text-alanizGold-600" aria-hidden="true" />
+      <h3 className="m-0 text-lg font-display font-semibold leading-none text-alanizGold-600">
+        Casa Alaniz
+      </h3>
     </div>
 
     <p className="text-sm text-parchment-300 leading-relaxed mb-4">

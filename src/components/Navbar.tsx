@@ -60,30 +60,20 @@ const useClickOutside = (callback: () => void) => {
 const Logo = React.memo(() => (
   <NavLink
     to="/"
-    className="flex items-center space-x-3 group transition-all duration-300"
+    className="group flex items-center gap-3 leading-none transition-all duration-300"
     aria-label="Casa Alaniz - Inicio"
   >
-    <div className="relative flex items-center">
-      <div
-        className="w-10 h-10 group-hover:scale-110 transition-transform duration-300 
-                   drop-shadow-lg flex items-center justify-center subtle-glow"
-      >
-        <img
-          src="/SelloSinFondo.ico"
-          alt="Escudo Casa Alaniz"
-          className="w-full h-full object-contain filter brightness-110 group-hover:brightness-125 transition-all duration-300"
-          loading="eager"
-        />
-      </div>
-    </div>
-    <div className="hidden items-center lg:flex">
-      <h1
-        className="m-0 font-display text-xl font-semibold leading-none text-alanizGold-600
-                   transition-colors duration-300 group-hover:text-alanizGold-500"
-      >
-        Casa Alaniz
-      </h1>
-    </div>
+    <span className="subtle-glow flex h-10 w-10 shrink-0 items-center justify-center drop-shadow-lg transition-transform duration-300 group-hover:scale-110">
+      <img
+        src="/SelloSinFondo.ico"
+        alt="Escudo Casa Alaniz"
+        className="h-full w-full object-contain brightness-110 transition-all duration-300 group-hover:brightness-125"
+        loading="eager"
+      />
+    </span>
+    <span className="hidden font-display text-xl font-semibold leading-none text-alanizGold-600 transition-colors duration-300 group-hover:text-alanizGold-500 lg:inline-block">
+      Casa Alaniz
+    </span>
   </NavLink>
 ));
 

@@ -10,6 +10,8 @@ import {
   HardHat,
   Heart,
   Hospital,
+  Map,
+  Maximize,
   Medal,
   Mountain,
   RadioTower,
@@ -834,6 +836,70 @@ export default function Fasor() {
                     FASOR: Honor, disciplina y servicio bajo la bandera de Casa Alaniz
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Abeiro - mapa incrustado (demostrador) */}
+          <div
+            className="card-elegant observe-me opacity-0 translate-y-8"
+            style={{ animationDelay: '1700ms' }}
+          >
+            <div className="mb-6 flex items-start space-x-6">
+              <div className="flex-shrink-0">
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-alanizGold-600 bg-transparent">
+                  <Map className="h-5 w-5 text-alanizGold-600" aria-hidden="true" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <p className="eyebrow mb-1 text-alanizGold-600/70">Proyecto · Demostrador</p>
+                <h3 className="font-display text-2xl font-semibold text-alanizGold-500">
+                  Abeiro — mapa de apoyo
+                </h3>
+              </div>
+            </div>
+
+            <div className="space-y-4 leading-relaxed text-parchment-200">
+              <p>
+                <strong className="text-alanizGold-400">Abeiro</strong> es un proyecto propio en
+                desarrollo: un <em>demostrador</em> de mapa para visualizar y coordinar puntos de
+                interés en labores de auxilio. No es un servicio operativo ni un sistema de
+                emergencias real &mdash; se muestra aquí como ejemplo del trabajo técnico de la
+                Casa.
+              </p>
+            </div>
+
+            {/* Escritorio: mapa embebido usable */}
+            <div className="mt-6 hidden md:block">
+              <div className="overflow-hidden rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40">
+                <iframe
+                  src="https://abeiro.vercel.app"
+                  title="Abeiro — mapa (demostrador)"
+                  loading="lazy"
+                  className="h-[600px] w-full"
+                ></iframe>
+              </div>
+              <p className="mt-3 text-center text-sm italic text-parchment-400">
+                Demostrador embebido de Abeiro (abeiro.vercel.app)
+              </p>
+            </div>
+
+            {/* Móvil: vista previa + botón a pantalla completa (evita el conflicto zoom/scroll) */}
+            <div className="mt-6 md:hidden">
+              <div className="flex flex-col items-center rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-8 text-center">
+                <Map className="mb-3 h-10 w-10 text-alanizGold-600" aria-hidden="true" />
+                <p className="mb-4 text-sm text-parchment-300">
+                  Para una mejor experiencia en el móvil, abre el mapa a pantalla completa.
+                </p>
+                <a
+                  href="https://abeiro.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-alaniz"
+                >
+                  <Maximize className="mr-2 h-5 w-5" aria-hidden="true" />
+                  Abrir mapa a pantalla completa
+                </a>
               </div>
             </div>
           </div>

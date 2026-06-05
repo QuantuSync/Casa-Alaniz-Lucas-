@@ -176,8 +176,8 @@ export default function Home() {
             
             {/* Título principal */}
             <div className="space-y-2">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-alanizGold-600 
-                             animate-fade-in-up drop-shadow-gold">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-alanizGold-600
+                             animate-fade-in-up">
                 Casa Alaniz
               </h1>
               

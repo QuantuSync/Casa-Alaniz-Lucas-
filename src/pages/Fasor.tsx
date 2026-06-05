@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
   BarChart3,
   Brain,
+  ChevronUp,
   Construction,
   Dumbbell,
   Flame,
@@ -19,7 +20,7 @@ import {
   Scale,
   Shield,
   Siren,
-  Square,
+  Star,
   Swords,
   Target,
   Timer,
@@ -36,6 +37,26 @@ import dronesLogo from '../assets/drones-logo.jpg';
 import forestalLogo from '../assets/forestal-logo.jpg';
 import terrestresLogo from '../assets/terrestres-logo.jpg';
 import sanitarioLogo from '../assets/sanitario-logo.jpg';
+
+// Distintivos de rango (en oro): estrellas de 5 puntas para mando, galones para tropa.
+const RankStars = ({ count }: { count: number }) => (
+  <span className="inline-flex items-center gap-1 text-alanizGold-600" aria-hidden="true">
+    {Array.from({ length: count }, (_, i) => (
+      <Star key={i} className="h-5 w-5 fill-current" />
+    ))}
+  </span>
+);
+
+const RankChevrons = ({ count }: { count: number }) => (
+  <span
+    className="inline-flex flex-col items-center -space-y-1.5 text-alanizGold-600"
+    aria-hidden="true"
+  >
+    {Array.from({ length: count }, (_, i) => (
+      <ChevronUp key={i} className="h-5 w-5" strokeWidth={3} />
+    ))}
+  </span>
+);
 
 export default function Fasor() {
   useEffect(() => {
@@ -146,8 +167,8 @@ export default function Fasor() {
             </p>
           </div>
 
-          <div className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full font-bold text-lg shadow-lg animate-bounce">
-            <span className="w-3 h-3 bg-green-400 rounded-full mr-3 animate-ping"></span>
+          <div className="inline-flex items-center px-6 py-3 border border-alanizGold-600/40 bg-alanizGreen-900/60 text-alanizGold-500 rounded-full font-bold text-lg shadow-lg">
+            <span className="w-3 h-3 bg-alanizGold-500 rounded-full mr-3 animate-ping"></span>
             OPERATIVO - EN SERVICIO
           </div>
         </div>
@@ -231,7 +252,7 @@ export default function Fasor() {
               {units.map((unit) => (
                 <div key={unit.id} className="relative group">
                   <div
-                    className="inline-flex items-center justify-center bg-gray-900/20 rounded-full shadow-2xl border-4 border-gray-800 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-gray-600"
+                    className="inline-flex items-center justify-center bg-alanizGreen-900/40 rounded-full shadow-2xl border-4 border-alanizGold-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/70"
                     style={{ width: '144px', height: '144px' }}
                   >
                     <img
@@ -263,36 +284,36 @@ export default function Fasor() {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="card-elegant bg-gradient-to-br from-orange-800/60 to-red-800/60 border border-orange-600/40">
+              <div className="card-elegant">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
                     <Flame className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
-                  <h4 className="font-display font-semibold text-orange-400">Incendios</h4>
+                  <h4 className="font-display font-semibold text-alanizGold-500">Incendios</h4>
                 </div>
                 <p className="text-sm text-parchment-300">
                   Forestales y urbanos. Extinción, evacuación y protección de infraestructuras.
                 </p>
               </div>
 
-              <div className="card-elegant bg-gradient-to-br from-blue-800/60 to-cyan-800/60 border border-blue-600/40">
+              <div className="card-elegant">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
                     <Waves className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
-                  <h4 className="font-display font-semibold text-blue-400">Inundaciones</h4>
+                  <h4 className="font-display font-semibold text-alanizGold-500">Inundaciones</h4>
                 </div>
                 <p className="text-sm text-parchment-300">
                   Rescate acuático, evacuaciones y control de daños por desbordamientos.
                 </p>
               </div>
 
-              <div className="card-elegant bg-gradient-to-br from-amber-800/60 to-yellow-800/60 border border-amber-600/40">
+              <div className="card-elegant">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
                     <Mountain className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
-                  <h4 className="font-display font-semibold text-amber-400">
+                  <h4 className="font-display font-semibold text-alanizGold-500">
                     Catástrofes Naturales
                   </h4>
                 </div>
@@ -301,36 +322,40 @@ export default function Fasor() {
                 </p>
               </div>
 
-              <div className="card-elegant bg-gradient-to-br from-red-800/60 to-pink-800/60 border border-red-600/40">
+              <div className="card-elegant">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
                     <Siren className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
-                  <h4 className="font-display font-semibold text-red-400">Emergencias Civiles</h4>
+                  <h4 className="font-display font-semibold text-alanizGold-500">
+                    Emergencias Civiles
+                  </h4>
                 </div>
                 <p className="text-sm text-parchment-300">
                   Accidentes, colapsos estructurales y situaciones de crisis urbana.
                 </p>
               </div>
 
-              <div className="card-elegant bg-gradient-to-br from-green-800/60 to-emerald-800/60 border border-green-600/40">
+              <div className="card-elegant">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
                     <Hospital className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
-                  <h4 className="font-display font-semibold text-green-400">Apoyo Sanitario</h4>
+                  <h4 className="font-display font-semibold text-alanizGold-500">
+                    Apoyo Sanitario
+                  </h4>
                 </div>
                 <p className="text-sm text-parchment-300">
                   Asistencia médica de emergencia y evacuaciones sanitarias.
                 </p>
               </div>
 
-              <div className="card-elegant bg-gradient-to-br from-purple-800/60 to-indigo-800/60 border border-purple-600/40">
+              <div className="card-elegant">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
                     <BarChart3 className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
-                  <h4 className="font-display font-semibold text-purple-400">
+                  <h4 className="font-display font-semibold text-alanizGold-500">
                     Evaluación de Riesgos
                   </h4>
                 </div>
@@ -371,16 +396,15 @@ export default function Fasor() {
               </h4>
 
               <div className="space-y-4">
-                <div className="bg-red-900/30 rounded-lg p-5 border-l-4 border-red-600 border border-red-600/30">
-                  <div className="flex items-start space-x-3 mb-3">
-                    <Square className="w-6 h-6 text-red-500 fill-red-500" aria-hidden="true" />
+                <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
+                  <div className="flex items-start space-x-4 mb-3">
+                    <div className="flex-shrink-0 pt-1">
+                      <RankStars count={3} />
+                    </div>
                     <div className="flex-1">
-                      <h5 className="font-display font-bold text-red-400 text-lg mb-1">
+                      <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         1. Comandante
                       </h5>
-                      <p className="text-xs text-red-300 font-semibold mb-2">
-                        Color de identificación: Rojo escarlata
-                      </p>
                     </div>
                   </div>
                   <p className="text-sm text-parchment-300 leading-relaxed">
@@ -389,19 +413,15 @@ export default function Fasor() {
                   </p>
                 </div>
 
-                <div className="bg-orange-900/30 rounded-lg p-5 border-l-4 border-orange-600 border border-orange-600/30">
-                  <div className="flex items-start space-x-3 mb-3">
-                    <Square
-                      className="w-6 h-6 text-orange-500 fill-orange-500"
-                      aria-hidden="true"
-                    />
+                <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
+                  <div className="flex items-start space-x-4 mb-3">
+                    <div className="flex-shrink-0 pt-1">
+                      <RankStars count={2} />
+                    </div>
                     <div className="flex-1">
-                      <h5 className="font-display font-bold text-orange-400 text-lg mb-1">
+                      <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         2. Capitán de Unidad
                       </h5>
-                      <p className="text-xs text-orange-300 font-semibold mb-2">
-                        Color de identificación: Naranja
-                      </p>
                     </div>
                   </div>
                   <p className="text-sm text-parchment-300 leading-relaxed">
@@ -410,19 +430,15 @@ export default function Fasor() {
                   </p>
                 </div>
 
-                <div className="bg-yellow-900/30 rounded-lg p-5 border-l-4 border-yellow-600 border border-yellow-600/30">
-                  <div className="flex items-start space-x-3 mb-3">
-                    <Square
-                      className="w-6 h-6 text-yellow-400 fill-yellow-400"
-                      aria-hidden="true"
-                    />
+                <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
+                  <div className="flex items-start space-x-4 mb-3">
+                    <div className="flex-shrink-0 pt-1">
+                      <RankStars count={1} />
+                    </div>
                     <div className="flex-1">
-                      <h5 className="font-display font-bold text-yellow-400 text-lg mb-1">
+                      <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         3. Teniente de Cuadrilla
                       </h5>
-                      <p className="text-xs text-yellow-300 font-semibold mb-2">
-                        Color de identificación: Amarillo dorado
-                      </p>
                     </div>
                   </div>
                   <p className="text-sm text-parchment-300 leading-relaxed">
@@ -431,16 +447,15 @@ export default function Fasor() {
                   </p>
                 </div>
 
-                <div className="bg-green-900/30 rounded-lg p-5 border-l-4 border-green-600 border border-green-600/30">
-                  <div className="flex items-start space-x-3 mb-3">
-                    <Square className="w-6 h-6 text-green-500 fill-green-500" aria-hidden="true" />
+                <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
+                  <div className="flex items-start space-x-4 mb-3">
+                    <div className="flex-shrink-0 pt-1">
+                      <RankChevrons count={2} />
+                    </div>
                     <div className="flex-1">
-                      <h5 className="font-display font-bold text-green-400 text-lg mb-1">
+                      <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         4. Operador Táctico
                       </h5>
-                      <p className="text-xs text-green-300 font-semibold mb-2">
-                        Color de identificación: Verde oliva
-                      </p>
                     </div>
                   </div>
                   <p className="text-sm text-parchment-300 leading-relaxed">
@@ -449,16 +464,15 @@ export default function Fasor() {
                   </p>
                 </div>
 
-                <div className="bg-blue-900/30 rounded-lg p-5 border-l-4 border-blue-600 border border-blue-600/30">
-                  <div className="flex items-start space-x-3 mb-3">
-                    <Square className="w-6 h-6 text-blue-500 fill-blue-500" aria-hidden="true" />
+                <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
+                  <div className="flex items-start space-x-4 mb-3">
+                    <div className="flex-shrink-0 pt-1">
+                      <RankChevrons count={1} />
+                    </div>
                     <div className="flex-1">
-                      <h5 className="font-display font-bold text-blue-400 text-lg mb-1">
+                      <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         5. Cadete en Formación
                       </h5>
-                      <p className="text-xs text-blue-300 font-semibold mb-2">
-                        Color de identificación: Azul acero
-                      </p>
                     </div>
                   </div>
                   <p className="text-sm text-parchment-300 leading-relaxed">
@@ -678,7 +692,7 @@ export default function Fasor() {
           </div>
 
           <div
-            className="card-elegant bg-gradient-to-r from-orange-200/20 to-orange-300/30 border-2 border-orange-400/40 observe-me opacity-0 translate-y-8"
+            className="card-elegant border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8"
             style={{ animationDelay: '1200ms' }}
           >
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 mb-6 text-center">
@@ -908,8 +922,8 @@ export default function Fasor() {
             className="text-center mt-16 observe-me opacity-0 translate-y-8"
             style={{ animationDelay: '1800ms' }}
           >
-            <div className="bg-red-800/50 rounded-xl p-8 border border-red-600/20 backdrop-blur-sm shadow-elegant">
-              <blockquote className="text-xl md:text-2xl font-display italic text-red-400 mb-4">
+            <div className="bg-alanizGreen-800/50 rounded-xl p-8 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant">
+              <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">
                 "Donde la memoria arde, también nace la fuerza de proteger."
               </blockquote>
               <cite className="text-parchment-400 text-sm">

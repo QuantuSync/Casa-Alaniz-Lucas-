@@ -48,7 +48,7 @@ export default function Condecoraciones() {
       <div className="content-container">
         {/* Header */}
         <div className="card-elegant mb-8">
-          <div className="text-center">
+          <div className="stack-centered">
             <div className="flex justify-center items-center space-x-4 mb-4">
               <Trophy className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
               <Crown className="w-12 h-12 text-alanizGold-600" aria-hidden="true" />

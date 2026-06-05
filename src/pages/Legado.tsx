@@ -36,7 +36,7 @@ export default function Legado() {
     <div className="min-h-screen py-16 md:py-24">
       <div className="content-container">
         {/* Hero Section */}
-        <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
+        <div className="stack-centered mb-16 observe-me opacity-0 translate-y-8">
           <div
             className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
                           rounded-full mb-6 animate-float"

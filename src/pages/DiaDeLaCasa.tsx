@@ -165,7 +165,7 @@ export default function DiaDeLaCasa() {
     <div className="min-h-screen py-16 md:py-24">
       <div className="content-container">
         {/* Hero Section */}
-        <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
+        <div className="stack-centered mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center space-x-4 mb-6">
             <Medal className="w-8 h-8 text-alanizGold-600 animate-float" aria-hidden="true" />
             <Crown
@@ -452,7 +452,7 @@ export default function DiaDeLaCasa() {
           </div>
 
           {condecoradosEsteAño.length === 0 ? (
-            <div className="text-center py-8">
+            <div className="stack-centered py-8">
               <Trophy className="w-8 h-8 text-alanizGold-600/30 mb-4 mx-auto" aria-hidden="true" />
               <p className="text-parchment-400">
                 Las condecoraciones de este año se anunciarán próximamente por decisión del Consejo

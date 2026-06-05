@@ -50,16 +50,14 @@ class ErrorBoundary extends React.Component<
 
 // Componente de carga inicial
 const LoadingScreen = () => (
-  <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950">
-    <div className="text-center space-y-4">
-      <div className="flex justify-center text-alanizGold-600 animate-pulse">
-        <Castle className="w-16 h-16" aria-hidden="true" />
-      </div>
-      <h2 className="text-xl font-display text-alanizGold-600 font-semibold">
+  <div className="flex min-h-screen items-center justify-center bg-alanizGreen-950">
+    <div className="stack-centered space-y-4">
+      <Castle className="h-16 w-16 animate-pulse text-alanizGold-600" aria-hidden="true" />
+      <h2 className="font-display text-xl font-semibold text-alanizGold-600">
         Cargando Casa Alaniz<span className="loading-dots"></span>
       </h2>
-      <div className="w-64 h-1 bg-alanizGreen-800 rounded-full overflow-hidden">
-        <div className="h-full bg-alanizGold-600 rounded-full animate-pulse"></div>
+      <div className="h-1 w-64 overflow-hidden rounded-full bg-alanizGreen-800">
+        <div className="h-full animate-pulse rounded-full bg-alanizGold-600"></div>
       </div>
     </div>
   </div>

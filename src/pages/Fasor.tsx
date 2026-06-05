@@ -95,7 +95,7 @@ export default function Fasor() {
   return (
     <div className="min-h-screen py-16 md:py-24">
       <div className="content-container">
-        <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
+        <div className="stack-centered mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center w-60 h-60 border-4 border-alanizGold-600/40 bg-transparent rounded-full mb-8 overflow-hidden">
             <img
               src={fasorLogo}
@@ -155,7 +155,7 @@ export default function Fasor() {
             className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8"
             style={{ animationDelay: '200ms' }}
           >
-            <div className="text-center mb-8">
+            <div className="stack-centered mb-8">
               <h3 className="text-3xl font-display font-bold text-alanizGold-600 mb-6">
                 Misión Principal
               </h3>

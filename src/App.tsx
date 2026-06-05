@@ -183,15 +183,13 @@ export default function App() {
             <Route
               path="/404"
               element={
-                <div className="min-h-[60vh] flex items-center justify-center px-4">
-                  <div className="text-center space-y-4">
-                    <div className="flex justify-center text-alanizGold-600">
-                      <Castle className="w-24 h-24" aria-hidden="true" />
-                    </div>
-                    <h1 className="text-3xl font-display text-alanizGold-600 font-bold">
+                <div className="flex min-h-[60vh] items-center justify-center px-4">
+                  <div className="stack-centered space-y-5">
+                    <Castle className="h-24 w-24 text-alanizGold-600" aria-hidden="true" />
+                    <h1 className="font-display text-3xl font-bold text-alanizGold-600">
                       Página No Encontrada
                     </h1>
-                    <p className="text-parchment-300 max-w-md">
+                    <p className="max-w-md text-parchment-300">
                       La página que buscas no existe en los archivos de la Casa Alaniz. Los
                       pergaminos han sido revisados, pero no se encontró rastro.
                     </p>

@@ -175,7 +175,7 @@ export default function Contacto() {
     <div className="min-h-screen bg-alanizGreen-950 py-16 md:py-24">
       <div className="content-container px-4 md:px-8">
         {/* Hero Section */}
-        <div className="text-center mb-8 md:mb-16 observe-me opacity-0 translate-y-8">
+        <div className="stack-centered mb-8 md:mb-16 observe-me opacity-0 translate-y-8">
           <div
             className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16
                           border-2 border-alanizGold-600 bg-transparent rounded-full mb-4 md:mb-6"
@@ -348,7 +348,7 @@ export default function Contacto() {
 
           {/* Sección final con llamada a la acción */}
           <div
-            className="mt-12 md:mt-16 text-center observe-me opacity-0 translate-y-8"
+            className="mt-12 md:mt-16 stack-centered observe-me opacity-0 translate-y-8"
             style={{ animationDelay: '800ms' }}
           >
             <div

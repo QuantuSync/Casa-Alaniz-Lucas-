@@ -51,7 +51,7 @@ export default function Documentos() {
   ];
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-16 md:py-24">
       <div className="content-container">
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
@@ -66,7 +66,7 @@ export default function Documentos() {
             Archivo Documental
           </h1>
 
-          <div className="divider-ornamental"></div>
+          <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
             El tesoro más preciado de la Casa Alaniz: documentos históricos que narran siglos de

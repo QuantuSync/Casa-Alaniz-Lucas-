@@ -44,7 +44,7 @@ export default function Condecoraciones() {
   };
 
   return (
-    <div className="min-h-screen bg-alanizGreen-950 py-8">
+    <div className="min-h-screen bg-alanizGreen-950 py-16 md:py-24">
       <div className="content-container">
         {/* Header */}
         <div className="card-elegant mb-8">

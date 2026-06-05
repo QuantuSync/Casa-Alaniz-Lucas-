@@ -172,7 +172,7 @@ export default function Contacto() {
   ];
 
   return (
-    <div className="min-h-screen bg-alanizGreen-950 py-8 md:py-16">
+    <div className="min-h-screen bg-alanizGreen-950 py-16 md:py-24">
       <div className="content-container px-4 md:px-8">
         {/* Hero Section */}
         <div className="text-center mb-8 md:mb-16 observe-me opacity-0 translate-y-8">
@@ -187,7 +187,7 @@ export default function Contacto() {
             Contacto Oficial
           </h1>
 
-          <div className="divider-ornamental"></div>
+          <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-base md:text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed px-4">
             Establece comunicación con la administración oficial de la Casa Alaniz para asuntos

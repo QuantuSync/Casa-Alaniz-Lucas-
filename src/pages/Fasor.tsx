@@ -93,7 +93,7 @@ export default function Fasor() {
   ];
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-16 md:py-24">
       <div className="content-container">
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center w-60 h-60 border-4 border-alanizGold-600/40 bg-transparent rounded-full mb-8 overflow-hidden">
@@ -116,7 +116,7 @@ export default function Fasor() {
             Fuerza de Auxilio, Soporte y Rescate
           </h2>
 
-          <div className="divider-ornamental"></div>
+          <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <div className="text-lg text-parchment-300 max-w-4xl mx-auto leading-relaxed mb-6 space-y-4">
             <p>

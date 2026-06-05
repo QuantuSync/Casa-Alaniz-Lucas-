@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tipografía propia Quantic Sci (OFL 1.1), autoalojada en /public/fonts */
+@font-face {
+  font-family: 'Quantic Sci';
+  src: url('/fonts/QuanticSci-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quantic Sci';
+  src: url('/fonts/QuanticSci-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quantic Sci';
+  src: url('/fonts/QuanticSci-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quantic Sci';
+  src: url('/fonts/QuanticSci-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quantic Sci Display';
+  src: url('/fonts/QuanticSciDisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Variables CSS personalizadas */
 :root {
   --alaniz-green: #0d1e12;
@@ -31,6 +68,8 @@
     background-attachment: fixed;
     min-height: 100vh;
     line-height: 1.7;
+    /* Cifras old-style por defecto en el cuerpo */
+    font-feature-settings: 'onum' 1;
     /* Patrón sutil de fondo */
     background-image:
       radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.02) 0%, transparent 50%),

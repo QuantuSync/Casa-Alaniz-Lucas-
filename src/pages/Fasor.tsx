@@ -37,12 +37,6 @@ import sanitarioLogo from '../assets/sanitario-logo.jpg';
 
 export default function Fasor() {
   useEffect(() => {
-    // Cargar fuente Impact desde Google Fonts
-    const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=Anton&display=swap';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

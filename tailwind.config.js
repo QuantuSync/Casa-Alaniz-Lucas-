@@ -52,8 +52,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['"EB Garamond"', 'serif'],
-        display: ['"Playfair Display"', 'serif'],
+        serif: ['"Quantic Sci"', 'serif'],
+        display: ['"Quantic Sci Display"', '"Quantic Sci"', 'serif'],
         sans: ['system-ui', 'sans-serif'],
       },
       fontSize: {

@@ -76,12 +76,10 @@ const Logo = React.memo(() => (
         />
       </div>
     </div>
-    <div className="hidden lg:flex items-center relative">
+    <div className="hidden items-center lg:flex">
       <h1
-        className="text-xl font-display font-semibold text-alanizGold-600
-                   group-hover:text-alanizGold-500 transition-colors duration-300
-                   relative leading-none"
-        style={{ height: '40px', display: 'flex', alignItems: 'center' }}
+        className="m-0 font-display text-xl font-semibold leading-none text-alanizGold-600
+                   transition-colors duration-300 group-hover:text-alanizGold-500"
       >
         Casa Alaniz
       </h1>

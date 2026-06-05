@@ -230,18 +230,6 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Scroll to top button */}
       <ScrollToTopButton />
-
-      {/* Indicador de carga para navegación (solo en desarrollo) */}
-      {import.meta.env.DEV && (
-        <div className="fixed bottom-4 left-4 z-40">
-          <div
-            className="bg-alanizGreen-800/90 backdrop-blur-sm px-3 py-1 rounded-full 
-                          text-xs text-alanizGold-600 font-mono"
-          >
-            Ruta: {location.pathname}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

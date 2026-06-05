@@ -200,6 +200,18 @@
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Antetítulo en versalitas (detalle editorial heráldico) */
+  .eyebrow {
+    @apply text-xs font-semibold;
+    font-variant-caps: small-caps;
+    letter-spacing: 0.18em;
+  }
+
+  /* Filete dorado fino */
+  .rule-gold {
+    @apply h-px w-16 bg-gradient-to-r from-transparent via-alanizGold-600/70 to-transparent;
+  }
+
   /* Texto con efecto dorado */
   .text-gold-glow {
     @apply text-alanizGold-600;

@@ -11,10 +11,10 @@ const ContactInfo = () => (
     <div className="flex items-center space-x-3 text-sm text-parchment-300">
       <Mail className="w-4 h-4 text-alanizGold-600 flex-shrink-0" aria-hidden="true" />
       <a
-        href="mailto:administracion@casaalaniz.es"
+        href="/contacto"
         className="hover:text-alanizGold-600 transition-colors duration-200 underline-offset-2 hover:underline"
       >
-        administracion@casaalaniz.es
+        Formulario de contacto
       </a>
     </div>
 
@@ -100,30 +100,27 @@ export default function Footer() {
 
       <div className="content-container">
         {/* Contenido principal del footer */}
-        <div className="py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="py-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {/* Información de la Casa */}
-            <div className="lg:col-span-1">
+            <div>
               <HouseInfo />
             </div>
 
             {/* Enlaces rápidos */}
-            <div className="lg:col-span-1">
+            <div>
               <QuickLinks />
             </div>
 
             {/* Información de contacto */}
-            <div className="lg:col-span-1">
+            <div>
               <ContactInfo />
             </div>
           </div>
         </div>
 
-        {/* Divisor ornamental */}
-        <div className="divider-ornamental"></div>
-
         {/* Footer inferior */}
-        <div className="py-6">
+        <div className="border-t border-alanizGold-600/15 py-5">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             {/* Copyright y año */}
             <div className="text-center md:text-left">
@@ -164,15 +161,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Versión y ambiente (solo en desarrollo) */}
-        {import.meta.env.DEV && (
-          <div className="py-2 border-t border-alanizGold-600/10">
-            <p className="text-xs text-parchment-500 text-center font-mono">
-              v1.0.0 - Desarrollo | React + TypeScript + Tailwind CSS
-            </p>
-          </div>
-        )}
       </div>
 
       {/* Elementos decorativos de fondo */}

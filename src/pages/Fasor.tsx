@@ -859,20 +859,23 @@ export default function Fasor() {
                 </div>
               </div>
               <div className="flex-1">
-                <p className="eyebrow mb-1 text-alanizGold-600/70">Proyecto · Demostrador</p>
-                <h3 className="font-display text-2xl font-semibold text-alanizGold-500">
-                  Abeiro — mapa de apoyo
+                <p className="eyebrow mb-1 text-alanizGold-600/70">
+                  Proyecto propio · En desarrollo activo
+                </p>
+                <h3 className="font-display text-2xl font-semibold text-alanizGold-600">
+                  Abeiro — protección ante incendios forestales
                 </h3>
               </div>
             </div>
 
             <div className="space-y-4 leading-relaxed text-parchment-200">
               <p>
-                <strong className="text-alanizGold-400">Abeiro</strong> es un proyecto propio en
-                desarrollo: un <em>demostrador</em> de mapa para visualizar y coordinar puntos de
-                interés en labores de auxilio. No es un servicio operativo ni un sistema de
-                emergencias real &mdash; se muestra aquí como ejemplo del trabajo técnico de la
-                Casa.
+                <strong className="text-alanizGold-600">Abeiro</strong> es un proyecto propio en
+                desarrollo activo: una herramienta de protección ante incendios forestales que
+                traduce el avance del fuego en decisiones de evacuación por aldea, a partir de datos
+                reales (IGE, OpenStreetMap, Sentinel-2). Nace del mismo principio que FASOR: servir
+                y proteger a quien lo necesita. Se encuentra en fase de desarrollo y aún no es un
+                sistema operativo de emergencias.
               </p>
             </div>
 
@@ -887,7 +890,7 @@ export default function Fasor() {
                 ></iframe>
               </div>
               <p className="mt-3 text-center text-sm italic text-parchment-400">
-                Demostrador embebido de Abeiro (abeiro.vercel.app)
+                Abeiro · abeiro.vercel.app
               </p>
             </div>
 

@@ -236,9 +236,6 @@ export default function Contacto() {
                         >
                           administracion@casaalaniz.es
                         </a>
-                        <p className="mt-1.5 text-xs italic text-parchment-500">
-                          Haga clic para abrir su cliente de correo
-                        </p>
                       </div>
                     </div>
                   </div>

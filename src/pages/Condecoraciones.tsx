@@ -3,7 +3,8 @@ import { Trophy, Crown, Star, Settings, Loader } from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
 interface Condecorado {
   id: string;
@@ -28,21 +29,27 @@ const condecoraciones: Condecoracion[] = [
   {
     id: 'gran-cruz',
     nombre: 'Gran Cruz de la Distinción Alaniz',
-    fundamento: 'Instituida por decreto solemne del Señor de la Casa Alaniz, la Gran Cruz de la Distinción Alaniz nace como símbolo de gratitud perpetua hacia aquellos cuyo proceder ha reforzado, de manera visible y constante, el honor, la integridad y la proyección de este linaje. Su concesión reconoce no solo los actos, sino también la disposición noble de quien, por voluntad propia, ha tejido lazos indelebles con la Casa.',
-    motivo: 'Se otorga exclusivamente a personas cuya trayectoria haya evidenciado una contribución singular al engrandecimiento moral, social o cultural de la Casa Alaniz. Comprende tanto servicios prestados en situaciones de relevancia como gestos de lealtad que, por su constancia y sinceridad, merezcan quedar inscritos en la memoria oficial del linaje.',
-    descripcion: 'La cruz, esmaltada en negro profundo con bordes dorados, representa la dignidad y la autoridad que la Casa Alaniz otorga a quienes se distinguen. La corona central, labrada en metal noble, simboliza el reconocimiento supremo emanado del Señor de la Casa. La cinta, en disposición vertical y tonalidades sobrias, alude a la rectitud, la permanencia y el carácter solemne de este honor.',
+    fundamento:
+      'Instituida por decreto solemne del Señor de la Casa Alaniz, la Gran Cruz de la Distinción Alaniz nace como símbolo de gratitud perpetua hacia aquellos cuyo proceder ha reforzado, de manera visible y constante, el honor, la integridad y la proyección de este linaje. Su concesión reconoce no solo los actos, sino también la disposición noble de quien, por voluntad propia, ha tejido lazos indelebles con la Casa.',
+    motivo:
+      'Se otorga exclusivamente a personas cuya trayectoria haya evidenciado una contribución singular al engrandecimiento moral, social o cultural de la Casa Alaniz. Comprende tanto servicios prestados en situaciones de relevancia como gestos de lealtad que, por su constancia y sinceridad, merezcan quedar inscritos en la memoria oficial del linaje.',
+    descripcion:
+      'La cruz, esmaltada en negro profundo con bordes dorados, representa la dignidad y la autoridad que la Casa Alaniz otorga a quienes se distinguen. La corona central, labrada en metal noble, simboliza el reconocimiento supremo emanado del Señor de la Casa. La cinta, en disposición vertical y tonalidades sobrias, alude a la rectitud, la permanencia y el carácter solemne de este honor.',
     imagen: '/images/condecoraciones/GranCruz.png',
-    orden: 1
+    orden: 1,
   },
   {
     id: 'cruz-honor-merito',
     nombre: 'Cruz del Honor y el Mérito',
-    fundamento: 'Creada como segunda distinción en orden de precedencia, la Cruz del Honor y el Mérito es una condecoración destinada a destacar la conducta ejemplar, la integridad personal y el compromiso inquebrantable con los valores que la Casa Alaniz preserva desde generaciones. No es una recompensa material, sino la confirmación pública de que el portador ha obrado conforme a los más altos principios.',
-    motivo: 'Se concede a quienes, mediante actos voluntarios o servicios desinteresados, hayan demostrado un compromiso activo y constante en beneficio de la Casa o de su comunidad cercana, siempre en concordancia con los valores de honor, respeto y nobleza que definen al linaje Alaniz.',
-    descripcion: 'Su diseño presenta una cruz esmaltada en blanco marfil, cuyos brazos se extienden con firmeza en las cuatro direcciones, simbolizando la proyección de la virtud en todos los ámbitos de la vida. En el centro, una estrella dorada recuerda que los principios rectores deben brillar incluso en la oscuridad. La cinta combina tonos cálidos y terrosos, evocando la raíz y la fortaleza que unen a las personas de recto proceder.',
+    fundamento:
+      'Creada como segunda distinción en orden de precedencia, la Cruz del Honor y el Mérito es una condecoración destinada a destacar la conducta ejemplar, la integridad personal y el compromiso inquebrantable con los valores que la Casa Alaniz preserva desde generaciones. No es una recompensa material, sino la confirmación pública de que el portador ha obrado conforme a los más altos principios.',
+    motivo:
+      'Se concede a quienes, mediante actos voluntarios o servicios desinteresados, hayan demostrado un compromiso activo y constante en beneficio de la Casa o de su comunidad cercana, siempre en concordancia con los valores de honor, respeto y nobleza que definen al linaje Alaniz.',
+    descripcion:
+      'Su diseño presenta una cruz esmaltada en blanco marfil, cuyos brazos se extienden con firmeza en las cuatro direcciones, simbolizando la proyección de la virtud en todos los ámbitos de la vida. En el centro, una estrella dorada recuerda que los principios rectores deben brillar incluso en la oscuridad. La cinta combina tonos cálidos y terrosos, evocando la raíz y la fortaleza que unen a las personas de recto proceder.',
     imagen: '/images/condecoraciones/HonoryMerito.png',
-    orden: 2
-  }
+    orden: 2,
+  },
 ];
 
 export default function Condecoraciones() {
@@ -53,13 +60,16 @@ export default function Condecoraciones() {
   // Función para cargar condecoraciones desde Supabase
   const loadCondecoracionesFromSupabase = async () => {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al cargar condecoraciones desde Supabase');
@@ -80,7 +90,7 @@ export default function Condecoraciones() {
           fecha_otorgamiento: item.fechaOtorgamiento || item.fecha_otorgamiento,
           motivo: item.motivo,
           condecoracion: item.condecoracion,
-          created_at: item.created_at || new Date().toISOString()
+          created_at: item.created_at || new Date().toISOString(),
         }));
         setCondecorados(convertedData);
       }
@@ -99,18 +109,13 @@ export default function Condecoraciones() {
     loadCondecoracionesFromSupabase();
   }, []);
 
-  const getCondecoracionName = (id: string) => {
-    return condecoraciones.find(c => c.id === id)?.nombre || id;
-  };
-
   const getCondecoradosPorCondecoracion = (condecoracionId: string) => {
-    return condecorados.filter(c => c.condecoracion === condecoracionId);
+    return condecorados.filter((c) => c.condecoracion === condecoracionId);
   };
 
   return (
     <div className="min-h-screen bg-alanizGreen-950 py-8">
       <div className="content-container">
-        
         {/* Header */}
         <div className="card-elegant mb-8">
           <div className="text-center">
@@ -123,10 +128,11 @@ export default function Condecoraciones() {
               Condecoraciones de la Casa Alaniz
             </h1>
             <p className="text-lg text-parchment-300 max-w-3xl mx-auto">
-              Distinciones otorgadas en reconocimiento a quienes han demostrado valores excepcionales 
-              de honor, lealtad y servicio, contribuyendo al engrandecimiento del linaje Alaniz.
+              Distinciones otorgadas en reconocimiento a quienes han demostrado valores
+              excepcionales de honor, lealtad y servicio, contribuyendo al engrandecimiento del
+              linaje Alaniz.
             </p>
-            
+
             {/* Información de carga */}
             {loadingCondecoraciones && (
               <div className="flex items-center justify-center space-x-2 mt-4">
@@ -149,7 +155,9 @@ export default function Condecoraciones() {
               </h2>
             </div>
             <p className="text-parchment-300 text-sm">
-              Las condecoraciones ahora se gestionan desde Supabase. Utiliza el <strong>Panel de Administración</strong> para añadir, editar o eliminar condecoraciones. Los cambios se reflejarán automáticamente para todos los usuarios.
+              Las condecoraciones ahora se gestionan desde Supabase. Utiliza el{' '}
+              <strong>Panel de Administración</strong> para añadir, editar o eliminar
+              condecoraciones. Los cambios se reflejarán automáticamente para todos los usuarios.
             </p>
             <div className="mt-4">
               <a href="/admin" className="btn-alaniz">
@@ -165,7 +173,6 @@ export default function Condecoraciones() {
           {condecoraciones.map((condecoracion) => (
             <div key={condecoracion.id} className="card-elegant">
               <div className="grid lg:grid-cols-3 gap-8">
-                
                 {/* Imagen de la condecoración */}
                 <div className="lg:col-span-1">
                   <div className="text-center">
@@ -179,7 +186,8 @@ export default function Condecoraciones() {
                           target.style.display = 'none';
                           const parent = target.parentElement;
                           if (parent) {
-                            parent.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-alanizGold-600" aria-hidden="true"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>';
+                            parent.innerHTML =
+                              '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-alanizGold-600" aria-hidden="true"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>';
                           }
                         }}
                       />
@@ -197,23 +205,18 @@ export default function Condecoraciones() {
 
                 {/* Información de la condecoración */}
                 <div className="lg:col-span-2 space-y-6">
-                  
                   <div>
                     <h3 className="text-lg font-display font-semibold text-alanizGold-600 mb-3">
                       Fundamento Histórico
                     </h3>
-                    <p className="text-parchment-200 leading-relaxed">
-                      {condecoracion.fundamento}
-                    </p>
+                    <p className="text-parchment-200 leading-relaxed">{condecoracion.fundamento}</p>
                   </div>
 
                   <div>
                     <h3 className="text-lg font-display font-semibold text-alanizGold-600 mb-3">
                       Motivo de Concesión
                     </h3>
-                    <p className="text-parchment-200 leading-relaxed">
-                      {condecoracion.motivo}
-                    </p>
+                    <p className="text-parchment-200 leading-relaxed">{condecoracion.motivo}</p>
                   </div>
 
                   <div>
@@ -229,9 +232,14 @@ export default function Condecoraciones() {
                   <div>
                     <h3 className="text-lg font-display font-semibold text-alanizGold-600 mb-3">
                       Condecorados
-                      {loadingCondecoraciones && <Loader className="inline-block ml-2 w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
+                      {loadingCondecoraciones && (
+                        <Loader
+                          className="inline-block ml-2 w-4 h-4 text-alanizGold-600"
+                          aria-hidden="true"
+                        />
+                      )}
                     </h3>
-                    
+
                     {loadingCondecoraciones ? (
                       <div className="flex items-center space-x-2 py-4">
                         <div className="w-4 h-4 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
@@ -244,7 +252,10 @@ export default function Condecoraciones() {
                     ) : (
                       <div className="space-y-6">
                         {getCondecoradosPorCondecoracion(condecoracion.id).map((condecorado) => (
-                          <div key={condecorado.id} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
+                          <div
+                            key={condecorado.id}
+                            className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20"
+                          >
                             <div className="flex items-start justify-between">
                               <div className="flex-1">
                                 <h4 className="text-xl font-display font-bold text-alanizGold-500 mb-2">
@@ -252,11 +263,14 @@ export default function Condecoraciones() {
                                 </h4>
                                 <div className="flex items-center space-x-2 mb-3">
                                   <span className="inline-flex items-center px-2 py-1 bg-alanizGold-600/20 rounded-full text-xs font-medium text-alanizGold-400">
-                                    {new Date(condecorado.fecha_otorgamiento).toLocaleDateString('es-ES', {
-                                      year: 'numeric',
-                                      month: 'long',
-                                      day: 'numeric'
-                                    })}
+                                    {new Date(condecorado.fecha_otorgamiento).toLocaleDateString(
+                                      'es-ES',
+                                      {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                      }
+                                    )}
                                   </span>
                                 </div>
                                 <p className="text-parchment-200 text-sm leading-relaxed italic pl-4 border-l-2 border-alanizGold-600/30">
@@ -274,7 +288,6 @@ export default function Condecoraciones() {
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );

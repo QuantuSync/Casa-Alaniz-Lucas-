@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Library, Shield, Crown, ScrollText, Mail, ArrowRight, type LucideIcon } from 'lucide-react';
+import {
+  Library,
+  Shield,
+  Crown,
+  ScrollText,
+  Mail,
+  ArrowRight,
+  type LucideIcon,
+} from 'lucide-react';
 import escudo from '../assets/Escudo.jpg';
 
 // Datos para las secciones destacadas
@@ -8,31 +16,35 @@ const featuredSections = [
   {
     icon: Library,
     title: 'Historia Familiar',
-    description: 'Descubre la rica crónica de la Casa Alaniz desde el siglo XII, con relatos de honor, valor y legado señorial.',
+    description:
+      'Descubre la rica crónica de la Casa Alaniz desde el siglo XII, con relatos de honor, valor y legado señorial.',
     link: '/historia',
-    color: 'from-blue-500 to-blue-600'
+    color: 'from-blue-500 to-blue-600',
   },
   {
     icon: Shield,
     title: 'Símbolos Heráldicos',
-    description: 'Explora el significado del escudo, bandera y anillo que identifican a nuestra noble casa señorial.',
+    description:
+      'Explora el significado del escudo, bandera y anillo que identifican a nuestra noble casa señorial.',
     link: '/simbolos',
-    color: 'from-green-500 to-green-600'
+    color: 'from-green-500 to-green-600',
   },
   {
     icon: Crown,
     title: 'El Legado Inmutable',
-    description: 'Conoce cómo el legado territorial y militar de la Casa Alaniz perdura a través de los siglos.',
+    description:
+      'Conoce cómo el legado territorial y militar de la Casa Alaniz perdura a través de los siglos.',
     link: '/legado',
-    color: 'from-purple-500 to-purple-600'
+    color: 'from-purple-500 to-purple-600',
   },
   {
     icon: ScrollText,
     title: 'Archivo Documental',
-    description: 'Accede a documentos históricos, cartas y tratados que narran nuestra historia señorial.',
+    description:
+      'Accede a documentos históricos, cartas y tratados que narran nuestra historia señorial.',
     link: '/documentos',
-    color: 'from-amber-500 to-amber-600'
-  }
+    color: 'from-amber-500 to-amber-600',
+  },
 ];
 
 // Estadísticas de la casa
@@ -40,79 +52,92 @@ const houseStats = [
   { number: '907', label: 'Años de Historia', suffix: '+' },
   { number: '15', label: 'Generaciones', suffix: '+' },
   { number: '3', label: 'Símbolos Heráldicos', suffix: '' },
-  { number: '∞', label: 'Memoria Preservada', suffix: '' }
+  { number: '∞', label: 'Memoria Preservada', suffix: '' },
 ];
 
 // Componente de tarjeta de sección
-const SectionCard = ({ 
-  icon, 
-  title, 
-  description, 
-  link, 
-  color,
-  delay = 0 
+const SectionCard = ({
+  icon,
+  title,
+  description,
+  link,
+  delay = 0,
 }: {
   icon: LucideIcon;
   title: string;
   description: string;
   link: string;
-  color: string;
   delay?: number;
 }) => (
-  <Link 
+  <Link
     to={link}
     className="group card-elegant hover:scale-105 transition-all duration-500 block"
     style={{ animationDelay: `${delay}ms` }}
   >
     <div className="relative overflow-hidden">
       {/* Icono con gradiente */}
-      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg
+      <div
+        className={`inline-flex items-center justify-center w-12 h-12 rounded-lg
                        border-2 border-alanizGold-600 bg-transparent mb-4 group-hover:scale-110
-                       transition-transform duration-300`}>
-        <span className="text-alanizGold-600">{React.createElement(icon, { className: 'w-6 h-6' })}</span>
+                       transition-transform duration-300`}
+      >
+        <span className="text-alanizGold-600">
+          {React.createElement(icon, { className: 'w-6 h-6' })}
+        </span>
       </div>
-      
+
       {/* Contenido */}
-      <h3 className="text-xl font-display font-semibold text-alanizGold-600 mb-3 
-                     group-hover:text-alanizGold-500 transition-colors duration-300">
+      <h3
+        className="text-xl font-display font-semibold text-alanizGold-600 mb-3 
+                     group-hover:text-alanizGold-500 transition-colors duration-300"
+      >
         {title}
       </h3>
-      
-      <p className="text-parchment-300 leading-relaxed mb-4 text-sm">
-        {description}
-      </p>
-      
+
+      <p className="text-parchment-300 leading-relaxed mb-4 text-sm">{description}</p>
+
       {/* Call to action */}
-      <div className="flex items-center text-alanizGold-600 font-medium text-sm 
-                      group-hover:text-alanizGold-500 transition-colors duration-300">
+      <div
+        className="flex items-center text-alanizGold-600 font-medium text-sm 
+                      group-hover:text-alanizGold-500 transition-colors duration-300"
+      >
         <span>Explorar</span>
-        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+        <ArrowRight
+          className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300"
+          aria-hidden="true"
+        />
       </div>
-      
+
       {/* Efecto hover */}
-      <div className="absolute inset-0 bg-gradient-to-r from-alanizGold-600/5 to-transparent 
-                      opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-alanizGold-600/5 to-transparent 
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+      ></div>
     </div>
   </Link>
 );
 
 // Componente de estadística
-const StatCard = ({ number, label, suffix, delay = 0 }: {
+const StatCard = ({
+  number,
+  label,
+  suffix,
+  delay = 0,
+}: {
   number: string;
   label: string;
   suffix: string;
   delay?: number;
 }) => (
-  <div 
+  <div
     className="text-center animate-on-scroll opacity-0 translate-y-8"
     style={{ animationDelay: `${delay}ms` }}
   >
     <div className="text-3xl md:text-4xl font-display font-bold text-alanizGold-600 mb-2">
-      {number}{suffix}
+      {number}
+      {suffix}
     </div>
-    <div className="text-sm text-parchment-400 font-medium uppercase tracking-wider">
-      {label}
-    </div>
+    <div className="text-sm text-parchment-400 font-medium uppercase tracking-wider">{label}</div>
   </div>
 );
 
@@ -123,7 +148,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Intersection Observer para animaciones
     const observer = new IntersectionObserver(
       (entries) => {
@@ -139,48 +164,52 @@ export default function Home() {
 
     // Observar elementos con la clase animate-on-scroll
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-    elementsToAnimate.forEach(el => observer.observe(el));
+    elementsToAnimate.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, [mounted]);
 
   return (
     <div className="min-h-screen">
-      
       {/* Hero Section */}
       <section className="relative py-4 lg:py-8 overflow-hidden">
         {/* Background decorativo */}
         <div className="absolute inset-0 bg-gradient-to-b from-alanizGreen-900/50 to-alanizGreen-950"></div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-alanizGold-600/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-alanizGold-600/5 rounded-full blur-2xl animate-float" 
-             style={{ animationDelay: '2s' }}></div>
-        
+        <div
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-alanizGold-600/5 rounded-full blur-2xl animate-float"
+          style={{ animationDelay: '2s' }}
+        ></div>
+
         <div className="content-container relative z-10">
           <div className="text-center space-y-8">
-            
             {/* Escudo con animación */}
             <div className="relative w-64 h-72 lg:w-72 lg:h-80 mx-auto mb-20">
-              <div className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                <img 
-                  src={escudo} 
-                  alt="Escudo de la Casa Alaniz" 
+              <div
+                className={`transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+              >
+                <img
+                  src={escudo}
+                  alt="Escudo de la Casa Alaniz"
                   className="w-full h-full object-contain rounded-lg shadow-2xl image-glow"
                   onLoad={() => setImageLoaded(true)}
                 />
               </div>
-              
+
               {/* Efectos de resplandor */}
               <div className="absolute inset-0 bg-alanizGold-600/20 rounded-lg blur-xl -z-10 animate-pulse"></div>
               <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-alanizGold-600/10 to-transparent rounded-full blur-2xl -z-20"></div>
             </div>
-            
+
             {/* Título principal */}
             <div className="space-y-2">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-alanizGold-600
-                             animate-fade-in-up">
+              <h1
+                className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-alanizGold-600
+                             animate-fade-in-up"
+              >
                 Casa Alaniz
               </h1>
-              
+
               <div className="flex items-center justify-center space-x-4">
                 <div className="h-px w-16 bg-alanizGold-600"></div>
                 <p className="text-lg md:text-xl text-alanizGold-600/80 italic font-medium">
@@ -189,27 +218,35 @@ export default function Home() {
                 <div className="h-px w-16 bg-alanizGold-600"></div>
               </div>
             </div>
-            
+
             {/* Descripción principal */}
             <div className="max-w-3xl mx-auto space-y-6">
-              <p className="text-lg md:text-xl text-parchment-200 leading-relaxed animate-fade-in-up"
-                 style={{ animationDelay: '200ms' }}>
-                Bienvenido al archivo heráldico oficial de la Casa Alaniz. Durante más de 
-                novecientos años, hemos sido una casa señorial con tradición militar, 
-                preservando nuestro legado territorial y familiar para las generaciones futuras.
+              <p
+                className="text-lg md:text-xl text-parchment-200 leading-relaxed animate-fade-in-up"
+                style={{ animationDelay: '200ms' }}
+              >
+                Bienvenido al archivo heráldico oficial de la Casa Alaniz. Durante más de
+                novecientos años, hemos sido una casa señorial con tradición militar, preservando
+                nuestro legado territorial y familiar para las generaciones futuras.
               </p>
-              
-              <p className="text-base md:text-lg text-parchment-300 leading-relaxed animate-fade-in-up"
-                 style={{ animationDelay: '400ms' }}>
-                Desde el siglo XII, cuando nuestros ancestros servían como ingenieros y estrategas militares, 
-                la Casa Alaniz ha mantenido vivos los valores de honor, disciplina y la responsabilidad 
-                señorial sobre el <em className="text-alanizGold-400">Valle de Monterrey</em>.
+
+              <p
+                className="text-base md:text-lg text-parchment-300 leading-relaxed animate-fade-in-up"
+                style={{ animationDelay: '400ms' }}
+              >
+                Desde el siglo XII, cuando nuestros ancestros servían como ingenieros y estrategas
+                militares, la Casa Alaniz ha mantenido vivos los valores de honor, disciplina y la
+                responsabilidad señorial sobre el{' '}
+                <em className="text-alanizGold-400">Valle de Monterrey</em>.
               </p>
             </div>
-            
+
             {/* Botones de acción */}
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 
-                            animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 
+                            animate-fade-in-up"
+              style={{ animationDelay: '600ms' }}
+            >
               <Link to="/historia" className="btn-alaniz">
                 <Library className="w-5 h-5 mr-2" aria-hidden="true" />
                 Explorar Historia
@@ -228,7 +265,7 @@ export default function Home() {
         <div className="content-container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {houseStats.map((stat, index) => (
-              <StatCard 
+              <StatCard
                 key={stat.label}
                 number={stat.number}
                 label={stat.label}
@@ -243,7 +280,6 @@ export default function Home() {
       {/* Secciones destacadas */}
       <section className="py-20">
         <div className="content-container">
-          
           {/* Encabezado de sección */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-alanizGold-600 mb-4">
@@ -251,21 +287,20 @@ export default function Home() {
             </h2>
             <div className="divider-ornamental"></div>
             <p className="text-lg text-parchment-300 max-w-2xl mx-auto">
-              Explora los diferentes aspectos de la historia, símbolos y documentos 
-              que conforman el rico patrimonio señorial de la Casa Alaniz.
+              Explora los diferentes aspectos de la historia, símbolos y documentos que conforman el
+              rico patrimonio señorial de la Casa Alaniz.
             </p>
           </div>
-          
+
           {/* Grid de secciones */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {featuredSections.map((section, index) => (
-              <SectionCard 
+              <SectionCard
                 key={section.title}
                 icon={section.icon}
                 title={section.title}
                 description={section.description}
                 link={section.link}
-                color={section.color}
                 delay={index * 100}
               />
             ))}
@@ -277,22 +312,24 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-r from-alanizGreen-900 via-alanizGreen-800 to-alanizGreen-900">
         <div className="content-container">
           <div className="text-center space-y-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
-                            rounded-full mb-4">
+            <div
+              className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
+                            rounded-full mb-4"
+            >
               <Mail className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
             </div>
-            
+
             <div className="space-y-4">
               <h2 className="text-2xl md:text-3xl font-display font-bold text-alanizGold-600">
                 ¿Formas parte de la Casa Alaniz?
               </h2>
               <p className="text-parchment-300 max-w-2xl mx-auto">
-                Si eres descendiente de nuestra casa señorial o necesitas información sobre 
-                documentos genealógicos y territoriales, no dudes en contactar con la administración 
+                Si eres descendiente de nuestra casa señorial o necesitas información sobre
+                documentos genealógicos y territoriales, no dudes en contactar con la administración
                 de la Casa bajo la jefatura del Señor de la Casa Alaniz.
               </p>
             </div>
-            
+
             <Link to="/contacto" className="btn-alaniz">
               <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
               Contactar Administración

@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Medal, Crown, Trophy, ScrollText, Clock, Briefcase, Users, PartyPopper } from 'lucide-react';
+import {
+  Medal,
+  Crown,
+  Trophy,
+  ScrollText,
+  Clock,
+  Briefcase,
+  Users,
+  PartyPopper,
+} from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
 // Interfaz para el contador
 interface TimeRemaining {
@@ -28,52 +38,54 @@ const programaDia = [
   {
     hora: '10:00',
     evento: 'Recepción y registro de invitados',
-    descripcion: 'Acogida formal con protocolo de vestimenta'
+    descripcion: 'Acogida formal con protocolo de vestimenta',
   },
   {
     hora: '11:00',
     evento: 'Ceremonia de renovación de votos',
-    descripcion: 'Renovación solemne de la lealtad al linaje y sus valores'
+    descripcion: 'Renovación solemne de la lealtad al linaje y sus valores',
   },
   {
     hora: '12:00',
     evento: 'Lectura de la Crónica Fundacional',
-    descripcion: 'Recordatorio solemne de nuestra historia milenaria'
+    descripcion: 'Recordatorio solemne de nuestra historia milenaria',
   },
   {
     hora: '13:00',
     evento: 'Entrega de Condecoraciones',
-    descripcion: 'Ceremonia principal: otorgamiento de honores y reconocimientos'
+    descripcion: 'Ceremonia principal: otorgamiento de honores y reconocimientos',
   },
   {
     hora: '14:30',
     evento: 'Banquete de la Casa',
-    descripcion: 'Comida familiar y confraternización entre miembros'
+    descripcion: 'Comida familiar y confraternización entre miembros',
   },
   {
     hora: '16:00',
     evento: 'Clausura y despedida',
-    descripcion: 'Palabras finales del Señor de la Casa y despedida formal'
-  }
+    descripcion: 'Palabras finales del Señor de la Casa y despedida formal',
+  },
 ];
 
 // Protocolo de vestimenta
 const protocoloVestimenta = [
   {
     categoria: 'Miembros de la Casa',
-    descripcion: 'Vestimenta formal oscura con símbolos heráldicos de la Casa (pin del escudo, anillo familiar)',
-    color: 'from-alanizGold-500 to-alanizGold-600'
+    descripcion:
+      'Vestimenta formal oscura con símbolos heráldicos de la Casa (pin del escudo, anillo familiar)',
+    color: 'from-alanizGold-500 to-alanizGold-600',
   },
   {
     categoria: 'Condecorados del día',
     descripcion: 'Vestimenta formal oscura. Recibirán sus condecoraciones durante la ceremonia',
-    color: 'from-blue-500 to-blue-600'
+    color: 'from-blue-500 to-blue-600',
   },
   {
     categoria: 'Invitados',
-    descripcion: 'Vestimenta formal respetuosa. Se sugiere colores sobrios en honor a la solemnidad',
-    color: 'from-green-500 to-green-600'
-  }
+    descripcion:
+      'Vestimenta formal respetuosa. Se sugiere colores sobrios en honor a la solemnidad',
+    color: 'from-green-500 to-green-600',
+  },
 ];
 
 export default function DiaDeLaCasa() {
@@ -83,19 +95,22 @@ export default function DiaDeLaCasa() {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
 
   // Función para cargar condecoraciones desde Supabase
   const loadCondecoracionesFromSupabase = async () => {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al cargar condecoraciones desde Supabase');
@@ -116,7 +131,7 @@ export default function DiaDeLaCasa() {
           fecha_otorgamiento: item.fechaOtorgamiento || item.fecha_otorgamiento,
           motivo: item.motivo,
           condecoracion: item.condecoracion,
-          created_at: item.created_at || new Date().toISOString()
+          created_at: item.created_at || new Date().toISOString(),
         }));
         setCondecorados(convertedData);
       }
@@ -130,23 +145,23 @@ export default function DiaDeLaCasa() {
     const now = new Date();
     const currentYear = now.getFullYear();
     let diaDelaCasa = new Date(currentYear, 8, 22, 10, 0, 0); // 22 de septiembre a las 10:00 AM
-    
+
     // Si ya pasó este año, mostrar el del próximo año
     if (now > diaDelaCasa) {
       diaDelaCasa = new Date(currentYear + 1, 8, 22, 10, 0, 0);
     }
-    
+
     const difference = diaDelaCasa.getTime() - now.getTime();
-    
+
     if (difference <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
-    
+
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    
+
     return { days, hours, minutes, seconds };
   };
 
@@ -155,18 +170,18 @@ export default function DiaDeLaCasa() {
     const now = new Date();
     const currentYear = now.getFullYear();
     let diaDelaCasa = new Date(currentYear, 8, 22); // 22 de septiembre
-    
+
     // Si ya pasó este año, mostrar el del próximo año
     if (now > diaDelaCasa) {
       diaDelaCasa = new Date(currentYear + 1, 8, 22);
     }
-    
+
     return diaDelaCasa;
   };
 
   // Calcular valores una sola vez
   const proximaFecha = getProximaFecha();
-  const condecoradosEsteAño = condecorados.filter(c => {
+  const condecoradosEsteAño = condecorados.filter((c) => {
     const fechaOtorgamiento = new Date(c.fecha_otorgamiento);
     return fechaOtorgamiento.getFullYear() === 2025;
   });
@@ -185,7 +200,7 @@ export default function DiaDeLaCasa() {
     );
 
     const elementsToObserve = document.querySelectorAll('.observe-me');
-    elementsToObserve.forEach(el => observer.observe(el));
+    elementsToObserve.forEach((el) => observer.observe(el));
 
     // Cargar condecoraciones desde Supabase
     loadCondecoracionesFromSupabase();
@@ -210,24 +225,31 @@ export default function DiaDeLaCasa() {
   return (
     <div className="min-h-screen py-16">
       <div className="content-container">
-        
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div className="inline-flex items-center justify-center space-x-4 mb-6">
             <Medal className="w-8 h-8 text-alanizGold-600 animate-float" aria-hidden="true" />
-            <Crown className="w-12 h-12 text-alanizGold-600 animate-float" style={{ animationDelay: '0.5s' }} aria-hidden="true" />
-            <Trophy className="w-8 h-8 text-alanizGold-600 animate-float" style={{ animationDelay: '1s' }} aria-hidden="true" />
+            <Crown
+              className="w-12 h-12 text-alanizGold-600 animate-float"
+              style={{ animationDelay: '0.5s' }}
+              aria-hidden="true"
+            />
+            <Trophy
+              className="w-8 h-8 text-alanizGold-600 animate-float"
+              style={{ animationDelay: '1s' }}
+              aria-hidden="true"
+            />
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
             El Día de la Casa Alaniz
           </h1>
-          
+
           <div className="divider-ornamental"></div>
-          
+
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            La celebración anual más solemne de nuestro linaje, donde honramos nuestra historia, 
-            renovamos nuestros votos y reconocemos a quienes han demostrado honor y lealtad 
+            La celebración anual más solemne de nuestro linaje, donde honramos nuestra historia,
+            renovamos nuestros votos y reconocemos a quienes han demostrado honor y lealtad
             excepcionales a la Casa Alaniz.
           </p>
 
@@ -239,10 +261,14 @@ export default function DiaDeLaCasa() {
             <div className="flex items-center justify-center space-x-8">
               <div className="text-center">
                 <div className="text-4xl font-bold text-alanizGold-600 mb-2">22</div>
-                <div className="text-sm text-parchment-400 uppercase tracking-wider">Septiembre</div>
+                <div className="text-sm text-parchment-400 uppercase tracking-wider">
+                  Septiembre
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-alanizGold-600 mb-2">{proximaFecha.getFullYear()}</div>
+                <div className="text-4xl font-bold text-alanizGold-600 mb-2">
+                  {proximaFecha.getFullYear()}
+                </div>
                 <div className="text-sm text-parchment-400 uppercase tracking-wider">Año</div>
               </div>
               <div className="text-center">
@@ -299,34 +325,45 @@ export default function DiaDeLaCasa() {
                 </div>
               </div>
             </div>
-            
+
             {/* Mensaje especial cuando falte poco tiempo */}
-            {timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes < 60 && (
-              <div className="mt-6 text-center">
-                <p className="text-alanizGold-400 font-semibold animate-pulse inline-flex items-center justify-center gap-2">
-                  <Medal className="w-5 h-5" aria-hidden="true" /> ¡La celebración está a punto de comenzar! <Medal className="w-5 h-5" aria-hidden="true" />
-                </p>
-              </div>
-            )}
-            
+            {timeRemaining.days === 0 &&
+              timeRemaining.hours === 0 &&
+              timeRemaining.minutes < 60 && (
+                <div className="mt-6 text-center">
+                  <p className="text-alanizGold-400 font-semibold animate-pulse inline-flex items-center justify-center gap-2">
+                    <Medal className="w-5 h-5" aria-hidden="true" /> ¡La celebración está a punto de
+                    comenzar! <Medal className="w-5 h-5" aria-hidden="true" />
+                  </p>
+                </div>
+              )}
+
             {/* Mensaje cuando es el día */}
-            {timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes === 0 && timeRemaining.seconds === 0 && (
-              <div className="mt-6 text-center">
-                <p className="text-alanizGold-400 font-bold text-xl animate-bounce inline-flex items-center justify-center gap-2">
-                  <PartyPopper className="w-5 h-5" aria-hidden="true" /> ¡Hoy es el Día de la Casa Alaniz! <PartyPopper className="w-5 h-5" aria-hidden="true" />
-                </p>
-              </div>
-            )}
+            {timeRemaining.days === 0 &&
+              timeRemaining.hours === 0 &&
+              timeRemaining.minutes === 0 &&
+              timeRemaining.seconds === 0 && (
+                <div className="mt-6 text-center">
+                  <p className="text-alanizGold-400 font-bold text-xl animate-bounce inline-flex items-center justify-center gap-2">
+                    <PartyPopper className="w-5 h-5" aria-hidden="true" /> ¡Hoy es el Día de la Casa
+                    Alaniz! <PartyPopper className="w-5 h-5" aria-hidden="true" />
+                  </p>
+                </div>
+              )}
           </div>
         </div>
 
         {/* Historia de la celebración */}
-        <div className="card-elegant observe-me opacity-0 translate-y-8 mb-12" 
-             style={{ animationDelay: '200ms' }}>
+        <div
+          className="card-elegant observe-me opacity-0 translate-y-8 mb-12"
+          style={{ animationDelay: '200ms' }}
+        >
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14
-                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+              <div
+                className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full"
+              >
                 <ScrollText className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
@@ -336,36 +373,42 @@ export default function DiaDeLaCasa() {
               </h3>
             </div>
           </div>
-          
+
           <div className="space-y-4 text-parchment-200 leading-relaxed">
             <p>
-              El <strong className="text-alanizGold-500">Día de la Casa Alaniz</strong> se instituyó oficialmente 
-              en el año <strong className="text-alanizGold-500">2025</strong>, coincidiendo con la refundación 
-              formal de nuestro linaje. El <em className="text-alanizGold-400">22 de septiembre</em> fue elegido 
-              como fecha conmemorativa por su proximidad al equinoccio de otoño, simbolizando el equilibrio 
+              El <strong className="text-alanizGold-500">Día de la Casa Alaniz</strong> se instituyó
+              oficialmente en el año <strong className="text-alanizGold-500">2025</strong>,
+              coincidiendo con la refundación formal de nuestro linaje. El{' '}
+              <em className="text-alanizGold-400">22 de septiembre</em> fue elegido como fecha
+              conmemorativa por su proximidad al equinoccio de otoño, simbolizando el equilibrio
               entre tradición y renovación que define a nuestra Casa.
             </p>
             <p>
-              Esta celebración anual tiene como propósito <strong className="text-alanizGold-500">fortalecer los 
-              lazos familiares</strong>, reconocer públicamente a quienes han contribuido al honor de la Casa, 
-              y renovar solemnemente nuestro compromiso con los valores ancestrales que nos han guiado 
-              durante más de ocho siglos.
+              Esta celebración anual tiene como propósito{' '}
+              <strong className="text-alanizGold-500">fortalecer los lazos familiares</strong>,
+              reconocer públicamente a quienes han contribuido al honor de la Casa, y renovar
+              solemnemente nuestro compromiso con los valores ancestrales que nos han guiado durante
+              más de ocho siglos.
             </p>
             <p>
-              El <em className="text-alanizGold-400">lugar de celebración varía cada año</em>, permitiendo que 
-              diferentes territorios vinculados a la Casa puedan acoger esta ceremonia solemne, 
-              manteniendo viva la conexión con nuestras raíces territoriales.
+              El <em className="text-alanizGold-400">lugar de celebración varía cada año</em>,
+              permitiendo que diferentes territorios vinculados a la Casa puedan acoger esta
+              ceremonia solemne, manteniendo viva la conexión con nuestras raíces territoriales.
             </p>
           </div>
         </div>
 
         {/* Programa del día */}
-        <div className="card-elegant observe-me opacity-0 translate-y-8 mb-12" 
-             style={{ animationDelay: '400ms' }}>
+        <div
+          className="card-elegant observe-me opacity-0 translate-y-8 mb-12"
+          style={{ animationDelay: '400ms' }}
+        >
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14
-                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+              <div
+                className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full"
+              >
                 <Clock className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
@@ -375,10 +418,13 @@ export default function DiaDeLaCasa() {
               </h3>
             </div>
           </div>
-          
+
           <div className="space-y-4">
             {programaDia.map((actividad, index) => (
-              <div key={index} className="flex items-start space-x-4 p-4 bg-alanizGreen-900/30 rounded-lg">
+              <div
+                key={index}
+                className="flex items-start space-x-4 p-4 bg-alanizGreen-900/30 rounded-lg"
+              >
                 <div className="flex-shrink-0">
                   <div className="w-16 h-16 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
                     <span className="text-alanizGold-600 font-bold text-sm">{actividad.hora}</span>
@@ -388,9 +434,7 @@ export default function DiaDeLaCasa() {
                   <h4 className="text-lg font-semibold text-alanizGold-500 mb-1">
                     {actividad.evento}
                   </h4>
-                  <p className="text-parchment-300 text-sm">
-                    {actividad.descripcion}
-                  </p>
+                  <p className="text-parchment-300 text-sm">{actividad.descripcion}</p>
                 </div>
               </div>
             ))}
@@ -398,12 +442,16 @@ export default function DiaDeLaCasa() {
         </div>
 
         {/* Protocolo de vestimenta */}
-        <div className="card-elegant observe-me opacity-0 translate-y-8 mb-12" 
-             style={{ animationDelay: '600ms' }}>
+        <div
+          className="card-elegant observe-me opacity-0 translate-y-8 mb-12"
+          style={{ animationDelay: '600ms' }}
+        >
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14
-                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+              <div
+                className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full"
+              >
                 <Briefcase className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
@@ -413,12 +461,17 @@ export default function DiaDeLaCasa() {
               </h3>
             </div>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             {protocoloVestimenta.map((protocolo, index) => (
-              <div key={index} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg
-                                 border-2 border-alanizGold-600 bg-transparent mb-4">
+              <div
+                key={index}
+                className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20"
+              >
+                <div
+                  className="inline-flex items-center justify-center w-12 h-12 rounded-lg
+                                 border-2 border-alanizGold-600 bg-transparent mb-4"
+                >
                   {index === 0 ? (
                     <Crown className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   ) : index === 1 ? (
@@ -439,12 +492,16 @@ export default function DiaDeLaCasa() {
         </div>
 
         {/* Condecoraciones otorgadas */}
-        <div className="card-elegant observe-me opacity-0 translate-y-8 mb-12" 
-             style={{ animationDelay: '800ms' }}>
+        <div
+          className="card-elegant observe-me opacity-0 translate-y-8 mb-12"
+          style={{ animationDelay: '800ms' }}
+        >
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14
-                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+              <div
+                className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full"
+              >
                 <Medal className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
@@ -454,7 +511,7 @@ export default function DiaDeLaCasa() {
               </h3>
             </div>
           </div>
-          
+
           {loadingCondecoraciones ? (
             <div className="text-center py-8">
               <div className="flex items-center justify-center space-x-2 mb-4">
@@ -466,13 +523,17 @@ export default function DiaDeLaCasa() {
             <div className="text-center py-8">
               <Trophy className="w-8 h-8 text-alanizGold-600/30 mb-4 mx-auto" aria-hidden="true" />
               <p className="text-parchment-400">
-                Las condecoraciones de este año se anunciarán próximamente por decisión del Consejo de la Casa.
+                Las condecoraciones de este año se anunciarán próximamente por decisión del Consejo
+                de la Casa.
               </p>
             </div>
           ) : (
             <div className="space-y-4">
               {condecoradosEsteAño.map((condecorado) => (
-                <div key={condecorado.id} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
+                <div
+                  key={condecorado.id}
+                  className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20"
+                >
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-alanizGold-600/20 rounded-lg flex items-center justify-center">
                       <Trophy className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
@@ -483,7 +544,9 @@ export default function DiaDeLaCasa() {
                       </h4>
                       <div className="flex items-center space-x-2 mb-3">
                         <span className="inline-flex items-center px-3 py-1 bg-alanizGold-600/20 rounded-full text-sm font-medium text-alanizGold-400">
-                          {condecorado.condecoracion === 'gran-cruz' ? 'Gran Cruz de la Distinción Alaniz' : 'Cruz del Honor y el Mérito'}
+                          {condecorado.condecoracion === 'gran-cruz'
+                            ? 'Gran Cruz de la Distinción Alaniz'
+                            : 'Cruz del Honor y el Mérito'}
                         </span>
                       </div>
                       <p className="text-parchment-200 text-sm leading-relaxed italic pl-4 border-l-2 border-alanizGold-600/30">
@@ -498,20 +561,21 @@ export default function DiaDeLaCasa() {
         </div>
 
         {/* Mensaje final */}
-        <div className="text-center observe-me opacity-0 translate-y-8" 
-             style={{ animationDelay: '1000ms' }}>
-          <div className="bg-alanizGreen-800/50 rounded-xl p-8 border border-alanizGold-600/20 
-                          backdrop-blur-sm shadow-elegant">
+        <div
+          className="text-center observe-me opacity-0 translate-y-8"
+          style={{ animationDelay: '1000ms' }}
+        >
+          <div
+            className="bg-alanizGreen-800/50 rounded-xl p-8 border border-alanizGold-600/20 
+                          backdrop-blur-sm shadow-elegant"
+          >
             <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">
-              "En el Día de la Casa, la memoria arde más fuerte que nunca. 
-              Unidos en honor, proyectados hacia la eternidad."
+              "En el Día de la Casa, la memoria arde más fuerte que nunca. Unidos en honor,
+              proyectados hacia la eternidad."
             </blockquote>
-            <cite className="text-parchment-400 text-sm">
-              — Lema del Día de la Casa Alaniz
-            </cite>
+            <cite className="text-parchment-400 text-sm">— Lema del Día de la Casa Alaniz</cite>
           </div>
         </div>
-
       </div>
     </div>
   );

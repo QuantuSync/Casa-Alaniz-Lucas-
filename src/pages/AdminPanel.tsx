@@ -19,7 +19,8 @@ import {
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
 interface Usuario {
   id?: string;
@@ -52,7 +53,7 @@ interface Condecorado {
 
 const condecoraciones = [
   { id: 'gran-cruz', nombre: 'Gran Cruz de la Distinción Alaniz' },
-  { id: 'cruz-honor-merito', nombre: 'Cruz del Honor y el Mérito' }
+  { id: 'cruz-honor-merito', nombre: 'Cruz del Honor y el Mérito' },
 ];
 
 export default function AdminPanel() {
@@ -60,7 +61,7 @@ export default function AdminPanel() {
     totalUsers: 0,
     totalDocuments: 0,
     totalCondecoraciones: 0,
-    activeUsers: 0
+    activeUsers: 0,
   });
   const [users, setUsers] = useState<Usuario[]>([]);
   const [condecorados, setCondecorados] = useState<Condecorado[]>([]);
@@ -77,18 +78,18 @@ export default function AdminPanel() {
   const [newUser, setNewUser] = useState({
     dni: '',
     name: '',
-    type: 'user' as 'admin' | 'user'
+    type: 'user' as 'admin' | 'user',
   });
   const [documentForm, setDocumentForm] = useState({
     name: '',
     type: '',
-    file: null as File | null
+    file: null as File | null,
   });
   const [condecoracionForm, setCondecoracionForm] = useState({
     nombre: '',
     fechaOtorgamiento: '',
     motivo: '',
-    condecoracion: ''
+    condecoracion: '',
   });
   const navigate = useNavigate();
 
@@ -98,9 +99,9 @@ export default function AdminPanel() {
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        }
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
       });
       setSupabaseConnected(response.ok);
       return response.ok;
@@ -116,13 +117,16 @@ export default function AdminPanel() {
   const loadUsersFromSupabase = async () => {
     setLoadingUsers(true);
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios?select=*&order=created_at.desc`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/usuarios?select=*&order=created_at.desc`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al cargar usuarios desde Supabase');
@@ -140,7 +144,7 @@ export default function AdminPanel() {
         nombre: userData.name,
         password: userData.password,
         tipo: userData.type,
-        created_at: userData.createdDate
+        created_at: userData.createdDate,
       }));
       setUsers(usersList);
       return usersList.length;
@@ -154,12 +158,12 @@ export default function AdminPanel() {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios`, {
         method: 'POST',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
+          Prefer: 'return=representation',
         },
-        body: JSON.stringify(usuario)
+        body: JSON.stringify(usuario),
       });
 
       if (!response.ok) {
@@ -180,10 +184,10 @@ export default function AdminPanel() {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios?dni=eq.${dni}`, {
         method: 'DELETE',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
-        }
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -200,13 +204,16 @@ export default function AdminPanel() {
   const loadDocumentsFromSupabase = async (userDni: string) => {
     setLoadingDocuments(true);
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?usuario_dni=eq.${userDni}&select=*&order=created_at.desc`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/documentos_usuarios?usuario_dni=eq.${userDni}&select=*&order=created_at.desc`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al cargar documentos desde Supabase');
@@ -228,7 +235,7 @@ export default function AdminPanel() {
         fecha_subida: doc.uploadDate,
         tamaño: doc.size,
         url_supabase: doc.url,
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
       }));
       setUserDocuments(convertedDocs);
       return convertedDocs.length;
@@ -239,14 +246,17 @@ export default function AdminPanel() {
 
   const getTotalDocumentsFromSupabase = async () => {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?select=id&count=exact`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          'Range': '0-0'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/documentos_usuarios?select=id&count=exact`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            Range: '0-0',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al contar documentos');
@@ -269,12 +279,12 @@ export default function AdminPanel() {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios`, {
         method: 'POST',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
+          Prefer: 'return=representation',
         },
-        body: JSON.stringify(documento)
+        body: JSON.stringify(documento),
       });
 
       if (!response.ok) {
@@ -294,10 +304,10 @@ export default function AdminPanel() {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?id=eq.${id}`, {
         method: 'DELETE',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
-        }
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -314,13 +324,16 @@ export default function AdminPanel() {
   const loadCondecoracionesFromSupabase = async () => {
     setLoadingCondecoraciones(true);
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al cargar condecoraciones desde Supabase');
@@ -343,17 +356,19 @@ export default function AdminPanel() {
     }
   };
 
-  const addCondecoracionToSupabase = async (condecoracion: Omit<Condecorado, 'id' | 'created_at'>) => {
+  const addCondecoracionToSupabase = async (
+    condecoracion: Omit<Condecorado, 'id' | 'created_at'>
+  ) => {
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones`, {
         method: 'POST',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
+          Prefer: 'return=representation',
         },
-        body: JSON.stringify(condecoracion)
+        body: JSON.stringify(condecoracion),
       });
 
       if (!response.ok) {
@@ -373,10 +388,10 @@ export default function AdminPanel() {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/condecoraciones?id=eq.${id}`, {
         method: 'DELETE',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
-        }
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -392,20 +407,17 @@ export default function AdminPanel() {
 
   const uploadToSupabase = async (file: File, dni: string): Promise<string> => {
     const fileName = `${dni}/${Date.now()}_${file.name}`;
-    
+
     const formData = new FormData();
     formData.append('file', file);
 
-    const response = await fetch(
-      `${SUPABASE_URL}/storage/v1/object/documentos/${fileName}`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        },
-        body: formData
-      }
-    );
+    const response = await fetch(`${SUPABASE_URL}/storage/v1/object/documentos/${fileName}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
       const error = await response.text();
@@ -435,7 +447,7 @@ export default function AdminPanel() {
       totalUsers,
       totalDocuments,
       totalCondecoraciones,
-      activeUsers: totalUsers
+      activeUsers: totalUsers,
     });
   };
 
@@ -448,9 +460,9 @@ export default function AdminPanel() {
     return result;
   };
 
-// CONTINÚA EN LA PARTE 2...
+  // CONTINÚA EN LA PARTE 2...
 
-// CONTINÚA DESDE LA PARTE 1...
+  // CONTINÚA DESDE LA PARTE 1...
 
   // ========== HANDLERS PARTE 2 ==========
 
@@ -468,15 +480,17 @@ export default function AdminPanel() {
         dni: newUser.dni.toUpperCase(),
         nombre: newUser.name,
         password: password,
-        tipo: newUser.type
+        tipo: newUser.type,
       });
 
-      setUsers(prev => [nuevoUsuario, ...prev]);
+      setUsers((prev) => [nuevoUsuario, ...prev]);
       setShowCreateUser(false);
       setNewUser({ dni: '', name: '', type: 'user' });
       loadStats();
-      
-      alert(`Usuario creado exitosamente en Supabase.\n\nDNI: ${nuevoUsuario.dni}\nContraseña: ${password}\n\n¡Guarda esta información!`);
+
+      alert(
+        `Usuario creado exitosamente en Supabase.\n\nDNI: ${nuevoUsuario.dni}\nContraseña: ${password}\n\n¡Guarda esta información!`
+      );
     } catch (error) {
       alert('Error al crear usuario: ' + (error as Error).message);
     } finally {
@@ -493,7 +507,7 @@ export default function AdminPanel() {
 
     try {
       await deleteUserFromSupabase(dni);
-      setUsers(prev => prev.filter(u => u.dni !== dni));
+      setUsers((prev) => prev.filter((u) => u.dni !== dni));
       loadStats();
       alert('Usuario eliminado exitosamente');
     } catch (error) {
@@ -504,7 +518,12 @@ export default function AdminPanel() {
   };
 
   const handleCreateCondecorado = async () => {
-    if (!condecoracionForm.nombre || !condecoracionForm.fechaOtorgamiento || !condecoracionForm.motivo || !condecoracionForm.condecoracion) {
+    if (
+      !condecoracionForm.nombre ||
+      !condecoracionForm.fechaOtorgamiento ||
+      !condecoracionForm.motivo ||
+      !condecoracionForm.condecoracion
+    ) {
       alert('Todos los campos son obligatorios');
       return;
     }
@@ -516,13 +535,13 @@ export default function AdminPanel() {
         nombre: condecoracionForm.nombre,
         fecha_otorgamiento: condecoracionForm.fechaOtorgamiento,
         motivo: condecoracionForm.motivo,
-        condecoracion: condecoracionForm.condecoracion
+        condecoracion: condecoracionForm.condecoracion,
       });
 
-      setCondecorados(prev => [nuevoCondecorado, ...prev]);
+      setCondecorados((prev) => [nuevoCondecorado, ...prev]);
       setCondecoracionForm({ nombre: '', fechaOtorgamiento: '', motivo: '', condecoracion: '' });
       loadStats();
-      
+
       alert('Condecorado añadido exitosamente a Supabase');
     } catch (error) {
       alert('Error al añadir condecorado: ' + (error as Error).message);
@@ -538,7 +557,7 @@ export default function AdminPanel() {
 
     try {
       await deleteCondecoracionFromSupabase(id);
-      setCondecorados(prev => prev.filter(c => c.id !== id));
+      setCondecorados((prev) => prev.filter((c) => c.id !== id));
       loadStats();
       alert('Condecorado eliminado exitosamente');
     } catch (error) {
@@ -555,11 +574,11 @@ export default function AdminPanel() {
         alert('Solo se permiten archivos PDF');
         return;
       }
-      
+
       setDocumentForm({
         ...documentForm,
         file: file,
-        name: documentForm.name || file.name.replace('.pdf', '')
+        name: documentForm.name || file.name.replace('.pdf', ''),
       });
     }
   };
@@ -575,20 +594,20 @@ export default function AdminPanel() {
     try {
       const fileUrl = await uploadToSupabase(documentForm.file, selectedUser);
       const fileSize = (documentForm.file.size / (1024 * 1024)).toFixed(1) + ' MB';
-      
+
       const nuevoDocumento = await addDocumentToSupabase({
         usuario_dni: selectedUser,
         nombre: documentForm.name + '.pdf',
         tipo: documentForm.type,
         fecha_subida: new Date().toISOString().split('T')[0],
         tamaño: fileSize,
-        url_supabase: fileUrl
+        url_supabase: fileUrl,
       });
 
-      setUserDocuments(prev => [nuevoDocumento, ...prev]);
+      setUserDocuments((prev) => [nuevoDocumento, ...prev]);
       setDocumentForm({ name: '', type: '', file: null });
       loadStats();
-      
+
       alert('Documento subido exitosamente a Supabase');
     } catch (error) {
       alert('Error al subir documento: ' + (error as Error).message);
@@ -605,19 +624,19 @@ export default function AdminPanel() {
     setLoadingDocuments(true);
 
     try {
-      const document = userDocuments.find(doc => doc.id === documentId);
+      const document = userDocuments.find((doc) => doc.id === documentId);
       if (document && document.url_supabase) {
         const urlParts = document.url_supabase.split('/storage/v1/object/public/documentos/');
         if (urlParts.length > 1) {
           const filePath = urlParts[1];
-          
+
           const deleteResponse = await fetch(
             `${SUPABASE_URL}/storage/v1/object/documentos/${filePath}`,
             {
               method: 'DELETE',
               headers: {
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-              }
+                Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+              },
             }
           );
 
@@ -628,9 +647,9 @@ export default function AdminPanel() {
       }
 
       await deleteDocumentFromSupabase(documentId);
-      setUserDocuments(prev => prev.filter(doc => doc.id !== documentId));
+      setUserDocuments((prev) => prev.filter((doc) => doc.id !== documentId));
       loadStats();
-      
+
       alert('Documento eliminado correctamente');
     } catch (error) {
       alert('Error al eliminar documento: ' + (error as Error).message);
@@ -646,7 +665,7 @@ export default function AdminPanel() {
   };
 
   const getCondecoracionName = (id: string) => {
-    return condecoraciones.find(c => c.id === id)?.nombre || id;
+    return condecoraciones.find((c) => c.id === id)?.nombre || id;
   };
 
   const handleLogout = () => {
@@ -667,7 +686,7 @@ export default function AdminPanel() {
           margin: 0 auto;
           padding: 1rem;
         }
-        
+
         .card-elegant {
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
@@ -676,7 +695,7 @@ export default function AdminPanel() {
           padding: 1.5rem;
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        
+
         .btn-alaniz {
           background: linear-gradient(135deg, #d4af37, #b8941f);
           color: #1a4d3a;
@@ -691,13 +710,13 @@ export default function AdminPanel() {
           justify-content: center;
           gap: 0.5rem;
         }
-        
+
         .btn-alaniz:hover {
           background: linear-gradient(135deg, #b8941f, #d4af37);
           transform: translateY(-2px);
           box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
         }
-        
+
         .btn-secondary {
           background: rgba(255, 255, 255, 0.1);
           color: #d4af37;
@@ -708,72 +727,71 @@ export default function AdminPanel() {
           cursor: pointer;
           transition: all 0.3s ease;
         }
-        
+
         .btn-secondary:hover {
           background: rgba(212, 175, 55, 0.1);
           border-color: #d4af37;
         }
-        
+
         @media (max-width: 768px) {
           .content-container {
             padding: 0.5rem;
           }
-          
+
           .card-elegant {
             padding: 1rem;
             margin-bottom: 1rem;
           }
-          
+
           .mobile-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
           }
-          
+
           .mobile-grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
           }
-          
+
           .mobile-stack {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
           }
-          
+
           .mobile-text-sm {
             font-size: 0.875rem;
           }
-          
+
           .mobile-hidden {
             display: none;
           }
-          
+
           .mobile-full {
             width: 100%;
           }
-          
+
           .btn-alaniz {
             padding: 0.5rem 1rem;
             font-size: 0.875rem;
           }
-          
+
           .btn-secondary {
             padding: 0.4rem 0.8rem;
             font-size: 0.875rem;
           }
         }
-        
+
         @media (max-width: 480px) {
           .mobile-grid-2 {
             grid-template-columns: 1fr;
           }
         }
       `}</style>
-      
+
       <div className="content-container">
-        
         {/* Header */}
         <div className="card-elegant mb-4 md:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -786,21 +804,20 @@ export default function AdminPanel() {
                   Panel de Administración
                 </h1>
                 <p className="text-sm md:text-base text-yellow-200">
-                  Sistema global con Supabase {supabaseConnected ? <Check className="inline w-4 h-4 text-alanizGold-600" aria-hidden="true" /> : <X className="inline w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
+                  Sistema global con Supabase{' '}
+                  {supabaseConnected ? (
+                    <Check className="inline w-4 h-4 text-alanizGold-600" aria-hidden="true" />
+                  ) : (
+                    <X className="inline w-4 h-4 text-alanizGold-600" aria-hidden="true" />
+                  )}
                 </p>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-2">
-              <button
-                onClick={testSupabaseConnection}
-                className="btn-secondary text-sm"
-              >
+              <button onClick={testSupabaseConnection} className="btn-secondary text-sm">
                 <RefreshCw className="w-4 h-4 mr-2 inline" aria-hidden="true" /> Test Conexión
               </button>
-              <button
-                onClick={handleLogout}
-                className="btn-secondary"
-              >
+              <button onClick={handleLogout} className="btn-secondary">
                 Cerrar Sesión
               </button>
             </div>
@@ -815,11 +832,13 @@ export default function AdminPanel() {
                 <Users className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
-                  Usuarios
-                </h3>
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">Usuarios</h3>
                 <p className="text-lg md:text-2xl font-bold text-white">
-                  {loadingUsers ? <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" /> : stats.totalUsers}
+                  {loadingUsers ? (
+                    <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" />
+                  ) : (
+                    stats.totalUsers
+                  )}
                 </p>
               </div>
             </div>
@@ -831,12 +850,8 @@ export default function AdminPanel() {
                 <FileText className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
-                  Documentos
-                </h3>
-                <p className="text-lg md:text-2xl font-bold text-white">
-                  {stats.totalDocuments}
-                </p>
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">Documentos</h3>
+                <p className="text-lg md:text-2xl font-bold text-white">{stats.totalDocuments}</p>
               </div>
             </div>
           </div>
@@ -851,7 +866,11 @@ export default function AdminPanel() {
                   Condecoraciones
                 </h3>
                 <p className="text-lg md:text-2xl font-bold text-white">
-                  {loadingCondecoraciones ? <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" /> : stats.totalCondecoraciones}
+                  {loadingCondecoraciones ? (
+                    <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" />
+                  ) : (
+                    stats.totalCondecoraciones
+                  )}
                 </p>
               </div>
             </div>
@@ -863,9 +882,7 @@ export default function AdminPanel() {
                 <Cloud className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="text-base md:text-lg font-semibold text-yellow-400">
-                  Storage
-                </h3>
+                <h3 className="text-base md:text-lg font-semibold text-yellow-400">Storage</h3>
                 <p className="text-lg md:text-2xl font-bold text-white">
                   {supabaseConnected ? 'Online' : 'Offline'}
                 </p>
@@ -885,7 +902,8 @@ export default function AdminPanel() {
               className="btn-alaniz mobile-full sm:w-auto"
               disabled={loadingCondecoraciones}
             >
-              <Trophy className="w-5 h-5 mr-2 inline" aria-hidden="true" /> {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
+              <Trophy className="w-5 h-5 mr-2 inline" aria-hidden="true" />{' '}
+              {showCondecoracionesManager ? 'Ocultar' : 'Gestionar'} Condecoraciones
             </button>
           </div>
 
@@ -902,7 +920,9 @@ export default function AdminPanel() {
                   <input
                     type="text"
                     value={condecoracionForm.nombre}
-                    onChange={(e) => setCondecoracionForm({...condecoracionForm, nombre: e.target.value})}
+                    onChange={(e) =>
+                      setCondecoracionForm({ ...condecoracionForm, nombre: e.target.value })
+                    }
                     className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                rounded-lg text-white placeholder-gray-400
                                focus:border-yellow-400"
@@ -917,27 +937,34 @@ export default function AdminPanel() {
                   <input
                     type="date"
                     value={condecoracionForm.fechaOtorgamiento}
-                    onChange={(e) => setCondecoracionForm({...condecoracionForm, fechaOtorgamiento: e.target.value})}
+                    onChange={(e) =>
+                      setCondecoracionForm({
+                        ...condecoracionForm,
+                        fechaOtorgamiento: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                rounded-lg text-white focus:border-yellow-400"
                     disabled={loadingCondecoraciones}
                   />
                 </div>
               </div>
-              
+
               <div className="mb-4">
                 <label className="block text-sm font-medium text-yellow-400 mb-2">
                   Condecoración otorgada
                 </label>
                 <select
                   value={condecoracionForm.condecoracion}
-                  onChange={(e) => setCondecoracionForm({...condecoracionForm, condecoracion: e.target.value})}
+                  onChange={(e) =>
+                    setCondecoracionForm({ ...condecoracionForm, condecoracion: e.target.value })
+                  }
                   className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                              rounded-lg text-white focus:border-yellow-400"
                   disabled={loadingCondecoraciones}
                 >
                   <option value="">Seleccionar condecoración</option>
-                  {condecoraciones.map(condecoracion => (
+                  {condecoraciones.map((condecoracion) => (
                     <option key={condecoracion.id} value={condecoracion.id}>
                       {condecoracion.nombre}
                     </option>
@@ -951,7 +978,9 @@ export default function AdminPanel() {
                 </label>
                 <textarea
                   value={condecoracionForm.motivo}
-                  onChange={(e) => setCondecoracionForm({...condecoracionForm, motivo: e.target.value})}
+                  onChange={(e) =>
+                    setCondecoracionForm({ ...condecoracionForm, motivo: e.target.value })
+                  }
                   rows={3}
                   className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                              rounded-lg text-white placeholder-gray-400
@@ -988,12 +1017,17 @@ export default function AdminPanel() {
               {/* Lista de condecorados */}
               <div>
                 <h4 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
-                  Condecorados Registrados ({condecorados.length}) {loadingCondecoraciones && <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" />}
+                  Condecorados Registrados ({condecorados.length}){' '}
+                  {loadingCondecoraciones && (
+                    <Loader className="inline w-5 h-5 animate-spin" aria-hidden="true" />
+                  )}
                 </h4>
-                
+
                 {condecorados.length === 0 ? (
                   <p className="text-gray-400 italic text-center py-4">
-                    {loadingCondecoraciones ? 'Cargando condecoraciones...' : 'No hay condecorados registrados aún.'}
+                    {loadingCondecoraciones
+                      ? 'Cargando condecoraciones...'
+                      : 'No hay condecorados registrados aún.'}
                   </p>
                 ) : (
                   <div className="space-y-3">
@@ -1008,15 +1042,17 @@ export default function AdminPanel() {
                               {getCondecoracionName(condecorado.condecoracion)}
                             </p>
                             <p className="text-sm text-gray-400 mb-2">
-                              Otorgada el {new Date(condecorado.fecha_otorgamiento).toLocaleDateString('es-ES', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                              })}
+                              Otorgada el{' '}
+                              {new Date(condecorado.fecha_otorgamiento).toLocaleDateString(
+                                'es-ES',
+                                {
+                                  year: 'numeric',
+                                  month: 'long',
+                                  day: 'numeric',
+                                }
+                              )}
                             </p>
-                            <p className="text-white text-sm">
-                              {condecorado.motivo}
-                            </p>
+                            <p className="text-white text-sm">{condecorado.motivo}</p>
                           </div>
                           <button
                             onClick={() => handleDeleteCondecorado(condecorado.id!)}
@@ -1040,9 +1076,7 @@ export default function AdminPanel() {
         {/* Gestión de usuarios */}
         <div className="card-elegant mb-4 md:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <h2 className="text-lg md:text-xl font-bold text-yellow-400">
-              Gestión de Usuarios
-            </h2>
+            <h2 className="text-lg md:text-xl font-bold text-yellow-400">Gestión de Usuarios</h2>
             <button
               onClick={() => setShowCreateUser(true)}
               className="btn-alaniz mobile-full sm:w-auto"
@@ -1059,14 +1093,12 @@ export default function AdminPanel() {
               </h3>
               <div className="mobile-grid md:grid md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-yellow-400 mb-2">
-                    DNI
-                  </label>
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">DNI</label>
                   <input
                     type="text"
                     placeholder="12345678A"
                     value={newUser.dni}
-                    onChange={(e) => setNewUser({...newUser, dni: e.target.value.toUpperCase()})}
+                    onChange={(e) => setNewUser({ ...newUser, dni: e.target.value.toUpperCase() })}
                     maxLength={9}
                     className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                rounded-lg text-white placeholder-gray-400
@@ -1081,19 +1113,19 @@ export default function AdminPanel() {
                     type="text"
                     placeholder="Juan Alaniz López"
                     value={newUser.name}
-                    onChange={(e) => setNewUser({...newUser, name: e.target.value})}
+                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
                     className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                rounded-lg text-white placeholder-gray-400
                                focus:border-yellow-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-yellow-400 mb-2">
-                    Tipo
-                  </label>
+                  <label className="block text-sm font-medium text-yellow-400 mb-2">Tipo</label>
                   <select
                     value={newUser.type}
-                    onChange={(e) => setNewUser({...newUser, type: e.target.value as 'admin' | 'user'})}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, type: e.target.value as 'admin' | 'user' })
+                    }
                     className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                rounded-lg text-white focus:border-yellow-400"
                   >
@@ -1127,17 +1159,18 @@ export default function AdminPanel() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-start space-x-3 md:space-x-4">
                     <div className="w-8 h-8 md:w-10 md:h-10 border-2 border-alanizGold-600 bg-transparent rounded-lg flex items-center justify-center flex-shrink-0 mt-1 sm:mt-0">
-                      {user.tipo === 'admin'
-                        ? <Crown className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
-                        : <User className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
+                      {user.tipo === 'admin' ? (
+                        <Crown className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
+                      ) : (
+                        <User className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
+                      )}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-medium text-yellow-400 mobile-text-sm">
-                        {user.nombre}
-                      </h3>
+                      <h3 className="font-medium text-yellow-400 mobile-text-sm">{user.nombre}</h3>
                       <div className="text-xs md:text-sm text-gray-400 break-all">
                         <div className="mobile-hidden sm:inline">
-                          DNI: {user.dni} • Contraseña: {user.password} • {user.tipo === 'admin' ? 'Administrador' : 'Usuario'}
+                          DNI: {user.dni} • Contraseña: {user.password} •{' '}
+                          {user.tipo === 'admin' ? 'Administrador' : 'Usuario'}
                         </div>
                         <div className="sm:hidden">
                           <div>DNI: {user.dni}</div>
@@ -1182,7 +1215,7 @@ export default function AdminPanel() {
             <div className="bg-green-900 rounded-lg p-4 md:p-6 w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4 md:mb-6">
                 <h2 className="text-lg md:text-xl font-bold text-yellow-400">
-                  Documentos de {users.find(u => u.dni === selectedUser)?.nombre}
+                  Documentos de {users.find((u) => u.dni === selectedUser)?.nombre}
                 </h2>
                 <button
                   onClick={() => setShowDocumentManager(false)}
@@ -1206,7 +1239,7 @@ export default function AdminPanel() {
                       type="text"
                       placeholder="Nombramiento de Caballero"
                       value={documentForm.name}
-                      onChange={(e) => setDocumentForm({...documentForm, name: e.target.value})}
+                      onChange={(e) => setDocumentForm({ ...documentForm, name: e.target.value })}
                       className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                  rounded-lg text-white placeholder-gray-400
                                  focus:border-yellow-400"
@@ -1218,7 +1251,7 @@ export default function AdminPanel() {
                     </label>
                     <select
                       value={documentForm.type}
-                      onChange={(e) => setDocumentForm({...documentForm, type: e.target.value})}
+                      onChange={(e) => setDocumentForm({ ...documentForm, type: e.target.value })}
                       className="w-full px-3 py-2 bg-green-800/50 border border-yellow-400/30 
                                  rounded-lg text-white focus:border-yellow-400"
                     >
@@ -1253,7 +1286,9 @@ export default function AdminPanel() {
                       <span>Subiendo...</span>
                     </div>
                   ) : (
-                    <><Cloud className="w-5 h-5 mr-2 inline" aria-hidden="true" /> Subir Documento</>
+                    <>
+                      <Cloud className="w-5 h-5 mr-2 inline" aria-hidden="true" /> Subir Documento
+                    </>
                   )}
                 </button>
               </div>
@@ -1263,10 +1298,13 @@ export default function AdminPanel() {
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400 mb-4">
                   Documentos Existentes ({userDocuments.length})
                 </h3>
-                
+
                 {userDocuments.length === 0 ? (
                   <div className="text-center py-8">
-                    <FileText className="w-8 h-8 text-yellow-400/30 mb-2 mx-auto" aria-hidden="true" />
+                    <FileText
+                      className="w-8 h-8 text-yellow-400/30 mb-2 mx-auto"
+                      aria-hidden="true"
+                    />
                     <p className="text-gray-400">No hay documentos para este usuario</p>
                   </div>
                 ) : (
@@ -1276,12 +1314,22 @@ export default function AdminPanel() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                           <div className="flex items-start space-x-3">
                             <div className="w-6 h-6 md:w-8 md:h-8 border-2 border-alanizGold-600 bg-transparent rounded flex items-center justify-center flex-shrink-0">
-                              {doc.tipo === 'Recompensas'
-                                ? <Trophy className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
-                                : <Swords className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
+                              {doc.tipo === 'Recompensas' ? (
+                                <Trophy
+                                  className="w-4 h-4 text-alanizGold-600"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <Swords
+                                  className="w-4 h-4 text-alanizGold-600"
+                                  aria-hidden="true"
+                                />
+                              )}
                             </div>
                             <div className="min-w-0 flex-1">
-                              <h4 className="font-medium text-yellow-400 mobile-text-sm break-words">{doc.nombre}</h4>
+                              <h4 className="font-medium text-yellow-400 mobile-text-sm break-words">
+                                {doc.nombre}
+                              </h4>
                               <p className="text-xs md:text-sm text-gray-400">
                                 {doc.tipo} • {doc.tamaño} • {doc.fecha_subida}
                               </p>
@@ -1325,17 +1373,31 @@ export default function AdminPanel() {
             <div className="mobile-grid md:grid md:grid-cols-2 gap-4 text-xs md:text-sm">
               <div>
                 <h4 className="font-semibold text-yellow-400 mb-2">Estado del Sistema</h4>
-                <p className={supabaseConnected ? "text-green-400" : "text-red-400"}>
-                  {supabaseConnected
-                    ? <><Check className="inline w-4 h-4 mr-1" aria-hidden="true" />Supabase Conectado</>
-                    : <><X className="inline w-4 h-4 mr-1" aria-hidden="true" />Supabase Desconectado</>}
+                <p className={supabaseConnected ? 'text-green-400' : 'text-red-400'}>
+                  {supabaseConnected ? (
+                    <>
+                      <Check className="inline w-4 h-4 mr-1" aria-hidden="true" />
+                      Supabase Conectado
+                    </>
+                  ) : (
+                    <>
+                      <X className="inline w-4 h-4 mr-1" aria-hidden="true" />
+                      Supabase Desconectado
+                    </>
+                  )}
                 </p>
                 <p className="text-gray-400">Última actualización: {new Date().toLocaleString()}</p>
               </div>
               <div>
                 <h4 className="font-semibold text-yellow-400 mb-2">Almacenamiento</h4>
-                <p className="text-gray-400"><Cloud className="inline w-5 h-5 mr-1" aria-hidden="true" /> Supabase Storage (Documentos)</p>
-                <p className="text-gray-400"><Database className="inline w-5 h-5 mr-1" aria-hidden="true" /> Supabase Database (Usuarios y Condecoraciones)</p>
+                <p className="text-gray-400">
+                  <Cloud className="inline w-5 h-5 mr-1" aria-hidden="true" /> Supabase Storage
+                  (Documentos)
+                </p>
+                <p className="text-gray-400">
+                  <Database className="inline w-5 h-5 mr-1" aria-hidden="true" /> Supabase Database
+                  (Usuarios y Condecoraciones)
+                </p>
                 <p className="text-green-400 text-xs">Global access enabled with RLS</p>
               </div>
             </div>

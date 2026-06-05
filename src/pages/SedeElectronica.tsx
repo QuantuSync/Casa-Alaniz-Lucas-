@@ -1,10 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { AlertTriangle, Landmark, RefreshCw, FileText, Trophy, Swords, Cloud, Save } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  AlertTriangle,
+  Landmark,
+  RefreshCw,
+  FileText,
+  Trophy,
+  Swords,
+  Cloud,
+  Save,
+} from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
 interface DocumentoUsuario {
   id: string;
@@ -30,7 +40,7 @@ export default function SedeElectronica() {
   const [documents, setDocuments] = useState<DocumentoUsuario[]>([]);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState<{ id: string; name: string } | null>(null);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const [supabaseConnected, setSupabaseConnected] = useState(false);
   const navigate = useNavigate();
 
@@ -249,9 +259,9 @@ export default function SedeElectronica() {
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        }
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
       });
       setSupabaseConnected(response.ok);
       return response.ok;
@@ -265,13 +275,16 @@ export default function SedeElectronica() {
   // Función para cargar documentos desde Supabase
   const loadUserDocumentsFromSupabase = async (userDni: string) => {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/documentos_usuarios?usuario_dni=eq.${userDni}&select=*&order=created_at.desc`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/documentos_usuarios?usuario_dni=eq.${userDni}&select=*&order=created_at.desc`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al cargar documentos desde Supabase');
@@ -288,9 +301,9 @@ export default function SedeElectronica() {
   // Función fallback para cargar documentos desde localStorage
   const loadUserDocumentsFromLocalStorage = (userDni: string): DocumentoUsuario[] => {
     try {
-      const allDocuments = JSON.parse(localStorage.getItem("alanizDocuments") || "{}");
+      const allDocuments = JSON.parse(localStorage.getItem('alanizDocuments') || '{}');
       const userDocuments = allDocuments[userDni] || [];
-      
+
       // Convertir formato antiguo al nuevo
       return userDocuments.map((doc: Document) => ({
         id: doc.id,
@@ -300,7 +313,7 @@ export default function SedeElectronica() {
         fecha_subida: doc.uploadDate,
         tamaño: doc.size,
         url_supabase: doc.url,
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
       }));
     } catch (error) {
       console.error('Error cargando documentos de localStorage:', error);
@@ -310,12 +323,12 @@ export default function SedeElectronica() {
 
   const loadUserDocuments = async () => {
     try {
-      const userId = localStorage.getItem("alanizUserId");
-      const userName = localStorage.getItem("alanizUserName");
-      const authStatus = localStorage.getItem("alanizAuth");
+      const userId = localStorage.getItem('alanizUserId');
+      const userName = localStorage.getItem('alanizUserName');
+      const authStatus = localStorage.getItem('alanizAuth');
 
-      if (!userId || !authStatus || authStatus !== "ok") {
-        navigate("/login");
+      if (!userId || !authStatus || authStatus !== 'ok') {
+        navigate('/login');
         return;
       }
 
@@ -341,11 +354,11 @@ export default function SedeElectronica() {
       }
 
       setDocuments(userDocuments);
-      setUserInfo({ id: userId, name: userName || "Usuario" });
+      setUserInfo({ id: userId, name: userName || 'Usuario' });
       setLoading(false);
     } catch (err) {
-      console.error("Error cargando documentos:", err);
-      setError("Error al cargar los documentos");
+      console.error('Error cargando documentos:', err);
+      setError('Error al cargar los documentos');
       setLoading(false);
     }
   };
@@ -362,25 +375,25 @@ export default function SedeElectronica() {
       // Fallback: buscar en localStorage (formato antiguo)
       const base64Data = localStorage.getItem(`file_${document.url_supabase}`);
       if (!base64Data) {
-        alert("El archivo no está disponible para descarga.");
+        alert('El archivo no está disponible para descarga.');
         return;
       }
 
       // Convertir base64 a blob
-      const byteCharacters = atob(base64Data.split(",")[1]);
+      const byteCharacters = atob(base64Data.split(',')[1]);
       const byteNumbers = new Array(byteCharacters.length);
       for (let i = 0; i < byteCharacters.length; i++) {
         byteNumbers[i] = byteCharacters.charCodeAt(i);
       }
       const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: "application/pdf" });
+      const blob = new Blob([byteArray], { type: 'application/pdf' });
 
       // Crear URL temporal y descargar
       const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = url;
       link.download = document.nombre;
-      link.style.display = "none";
+      link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -388,8 +401,8 @@ export default function SedeElectronica() {
       // Limpiar URL temporal
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Error al descargar:", error);
-      alert("Error al descargar el documento.");
+      console.error('Error al descargar:', error);
+      alert('Error al descargar el documento.');
     }
   };
 
@@ -404,34 +417,34 @@ export default function SedeElectronica() {
       // Fallback: buscar en localStorage (formato antiguo)
       const base64Data = localStorage.getItem(`file_${document.url_supabase}`);
       if (base64Data) {
-        const byteCharacters = atob(base64Data.split(",")[1]);
+        const byteCharacters = atob(base64Data.split(',')[1]);
         const byteNumbers = new Array(byteCharacters.length);
         for (let i = 0; i < byteCharacters.length; i++) {
           byteNumbers[i] = byteCharacters.charCodeAt(i);
         }
         const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: "application/pdf" });
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
         const url = URL.createObjectURL(blob);
-        window.open(url, "_blank");
+        window.open(url, '_blank');
       } else {
-        alert("No se puede visualizar el documento.");
+        alert('No se puede visualizar el documento.');
       }
     } catch (error) {
-      console.error("Error al ver documento:", error);
-      alert("Error al visualizar el documento.");
+      console.error('Error al ver documento:', error);
+      alert('Error al visualizar el documento.');
     }
   };
 
   const handleLogout = () => {
     try {
-      localStorage.removeItem("alanizAuth");
-      localStorage.removeItem("alanizUserId");
-      localStorage.removeItem("alanizUserType");
-      localStorage.removeItem("alanizUserName");
-      navigate("/login");
+      localStorage.removeItem('alanizAuth');
+      localStorage.removeItem('alanizUserId');
+      localStorage.removeItem('alanizUserType');
+      localStorage.removeItem('alanizUserName');
+      navigate('/login');
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-      window.location.href = "/login";
+      console.error('Error al cerrar sesión:', error);
+      window.location.href = '/login';
     }
   };
 
@@ -450,7 +463,9 @@ export default function SedeElectronica() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950 p-4">
         <div className="text-center space-y-4 max-w-md mx-auto">
-          <div className="mb-4 flex justify-center"><AlertTriangle className="w-16 h-16 text-red-400" aria-hidden="true" /></div>
+          <div className="mb-4 flex justify-center">
+            <AlertTriangle className="w-16 h-16 text-red-400" aria-hidden="true" />
+          </div>
           <h2 className="text-xl font-semibold text-red-400">Error al cargar</h2>
           <p className="text-parchment-300">{error}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -474,7 +489,10 @@ export default function SedeElectronica() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-6 space-y-4 lg:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
               <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex items-center justify-center mx-auto sm:mx-0">
-                <Landmark className="w-5 h-5 md:w-6 md:h-6 text-alanizGold-600" aria-hidden="true" />
+                <Landmark
+                  className="w-5 h-5 md:w-6 md:h-6 text-alanizGold-600"
+                  aria-hidden="true"
+                />
               </div>
               <div className="text-center sm:text-left">
                 <h1 className="text-xl md:text-2xl font-display font-bold text-alanizGold-600">
@@ -484,8 +502,12 @@ export default function SedeElectronica() {
                   Bienvenido, {userInfo?.name}
                 </p>
                 <div className="flex items-center justify-center sm:justify-start space-x-2 mt-1">
-                  <div className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
-                  <span className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                  <div
+                    className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}
+                  ></div>
+                  <span
+                    className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}
+                  >
                     {supabaseConnected ? 'Sistema global' : 'Modo local'}
                   </span>
                 </div>
@@ -506,16 +528,24 @@ export default function SedeElectronica() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4 text-center">
-              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">DNI</h3>
-              <p className="text-parchment-300 text-sm md:text-base">{userInfo?.id || "N/A"}</p>
+              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">
+                DNI
+              </h3>
+              <p className="text-parchment-300 text-sm md:text-base">{userInfo?.id || 'N/A'}</p>
             </div>
             <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4 text-center">
-              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">Documentos</h3>
+              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">
+                Documentos
+              </h3>
               <p className="text-parchment-300 text-sm md:text-base">{documents.length}</p>
             </div>
             <div className="bg-alanizGreen-900-30 rounded-lg p-3 md:p-4 text-center">
-              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">Estado</h3>
-              <p className={`text-sm md:text-base ${supabaseConnected ? "text-green-400" : "text-yellow-400"}`}>
+              <h3 className="font-semibold text-alanizGold-600 mb-1 md:mb-2 text-sm md:text-base">
+                Estado
+              </h3>
+              <p
+                className={`text-sm md:text-base ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}
+              >
                 {supabaseConnected ? 'Global' : 'Local'}
               </p>
             </div>
@@ -530,7 +560,12 @@ export default function SedeElectronica() {
 
           {documents.length === 0 ? (
             <div className="text-center py-8 md:py-12">
-              <div className="mb-4 flex justify-center"><FileText className="w-8 h-8 md:w-16 md:h-16 text-alanizGold-600/30" aria-hidden="true" /></div>
+              <div className="mb-4 flex justify-center">
+                <FileText
+                  className="w-8 h-8 md:w-16 md:h-16 text-alanizGold-600/30"
+                  aria-hidden="true"
+                />
+              </div>
               <h3 className="text-base md:text-lg font-medium text-alanizGold-600 mb-2">
                 No hay documentos disponibles
               </h3>
@@ -541,19 +576,25 @@ export default function SedeElectronica() {
           ) : (
             <div className="space-y-3 md:space-y-4">
               {documents.map((doc) => (
-                <div
-                  key={doc.id}
-                  className="document-item"
-                >
+                <div key={doc.id} className="document-item">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
                     <div className="flex items-start md:items-center space-x-3 md:space-x-4 flex-1">
                       <div className="w-8 h-8 md:w-10 md:h-10 bg-alanizGold-600-20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        {doc.tipo === "Recompensas" ? (
-                          <Trophy className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600" aria-hidden="true" />
-                        ) : doc.tipo === "Nombramientos" ? (
-                          <Swords className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600" aria-hidden="true" />
+                        {doc.tipo === 'Recompensas' ? (
+                          <Trophy
+                            className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600"
+                            aria-hidden="true"
+                          />
+                        ) : doc.tipo === 'Nombramientos' ? (
+                          <Swords
+                            className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600"
+                            aria-hidden="true"
+                          />
                         ) : (
-                          <FileText className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600" aria-hidden="true" />
+                          <FileText
+                            className="w-4 h-4 md:w-5 md:h-5 text-alanizGold-600"
+                            aria-hidden="true"
+                          />
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -586,7 +627,7 @@ export default function SedeElectronica() {
                       <button
                         onClick={() => handleDownload(doc)}
                         className="btn-alaniz text-sm w-full sm:w-auto"
-                        disabled={!doc.url_supabase || doc.url_supabase === "#"}
+                        disabled={!doc.url_supabase || doc.url_supabase === '#'}
                       >
                         Descargar
                       </button>
@@ -609,7 +650,12 @@ export default function SedeElectronica() {
               <li>• Mantén tus credenciales seguras y no las compartas</li>
               <li>• Para solicitar nuevos documentos, contacta con la administración</li>
               <li>• Los documentos tienen validez oficial para trámites genealógicos</li>
-              <li>• {supabaseConnected ? 'Sistema sincronizado globalmente' : 'Modo offline - documentos locales'}</li>
+              <li>
+                •{' '}
+                {supabaseConnected
+                  ? 'Sistema sincronizado globalmente'
+                  : 'Modo offline - documentos locales'}
+              </li>
             </ul>
           </div>
 
@@ -618,7 +664,9 @@ export default function SedeElectronica() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs space-y-2 sm:space-y-0">
               <span className="text-parchment-500">Estado del sistema:</span>
               <div className="flex items-center space-x-2">
-                <span className={`inline-flex items-center gap-1 ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                <span
+                  className={`inline-flex items-center gap-1 ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}
+                >
                   {supabaseConnected ? (
                     <>
                       <Cloud className="w-4 h-4" aria-hidden="true" /> Supabase conectado

@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, AlertTriangle, Check, IdCard, Lock, EyeOff, Eye, Cloud, Save, ArrowLeft } from 'lucide-react';
+import {
+  Shield,
+  AlertTriangle,
+  Check,
+  IdCard,
+  Lock,
+  EyeOff,
+  Eye,
+  Cloud,
+  Save,
+  ArrowLeft,
+} from 'lucide-react';
 
 // CONFIGURACIÓN SUPABASE
 const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
 
 interface Usuario {
   dni: string;
@@ -46,9 +58,9 @@ export default function Login() {
     try {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        }
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
       });
       setSupabaseConnected(response.ok);
     } catch (error) {
@@ -77,15 +89,21 @@ export default function Login() {
   };
 
   // Función para autenticar usuario con Supabase
-  const authenticateUserWithSupabase = async (dni: string, password: string): Promise<Usuario | null> => {
+  const authenticateUserWithSupabase = async (
+    dni: string,
+    password: string
+  ): Promise<Usuario | null> => {
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/usuarios?dni=eq.${dni.toUpperCase()}&password=eq.${password}&select=*`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/usuarios?dni=eq.${dni.toUpperCase()}&password=eq.${password}&select=*`,
+        {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Error al consultar la base de datos');
@@ -104,14 +122,14 @@ export default function Login() {
     try {
       const users = JSON.parse(localStorage.getItem('alanizUsers') || '{}');
       const userData = users[dni.toUpperCase()];
-      
+
       if (userData && userData.password === password) {
         return {
           dni: dni.toUpperCase(),
           nombre: userData.name,
           password: userData.password,
           tipo: userData.type,
-          created_at: userData.createdDate || new Date().toISOString()
+          created_at: userData.createdDate || new Date().toISOString(),
         };
       }
       return null;
@@ -139,7 +157,7 @@ export default function Login() {
     }
 
     // Simular delay para UX
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     try {
       let user: Usuario | null = null;
@@ -148,7 +166,7 @@ export default function Login() {
       if (supabaseConnected) {
         user = await authenticateUserWithSupabase(dni, pass);
       }
-      
+
       // Si falla Supabase o no está conectado, usar localStorage como fallback
       if (!user) {
         console.log('Supabase falló o no disponible, intentando con localStorage...');
@@ -221,8 +239,12 @@ export default function Login() {
 
             {/* Indicador de estado de conexión */}
             <div className="flex items-center justify-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
-              <span className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+              <div
+                className={`w-2 h-2 rounded-full ${supabaseConnected ? 'bg-green-400' : 'bg-yellow-400'}`}
+              ></div>
+              <span
+                className={`text-xs ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}
+              >
                 {supabaseConnected ? 'Sistema global activo' : 'Modo local activo'}
               </span>
             </div>
@@ -232,7 +254,10 @@ export default function Login() {
           {error && error !== 'success' && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg animate-fade-in-down">
               <div className="flex items-start space-x-3">
-                <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <AlertTriangle
+                  className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <p className="text-red-400 text-sm font-medium">{error}</p>
               </div>
             </div>
@@ -281,7 +306,10 @@ export default function Login() {
 
             {/* Campo de contraseña */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-alanizGold-600 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-alanizGold-600 mb-2"
+              >
                 Contraseña
               </label>
               <div className="relative">
@@ -348,7 +376,8 @@ export default function Login() {
                 Solo para Miembros Verificados
               </h3>
               <p className="text-xs text-parchment-400 leading-relaxed mb-3">
-                El acceso está restringido a miembros oficiales de la Casa Alaniz con credenciales válidas.
+                El acceso está restringido a miembros oficiales de la Casa Alaniz con credenciales
+                válidas.
               </p>
               <div className="flex items-center justify-between text-xs text-parchment-500">
                 <span>¿No tienes acceso?</span>
@@ -367,7 +396,9 @@ export default function Login() {
               <div className="flex items-center justify-between text-xs">
                 <span className="text-parchment-500">Estado del sistema:</span>
                 <div className="flex items-center space-x-2">
-                  <span className={`inline-flex items-center gap-1 ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}>
+                  <span
+                    className={`inline-flex items-center gap-1 ${supabaseConnected ? 'text-green-400' : 'text-yellow-400'}`}
+                  >
                     {supabaseConnected ? (
                       <>
                         <Cloud className="w-4 h-4" aria-hidden="true" /> Global
@@ -404,7 +435,8 @@ export default function Login() {
             className="text-sm text-alanizGold-600/70 hover:text-alanizGold-600 
                        transition-colors duration-200 underline-offset-2 hover:underline"
           >
-            <ArrowLeft className="inline w-4 h-4 mr-1 align-text-bottom" aria-hidden="true" /> Volver al Archivo Principal
+            <ArrowLeft className="inline w-4 h-4 mr-1 align-text-bottom" aria-hidden="true" />{' '}
+            Volver al Archivo Principal
           </a>
         </div>
       </div>

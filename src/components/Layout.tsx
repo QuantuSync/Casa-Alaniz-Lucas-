@@ -28,7 +28,7 @@ const ScrollToTopButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
@@ -63,10 +63,11 @@ const LoadingBar = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-alanizGreen-900">
-      <div className="h-full bg-gradient-to-r from-alanizGold-600 to-alanizGold-400 
+      <div
+        className="h-full bg-gradient-to-r from-alanizGold-600 to-alanizGold-400 
                       animate-pulse transition-all duration-600 ease-out"
-           style={{ width: '100%' }}>
-      </div>
+        style={{ width: '100%' }}
+      ></div>
     </div>
   );
 };
@@ -84,14 +85,20 @@ export default function Layout({ children }: LayoutProps) {
   // Efecto para aplicar clases específicas según la ruta
   useEffect(() => {
     const body = document.body;
-    
+
     // Limpiar clases anteriores
     body.classList.remove(
-      'page-home', 'page-historia', 'page-simbolos', 
-      'page-legado', 'page-documentos', 'page-contacto', 
-      'page-login', 'page-miembros', 'page-condecoraciones'
+      'page-home',
+      'page-historia',
+      'page-simbolos',
+      'page-legado',
+      'page-documentos',
+      'page-contacto',
+      'page-login',
+      'page-miembros',
+      'page-condecoraciones'
     );
-    
+
     // Aplicar clase según la ruta actual
     const routeClasses: Record<string, string> = {
       '/': 'page-home',
@@ -104,7 +111,7 @@ export default function Layout({ children }: LayoutProps) {
       '/login': 'page-login',
       '/miembros': 'page-miembros',
     };
-    
+
     const pageClass = routeClasses[location.pathname];
     if (pageClass) {
       body.classList.add(pageClass);
@@ -130,7 +137,7 @@ export default function Layout({ children }: LayoutProps) {
     const observerOptions = {
       root: null,
       rootMargin: '0px 0px -50px 0px',
-      threshold: 0.1
+      threshold: 0.1,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -163,7 +170,7 @@ export default function Layout({ children }: LayoutProps) {
 
   // Skip link para accesibilidad
   const SkipLink = () => (
-    <a 
+    <a
       href="#main-content"
       className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
                  bg-alanizGold-600 text-alanizGreen-950 px-4 py-2 rounded-lg
@@ -178,24 +185,28 @@ export default function Layout({ children }: LayoutProps) {
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Patrón sutil de fondo */}
       <div className="absolute inset-0 bg-heraldic"></div>
-      
+
       {/* Elementos decorativos */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-alanizGold-600/5 
-                      rounded-full blur-3xl animate-float" 
-           style={{ animationDelay: '0s', animationDuration: '8s' }}>
-      </div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-alanizGold-600/3 
-                      rounded-full blur-3xl animate-float" 
-           style={{ animationDelay: '2s', animationDuration: '12s' }}>
-      </div>
-      
+      <div
+        className="absolute top-1/4 left-1/4 w-64 h-64 bg-alanizGold-600/5 
+                      rounded-full blur-3xl animate-float"
+        style={{ animationDelay: '0s', animationDuration: '8s' }}
+      ></div>
+      <div
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-alanizGold-600/3 
+                      rounded-full blur-3xl animate-float"
+        style={{ animationDelay: '2s', animationDuration: '12s' }}
+      ></div>
+
       {/* Vignette effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-alanizGreen-950/20 
-                      via-transparent to-alanizGreen-950/20">
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-alanizGreen-950/30 
-                      via-transparent to-alanizGreen-950/30">
-      </div>
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-alanizGreen-950/20 
+                      via-transparent to-alanizGreen-950/20"
+      ></div>
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-alanizGreen-950/30 
+                      via-transparent to-alanizGreen-950/30"
+      ></div>
     </div>
   );
 
@@ -203,41 +214,39 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen flex flex-col relative">
       {/* Skip link para accesibilidad */}
       <SkipLink />
-      
+
       {/* Loading bar */}
       <LoadingBar />
-      
+
       {/* Background pattern */}
       <BackgroundPattern />
-      
+
       {/* Header - Z-INDEX MUY ALTO para evitar solapamiento */}
       <div className="relative z-[9998]">
         <Navbar />
       </div>
-      
+
       {/* Main content */}
-      <main 
-        id="main-content"
-        className="flex-grow relative z-10"
-        role="main"
-      >
+      <main id="main-content" className="flex-grow relative z-10" role="main">
         {/* Container con animación suave */}
         <div className={`transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
           {children}
         </div>
       </main>
-      
+
       {/* Footer */}
       <Footer />
-      
+
       {/* Scroll to top button */}
       <ScrollToTopButton />
-      
+
       {/* Indicador de carga para navegación (solo en desarrollo) */}
       {import.meta.env.DEV && (
         <div className="fixed bottom-4 left-4 z-40">
-          <div className="bg-alanizGreen-800/90 backdrop-blur-sm px-3 py-1 rounded-full 
-                          text-xs text-alanizGold-600 font-mono">
+          <div
+            className="bg-alanizGreen-800/90 backdrop-blur-sm px-3 py-1 rounded-full 
+                          text-xs text-alanizGold-600 font-mono"
+          >
             Ruta: {location.pathname}
           </div>
         </div>

@@ -35,13 +35,10 @@ class ErrorBoundary extends React.Component<
               Error en el Archivo
             </h1>
             <p className="text-parchment-200 max-w-md">
-              Ha ocurrido un error inesperado en el archivo heráldico. 
-              Los custodios han sido notificados.
+              Ha ocurrido un error inesperado en el archivo heráldico. Los custodios han sido
+              notificados.
             </p>
-            <button 
-              onClick={() => window.location.reload()}
-              className="btn-alaniz"
-            >
+            <button onClick={() => window.location.reload()} className="btn-alaniz">
               Restaurar Archivo
             </button>
           </div>
@@ -95,7 +92,8 @@ root.render(
 // Registro del Service Worker para PWA (opcional)
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker
+      .register('/sw.js')
       .then((registration) => {
         console.log('SW registrado: ', registration);
       })

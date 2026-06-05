@@ -17,7 +17,7 @@ export default function Documentos() {
     );
 
     const elementsToObserve = document.querySelectorAll('.observe-me');
-    elementsToObserve.forEach(el => observer.observe(el));
+    elementsToObserve.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
@@ -28,61 +28,65 @@ export default function Documentos() {
       icon: ScrollText,
       title: 'Cartas Históricas',
       description: 'Correspondencia familiar y oficial preservada a través de los siglos',
-      color: 'from-amber-500 to-amber-600'
+      color: 'from-amber-500 to-amber-600',
     },
     {
       icon: FileText,
       title: 'Tratados y Acuerdos',
       description: 'Documentos legales y alianzas establecidas por la Casa Alaniz',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-blue-500 to-blue-600',
     },
     {
       icon: Map,
       title: 'Cartografía Ancestral',
       description: 'Mapas y planos de territorios y propiedades familiares',
-      color: 'from-green-500 to-green-600'
+      color: 'from-green-500 to-green-600',
     },
     {
       icon: Library,
       title: 'Crónicas Restauradas',
       description: 'Relatos históricos y testimonios de eventos significativos',
-      color: 'from-purple-500 to-purple-600'
-    }
+      color: 'from-purple-500 to-purple-600',
+    },
   ];
 
   return (
     <div className="min-h-screen py-16">
       <div className="content-container">
-        
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
-                          rounded-full mb-6">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
+                          rounded-full mb-6"
+          >
             <Library className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
             Archivo Documental
           </h1>
-          
+
           <div className="divider-ornamental"></div>
-          
+
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
-            El tesoro más preciado de la Casa Alaniz: documentos históricos que 
-            narran siglos de historia, honor y tradición familiar.
+            El tesoro más preciado de la Casa Alaniz: documentos históricos que narran siglos de
+            historia, honor y tradición familiar.
           </p>
         </div>
 
         {/* Estado actual del archivo */}
         <div className="max-w-4xl mx-auto mb-16">
-          
           {/* Anuncio principal */}
-          <div className="card-elegant observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '200ms' }}>
+          <div
+            className="card-elegant observe-me opacity-0 translate-y-8"
+            style={{ animationDelay: '200ms' }}
+          >
             <div className="flex items-start space-x-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14
-                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                <div
+                  className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full"
+                >
                   <Clock className="w-7 h-7 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
@@ -91,45 +95,56 @@ export default function Documentos() {
                   <h3 className="text-xl font-display font-semibold text-alanizGold-600">
                     Repositorio en Desarrollo
                   </h3>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold 
-                                   bg-orange-500 text-white animate-pulse">
+                  <span
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold 
+                                   bg-orange-500 text-white animate-pulse"
+                  >
                     Próximamente
                   </span>
                 </div>
                 <p className="text-parchment-200 leading-relaxed text-base md:text-lg">
                   Próximamente se habilitará un repositorio digital con cartas, tratados,
-                  cartografía y crónicas restauradas. El acceso estará reservado a los
-                  miembros verificados de la Casa.
+                  cartografía y crónicas restauradas. El acceso estará reservado a los miembros
+                  verificados de la Casa.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Tipos de documentos disponibles */}
-          <div className="mt-12 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '400ms' }}>
+          <div
+            className="mt-12 observe-me opacity-0 translate-y-8"
+            style={{ animationDelay: '400ms' }}
+          >
             <h3 className="text-2xl font-display font-semibold text-alanizGold-600 text-center mb-8">
               Colecciones del Archivo
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-6">
-              {documentTypes.map((type, index) => {
+              {documentTypes.map((type) => {
                 return (
-                  <div 
+                  <div
                     key={type.title}
                     className="bg-alanizGreen-800/30 rounded-lg p-6 border border-alanizGold-600/20 
                                hover:border-alanizGold-600/40 transition-all duration-300 
                                hover:bg-alanizGreen-800/50 group"
                   >
                     <div className="flex items-start space-x-4">
-                      <div className={`inline-flex items-center justify-center w-12 h-12
+                      <div
+                        className={`inline-flex items-center justify-center w-12 h-12
                                        border-2 border-alanizGold-600 bg-transparent rounded-full
-                                       group-hover:scale-110 transition-transform duration-300`}>
-                        {React.createElement(type.icon, { className: 'w-5 h-5 text-alanizGold-600', 'aria-hidden': 'true' })}
+                                       group-hover:scale-110 transition-transform duration-300`}
+                      >
+                        {React.createElement(type.icon, {
+                          className: 'w-5 h-5 text-alanizGold-600',
+                          'aria-hidden': 'true',
+                        })}
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-lg font-display font-semibold text-alanizGold-600 mb-2 
-                                       group-hover:text-alanizGold-500 transition-colors duration-300">
+                        <h4
+                          className="text-lg font-display font-semibold text-alanizGold-600 mb-2 
+                                       group-hover:text-alanizGold-500 transition-colors duration-300"
+                        >
                           {type.title}
                         </h4>
                         <p className="text-sm text-parchment-300 leading-relaxed">
@@ -144,14 +159,20 @@ export default function Documentos() {
           </div>
 
           {/* Información sobre acceso */}
-          <div className="mt-12 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '600ms' }}>
-            <div className="bg-gradient-to-r from-alanizGreen-900/50 to-alanizGreen-800/50 
-                            rounded-xl p-8 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant">
+          <div
+            className="mt-12 observe-me opacity-0 translate-y-8"
+            style={{ animationDelay: '600ms' }}
+          >
+            <div
+              className="bg-gradient-to-r from-alanizGreen-900/50 to-alanizGreen-800/50 
+                            rounded-xl p-8 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant"
+            >
               <div className="flex items-start space-x-6">
                 <div className="flex-shrink-0">
-                  <div className="inline-flex items-center justify-center w-14 h-14
-                                  border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <div
+                    className="inline-flex items-center justify-center w-14 h-14
+                                  border-2 border-alanizGold-600 bg-transparent rounded-full"
+                  >
                     <Lock className="w-7 h-7 text-alanizGold-600" aria-hidden="true" />
                   </div>
                 </div>
@@ -160,9 +181,9 @@ export default function Documentos() {
                     Acceso Restringido
                   </h3>
                   <p className="text-parchment-200 leading-relaxed">
-                    El archivo documental estará disponible únicamente para miembros verificados 
-                    de la Casa Alaniz. Esta medida garantiza la preservación y el uso adecuado 
-                    de documentos de valor histórico incalculable.
+                    El archivo documental estará disponible únicamente para miembros verificados de
+                    la Casa Alaniz. Esta medida garantiza la preservación y el uso adecuado de
+                    documentos de valor histórico incalculable.
                   </p>
                   <div className="grid md:grid-cols-2 gap-6 mt-6">
                     <div className="space-y-3">
@@ -210,31 +231,30 @@ export default function Documentos() {
           </div>
 
           {/* Aviso para miembros */}
-          <div className="mt-12 observe-me opacity-0 translate-y-8" 
-               style={{ animationDelay: '800ms' }}>
+          <div
+            className="mt-12 observe-me opacity-0 translate-y-8"
+            style={{ animationDelay: '800ms' }}
+          >
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-6">
               <div className="flex items-start space-x-4">
-                <AlertTriangle className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <AlertTriangle
+                  className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <div className="flex-1">
                   <h4 className="font-semibold text-blue-400 mb-2">
                     Para Miembros de la Casa Alaniz
                   </h4>
                   <p className="text-sm text-parchment-300 leading-relaxed mb-4">
-                    Si eres descendiente de nuestra noble casa y deseas acceso al archivo 
-                    documental cuando esté disponible, contacta con la administración para 
-                    iniciar el proceso de verificación.
+                    Si eres descendiente de nuestra noble casa y deseas acceso al archivo documental
+                    cuando esté disponible, contacta con la administración para iniciar el proceso
+                    de verificación.
                   </p>
                   <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                    <a 
-                      href="/contacto"
-                      className="btn-secondary text-center"
-                    >
+                    <a href="/contacto" className="btn-secondary text-center">
                       Contactar Administración
                     </a>
-                    <a 
-                      href="/login"
-                      className="btn-alaniz text-center"
-                    >
+                    <a href="/login" className="btn-alaniz text-center">
                       <Lock className="w-4 h-4 mr-2" aria-hidden="true" />
                       Acceso Miembros
                     </a>

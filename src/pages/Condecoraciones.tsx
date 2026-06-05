@@ -1,19 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Trophy, Crown, Star, Settings, Loader } from 'lucide-react';
-
-// CONFIGURACIÓN SUPABASE
-const SUPABASE_URL = 'https://rbicywnjsbrbezomrnss.supabase.co';
-const SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiaWN5d25qc2JyYmV6b21ybnNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5MjE5MDgsImV4cCI6MjA3MDQ5NzkwOH0.eVW1XGZVFmQa49-Ai2rwqSXbMdthqHHRZsCpOU3k6bw';
-
-interface Condecorado {
-  id: string;
-  nombre: string;
-  fecha_otorgamiento: string;
-  motivo: string;
-  condecoracion: string;
-  created_at?: string;
-}
+import { Trophy, Crown, Star } from 'lucide-react';
+import { condecorados } from '../data/condecorados';
 
 interface Condecoracion {
   id: string;
@@ -53,62 +39,6 @@ const condecoraciones: Condecoracion[] = [
 ];
 
 export default function Condecoraciones() {
-  const [condecorados, setCondecorados] = useState<Condecorado[]>([]);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [loadingCondecoraciones, setLoadingCondecoraciones] = useState(true);
-
-  // Función para cargar condecoraciones desde Supabase
-  const loadCondecoracionesFromSupabase = async () => {
-    try {
-      const response = await fetch(
-        `${SUPABASE_URL}/rest/v1/condecoraciones?select=*&order=created_at.desc`,
-        {
-          headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Error al cargar condecoraciones desde Supabase');
-      }
-
-      const data = await response.json();
-      setCondecorados(data);
-    } catch (error) {
-      console.error('Error cargando condecoraciones desde Supabase:', error);
-      // Fallback a localStorage si falla Supabase
-      const savedCondecorados = localStorage.getItem('alanizCondecorados');
-      if (savedCondecorados) {
-        const localData = JSON.parse(savedCondecorados);
-        // Convertir formato localStorage a formato Supabase
-        const convertedData = localData.map((item: any) => ({
-          id: item.id,
-          nombre: item.nombre,
-          fecha_otorgamiento: item.fechaOtorgamiento || item.fecha_otorgamiento,
-          motivo: item.motivo,
-          condecoracion: item.condecoracion,
-          created_at: item.created_at || new Date().toISOString(),
-        }));
-        setCondecorados(convertedData);
-      }
-    } finally {
-      setLoadingCondecoraciones(false);
-    }
-  };
-
-  useEffect(() => {
-    // Verificar si el usuario es admin
-    const adminAuth = localStorage.getItem('alanizAuth');
-    const userType = localStorage.getItem('alanizUserType');
-    setIsAdmin(adminAuth === 'true' && userType === 'admin');
-
-    // Cargar condecoraciones desde Supabase
-    loadCondecoracionesFromSupabase();
-  }, []);
-
   const getCondecoradosPorCondecoracion = (condecoracionId: string) => {
     return condecorados.filter((c) => c.condecoracion === condecoracionId);
   };
@@ -132,41 +62,8 @@ export default function Condecoraciones() {
               excepcionales de honor, lealtad y servicio, contribuyendo al engrandecimiento del
               linaje Alaniz.
             </p>
-
-            {/* Información de carga */}
-            {loadingCondecoraciones && (
-              <div className="flex items-center justify-center space-x-2 mt-4">
-                <div className="w-5 h-5 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
-                <span className="text-alanizGold-600 text-sm">Cargando condecoraciones...</span>
-              </div>
-            )}
           </div>
         </div>
-
-        {/* Nota para administradores */}
-        {isAdmin && (
-          <div className="card-elegant mb-8 bg-alanizGold-600/5 border border-alanizGold-600/20">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-6 h-6 border-2 border-alanizGold-600 bg-transparent rounded-full flex items-center justify-center">
-                <Crown className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
-              </div>
-              <h2 className="text-lg font-display font-bold text-alanizGold-600">
-                Panel de Administrador
-              </h2>
-            </div>
-            <p className="text-parchment-300 text-sm">
-              Las condecoraciones ahora se gestionan desde Supabase. Utiliza el{' '}
-              <strong>Panel de Administración</strong> para añadir, editar o eliminar
-              condecoraciones. Los cambios se reflejarán automáticamente para todos los usuarios.
-            </p>
-            <div className="mt-4">
-              <a href="/admin" className="btn-alaniz">
-                <Settings className="w-5 h-5 mr-2" aria-hidden="true" />
-                Ir al Panel de Administración
-              </a>
-            </div>
-          </div>
-        )}
 
         {/* Lista de condecoraciones */}
         <div className="space-y-8">
@@ -232,20 +129,9 @@ export default function Condecoraciones() {
                   <div>
                     <h3 className="text-lg font-display font-semibold text-alanizGold-600 mb-3">
                       Condecorados
-                      {loadingCondecoraciones && (
-                        <Loader
-                          className="inline-block ml-2 w-4 h-4 text-alanizGold-600"
-                          aria-hidden="true"
-                        />
-                      )}
                     </h3>
 
-                    {loadingCondecoraciones ? (
-                      <div className="flex items-center space-x-2 py-4">
-                        <div className="w-4 h-4 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
-                        <span className="text-parchment-400 text-sm">Cargando condecorados...</span>
-                      </div>
-                    ) : getCondecoradosPorCondecoracion(condecoracion.id).length === 0 ? (
+                    {getCondecoradosPorCondecoracion(condecoracion.id).length === 0 ? (
                       <p className="text-parchment-400 italic">
                         Aún no se han otorgado condecoraciones de este tipo.
                       </p>

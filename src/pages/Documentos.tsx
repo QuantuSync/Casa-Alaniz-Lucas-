@@ -254,10 +254,6 @@ export default function Documentos() {
                     <a href="/contacto" className="btn-secondary text-center">
                       Contactar Administración
                     </a>
-                    <a href="/login" className="btn-alaniz text-center">
-                      <Lock className="w-4 h-4 mr-2" aria-hidden="true" />
-                      Acceso Miembros
-                    </a>
                   </div>
                 </div>
               </div>

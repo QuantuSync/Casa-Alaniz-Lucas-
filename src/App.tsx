@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Castle } from 'lucide-react';
 import Layout from './components/Layout';
-import ProtectedRoute from './routes/ProtectedRoute';
 
 // Lazy loading de páginas para mejor performance
 const Home = React.lazy(() => import('./pages/Home'));
@@ -12,10 +11,6 @@ const Legado = React.lazy(() => import('./pages/Legado'));
 const Fasor = React.lazy(() => import('./pages/Fasor'));
 const Documentos = React.lazy(() => import('./pages/Documentos'));
 const Contacto = React.lazy(() => import('./pages/Contacto'));
-const Login = React.lazy(() => import('./pages/Login'));
-const Miembros = React.lazy(() => import('./pages/Miembros'));
-const SedeElectronica = React.lazy(() => import('./pages/SedeElectronica'));
-const AdminPanel = React.lazy(() => import('./pages/AdminPanel'));
 const Condecoraciones = React.lazy(() => import('./pages/Condecoraciones'));
 const DiaDeLaCasa = React.lazy(() => import('./pages/DiaDeLaCasa'));
 
@@ -72,10 +67,6 @@ const useScrollToTop = () => {
       '/condecoraciones': 'Condecoraciones - Casa Alaniz',
       '/dia-casa': 'Día de la Casa - Casa Alaniz',
       '/contacto': 'Contacto - Casa Alaniz',
-      '/login': 'Acceso Miembros - Casa Alaniz',
-      '/miembros': 'Área Privada - Casa Alaniz',
-      '/sede-electronica': 'Sede Electrónica - Casa Alaniz',
-      '/admin': 'Panel de Administración - Casa Alaniz',
     };
 
     const title = routeTitles[location.pathname] || 'Casa Alaniz - Archivo Heráldico Familiar';
@@ -97,10 +88,6 @@ const useScrollToTop = () => {
       '/dia-casa':
         'La celebración anual más solemne de la Casa Alaniz: ceremonia de condecoraciones y renovación de votos.',
       '/contacto': 'Contacta con la administración oficial de la Casa Alaniz.',
-      '/login': 'Acceso exclusivo para miembros verificados de la Casa Alaniz.',
-      '/miembros': 'Área privada para guardians y miembros de la Casa Alaniz.',
-      '/sede-electronica': 'Sede electrónica oficial para miembros de la Casa Alaniz.',
-      '/admin': 'Panel de administración del sistema Casa Alaniz.',
     };
 
     const description = descriptions[location.pathname] || descriptions['/'];
@@ -191,35 +178,6 @@ export default function App() {
             <Route path="/condecoraciones" element={<Condecoraciones />} />
             <Route path="/dia-casa" element={<DiaDeLaCasa />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path="/login" element={<Login />} />
-
-            {/* Rutas protegidas */}
-            <Route
-              path="/miembros"
-              element={
-                <ProtectedRoute>
-                  <Miembros />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/sede-electronica"
-              element={
-                <ProtectedRoute>
-                  <SedeElectronica />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute adminOnly={true}>
-                  <AdminPanel />
-                </ProtectedRoute>
-              }
-            />
 
             {/* Redirección para rutas no encontradas */}
             <Route

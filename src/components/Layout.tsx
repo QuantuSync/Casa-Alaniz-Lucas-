@@ -94,8 +94,6 @@ export default function Layout({ children }: LayoutProps) {
       'page-legado',
       'page-documentos',
       'page-contacto',
-      'page-login',
-      'page-miembros',
       'page-condecoraciones'
     );
 
@@ -108,8 +106,6 @@ export default function Layout({ children }: LayoutProps) {
       '/documentos': 'page-documentos',
       '/condecoraciones': 'page-condecoraciones',
       '/contacto': 'page-contacto',
-      '/login': 'page-login',
-      '/miembros': 'page-miembros',
     };
 
     const pageClass = routeClasses[location.pathname];
@@ -117,12 +113,7 @@ export default function Layout({ children }: LayoutProps) {
       body.classList.add(pageClass);
     }
 
-    // Aplicar efectos visuales específicos para ciertas páginas
-    if (location.pathname === '/login' || location.pathname === '/miembros') {
-      body.style.background = 'linear-gradient(135deg, #0d1e12 0%, #1a2d20 50%, #0d1e12 100%)';
-    } else {
-      body.style.background = '';
-    }
+    body.style.background = '';
 
     return () => {
       // Cleanup

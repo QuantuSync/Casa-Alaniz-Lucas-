@@ -36,7 +36,6 @@ import terrestresLogo from '../assets/terrestres-logo.jpg';
 import sanitarioLogo from '../assets/sanitario-logo.jpg';
 
 export default function Fasor() {
-
   useEffect(() => {
     // Cargar fuente Impact desde Google Fonts
     const link = document.createElement('link');

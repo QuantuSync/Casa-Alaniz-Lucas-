@@ -381,9 +381,6 @@ export default function Contacto() {
                     <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
                     Enviar Consulta
                   </a>
-                  <a href="/login" className="btn-secondary w-full sm:w-auto">
-                    Acceso Miembros
-                  </a>
                 </div>
               </div>
             </div>

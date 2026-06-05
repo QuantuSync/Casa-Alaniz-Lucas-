@@ -10,9 +10,7 @@ import {
   FileText,
   Trophy,
   Medal,
-  Landmark,
   Mail,
-  Shield,
   ChevronDown,
   X,
   Menu,
@@ -37,9 +35,7 @@ const navigationItems = [
       { path: '/dia-casa', label: 'Día de la Casa', icon: Medal },
     ],
   },
-  { path: '/sede-electronica', label: 'Sede Electrónica', icon: Landmark },
   { path: '/contacto', label: 'Contacto', icon: Mail },
-  { path: '/login', label: 'Miembros', icon: Shield },
 ] as const;
 
 // Hook personalizado para manejar clicks fuera del componente

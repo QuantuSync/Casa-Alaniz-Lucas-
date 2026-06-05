@@ -226,17 +226,17 @@ export default function Contacto() {
                     </p>
 
                     {/* Email destacado */}
-                    <div className="bg-alanizGreen-900/50 rounded-lg p-4 md:p-6 border-l-4 border-alanizGold-600">
-                      <div className="text-center">
+                    <div className="bg-alanizGreen-900/50 rounded-lg p-5 md:p-6 border-l-4 border-alanizGold-600">
+                      <div className="stack-centered">
                         <a
                           href="mailto:administracion@casaalaniz.es"
-                          className="text-lg md:text-xl lg:text-2xl font-display font-semibold text-alanizGold-600 
-                                     hover:text-alanizGold-500 transition-colors duration-300 
-                                     underline-offset-4 hover:underline block break-all md:break-words"
+                          className="text-lg md:text-xl lg:text-2xl font-display font-semibold text-alanizGold-600
+                                     hover:text-alanizGold-500 transition-colors duration-300
+                                     underline-offset-4 hover:underline break-all md:break-words"
                         >
                           administracion@casaalaniz.es
                         </a>
-                        <p className="text-xs md:text-sm text-parchment-400 mt-2">
+                        <p className="mt-1.5 text-xs italic text-parchment-500">
                           Haga clic para abrir su cliente de correo
                         </p>
                       </div>

@@ -70,6 +70,13 @@ const RankChevrons = ({ count }: { count: number }) => (
   </span>
 );
 
+// Círculo-insignia: encierra las divisas de un rango (estilo badge del sitio).
+const RankBadge = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-alanizGold-600 bg-transparent">
+    {children}
+  </div>
+);
+
 export default function Fasor() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -402,10 +409,10 @@ export default function Fasor() {
 
               <div className="space-y-4">
                 <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
-                  <div className="flex items-start space-x-4 mb-3">
-                    <div className="flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-4 mb-3">
+                    <RankBadge>
                       <RankStars count={3} />
-                    </div>
+                    </RankBadge>
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         1. Comandante
@@ -419,10 +426,10 @@ export default function Fasor() {
                 </div>
 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
-                  <div className="flex items-start space-x-4 mb-3">
-                    <div className="flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-4 mb-3">
+                    <RankBadge>
                       <RankStars count={2} />
-                    </div>
+                    </RankBadge>
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         2. Capitán de Unidad
@@ -436,10 +443,10 @@ export default function Fasor() {
                 </div>
 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
-                  <div className="flex items-start space-x-4 mb-3">
-                    <div className="flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-4 mb-3">
+                    <RankBadge>
                       <RankStars count={1} />
-                    </div>
+                    </RankBadge>
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         3. Teniente de Cuadrilla
@@ -453,10 +460,10 @@ export default function Fasor() {
                 </div>
 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
-                  <div className="flex items-start space-x-4 mb-3">
-                    <div className="flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-4 mb-3">
+                    <RankBadge>
                       <RankChevrons count={2} />
-                    </div>
+                    </RankBadge>
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         4. Operador Táctico
@@ -470,10 +477,10 @@ export default function Fasor() {
                 </div>
 
                 <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
-                  <div className="flex items-start space-x-4 mb-3">
-                    <div className="flex-shrink-0 pt-1">
+                  <div className="flex items-center gap-4 mb-3">
+                    <RankBadge>
                       <RankChevrons count={1} />
-                    </div>
+                    </RankBadge>
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">
                         5. Cadete en Formación

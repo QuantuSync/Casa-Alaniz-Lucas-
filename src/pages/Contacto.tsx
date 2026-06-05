@@ -162,9 +162,9 @@ export default function Contacto() {
         
         {/* Hero Section */}
         <div className="text-center mb-8 md:mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 
-                          bg-alanizGold-600 rounded-full shadow-lg mb-4 md:mb-6">
-            <Send className="w-5 h-5 md:w-6 md:h-6 text-alanizGreen-950" aria-hidden="true" />
+          <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16
+                          border-2 border-alanizGold-600 bg-transparent rounded-full mb-4 md:mb-6">
+            <Send className="w-5 h-5 md:w-6 md:h-6 text-alanizGold-600" aria-hidden="true" />
           </div>
           
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-alanizGold-600 mb-4 md:mb-6 px-4">
@@ -192,9 +192,9 @@ export default function Contacto() {
                    style={{ animationDelay: '200ms' }}>
                 <div className="flex flex-col md:flex-row md:items-start space-y-4 md:space-y-0 md:space-x-6">
                   <div className="flex-shrink-0 self-center md:self-start">
-                    <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 
-                                    bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                      <Mail className="w-5 h-5 md:w-6 md:h-6 text-white" aria-hidden="true" />
+                    <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14
+                                    border-2 border-alanizGold-600 bg-transparent rounded-full">
+                      <Mail className="w-5 h-5 md:w-6 md:h-6 text-alanizGold-600" aria-hidden="true" />
                     </div>
                   </div>
                   <div className="flex-1 space-y-4 text-center md:text-left">
@@ -242,10 +242,10 @@ export default function Contacto() {
                                    hover:bg-alanizGreen-800/50 group"
                       >
                         <div className="flex flex-col md:flex-row md:items-start space-y-3 md:space-y-0 md:space-x-4">
-                          <div className={`inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 
-                                           bg-gradient-to-r ${info.color} rounded-full shadow-lg 
+                          <div className={`inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12
+                                           border-2 border-alanizGold-600 bg-transparent rounded-full
                                            group-hover:scale-110 transition-transform duration-300 self-center md:self-start`}>
-                            {React.createElement(info.icon, { className: 'w-5 h-5 text-white', 'aria-hidden': 'true' })}
+                            {React.createElement(info.icon, { className: 'w-5 h-5 text-alanizGold-600', 'aria-hidden': 'true' })}
                           </div>
                           <div className="flex-1 text-center md:text-left">
                             <h4 className="text-base md:text-lg font-display font-semibold text-alanizGold-600 mb-1 
@@ -317,9 +317,9 @@ export default function Contacto() {
             <div className="bg-gradient-to-r from-alanizGreen-900/50 to-alanizGreen-800/50 
                             rounded-xl p-6 md:p-8 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant">
               <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 
-                                bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <Users className="w-5 h-5 md:w-6 md:h-6 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16
+                                border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <Users className="w-5 h-5 md:w-6 md:h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
                 
                 <h3 className="text-xl md:text-2xl font-display font-bold text-alanizGold-600">

@@ -38,8 +38,8 @@ const Card = ({
           <img
             src={src}
             alt={title}
-            className="w-full h-48 object-contain bg-parchment-100 image-glow border border-alanizGold-600/20
-                       group-hover:border-alanizGold-600/40 transition-all duration-300 p-4"
+            className="w-full h-56 object-contain bg-alanizGreen-900 image-glow border border-alanizGold-600/30
+                       group-hover:border-alanizGold-600/50 transition-all duration-300 p-2"
             onLoad={() => setImageLoaded(true)}
           />
         </div>
@@ -67,7 +67,7 @@ const Card = ({
 
         {/* Loading placeholder */}
         {!imageLoaded && (
-          <div className="absolute inset-0 bg-parchment-100 animate-pulse flex items-center justify-center rounded-lg">
+          <div className="absolute inset-0 bg-alanizGreen-900 animate-pulse flex items-center justify-center rounded-lg">
             <div className="w-12 h-12 border-2 border-alanizGold-600 border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
@@ -78,11 +78,11 @@ const Card = ({
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
             <div
-              className="inline-flex items-center justify-center w-10 h-10 
-                            bg-alanizGold-600 rounded-full shadow-lg group-hover:scale-110 
+              className="inline-flex items-center justify-center w-10 h-10
+                            border-2 border-alanizGold-600 bg-transparent rounded-full group-hover:scale-110
                             transition-transform duration-300"
             >
-              {React.createElement(icon, { className: 'w-5 h-5 text-alanizGreen-950', 'aria-hidden': 'true' })}
+              {React.createElement(icon, { className: 'w-5 h-5 text-alanizGold-600', 'aria-hidden': 'true' })}
             </div>
           </div>
           <h3
@@ -138,10 +138,10 @@ export default function Simbolos() {
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
           <div
-            className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
-                          rounded-full shadow-lg mb-6"
+            className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600
+                          bg-transparent rounded-full mb-6"
           >
-            <Shield className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
+            <Shield className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
           </div>
 
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -353,9 +353,9 @@ export default function Simbolos() {
                           rounded-xl p-8 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant"
           >
             <div className="text-center space-y-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
-                              rounded-full shadow-lg">
-                <Flame className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
+              <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600
+                              bg-transparent rounded-full">
+                <Flame className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
               </div>
               
               <div className="space-y-4">

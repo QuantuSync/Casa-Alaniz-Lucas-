@@ -207,8 +207,8 @@ export default function Login() {
         <div className="card-elegant animate-fade-in-up shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-6">
-              <Shield className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
+            <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-6">
+              <Shield className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
             </div>
 
             <h1 className="text-2xl md:text-3xl font-display font-bold text-alanizGold-600 mb-2">

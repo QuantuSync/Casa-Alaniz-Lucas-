@@ -778,8 +778,8 @@ export default function AdminPanel() {
         <div className="card-elegant mb-4 md:mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                <Settings className="w-5 h-5 text-green-900" aria-hidden="true" />
+              <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex items-center justify-center">
+                <Settings className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
                 <h1 className="text-xl md:text-2xl font-bold text-yellow-400">
@@ -811,8 +811,8 @@ export default function AdminPanel() {
         <div className="mobile-grid md:grid md:grid-cols-4 gap-4 md:gap-6 mb-4 md:mb-8">
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <Users className="w-5 h-5 text-blue-400" aria-hidden="true" />
+              <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-lg flex items-center justify-center">
+                <Users className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
@@ -827,8 +827,8 @@ export default function AdminPanel() {
 
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                <FileText className="w-5 h-5 text-green-400" aria-hidden="true" />
+              <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-lg flex items-center justify-center">
+                <FileText className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
@@ -843,8 +843,8 @@ export default function AdminPanel() {
 
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                <Trophy className="w-5 h-5 text-yellow-400" aria-hidden="true" />
+              <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-lg flex items-center justify-center">
+                <Trophy className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
@@ -859,8 +859,8 @@ export default function AdminPanel() {
 
           <div className="card-elegant">
             <div className="flex items-center space-x-3 md:space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <Cloud className="w-5 h-5 text-purple-400" aria-hidden="true" />
+              <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-lg flex items-center justify-center">
+                <Cloud className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-semibold text-yellow-400">
@@ -1126,10 +1126,10 @@ export default function AdminPanel() {
               <div key={user.dni} className="bg-green-800/30 rounded-lg p-4">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-start space-x-3 md:space-x-4">
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 sm:mt-0">
+                    <div className="w-8 h-8 md:w-10 md:h-10 border-2 border-alanizGold-600 bg-transparent rounded-lg flex items-center justify-center flex-shrink-0 mt-1 sm:mt-0">
                       {user.tipo === 'admin'
-                        ? <Crown className="w-4 h-4 text-yellow-400" aria-hidden="true" />
-                        : <User className="w-4 h-4 text-yellow-400" aria-hidden="true" />}
+                        ? <Crown className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
+                        : <User className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="font-medium text-yellow-400 mobile-text-sm">
@@ -1275,10 +1275,10 @@ export default function AdminPanel() {
                       <div key={doc.id} className="bg-green-800/30 rounded-lg p-3 md:p-4">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                           <div className="flex items-start space-x-3">
-                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-500/20 rounded flex items-center justify-center flex-shrink-0">
+                            <div className="w-6 h-6 md:w-8 md:h-8 border-2 border-alanizGold-600 bg-transparent rounded flex items-center justify-center flex-shrink-0">
                               {doc.tipo === 'Recompensas'
-                                ? <Trophy className="w-4 h-4 text-red-400" aria-hidden="true" />
-                                : <Swords className="w-4 h-4 text-red-400" aria-hidden="true" />}
+                                ? <Trophy className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
+                                : <Swords className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />}
                             </div>
                             <div className="min-w-0 flex-1">
                               <h4 className="font-medium text-yellow-400 mobile-text-sm break-words">{doc.nombre}</h4>

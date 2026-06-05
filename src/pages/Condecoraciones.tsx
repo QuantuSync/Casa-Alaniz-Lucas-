@@ -141,8 +141,8 @@ export default function Condecoraciones() {
         {isAdmin && (
           <div className="card-elegant mb-8 bg-alanizGold-600/5 border border-alanizGold-600/20">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-6 h-6 bg-alanizGold-600 rounded-full flex items-center justify-center">
-                <Crown className="w-4 h-4 text-alanizGreen-950" aria-hidden="true" />
+              <div className="w-6 h-6 border-2 border-alanizGold-600 bg-transparent rounded-full flex items-center justify-center">
+                <Crown className="w-4 h-4 text-alanizGold-600" aria-hidden="true" />
               </div>
               <h2 className="text-lg font-display font-bold text-alanizGold-600">
                 Panel de Administrador

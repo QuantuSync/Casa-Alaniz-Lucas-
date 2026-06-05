@@ -27,9 +27,9 @@ export default function Legado() {
         
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
-                          rounded-full shadow-lg mb-6 animate-float">
-            <Sparkles className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
+          <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
+                          rounded-full mb-6 animate-float">
+            <Sparkles className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -52,9 +52,9 @@ export default function Legado() {
                style={{ animationDelay: '200ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full shadow-lg">
-                  <Mountain className="w-5 h-5 text-white" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Mountain className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -86,9 +86,9 @@ export default function Legado() {
                style={{ animationDelay: '400ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg">
-                  <Settings className="w-5 h-5 text-white" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Settings className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -143,9 +143,9 @@ export default function Legado() {
                style={{ animationDelay: '600ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-purple-500 to-purple-600 rounded-full shadow-lg">
-                  <Shield className="w-5 h-5 text-white" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Shield className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -217,9 +217,9 @@ export default function Legado() {
                style={{ animationDelay: '800ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg">
-                  <Flame className="w-5 h-5 text-white" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Flame className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -260,9 +260,9 @@ export default function Legado() {
                style={{ animationDelay: '1000ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <Crown className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Crown className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">

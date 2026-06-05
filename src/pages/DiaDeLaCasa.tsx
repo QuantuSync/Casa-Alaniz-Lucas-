@@ -325,9 +325,9 @@ export default function DiaDeLaCasa() {
              style={{ animationDelay: '200ms' }}>
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14 
-                              bg-gradient-to-r from-amber-500 to-amber-600 rounded-full shadow-lg">
-                <ScrollText className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+                <ScrollText className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -364,9 +364,9 @@ export default function DiaDeLaCasa() {
              style={{ animationDelay: '400ms' }}>
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14 
-                              bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg">
-                <Clock className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+                <Clock className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -402,9 +402,9 @@ export default function DiaDeLaCasa() {
              style={{ animationDelay: '600ms' }}>
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14 
-                              bg-gradient-to-r from-purple-500 to-purple-600 rounded-full shadow-lg">
-                <Briefcase className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+                <Briefcase className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">
@@ -417,14 +417,14 @@ export default function DiaDeLaCasa() {
           <div className="grid md:grid-cols-3 gap-6">
             {protocoloVestimenta.map((protocolo, index) => (
               <div key={index} className="bg-alanizGreen-900/30 rounded-lg p-5 border border-alanizGold-600/20">
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg 
-                                 bg-gradient-to-r ${protocolo.color} shadow-lg mb-4`}>
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg
+                                 border-2 border-alanizGold-600 bg-transparent mb-4">
                   {index === 0 ? (
-                    <Crown className="w-5 h-5 text-white" aria-hidden="true" />
+                    <Crown className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   ) : index === 1 ? (
-                    <Trophy className="w-5 h-5 text-white" aria-hidden="true" />
+                    <Trophy className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   ) : (
-                    <Users className="w-5 h-5 text-white" aria-hidden="true" />
+                    <Users className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   )}
                 </div>
                 <h4 className="text-lg font-semibold text-alanizGold-500 mb-3">
@@ -443,9 +443,9 @@ export default function DiaDeLaCasa() {
              style={{ animationDelay: '800ms' }}>
           <div className="flex items-start space-x-6 mb-6">
             <div className="flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-14 h-14 
-                              bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-lg">
-                <Medal className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="inline-flex items-center justify-center w-14 h-14
+                              border-2 border-alanizGold-600 bg-transparent rounded-full">
+                <Medal className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
               </div>
             </div>
             <div className="flex-1">

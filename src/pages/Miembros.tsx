@@ -93,10 +93,10 @@ export default function Miembros() {
           {/* Header de bienvenida */}
           <div className="text-center mb-16 animate-fade-in-up">
             <div
-              className="inline-flex items-center justify-center w-20 h-20 bg-alanizGold-600 
-                            rounded-full shadow-2xl mb-8 animate-float"
+              className="inline-flex items-center justify-center w-20 h-20 border-2 border-alanizGold-600 bg-transparent
+                            rounded-full mb-8 animate-float"
             >
-              <Shield className="w-10 h-10 text-alanizGreen-950" aria-hidden="true" />
+              <Shield className="w-10 h-10 text-alanizGold-600" aria-hidden="true" />
             </div>
 
             <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-4">
@@ -124,10 +124,10 @@ export default function Miembros() {
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
                     <div
-                      className="inline-flex items-center justify-center w-14 h-14 
-                                    bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg"
+                      className="inline-flex items-center justify-center w-14 h-14
+                                    border-2 border-alanizGold-600 bg-transparent rounded-full"
                     >
-                      <User className="w-7 h-7 text-white" aria-hidden="true" />
+                      <User className="w-7 h-7 text-alanizGold-600" aria-hidden="true" />
                     </div>
                   </div>
                   <div className="flex-1 space-y-4">
@@ -177,8 +177,8 @@ export default function Miembros() {
               >
                 <div className="text-center space-y-6">
                   <div
-                    className="inline-flex items-center justify-center w-16 h-16 
-                                  bg-alanizGreen-800 rounded-full border-2 border-alanizGold-600/30"
+                    className="inline-flex items-center justify-center w-16 h-16
+                                  border-2 border-alanizGold-600 bg-transparent rounded-full"
                   >
                     <Library className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
                   </div>
@@ -211,11 +211,11 @@ export default function Miembros() {
                                                               bg-alanizGreen-800/30 rounded-lg border border-alanizGold-600/20"
                           >
                             <div
-                              className={`inline-flex items-center justify-center w-10 h-10 
-                                             bg-gradient-to-r ${feature.color} rounded-full shadow-lg`}
+                              className="inline-flex items-center justify-center w-10 h-10
+                                             border-2 border-alanizGold-600 bg-transparent rounded-full"
                             >
                               {React.createElement(feature.icon, {
-                                className: "w-5 h-5 text-white",
+                                className: "w-5 h-5 text-alanizGold-600",
                                 "aria-hidden": "true",
                               })}
                             </div>

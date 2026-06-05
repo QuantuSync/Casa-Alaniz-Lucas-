@@ -56,9 +56,9 @@ export default function Documentos() {
         
         {/* Hero Section */}
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
-                          rounded-full shadow-lg mb-6">
-            <Library className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
+          <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
+                          rounded-full mb-6">
+            <Library className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
           </div>
           
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
@@ -81,9 +81,9 @@ export default function Documentos() {
                style={{ animationDelay: '200ms' }}>
             <div className="flex items-start space-x-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 
-                                bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-lg">
-                  <Clock className="w-7 h-7 text-white" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14
+                                border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Clock className="w-7 h-7 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1 space-y-4">
@@ -122,10 +122,10 @@ export default function Documentos() {
                                hover:bg-alanizGreen-800/50 group"
                   >
                     <div className="flex items-start space-x-4">
-                      <div className={`inline-flex items-center justify-center w-12 h-12 
-                                       bg-gradient-to-r ${type.color} rounded-full shadow-lg 
+                      <div className={`inline-flex items-center justify-center w-12 h-12
+                                       border-2 border-alanizGold-600 bg-transparent rounded-full
                                        group-hover:scale-110 transition-transform duration-300`}>
-                        {React.createElement(type.icon, { className: 'w-5 h-5 text-white', 'aria-hidden': 'true' })}
+                        {React.createElement(type.icon, { className: 'w-5 h-5 text-alanizGold-600', 'aria-hidden': 'true' })}
                       </div>
                       <div className="flex-1">
                         <h4 className="text-lg font-display font-semibold text-alanizGold-600 mb-2 
@@ -150,9 +150,9 @@ export default function Documentos() {
                             rounded-xl p-8 border border-alanizGold-600/20 backdrop-blur-sm shadow-elegant">
               <div className="flex items-start space-x-6">
                 <div className="flex-shrink-0">
-                  <div className="inline-flex items-center justify-center w-14 h-14 
-                                  bg-alanizGold-600 rounded-full shadow-lg">
-                    <Lock className="w-7 h-7 text-alanizGreen-950" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-14 h-14
+                                  border-2 border-alanizGold-600 bg-transparent rounded-full">
+                    <Lock className="w-7 h-7 text-alanizGold-600" aria-hidden="true" />
                   </div>
                 </div>
                 <div className="flex-1 space-y-4">

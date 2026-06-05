@@ -473,8 +473,8 @@ export default function SedeElectronica() {
         <div className="card-elegant mb-6 md:mb-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-6 space-y-4 lg:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-alanizGold-600 rounded-full flex items-center justify-center mx-auto sm:mx-0">
-                <Landmark className="w-5 h-5 md:w-6 md:h-6 text-alanizGreen-950" aria-hidden="true" />
+              <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex items-center justify-center mx-auto sm:mx-0">
+                <Landmark className="w-5 h-5 md:w-6 md:h-6 text-alanizGold-600" aria-hidden="true" />
               </div>
               <div className="text-center sm:text-left">
                 <h1 className="text-xl md:text-2xl font-display font-bold text-alanizGold-600">

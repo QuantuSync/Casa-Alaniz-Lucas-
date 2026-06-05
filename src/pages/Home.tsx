@@ -66,10 +66,10 @@ const SectionCard = ({
   >
     <div className="relative overflow-hidden">
       {/* Icono con gradiente */}
-      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg 
-                       bg-gradient-to-r ${color} shadow-lg mb-4 group-hover:scale-110 
+      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg
+                       border-2 border-alanizGold-600 bg-transparent mb-4 group-hover:scale-110
                        transition-transform duration-300`}>
-        <span className="text-white">{React.createElement(icon, { className: 'w-6 h-6' })}</span>
+        <span className="text-alanizGold-600">{React.createElement(icon, { className: 'w-6 h-6' })}</span>
       </div>
       
       {/* Contenido */}
@@ -277,9 +277,9 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-r from-alanizGreen-900 via-alanizGreen-800 to-alanizGreen-900">
         <div className="content-container">
           <div className="text-center space-y-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 
-                            rounded-full shadow-lg mb-4">
-              <Mail className="w-8 h-8 text-alanizGreen-950" aria-hidden="true" />
+            <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent
+                            rounded-full mb-4">
+              <Mail className="w-8 h-8 text-alanizGold-600" aria-hidden="true" />
             </div>
             
             <div className="space-y-4">

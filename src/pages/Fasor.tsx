@@ -103,7 +103,7 @@ export default function Fasor() {
     <div className="min-h-screen py-16">
       <div className="content-container">
         <div className="text-center mb-16 observe-me opacity-0 translate-y-8">
-          <div className="inline-flex items-center justify-center w-60 h-60 bg-red-600/20 rounded-full shadow-2xl mb-8 overflow-hidden border-4 border-red-600/40">
+          <div className="inline-flex items-center justify-center w-60 h-60 border-4 border-alanizGold-600/40 bg-transparent rounded-full mb-8 overflow-hidden">
             <img 
               src={fasorLogo} 
               alt="Logo FASOR - Fuerza de Auxilio, Soporte y Rescate" 
@@ -158,32 +158,32 @@ export default function Fasor() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <Scale className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <Scale className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Disciplina</h4>
                 <p className="text-sm text-parchment-300 text-center">Orden y método en cada actuación</p>
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <Handshake className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <Handshake className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Coordinación</h4>
                 <p className="text-sm text-parchment-300 text-center">Trabajo en equipo efectivo</p>
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <Zap className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <Zap className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Sacrificio</h4>
                 <p className="text-sm text-parchment-300 text-center">Entrega total al servicio</p>
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-alanizGold-600 rounded-full shadow-lg mb-4">
-                  <Shield className="w-6 h-6 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <Shield className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                 </div>
                 <h4 className="font-display font-semibold text-alanizGold-400 mb-2">Fidelidad</h4>
                 <p className="text-sm text-parchment-300 text-center">Lealtad inquebrantable al pueblo</p>
@@ -240,8 +240,8 @@ export default function Fasor() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="card-elegant bg-gradient-to-br from-orange-800/60 to-red-800/60 border border-orange-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-600 rounded-full flex-shrink-0">
-                    <Flame className="w-5 h-5 text-white" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
+                    <Flame className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-orange-400">
                     Incendios
@@ -254,8 +254,8 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-blue-800/60 to-cyan-800/60 border border-blue-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full flex-shrink-0">
-                    <Waves className="w-5 h-5 text-white" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
+                    <Waves className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-blue-400">
                     Inundaciones
@@ -268,8 +268,8 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-amber-800/60 to-yellow-800/60 border border-amber-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-600 rounded-full flex-shrink-0">
-                    <Mountain className="w-5 h-5 text-white" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
+                    <Mountain className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-amber-400">
                     Catástrofes Naturales
@@ -282,8 +282,8 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-red-800/60 to-pink-800/60 border border-red-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-red-600 rounded-full flex-shrink-0">
-                    <Siren className="w-5 h-5 text-white" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
+                    <Siren className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-red-400">
                     Emergencias Civiles
@@ -296,8 +296,8 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-green-800/60 to-emerald-800/60 border border-green-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full flex-shrink-0">
-                    <Hospital className="w-5 h-5 text-white" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
+                    <Hospital className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-green-400">
                     Apoyo Sanitario
@@ -310,8 +310,8 @@ export default function Fasor() {
               
               <div className="card-elegant bg-gradient-to-br from-purple-800/60 to-indigo-800/60 border border-purple-600/40">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-600 rounded-full flex-shrink-0">
-                    <BarChart3 className="w-5 h-5 text-white" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full flex-shrink-0">
+                    <BarChart3 className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-purple-400">
                     Evaluación de Riesgos
@@ -327,8 +327,8 @@ export default function Fasor() {
           <div className="card-elegant observe-me opacity-0 translate-y-8" style={{ animationDelay: '600ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <Swords className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14 border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Swords className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">
@@ -531,8 +531,8 @@ export default function Fasor() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
-                    <Dumbbell className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full mb-3 mx-auto">
+                    <Dumbbell className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
                     Condición Física
@@ -545,8 +545,8 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
-                    <Wrench className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full mb-3 mx-auto">
+                    <Wrench className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
                     Formación Técnica
@@ -559,8 +559,8 @@ export default function Fasor() {
               
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30">
                 <div className="text-center mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-alanizGold-600 rounded-full mb-3 mx-auto">
-                    <Brain className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 border-2 border-alanizGold-600 bg-transparent rounded-full mb-3 mx-auto">
+                    <Brain className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500">
                     Fortaleza Mental
@@ -628,8 +628,8 @@ export default function Fasor() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full shadow-lg mb-4">
-                  <span className="text-white text-xl font-bold">1</span>
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <span className="text-alanizGold-600 text-xl font-bold">1</span>
                 </div>
                 <h4 className="font-display font-semibold text-green-400 mb-3">Nivel Verde</h4>
                 <div className="text-center">
@@ -640,8 +640,8 @@ export default function Fasor() {
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-full shadow-lg mb-4">
-                  <span className="text-white text-xl font-bold">2</span>
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4">
+                  <span className="text-alanizGold-600 text-xl font-bold">2</span>
                 </div>
                 <h4 className="font-display font-semibold text-amber-400 mb-3">Nivel Ámbar</h4>
                 <div className="text-center">
@@ -652,8 +652,8 @@ export default function Fasor() {
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full shadow-lg mb-4 animate-pulse">
-                  <span className="text-white text-xl font-bold">3</span>
+                <div className="inline-flex items-center justify-center w-16 h-16 border-2 border-alanizGold-600 bg-transparent rounded-full mb-4 animate-pulse">
+                  <span className="text-alanizGold-600 text-xl font-bold">3</span>
                 </div>
                 <h4 className="font-display font-semibold text-red-400 mb-3">Nivel Rojo</h4>
                 <div className="text-center">
@@ -712,8 +712,8 @@ export default function Fasor() {
           <div className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8" style={{ animationDelay: '1600ms' }}>
             <div className="flex items-start space-x-6 mb-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-alanizGold-500 to-alanizGold-600 rounded-full shadow-lg">
-                  <Heart className="w-5 h-5 text-alanizGreen-950" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14 border-2 border-alanizGold-600 bg-transparent rounded-full">
+                  <Heart className="w-5 h-5 text-alanizGold-600" aria-hidden="true" />
                 </div>
               </div>
               <div className="flex-1">

@@ -242,37 +242,30 @@ export default function Fasor() {
               </h3>
               <p className="text-lg text-parchment-100 leading-relaxed">
                 FASOR se organiza en{' '}
-                <strong className="text-alanizGold-400">cinco unidades especializadas</strong>, cada
+                <strong className="text-alanizGold-600">cinco unidades especializadas</strong>, cada
                 una con capacidades específicas que garantizan una respuesta integral ante cualquier
                 emergencia.
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {units.map((unit) => (
-                <div key={unit.id} className="relative group">
-                  <div
-                    className="inline-flex items-center justify-center bg-alanizGreen-900/40 rounded-full shadow-2xl border-4 border-alanizGold-600/40 overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:border-alanizGold-600/70"
-                    style={{ width: '144px', height: '144px' }}
-                  >
+                <div
+                  key={unit.id}
+                  className="flex flex-col items-center rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-6 text-center transition-all duration-300 hover:border-alanizGold-600/60"
+                >
+                  <div className="mb-4 inline-flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-alanizGold-600/40 bg-alanizGreen-900 shadow-lg">
                     <img
                       src={unit.logo}
                       alt={`Logo ${unit.name} - FASOR`}
-                      className="w-full h-full object-cover"
+                      className="h-full w-full object-cover"
                       loading="lazy"
                     />
                   </div>
-
-                  <div className="absolute inset-0 bg-black/85 rounded-full items-center justify-center p-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden group-hover:flex">
-                    <div className="text-center max-w-[180px]">
-                      <h4 className="text-alanizGold-400 font-display font-semibold text-sm mb-2">
-                        {unit.name}
-                      </h4>
-                      <p className="text-parchment-300 text-xs leading-relaxed">
-                        {unit.description}
-                      </p>
-                    </div>
-                  </div>
+                  <h4 className="mb-2 font-display text-lg font-semibold text-alanizGold-500">
+                    {unit.name}
+                  </h4>
+                  <p className="text-sm leading-relaxed text-parchment-300">{unit.description}</p>
                 </div>
               ))}
             </div>

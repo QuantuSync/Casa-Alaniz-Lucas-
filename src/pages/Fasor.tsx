@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import {
   BarChart3,
   Brain,
-  ChevronUp,
   Construction,
   Dumbbell,
   Flame,
@@ -20,7 +19,6 @@ import {
   Scale,
   Shield,
   Siren,
-  Star,
   Swords,
   Target,
   Timer,
@@ -38,22 +36,36 @@ import forestalLogo from '../assets/forestal-logo.jpg';
 import terrestresLogo from '../assets/terrestres-logo.jpg';
 import sanitarioLogo from '../assets/sanitario-logo.jpg';
 
-// Distintivos de rango (en oro): estrellas de 5 puntas para mando, galones para tropa.
+// Distintivos de rango (SVG a medida, en oro): estrella heráldica de 5 puntas rectas
+// para mando, galón en V plano apilable para tropa.
 const RankStars = ({ count }: { count: number }) => (
-  <span className="inline-flex items-center gap-1 text-alanizGold-600" aria-hidden="true">
+  <span className="inline-flex items-center gap-0.5 text-alanizGold-600" aria-hidden="true">
     {Array.from({ length: count }, (_, i) => (
-      <Star key={i} className="h-5 w-5 fill-current" />
+      <svg key={i} viewBox="0 0 24 24" className="h-[15px] w-[15px]" fill="currentColor">
+        <path d="M12 1 L14.53 8.52 L22.46 8.6 L16.09 13.33 L18.47 20.9 L12 16.3 L5.53 20.9 L7.91 13.33 L1.54 8.6 L9.47 8.52 Z" />
+      </svg>
     ))}
   </span>
 );
 
 const RankChevrons = ({ count }: { count: number }) => (
   <span
-    className="inline-flex flex-col items-center -space-y-1.5 text-alanizGold-600"
+    className="inline-flex flex-col items-center gap-0.5 text-alanizGold-600"
     aria-hidden="true"
   >
     {Array.from({ length: count }, (_, i) => (
-      <ChevronUp key={i} className="h-5 w-5" strokeWidth={3} />
+      <svg
+        key={i}
+        viewBox="0 0 36 11"
+        className="h-[11px] w-9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={3.5}
+        strokeLinejoin="miter"
+        strokeLinecap="butt"
+      >
+        <path d="M2 9 L18 2.5 L34 9" />
+      </svg>
     ))}
   </span>
 );

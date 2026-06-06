@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { Castle } from 'lucide-react';
+import type { RouteRecord } from 'vite-react-ssg';
 import Layout from './components/Layout';
+import ErrorBoundary from './components/ErrorBoundary';
 
-// Lazy loading de páginas para mejor performance
-const Home = React.lazy(() => import('./pages/Home'));
-const Historia = React.lazy(() => import('./pages/Historia'));
-const Simbolos = React.lazy(() => import('./pages/Simbolos'));
-const Legado = React.lazy(() => import('./pages/Legado'));
-const Fasor = React.lazy(() => import('./pages/Fasor'));
-const Documentos = React.lazy(() => import('./pages/Documentos'));
-const Contacto = React.lazy(() => import('./pages/Contacto'));
-const Condecoraciones = React.lazy(() => import('./pages/Condecoraciones'));
-const DiaDeLaCasa = React.lazy(() => import('./pages/DiaDeLaCasa'));
-
-// Componente de carga para transiciones
+// Componente de carga para transiciones (fallback de Suspense)
 const PageLoader = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
     <div className="text-center space-y-4">
@@ -24,32 +15,9 @@ const PageLoader = () => (
   </div>
 );
 
-// Loading bar mejorado para transiciones de página
-const LoadingBar = () => {
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, [location]);
-
-  if (!loading) return null;
-
-  return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-alanizGreen-900">
-      <div
-        className="h-full bg-gradient-to-r from-alanizGold-600 to-alanizGold-400 
-                      transition-all duration-300 ease-out animate-pulse"
-        style={{ width: '100%' }}
-      ></div>
-    </div>
-  );
-};
-
-// Hook para scroll al cambiar de página
-const useScrollToTop = () => {
+// Hook para scroll al cambiar de página y título/meta por ruta.
+// Todo va dentro de useEffect: no se ejecuta en el pre-render (SSR), solo en cliente.
+const useRouteEffects = () => {
   const location = useLocation();
 
   useEffect(() => {
@@ -95,122 +63,94 @@ const useScrollToTop = () => {
     if (metaDescription) {
       metaDescription.setAttribute('content', description);
     }
-
-    // Analytics de navegación (si se implementa en el futuro)
-    if (import.meta.env.PROD) {
-      console.log(`Navegación: ${location.pathname}`);
-    }
   }, [location]);
 };
 
-// Componente principal de la aplicación
-export default function App() {
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-  // Hook personalizado para scroll
-  useScrollToTop();
-
-  // Manejar carga inicial
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitialLoad(false);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Efecto para mejorar la experiencia de usuario
-  useEffect(() => {
-    // Configurar tema oscuro/claro según preferencias del sistema
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-    const handleColorSchemeChange = (e: MediaQueryListEvent) => {
-      // La Casa Alaniz mantiene su tema oscuro, pero podemos registrar la preferencia
-      console.log(`Preferencia de color del sistema: ${e.matches ? 'claro' : 'oscuro'}`);
-    };
-
-    mediaQuery.addEventListener('change', handleColorSchemeChange);
-    return () => mediaQuery.removeEventListener('change', handleColorSchemeChange);
-  }, []);
-
-  // Mostrar carga inicial si es necesario
-  if (isInitialLoad) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-alanizGreen-950">
-        <div className="text-center space-y-6">
-          <div className="flex justify-center text-alanizGold-600 animate-float">
-            <Castle className="w-24 h-24" aria-hidden="true" />
-          </div>
-          <div className="space-y-2">
-            <h1 className="text-3xl font-display text-alanizGold-600 font-bold">Casa Alaniz</h1>
-            <p className="text-parchment-300 italic">Memoria Ardet</p>
-          </div>
-          <div className="flex justify-center space-x-1">
-            <div className="w-2 h-2 bg-alanizGold-600 rounded-full animate-pulse"></div>
-            <div
-              className="w-2 h-2 bg-alanizGold-600 rounded-full animate-pulse"
-              style={{ animationDelay: '0.2s' }}
-            ></div>
-            <div
-              className="w-2 h-2 bg-alanizGold-600 rounded-full animate-pulse"
-              style={{ animationDelay: '0.4s' }}
-            ></div>
-          </div>
-        </div>
+// Página 404
+const NotFound = () => (
+  <div className="flex min-h-[60vh] items-center justify-center px-4">
+    <div className="stack-centered space-y-5">
+      <Castle className="h-24 w-24 text-alanizGold-600" aria-hidden="true" />
+      <h1 className="font-display text-3xl font-bold text-alanizGold-600">Página No Encontrada</h1>
+      <p className="max-w-md text-parchment-300">
+        La página que buscas no existe en los archivos de la Casa Alaniz. Los pergaminos han sido
+        revisados, pero no se encontró rastro.
+      </p>
+      <div className="space-x-4">
+        <button onClick={() => window.history.back()} className="btn-secondary">
+          Volver Atrás
+        </button>
+        <button onClick={() => (window.location.href = '/')} className="btn-alaniz">
+          Ir al Inicio
+        </button>
       </div>
-    );
-  }
+    </div>
+  </div>
+);
+
+// Elemento raíz: ErrorBoundary + Layout + Suspense con el Outlet de la ruta activa.
+function Root() {
+  useRouteEffects();
 
   return (
-    <Layout>
-      <LoadingBar />
-      <React.Suspense fallback={<PageLoader />}>
-        <div className="animate-fade-in">
-          <Routes>
-            {/* Ruta principal */}
-            <Route path="/" element={<Home />} />
-
-            {/* Rutas públicas */}
-            <Route path="/historia" element={<Historia />} />
-            <Route path="/simbolos" element={<Simbolos />} />
-            <Route path="/legado" element={<Legado />} />
-            <Route path="/fasor" element={<Fasor />} />
-            <Route path="/documentos" element={<Documentos />} />
-            <Route path="/condecoraciones" element={<Condecoraciones />} />
-            <Route path="/dia-casa" element={<DiaDeLaCasa />} />
-            <Route path="/contacto" element={<Contacto />} />
-
-            {/* Redirección para rutas no encontradas */}
-            <Route
-              path="/404"
-              element={
-                <div className="flex min-h-[60vh] items-center justify-center px-4">
-                  <div className="stack-centered space-y-5">
-                    <Castle className="h-24 w-24 text-alanizGold-600" aria-hidden="true" />
-                    <h1 className="font-display text-3xl font-bold text-alanizGold-600">
-                      Página No Encontrada
-                    </h1>
-                    <p className="max-w-md text-parchment-300">
-                      La página que buscas no existe en los archivos de la Casa Alaniz. Los
-                      pergaminos han sido revisados, pero no se encontró rastro.
-                    </p>
-                    <div className="space-x-4">
-                      <button onClick={() => window.history.back()} className="btn-secondary">
-                        Volver Atrás
-                      </button>
-                      <button onClick={() => (window.location.href = '/')} className="btn-alaniz">
-                        Ir al Inicio
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              }
-            />
-
-            {/* Catch-all route */}
-            <Route path="*" element={<Navigate to="/404" replace />} />
-          </Routes>
-        </div>
-      </React.Suspense>
-    </Layout>
+    <ErrorBoundary>
+      <Layout>
+        <React.Suspense fallback={<PageLoader />}>
+          <div className="animate-fade-in">
+            <Outlet />
+          </div>
+        </React.Suspense>
+      </Layout>
+    </ErrorBoundary>
   );
 }
+
+// Rutas en formato data-router para vite-react-ssg.
+// Cada página se carga con `lazy`; el import directo permite al SSG detectar
+// los estilos/recursos de cada ruta durante el build.
+export const routes: RouteRecord[] = [
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        lazy: () => import('./pages/Home').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'historia',
+        lazy: () => import('./pages/Historia').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'simbolos',
+        lazy: () => import('./pages/Simbolos').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'legado',
+        lazy: () => import('./pages/Legado').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'fasor',
+        lazy: () => import('./pages/Fasor').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'documentos',
+        lazy: () => import('./pages/Documentos').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'condecoraciones',
+        lazy: () => import('./pages/Condecoraciones').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'dia-casa',
+        lazy: () => import('./pages/DiaDeLaCasa').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'contacto',
+        lazy: () => import('./pages/Contacto').then((m) => ({ Component: m.default })),
+      },
+      { path: '404', element: <NotFound /> },
+      { path: '*', element: <Navigate to="/404" replace /> },
+    ],
+  },
+];

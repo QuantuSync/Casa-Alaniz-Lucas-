@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Library, Shield, Crown, ScrollText, Mail } from 'lucide-react';
 import escudo from '../assets/Escudo.jpg';
@@ -73,6 +73,19 @@ const StatCard = ({
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const escudoRef = useRef<HTMLImageElement>(null);
+
+  // En la primera carga directa de la home, el escudo va en el HTML pre-renderizado y
+  // puede terminar de cargar ANTES de que React hidrate y enganche `onLoad`; en ese caso
+  // `onLoad` no se dispara y el escudo se quedaría oculto (opacity-0). Tras hidratar,
+  // comprobamos si la imagen ya está completa y la revelamos. Así el escudo aparece
+  // SIEMPRE en la primera carga, sin depender de un onLoad que puede perderse.
+  useEffect(() => {
+    const img = escudoRef.current;
+    if (img && img.complete && img.naturalWidth > 0) {
+      setImageLoaded(true);
+    }
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -114,10 +127,12 @@ export default function Home() {
                 }`}
               >
                 <img
+                  ref={escudoRef}
                   src={escudo}
                   alt="Escudo de la Casa Alaniz"
                   className="image-glow mx-auto h-56 w-full object-contain lg:h-64"
                   onLoad={() => setImageLoaded(true)}
+                  onError={() => setImageLoaded(true)}
                 />
               </div>
             </div>

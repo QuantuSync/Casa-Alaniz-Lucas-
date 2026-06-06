@@ -60,6 +60,7 @@ const useClickOutside = (callback: () => void) => {
 const Logo = React.memo(() => (
   <NavLink
     to="/"
+    end
     className="group flex items-center gap-3 leading-none transition-all duration-300"
     aria-label="Casa Alaniz - Inicio"
   >
@@ -92,6 +93,7 @@ const NavItem = React.memo(
   }) => (
     <NavLink
       to={path}
+      end={path === '/'}
       onClick={onClick}
       className={({ isActive }) => `
       relative flex items-center space-x-2 px-3 py-2 rounded-lg
@@ -229,6 +231,7 @@ const DropdownNavItem = React.memo(
                 <NavLink
                   key={subitem.path}
                   to={subitem.path}
+                  end={subitem.path === '/'}
                   onClick={onClose}
                   role="menuitem"
                   tabIndex={isOpen ? 0 : -1}
@@ -364,6 +367,7 @@ const MobileMenu = React.memo(({ isOpen, onClose }: { isOpen: boolean; onClose: 
                         <NavLink
                           key={subitem.path}
                           to={subitem.path}
+                          end={subitem.path === '/'}
                           onClick={onClose}
                           role="menuitem"
                           className={({ isActive }) => `

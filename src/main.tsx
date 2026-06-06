@@ -6,21 +6,8 @@ import { routes } from './App';
 export const createRoot = ViteReactSSG({ routes });
 
 // El siguiente código solo debe ejecutarse en el navegador, nunca durante el pre-render.
+// (No se registra Service Worker: no hay /sw.js ni PWA; hacerlo daba un error de consola.)
 if (typeof window !== 'undefined' && import.meta.env.PROD) {
-  // Registro del Service Worker para PWA (opcional)
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then((registration) => {
-          console.log('SW registrado: ', registration);
-        })
-        .catch((registrationError) => {
-          console.log('SW registro falló: ', registrationError);
-        });
-    });
-  }
-
   // Preload de rutas críticas para mejorar la navegación posterior
   import('./pages/Home');
   import('./pages/Historia');

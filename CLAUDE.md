@@ -43,6 +43,8 @@ npm run format    # Prettier --write .
 - **Imágenes en `public/`** se referencian con ruta absoluta (`/fonts/...`, `/images/...`); las de `src/assets/` se importan en el módulo.
 - **Formato**: Prettier (`singleQuote`, `printWidth: 100`, `semi`, 2 espacios). Ejecutar `npm run format` antes de commitear.
 - **Pre-render (SSG)**: el código que use `window`/`document`/`localStorage`/observers debe ir en `useEffect` o handlers (no se ejecutan en build), o envuelto en `<ClientOnly>`. Nada que toque el navegador en el cuerpo del render ni a nivel de módulo, o romperá el build. Título/meta por ruta van en el `handle` de la ruta (→ `RouteHead`/`<Head>`), no en `document.title`.
+- **NavLink a `/`**: usar siempre `end` (logo e "Inicio"); sin `end`, `/` se considera activo en todas las rutas y el estado activo difiere entre servidor y cliente → error de hidratación.
+- **Verificar el SSG en local**: `npm run preview` NO resuelve bien las rutas anidadas (sirve `index.html` de home para `/historia` y provoca falsos mismatches de hidratación). Para una prueba fiel a Vercel, servir `dist/` con un estático que haga clean-URLs (`<ruta>/index.html`) y fallback SPA. Las rutas reales hidratan sin errores; solo una URL inexistente cae al fallback (mismatch esperado).
 
 ## Método de trabajo
 

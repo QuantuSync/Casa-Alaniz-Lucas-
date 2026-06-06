@@ -4,6 +4,7 @@ import { Castle } from 'lucide-react';
 import { Head, ClientOnly, type RouteRecord } from 'vite-react-ssg';
 import Layout from './components/Layout';
 import ErrorBoundary from './components/ErrorBoundary';
+import escudo from './assets/Escudo.jpg';
 
 const DEFAULT_TITLE = 'Casa Alaniz - Archivo Heráldico Familiar';
 const DEFAULT_DESCRIPTION =
@@ -24,16 +25,46 @@ const PageLoader = () => (
 // Splash de bienvenida "Memoria Ardet". Se renderiza SOLO en cliente (ClientOnly),
 // como capa por encima del contenido (que ya está en el HTML pre-renderizado), y se
 // desvanece tras hidratar. No entra en el HTML => no afecta al SEO.
+//
+// El escudo es una imagen (~700 KB), así que el temporizador de desvanecimiento NO
+// arranca hasta que la imagen ha cargado (onload) — así el escudo SIEMPRE se ve antes
+// de irse. Se precarga con prioridad alta (fetchPriority) y hay un tope de seguridad
+// por si la red fallara o fuese muy lenta, para que el splash nunca se quede colgado.
 function WelcomeSplash() {
   const [fading, setFading] = useState(false);
   const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
-    const fadeTimer = setTimeout(() => setFading(true), 900);
-    const removeTimer = setTimeout(() => setRemoved(true), 1500);
+    let started = false;
+    let fadeTimer: ReturnType<typeof setTimeout>;
+    let removeTimer: ReturnType<typeof setTimeout>;
+
+    // Arranca la cuenta atrás del splash: mantener el escudo visible ~900 ms y luego
+    // desvanecer. Solo se ejecuta una vez (cuando el escudo está listo o salta el tope).
+    const start = () => {
+      if (started) return;
+      started = true;
+      fadeTimer = setTimeout(() => setFading(true), 900);
+      removeTimer = setTimeout(() => setRemoved(true), 1500);
+    };
+
+    // Precarga con prioridad alta; comparte caché con el <img> que se pinta abajo.
+    const img = new Image();
+    img.fetchPriority = 'high';
+    img.onload = start;
+    img.onerror = start; // si fallara, no bloquear el splash
+    img.src = escudo;
+    if (img.complete) start(); // ya estaba en caché
+
+    // Tope de seguridad: pase lo que pase, el splash no dura más de 4 s.
+    const safetyTimer = setTimeout(start, 4000);
+
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);
+      clearTimeout(safetyTimer);
+      img.onload = null;
+      img.onerror = null;
     };
   }, []);
 
@@ -47,8 +78,15 @@ function WelcomeSplash() {
       }`}
     >
       <div className="text-center space-y-6">
-        <div className="flex justify-center text-alanizGold-600 animate-float">
-          <Castle className="w-24 h-24" aria-hidden="true" />
+        <div className="flex justify-center animate-float">
+          <img
+            src={escudo}
+            alt="Escudo de la Casa Alaniz"
+            width={420}
+            height={600}
+            decoding="async"
+            className="h-44 w-auto rounded-lg border border-alanizGold-600/30 shadow-2xl sm:h-52"
+          />
         </div>
         <div className="space-y-2">
           <h1 className="text-3xl font-display text-alanizGold-600 font-bold">Casa Alaniz</h1>

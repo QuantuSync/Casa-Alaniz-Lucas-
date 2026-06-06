@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react';
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, Navigate, useLocation, useMatches } from 'react-router-dom';
 import { Castle } from 'lucide-react';
-import type { RouteRecord } from 'vite-react-ssg';
+import { Head, ClientOnly, type RouteRecord } from 'vite-react-ssg';
 import Layout from './components/Layout';
 import ErrorBoundary from './components/ErrorBoundary';
+
+const DEFAULT_TITLE = 'Casa Alaniz - Archivo Heráldico Familiar';
+const DEFAULT_DESCRIPTION =
+  'Archivo heráldico oficial de la Casa Alaniz. Custodios de la memoria y preservadores del legado familiar.';
+
+type RouteMeta = { title: string; description: string };
 
 // Componente de carga para transiciones (fallback de Suspense)
 const PageLoader = () => (
@@ -15,54 +21,79 @@ const PageLoader = () => (
   </div>
 );
 
-// Hook para scroll al cambiar de página y título/meta por ruta.
-// Todo va dentro de useEffect: no se ejecuta en el pre-render (SSR), solo en cliente.
-const useRouteEffects = () => {
-  const location = useLocation();
+// Splash de bienvenida "Memoria Ardet". Se renderiza SOLO en cliente (ClientOnly),
+// como capa por encima del contenido (que ya está en el HTML pre-renderizado), y se
+// desvanece tras hidratar. No entra en el HTML => no afecta al SEO.
+function WelcomeSplash() {
+  const [fading, setFading] = useState(false);
+  const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
-    // Smooth scroll to top cuando cambia la ruta
+    const fadeTimer = setTimeout(() => setFading(true), 900);
+    const removeTimer = setTimeout(() => setRemoved(true), 1500);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+    };
+  }, []);
+
+  if (removed) return null;
+
+  return (
+    <div
+      aria-hidden="true"
+      className={`fixed inset-0 z-[10000] flex items-center justify-center bg-alanizGreen-950 transition-opacity duration-500 ${
+        fading ? 'pointer-events-none opacity-0' : 'opacity-100'
+      }`}
+    >
+      <div className="text-center space-y-6">
+        <div className="flex justify-center text-alanizGold-600 animate-float">
+          <Castle className="w-24 h-24" aria-hidden="true" />
+        </div>
+        <div className="space-y-2">
+          <h1 className="text-3xl font-display text-alanizGold-600 font-bold">Casa Alaniz</h1>
+          <p className="text-parchment-300 italic">Memoria Ardet</p>
+        </div>
+        <div className="flex justify-center space-x-1">
+          <div className="w-2 h-2 bg-alanizGold-600 rounded-full animate-pulse"></div>
+          <div
+            className="w-2 h-2 bg-alanizGold-600 rounded-full animate-pulse"
+            style={{ animationDelay: '0.2s' }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-alanizGold-600 rounded-full animate-pulse"
+            style={{ animationDelay: '0.4s' }}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Inyecta <title>/<meta> por ruta en el <head>, leyendo el `handle` de la ruta activa.
+// Al renderizarse (no en useEffect), queda en el HTML pre-renderizado y react-helmet
+// lo actualiza también al navegar en cliente.
+function RouteHead() {
+  const matches = useMatches();
+  const meta = [...matches].reverse().find((m) => m.handle)?.handle as RouteMeta | undefined;
+  const title = meta?.title ?? DEFAULT_TITLE;
+  const description = meta?.description ?? DEFAULT_DESCRIPTION;
+
+  return (
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+    </Head>
+  );
+}
+
+// Scroll al inicio al cambiar de ruta (solo cliente; va en useEffect).
+const useScrollToTop = () => {
+  const location = useLocation();
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Actualizar título de la página según la ruta
-    const routeTitles: Record<string, string> = {
-      '/': 'Inicio - Casa Alaniz',
-      '/historia': 'Historia - Casa Alaniz',
-      '/simbolos': 'Símbolos Heráldicos - Casa Alaniz',
-      '/legado': 'El Legado Vivo - Casa Alaniz',
-      '/fasor': 'FASOR - Fuerza de Auxilio, Soporte y Rescate - Casa Alaniz',
-      '/documentos': 'Archivo Documental - Casa Alaniz',
-      '/condecoraciones': 'Condecoraciones - Casa Alaniz',
-      '/dia-casa': 'Día de la Casa - Casa Alaniz',
-      '/contacto': 'Contacto - Casa Alaniz',
-    };
-
-    const title = routeTitles[location.pathname] || 'Casa Alaniz - Archivo Heráldico Familiar';
-    document.title = title;
-
-    // Actualizar meta description dinámicamente
-    const descriptions: Record<string, string> = {
-      '/': 'Archivo heráldico oficial de la Casa Alaniz. Custodios de la memoria y preservadores del legado familiar.',
-      '/historia':
-        'Descubre la rica historia de la Casa Alaniz, desde 1117 d.C. hasta nuestros días.',
-      '/simbolos':
-        'Explora los símbolos heráldicos de la Casa Alaniz: escudo, bandera y anillo familiar.',
-      '/legado': 'El legado vivo de la Casa Alaniz y su impacto en las generaciones futuras.',
-      '/fasor':
-        'FASOR - Fuerza de Auxilio, Soporte y Rescate de la Casa Alaniz. Siempre listos, siempre vigilantes, siempre al servicio.',
-      '/documentos': 'Acceso al archivo documental con cartas, tratados y crónicas restauradas.',
-      '/condecoraciones':
-        'Condecoraciones y distinciones otorgadas por la Casa Alaniz en reconocimiento al honor y mérito.',
-      '/dia-casa':
-        'La celebración anual más solemne de la Casa Alaniz: ceremonia de condecoraciones y renovación de votos.',
-      '/contacto': 'Contacta con la administración oficial de la Casa Alaniz.',
-    };
-
-    const description = descriptions[location.pathname] || descriptions['/'];
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', description);
-    }
   }, [location]);
 };
 
@@ -88,12 +119,14 @@ const NotFound = () => (
   </div>
 );
 
-// Elemento raíz: ErrorBoundary + Layout + Suspense con el Outlet de la ruta activa.
+// Elemento raíz: head por ruta + ErrorBoundary + Layout + Suspense con el Outlet,
+// y el splash de bienvenida como overlay solo-cliente.
 function Root() {
-  useRouteEffects();
+  useScrollToTop();
 
   return (
     <ErrorBoundary>
+      <RouteHead />
       <Layout>
         <React.Suspense fallback={<PageLoader />}>
           <div className="animate-fade-in">
@@ -101,13 +134,15 @@ function Root() {
           </div>
         </React.Suspense>
       </Layout>
+      <ClientOnly>{() => <WelcomeSplash />}</ClientOnly>
     </ErrorBoundary>
   );
 }
 
 // Rutas en formato data-router para vite-react-ssg.
 // Cada página se carga con `lazy`; el import directo permite al SSG detectar
-// los estilos/recursos de cada ruta durante el build.
+// los estilos/recursos de cada ruta durante el build. El `handle` aporta el
+// título/descripción que RouteHead inyecta en el <head> pre-renderizado.
 export const routes: RouteRecord[] = [
   {
     path: '/',
@@ -116,38 +151,76 @@ export const routes: RouteRecord[] = [
       {
         index: true,
         lazy: () => import('./pages/Home').then((m) => ({ Component: m.default })),
+        handle: { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION } satisfies RouteMeta,
       },
       {
         path: 'historia',
         lazy: () => import('./pages/Historia').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'Historia - Casa Alaniz',
+          description:
+            'Descubre la rica historia de la Casa Alaniz, desde 1117 d.C. hasta nuestros días.',
+        } satisfies RouteMeta,
       },
       {
         path: 'simbolos',
         lazy: () => import('./pages/Simbolos').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'Símbolos Heráldicos - Casa Alaniz',
+          description:
+            'Explora los símbolos heráldicos de la Casa Alaniz: escudo, bandera y anillo familiar.',
+        } satisfies RouteMeta,
       },
       {
         path: 'legado',
         lazy: () => import('./pages/Legado').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'El Legado Vivo - Casa Alaniz',
+          description: 'El legado vivo de la Casa Alaniz y su impacto en las generaciones futuras.',
+        } satisfies RouteMeta,
       },
       {
         path: 'fasor',
         lazy: () => import('./pages/Fasor').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'FASOR - Fuerza de Auxilio, Soporte y Rescate - Casa Alaniz',
+          description:
+            'FASOR - Fuerza de Auxilio, Soporte y Rescate de la Casa Alaniz. Siempre listos, siempre vigilantes, siempre al servicio.',
+        } satisfies RouteMeta,
       },
       {
         path: 'documentos',
         lazy: () => import('./pages/Documentos').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'Archivo Documental - Casa Alaniz',
+          description: 'Acceso al archivo documental con cartas, tratados y crónicas restauradas.',
+        } satisfies RouteMeta,
       },
       {
         path: 'condecoraciones',
         lazy: () => import('./pages/Condecoraciones').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'Condecoraciones - Casa Alaniz',
+          description:
+            'Condecoraciones y distinciones otorgadas por la Casa Alaniz en reconocimiento al honor y mérito.',
+        } satisfies RouteMeta,
       },
       {
         path: 'dia-casa',
         lazy: () => import('./pages/DiaDeLaCasa').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'Día de la Casa - Casa Alaniz',
+          description:
+            'La celebración anual más solemne de la Casa Alaniz: ceremonia de condecoraciones y renovación de votos.',
+        } satisfies RouteMeta,
       },
       {
         path: 'contacto',
         lazy: () => import('./pages/Contacto').then((m) => ({ Component: m.default })),
+        handle: {
+          title: 'Contacto - Casa Alaniz',
+          description: 'Contacta con la administración oficial de la Casa Alaniz.',
+        } satisfies RouteMeta,
       },
       { path: '404', element: <NotFound /> },
       { path: '*', element: <Navigate to="/404" replace /> },

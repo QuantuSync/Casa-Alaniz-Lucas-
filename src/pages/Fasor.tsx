@@ -35,7 +35,7 @@ import dronesLogo from '../assets/drones-logo.jpg';
 import forestalLogo from '../assets/forestal-logo.jpg';
 import terrestresLogo from '../assets/terrestres-logo.jpg';
 import sanitarioLogo from '../assets/sanitario-logo.jpg';
-import OfficialSeal from '../components/OfficialSeal';
+import AccreditationSeal from '../components/AccreditationSeal';
 
 // Distintivos de rango (SVG a medida, en oro): estrella heráldica de 5 puntas rectas
 // para mando, galón en V plano apilable para tropa.
@@ -252,41 +252,22 @@ export default function Fasor() {
             </div>
           </div>
 
-          <div
-            className="card-elegant observe-me opacity-0 translate-y-8"
-            style={{ animationDelay: '250ms' }}
-          >
-            <div className="mb-6 flex items-start space-x-6">
-              <div className="flex-shrink-0">
-                <OfficialSeal />
-              </div>
-              <div className="flex-1">
-                <p className="eyebrow mb-1 text-alanizGold-600/70">Entidad registrada</p>
-                <h3 className="font-display text-2xl font-semibold text-alanizGold-600">
-                  Asociación registrada
-                </h3>
-                <div className="rule-gold mt-4" aria-hidden="true"></div>
-              </div>
-            </div>
-
-            <div className="space-y-4 leading-relaxed text-parchment-200">
-              <p>
-                FASOR — Fuerza de Auxilio, Soporte y Rescate es una entidad de protección civil y
-                respuesta ante emergencias, con personalidad jurídica propia en 2025, al amparo del
-                artículo 22 de la Constitución Española y conforme a la Ley Orgánica 1/2002, de 22
-                de marzo. Su ámbito principal de actuación es la comunidad de Castilla y León,
-                pudiendo intervenir en el resto de España o en el extranjero en colaboración con las
-                autoridades competentes.
-              </p>
-              <p>
-                FASOR nace bajo el amparo de la Casa Alaniz como reflejo de un deber de servicio y
-                protección a la comunidad, y desarrolla fines de intervención en emergencias civiles
-                y catástrofes, auxilio a la población, formación ciudadana en prevención y primeros
-                auxilios, y colaboración con administraciones públicas en materia de protección
-                civil.
-              </p>
-            </div>
-          </div>
+          <AccreditationSeal eyebrow="Entidad registrada" title="Asociación registrada">
+            <p>
+              FASOR — Fuerza de Auxilio, Soporte y Rescate es una entidad de protección civil y
+              respuesta ante emergencias, con personalidad jurídica propia en 2025, al amparo del
+              artículo 22 de la Constitución Española y conforme a la Ley Orgánica 1/2002, de 22 de
+              marzo. Su ámbito principal de actuación es la comunidad de Castilla y León, pudiendo
+              intervenir en el resto de España o en el extranjero en colaboración con las
+              autoridades competentes.
+            </p>
+            <p>
+              FASOR nace bajo el amparo de la Casa Alaniz como reflejo de un deber de servicio y
+              protección a la comunidad, y desarrolla fines de intervención en emergencias civiles y
+              catástrofes, auxilio a la población, formación ciudadana en prevención y primeros
+              auxilios, y colaboración con administraciones públicas en materia de protección civil.
+            </p>
+          </AccreditationSeal>
 
           <div
             className="card-elegant bg-gradient-to-r from-alanizGreen-800/80 to-alanizGreen-900/80 border-2 border-alanizGold-600/40 observe-me opacity-0 translate-y-8"

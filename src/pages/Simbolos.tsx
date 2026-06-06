@@ -17,7 +17,7 @@ import {
 import escudo from '../assets/Escudo.jpg';
 import bandera from '../assets/Bandera.jpg';
 import anillo from '../assets/Anillo.png';
-import OfficialSeal from '../components/OfficialSeal';
+import AccreditationSeal from '../components/AccreditationSeal';
 
 // Componente de tarjeta de símbolo mejorado
 const Card = ({
@@ -262,29 +262,13 @@ export default function Simbolos() {
           </Card>
 
           {/* Escudo de armas certificado */}
-          <div
-            className="card-elegant observe-me opacity-0 translate-y-8"
-            style={{ animationDelay: '300ms' }}
-          >
-            <div className="mb-6 flex items-start space-x-6">
-              <div className="flex-shrink-0">
-                <OfficialSeal />
-              </div>
-              <div className="flex-1">
-                <p className="eyebrow mb-1 text-alanizGold-600/70">Reconocimiento oficial</p>
-                <h3 className="font-display text-2xl font-semibold text-alanizGold-600">
-                  Escudo de armas certificado
-                </h3>
-                <div className="rule-gold mt-4" aria-hidden="true"></div>
-              </div>
-            </div>
-
-            <p className="leading-relaxed text-parchment-200">
+          <AccreditationSeal eyebrow="Reconocimiento oficial" title="Escudo de armas certificado">
+            <p>
               El escudo de armas de la Casa Alaniz se encuentra oficialmente certificado y
               registrado en el Armorial Internacional (Gijón, Principado de Asturias, 2025), con
               testimonio notarial del Ilustre Colegio Notarial de Asturias.
             </p>
-          </div>
+          </AccreditationSeal>
 
           {/* Bandera */}
           <Card src={bandera} title="Bandera Señorial" icon={Flag} delay={400}>

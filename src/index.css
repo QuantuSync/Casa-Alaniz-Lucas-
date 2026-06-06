@@ -477,3 +477,93 @@
     animation: none;
   }
 }
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Bloques de ACREDITACIÓN OFICIAL (Símbolos / FASOR)
+   Prestigio sobrio en gama verde/oro: sello en relieve, aura dorada muy sutil
+   y constante, revelado al scroll y un shimmer que cruza el panel UNA vez.
+   Sin colores nuevos, sin fondos llamativos, sin pulsos. Respeta reduced-motion.
+   Fuera de @layer (al final) para tener precedencia sobre .card-elegant.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Sello en relieve: sombra estampada + ligero realce del escudo central */
+.official-seal {
+  filter: drop-shadow(0 3px 4px rgba(13, 30, 18, 0.5));
+}
+.official-seal-icon {
+  filter: drop-shadow(0 1px 1px rgba(13, 30, 18, 0.55));
+}
+
+/* Panel: borde dorado algo más definido + AURA dorada muy tenue y constante
+   (solo para separar del fondo; nada de pulsos). Revelado al entrar en viewport. */
+.accred-panel {
+  position: relative;
+  overflow: hidden; /* recorta el shimmer al marco redondeado */
+  border-color: rgba(212, 175, 55, 0.38);
+  box-shadow:
+    var(--shadow-elegant),
+    0 0 0 1px rgba(212, 175, 55, 0.1),
+    0 0 26px -8px rgba(212, 175, 55, 0.22);
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.accred-panel.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Shimmer: franja de luz diagonal y tenue que recorre el panel una sola vez */
+.accred-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-180%) skewX(-12deg);
+  background: linear-gradient(
+    100deg,
+    rgba(248, 212, 152, 0) 0%,
+    rgba(248, 212, 152, 0.17) 50%,
+    rgba(248, 212, 152, 0) 100%
+  );
+}
+.accred-panel.is-revealed .accred-shine {
+  animation: accred-sweep 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s 1 both;
+}
+@keyframes accred-sweep {
+  0% {
+    transform: translateX(-180%) skewX(-12deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(330%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+/* Accesibilidad: sin movimiento si el usuario lo pide. El bloque aparece visible
+   de inmediato (sin funde/subida) y el shimmer no se ejecuta. El relieve y el aura
+   (estáticos) se conservan. */
+@media (prefers-reduced-motion: reduce) {
+  .accred-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .accred-shine {
+    display: none;
+  }
+}

@@ -17,6 +17,7 @@ import {
   RadioTower,
   RefreshCw,
   Scale,
+  ScrollText,
   Shield,
   Siren,
   Swords,
@@ -248,6 +249,44 @@ export default function Fasor() {
                   Lealtad inquebrantable al pueblo
                 </p>
               </div>
+            </div>
+          </div>
+
+          <div
+            className="card-elegant observe-me opacity-0 translate-y-8"
+            style={{ animationDelay: '250ms' }}
+          >
+            <div className="mb-6 flex items-start space-x-6">
+              <div className="flex-shrink-0">
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-alanizGold-600 bg-transparent">
+                  <ScrollText className="h-5 w-5 text-alanizGold-600" aria-hidden="true" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <p className="eyebrow mb-1 text-alanizGold-600/70">Personalidad jurídica</p>
+                <h3 className="font-display text-2xl font-semibold text-alanizGold-600">
+                  Asociación registrada
+                </h3>
+                <div className="rule-gold mt-4" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <div className="space-y-4 leading-relaxed text-parchment-200">
+              <p>
+                FASOR — Fuerza de Auxilio, Soporte y Rescate es una entidad de protección civil y
+                respuesta ante emergencias, con personalidad jurídica propia en 2025, al amparo del
+                artículo 22 de la Constitución Española y conforme a la Ley Orgánica 1/2002, de 22
+                de marzo. Su ámbito principal de actuación es la comunidad de Castilla y León,
+                pudiendo intervenir en el resto de España o en el extranjero en colaboración con las
+                autoridades competentes.
+              </p>
+              <p>
+                FASOR nace bajo el amparo de la Casa Alaniz como reflejo de un deber de servicio y
+                protección a la comunidad, y desarrolla fines de intervención en emergencias civiles
+                y catástrofes, auxilio a la población, formación ciudadana en prevención y primeros
+                auxilios, y colaboración con administraciones públicas en materia de protección
+                civil.
+              </p>
             </div>
           </div>
 

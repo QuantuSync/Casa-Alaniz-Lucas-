@@ -10,7 +10,6 @@ import {
   Leaf,
   Diamond,
   Award,
-  BadgeCheck,
   User,
   Zap,
   type LucideIcon,
@@ -18,6 +17,7 @@ import {
 import escudo from '../assets/Escudo.jpg';
 import bandera from '../assets/Bandera.jpg';
 import anillo from '../assets/Anillo.png';
+import OfficialSeal from '../components/OfficialSeal';
 
 // Componente de tarjeta de símbolo mejorado
 const Card = ({
@@ -268,9 +268,7 @@ export default function Simbolos() {
           >
             <div className="mb-6 flex items-start space-x-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-alanizGold-600 bg-transparent">
-                  <BadgeCheck className="h-5 w-5 text-alanizGold-600" aria-hidden="true" />
-                </div>
+                <OfficialSeal />
               </div>
               <div className="flex-1">
                 <p className="eyebrow mb-1 text-alanizGold-600/70">Reconocimiento oficial</p>

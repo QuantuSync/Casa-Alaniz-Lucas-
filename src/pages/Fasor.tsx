@@ -17,7 +17,6 @@ import {
   RadioTower,
   RefreshCw,
   Scale,
-  ScrollText,
   Shield,
   Siren,
   Swords,
@@ -36,6 +35,7 @@ import dronesLogo from '../assets/drones-logo.jpg';
 import forestalLogo from '../assets/forestal-logo.jpg';
 import terrestresLogo from '../assets/terrestres-logo.jpg';
 import sanitarioLogo from '../assets/sanitario-logo.jpg';
+import OfficialSeal from '../components/OfficialSeal';
 
 // Distintivos de rango (SVG a medida, en oro): estrella heráldica de 5 puntas rectas
 // para mando, galón en V plano apilable para tropa.
@@ -258,12 +258,10 @@ export default function Fasor() {
           >
             <div className="mb-6 flex items-start space-x-6">
               <div className="flex-shrink-0">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-alanizGold-600 bg-transparent">
-                  <ScrollText className="h-5 w-5 text-alanizGold-600" aria-hidden="true" />
-                </div>
+                <OfficialSeal />
               </div>
               <div className="flex-1">
-                <p className="eyebrow mb-1 text-alanizGold-600/70">Personalidad jurídica</p>
+                <p className="eyebrow mb-1 text-alanizGold-600/70">Entidad registrada</p>
                 <h3 className="font-display text-2xl font-semibold text-alanizGold-600">
                   Asociación registrada
                 </h3>

@@ -515,7 +515,9 @@
    viewport (entrada), pero el resalte queda permanente después. */
 .accred-panel {
   position: relative;
-  overflow: hidden; /* recorta el shimmer al marco redondeado */
+  /* Sin overflow:hidden en el panel: así la caja CRECE con su contenido y nunca
+     recorta el texto (especialmente en móvil). El shimmer se recorta aparte con
+     su propio contenedor (.accred-shine-clip). */
   border-width: 2px;
   border-color: rgba(212, 175, 55, 0.7);
   opacity: 0;
@@ -543,6 +545,16 @@
       0 0 0 1px rgba(212, 175, 55, 0.6),
       0 0 38px 4px rgba(212, 175, 55, 0.6);
   }
+}
+
+/* Contenedor que recorta el shimmer al marco redondeado del panel, sin que el
+   panel en sí tenga overflow:hidden (que recortaría el texto en móvil). */
+.accred-shine-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 /* Shimmer: franja de luz dorada que recorre el panel en BUCLE continuo

@@ -46,8 +46,11 @@ export default function AccreditationSeal({ eyebrow, title, children }: Accredit
 
   return (
     <div ref={ref} className={`accred-panel card-elegant ${revealed ? 'is-revealed' : ''}`}>
-      {/* Barrido de luz (shimmer) que cruza el panel una vez al revelarse */}
-      <span className="accred-shine" aria-hidden="true" />
+      {/* Barrido de luz (shimmer) que cruza el panel; se recorta en su propio
+          contenedor para no obligar al panel a usar overflow:hidden. */}
+      <span className="accred-shine-clip" aria-hidden="true">
+        <span className="accred-shine" />
+      </span>
 
       <div className="relative">
         <div className="mb-6 flex items-start space-x-6">

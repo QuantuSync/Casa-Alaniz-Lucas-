@@ -45,14 +45,14 @@ export default function Legado() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-display font-bold text-alanizGold-600 mb-6">
-            El Legado Inmutable
+            El Legado de la Casa
           </h1>
 
           <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
-            Ocho siglos de historia han forjado un legado que trasciende el tiempo: territorio,
-            honor, conocimiento y la responsabilidad sagrada hacia las futuras generaciones.
+            Lo que la Casa Alaniz quiere conservar y transmitir: su territorio, su oficio, sus
+            valores y su compromiso con las próximas generaciones.
           </p>
         </div>
 
@@ -81,22 +81,17 @@ export default function Legado() {
 
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                El <strong className="text-alanizGold-500">Valle de Monterrey</strong> constituye
-                mucho más que una posesión; representa el corazón territorial de la Casa Alaniz, una
-                responsabilidad señorial que ha pasado de generación en generación desde el siglo
-                XV. Este valle fronterizo con Portugal simboliza la{' '}
-                <em className="text-alanizGold-400">
-                  autoridad territorial, la justicia menor y la defensa del territorio
-                </em>{' '}
-                que define nuestra naturaleza señorial.
+                El <strong className="text-alanizGold-500">Valle de Monterrey</strong>, en Galicia y
+                junto a la frontera portuguesa, es el territorio que la tradición vincula a la Casa
+                Alaniz desde el siglo XV. Más que una posesión, es el lugar al que la familia liga su
+                memoria.
               </p>
               <p>
-                La herencia territorial conlleva no solo derechos, sino deberes sagrados: la
-                protección de quienes habitan bajo nuestro amparo, la administración justa y la
-                preservación de la paz en nuestras tierras. El{' '}
-                <strong className="text-alanizGold-500">Señor de la Casa Alaniz</strong> ostenta
-                actualmente esta responsabilidad ancestral que conecta el pasado medieval con el
-                presente.
+                Ese vínculo se entiende hoy sobre todo como una idea de{' '}
+                <em className="text-alanizGold-400">responsabilidad</em>: cuidar lo recibido y
+                administrarlo con criterio. Es la lectura que el{' '}
+                <strong className="text-alanizGold-500">Señor de la Casa Alaniz</strong> hace de ese
+                pasado en el presente.
               </p>
             </div>
           </div>
@@ -124,20 +119,19 @@ export default function Legado() {
 
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                Desde las{' '}
-                <strong className="text-alanizGold-500">rutas cruzadas del siglo XII</strong>, la
-                Casa Alaniz ha custodiado conocimientos especializados en{' '}
+                Según la tradición familiar, ya desde el{' '}
+                <strong className="text-alanizGold-500">siglo XII</strong> los Alaniz se dedicaron a
+                la{' '}
                 <em className="text-alanizGold-400">
-                  ingeniería militar, cartografía, mecánica y fortificaciones
+                  ingeniería militar, la cartografía, la mecánica y las fortificaciones
                 </em>
-                . Este saber técnico, transmitido de padre a hijo durante ocho siglos, constituye un
-                patrimonio intelectual único que nos distingue como casa de ingenieros y estrategas.
+                . Ese oficio técnico es la seña que la Casa reivindica: la de una familia de
+                constructores.
               </p>
               <p>
-                La <strong className="text-alanizGold-500">tradición militar moderna</strong>,
-                renovada desde 2011, honra este legado ancestral adaptándolo a los tiempos
-                presentes. Lejos de tratarse de nostalgia, representa la aplicación práctica de
-                principios eternos: disciplina, estrategia, honor y servicio.
+                La <strong className="text-alanizGold-500">tradición de inspiración militar</strong>,
+                retomada desde 2011, recoge ese oficio y lo lleva al presente. No es nostalgia, sino
+                una forma de trabajar: disciplina, método, honor y servicio.
               </p>
 
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30 mt-6">
@@ -189,10 +183,9 @@ export default function Legado() {
 
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                El <strong className="text-alanizGold-500">escudo de armas reconstituido</strong> en
-                2025 trasciende una creación caprichosa, constituyendo la recuperación formal de
-                símbolos que han definido nuestra identidad durante siglos. Cada elemento porta
-                significado profundo y conecta el presente con la memoria ancestral.
+                El <strong className="text-alanizGold-500">escudo de armas</strong>, recuperado en
+                2025, no es un capricho: fija en una forma estable los símbolos de la familia. Cada
+                elemento tiene un significado.
               </p>
 
               <div className="grid md:grid-cols-2 gap-8 mt-6">
@@ -202,8 +195,7 @@ export default function Legado() {
                       El Lobo Guardian
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Símbolo central que representa la <em>inteligencia antes que la fuerza</em>,
-                      la vigilancia perpetua, la valentía y la fidelidad inquebrantable al linaje.
+                      Figura central: inteligencia, vigilancia y lealtad a la familia.
                     </p>
                   </div>
 
@@ -212,9 +204,8 @@ export default function Legado() {
                       Las Tres Estrellas
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      <strong>Abril</strong> la heredera, <strong>Diana</strong> la valiente, y{' '}
-                      <strong>Martina</strong> la protectora. Las luminarias del linaje vivo que
-                      aseguran la continuidad de la Casa.
+                      <strong>Abril</strong>, <strong>Diana</strong> y <strong>Martina</strong>, las
+                      tres hijas de la familia y la continuidad de la Casa.
                     </p>
                   </div>
                 </div>
@@ -225,8 +216,7 @@ export default function Legado() {
                       El Orbe de Ámbar
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Representa la llama interior que nunca se extingue, la pasión por preservar la
-                      memoria y el fuego sagrado del lema <em>"Memoria Ardet"</em>.
+                      La llama del lema <em>"Memoria Ardet"</em>: mantener viva la memoria.
                     </p>
                   </div>
 
@@ -235,8 +225,7 @@ export default function Legado() {
                       Las Raíces Profundas
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Simbolizan la profundidad de la memoria ancestral y la conexión inquebrantable
-                      con nuestros orígenes orientales y nuestro pasado señorial.
+                      Los orígenes de la familia y el arraigo de su memoria.
                     </p>
                   </div>
                 </div>
@@ -268,22 +257,20 @@ export default function Legado() {
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
                 <em className="text-alanizGold-400 text-xl">"Memoria Ardet"</em> — "La memoria arde"
-                — trasciende un simple lema, constituyendo la filosofía fundamental que guía cada
-                acción de la Casa Alaniz. Esta llama interior impulsa la preservación consciente de
-                nuestro legado y la transmisión responsable a las generaciones futuras.
+                — es la idea que ordena el resto: conservar la memoria de la familia y transmitirla
+                con cuidado a quienes vienen detrás.
               </p>
               <p>
-                El{' '}
+                Su forma concreta es el{' '}
                 <strong className="text-alanizGold-500">
                   compromiso con la formación de los jóvenes
-                </strong>{' '}
-                constituye la expresión práctica de este legado. Entendemos que la verdadera nobleza
-                reside en la capacidad de forjar caracteres íntegros basados en{' '}
+                </strong>
+                . Para la Casa, lo que cuenta no son los títulos, sino ayudar a formar personas
+                íntegras a partir de{' '}
                 <em className="text-alanizGold-400">
-                  la disciplina, el honor, la integridad, el liderazgo responsable y la excelencia
-                  personal
+                  la disciplina, el honor, la responsabilidad y el esfuerzo
                 </em>
-                , jamás en títulos vacíos.
+                .
               </p>
 
               <div className="bg-alanizGreen-900/50 rounded-lg p-6 border border-alanizGold-600/30 mt-6">
@@ -315,33 +302,28 @@ export default function Legado() {
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-display font-semibold text-alanizGold-500 mb-4">
-                  Legado de Continuidad: La Sucesión Sagrada
+                  Legado de Continuidad: La Sucesión
                 </h3>
               </div>
             </div>
 
             <div className="space-y-4 text-parchment-100 leading-relaxed">
               <p>
-                La <strong className="text-alanizGold-400">sucesión del señorío</strong> trasciende
-                un acto meramente simbólico, constituyendo la culminación natural de ocho siglos de
-                transmisión directa del linaje. Bajo la actual jefatura del{' '}
-                <strong className="text-alanizGold-400">Señor de la Casa Alaniz</strong>, se
-                garantiza que el legado perdurará y se proyectará con renovada fuerza hacia el
-                futuro.
+                La <strong className="text-alanizGold-400">sucesión</strong> de la Casa es algo más
+                que un gesto simbólico: es la forma de asegurar que lo construido siga adelante. Hoy
+                corresponde al <strong className="text-alanizGold-400">Señor de la Casa Alaniz</strong>{' '}
+                y, después, a sus hijas.
               </p>
               <p>
-                Esta continuidad trasciende lo genealógico para convertirse en{' '}
-                <em className="text-alanizGold-400">responsabilidad generacional</em>: custodiar el
-                honor familiar, preservar los conocimientos ancestrales, mantener viva la tradición
-                militar y, sobre todo, formar a las próximas generaciones en los valores que han
-                definido nuestra casa durante casi un milenio.
+                Más que una cuestión genealógica, es una{' '}
+                <em className="text-alanizGold-400">responsabilidad entre generaciones</em>: cuidar la
+                memoria, conservar el oficio, mantener viva la tradición y, sobre todo, formar a
+                quienes vienen detrás.
               </p>
 
               <div className="bg-alanizGold-600/10 rounded-lg p-6 border-l-4 border-alanizGold-600 mt-6">
                 <p className="text-alanizGold-400 font-medium text-center italic">
-                  "No heredamos la tierra de nuestros ancestros; la tomamos prestada de nuestros
-                  hijos. La Casa Alaniz es el custodio eterno de un legado que trasciende el
-                  tiempo."
+                  "No heredamos la tierra de nuestros padres; la tomamos prestada de nuestros hijos."
                 </p>
               </div>
             </div>
@@ -357,10 +339,9 @@ export default function Legado() {
                             backdrop-blur-sm shadow-elegant"
             >
               <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">
-                "Ocho siglos han forjado nuestro carácter. La eternidad será nuestro horizonte.
-                Mientras arda la memoria, perdurará el linaje."
+                "Mientras se cuide la memoria, la Casa sigue en pie."
               </blockquote>
-              <cite className="text-parchment-400 text-sm">— Credo perpetuo de la Casa Alaniz</cite>
+              <cite className="text-parchment-400 text-sm">— Casa Alaniz</cite>
             </div>
           </div>
         </div>

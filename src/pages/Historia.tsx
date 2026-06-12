@@ -40,8 +40,8 @@ export default function Historia() {
           <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
-            Una historia milenaria que abarca desde el siglo XII hasta la refundación de nuestra
-            Casa en el siglo XXI, atravesando continentes y épocas.
+            El recorrido que la tradición familiar atribuye a la Casa Alaniz, desde el siglo XII
+            hasta su refundación en el siglo XXI.
           </p>
         </div>
 
@@ -79,12 +79,11 @@ export default function Historia() {
 
             <div className="space-y-4 text-parchment-200 leading-relaxed">
               <p>
-                Los orígenes remotos de la Casa Alaniz se remontan al siglo XII, en una región
-                situada entre la actual{' '}
-                <strong className="text-alanizGold-500">Siria y Mesopotamia</strong>. Los primeros
-                registros hacen referencia a una familia de ingenieros y artesanos militares que
-                servían como apoyo logístico y constructivo a las huestes cruzadas, sin estar
-                necesariamente vinculados a un bando religioso.
+                La tradición familiar sitúa los orígenes de la Casa Alaniz en el siglo XII, en una
+                región entre la actual{' '}
+                <strong className="text-alanizGold-500">Siria y Mesopotamia</strong>. Se les recuerda
+                como una familia de ingenieros y artesanos militares que daban apoyo logístico y
+                constructivo a los ejércitos de la época, sin atarse a un bando concreto.
               </p>
               <p>
                 Su conocimiento en{' '}
@@ -278,49 +277,38 @@ export default function Historia() {
 
             <div className="space-y-4 text-parchment-100 leading-relaxed">
               <p>
-                Desde el año <strong className="text-alanizGold-400">2011</strong>, la Casa Alaniz
-                ha desarrollado una marcada{' '}
-                <strong className="text-alanizGold-400">tradición militar</strong> que honra el
-                legado ancestral de sus antepasados como ingenieros y estrategas militares. Esta
-                tradición no se limita al ámbito castrense, sino que se extiende como filosofía de
-                vida basada en la{' '}
+                Desde <strong className="text-alanizGold-400">2011</strong>, la Casa Alaniz retoma
+                una <strong className="text-alanizGold-400">tradición de inspiración militar</strong>{' '}
+                que recoge el oficio de sus antepasados ingenieros. Más que un asunto castrense, se
+                entiende como una forma de trabajar basada en la{' '}
                 <em className="text-alanizGold-400">disciplina, el honor y el servicio</em>.
               </p>
               <p>
-                Paralelamente, la Casa ha asumido un{' '}
+                En paralelo, la Casa asume un{' '}
                 <strong className="text-alanizGold-400">
-                  fuerte compromiso con la formación en valores de los jóvenes
+                  compromiso con la formación de los jóvenes
                 </strong>
-                , entendiendo que la verdadera nobleza se manifiesta en el servicio a las futuras
-                generaciones. A través de principios como la{' '}
+                , en la idea de que lo que de verdad cuenta es lo que se aporta a los demás. Sobre
+                principios como la{' '}
                 <em className="text-alanizGold-400">
-                  integridad, el liderazgo responsable y la excelencia personal
-                </em>
-                , se prepara el camino hacia la refundación formal del linaje.
+                  integridad, la responsabilidad y el esfuerzo
+                </em>{' '}
+                se prepara la refundación del linaje.
               </p>
 
-              <div className="bg-alanizGreen-900/50 rounded-lg p-4 border border-alanizGold-600/30 mt-6 mb-6">
-                <p className="text-alanizGold-400 text-sm italic">
-                  "El verdadero valor no reside en la espada, sino en el corazón que la empuña al
-                  servicio de la justicia y la formación de las generaciones venideras."
-                </p>
-              </div>
-
               <p>
-                En el año <strong className="text-alanizGold-400">2025</strong>, el linaje es
-                formalmente reorganizado y fundado como{' '}
-                <strong className="text-alanizGold-400">Casa Alaniz</strong>, recuperando sus
-                símbolos, redactando su acta fundacional, diseñando un escudo de armas propio y
-                consolidando su identidad heráldica.
+                En <strong className="text-alanizGold-400">2025</strong> el linaje se reorganiza
+                formalmente como <strong className="text-alanizGold-400">Casa Alaniz</strong>:
+                recupera sus símbolos, redacta su acta fundacional y adopta un escudo de armas
+                propio.
               </p>
               <p>
                 Se establece el lema{' '}
-                <em className="text-alanizGold-400 text-lg">"Memoria Ardet"</em> ("La memoria
-                arde"), en referencia al fuego interior que preserva la historia familiar. El{' '}
-                <strong className="text-alanizGold-400">lobo</strong> se adopta como emblema
-                central, no como figura salvaje, sino como representación de la{' '}
-                <em>inteligencia antes que la fuerza</em>, la vigilancia, la valentía y la fidelidad
-                por encima de todo.
+                <em className="text-alanizGold-400 text-lg">"Memoria Ardet"</em> ("La memoria arde"),
+                por la voluntad de mantener viva la historia familiar. El{' '}
+                <strong className="text-alanizGold-400">lobo</strong> se adopta como figura central:
+                no como animal salvaje, sino como símbolo de{' '}
+                <em>inteligencia, vigilancia y lealtad</em>.
               </p>
 
               {/* Detalles del escudo */}
@@ -332,20 +320,20 @@ export default function Historia() {
                   <li className="flex items-start space-x-3">
                     <Star className="w-5 h-5 text-alanizGold-400 mt-1" aria-hidden="true" />
                     <span>
-                      <strong>Tres estrellas</strong> con los nombres de las hijas del linaje vivo:
-                      Abril la heredera del señorío, Diana la valiente, y Martina la protectora
+                      <strong>Tres estrellas</strong> por las hijas de la familia: Abril, Diana y
+                      Martina
                     </span>
                   </li>
                   <li className="flex items-start space-x-3">
                     <Flame className="w-5 h-5 text-alanizGold-400 mt-1" aria-hidden="true" />
                     <span>
-                      <strong>Orbe de ámbar</strong> que representa la llama latente
+                      <strong>Orbe de ámbar</strong>, la llama del lema "Memoria Ardet"
                     </span>
                   </li>
                   <li className="flex items-start space-x-3">
                     <Leaf className="w-5 h-5 text-alanizGold-400 mt-1" aria-hidden="true" />
                     <span>
-                      <strong>Raíces</strong> que simbolizan la profundidad de la memoria
+                      <strong>Raíces</strong>, el peso de la memoria y los orígenes
                     </span>
                   </li>
                 </ul>
@@ -353,18 +341,13 @@ export default function Historia() {
 
               <div className="bg-alanizGold-600/10 rounded-lg p-6 border-l-4 border-alanizGold-600 mt-6">
                 <p className="text-alanizGold-400 font-medium mb-4">
-                  Desde su sede en <strong>Castilla y León</strong>, la Casa Alaniz se proyecta con
-                  plena conciencia de su historia, y con la voluntad de ejercer una{' '}
-                  <em>autoridad moral, legítima y simbólica</em>, como casa señorial viva. No es la
-                  nostalgia quien la impulsa, sino la fidelidad a un linaje que, lejos de
-                  extinguirse, arde con renovada fuerza.
+                  Con sede en <strong>Castilla y León</strong>, la Casa Alaniz mira a su historia sin
+                  nostalgia: la entiende como un punto de partida para hacer cosas útiles en el
+                  presente, más que como un título del pasado.
                 </p>
                 <p className="text-alanizGold-500 text-sm italic">
-                  La sucesión de la jefatura de la Casa Alaniz, históricamente vinculada al
-                  territorio del Valle de Monterrey, recae en <strong>Abril</strong>, la hija mayor
-                  y heredera legítima, quien junto a sus hermanas <strong>Diana</strong> y{' '}
-                  <strong>Martina</strong>, representa la continuidad del linaje y la proyección
-                  futura de la Casa Alaniz.
+                  La continuidad de la Casa se confía a <strong>Abril</strong>, la hija mayor, junto
+                  a sus hermanas <strong>Diana</strong> y <strong>Martina</strong>.
                 </p>
               </div>
             </div>
@@ -380,8 +363,7 @@ export default function Historia() {
                             backdrop-blur-sm shadow-elegant"
             >
               <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">
-                "De Oriente al Valle de Monterrey, de los siglos a la eternidad, la memoria arde y
-                el linaje perdura."
+                "Del siglo XII a hoy, la memoria de la Casa Alaniz sigue viva."
               </blockquote>
               <cite className="text-parchment-400 text-sm">
                 — Crónica Fundacional de la Casa Alaniz

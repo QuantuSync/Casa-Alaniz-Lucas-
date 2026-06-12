@@ -8,7 +8,7 @@ import escudo from './assets/Escudo.jpg';
 
 const DEFAULT_TITLE = 'Casa Alaniz - Archivo Heráldico Familiar';
 const DEFAULT_DESCRIPTION =
-  'Archivo heráldico oficial de la Casa Alaniz. Custodios de la memoria y preservadores del legado familiar.';
+  'Archivo heráldico de la Casa Alaniz: su historia, sus símbolos y su legado.';
 
 type RouteMeta = { title: string; description: string };
 
@@ -142,8 +142,7 @@ const NotFound = () => (
       <Castle className="h-24 w-24 text-alanizGold-600" aria-hidden="true" />
       <h1 className="font-display text-3xl font-bold text-alanizGold-600">Página No Encontrada</h1>
       <p className="max-w-md text-parchment-300">
-        La página que buscas no existe en los archivos de la Casa Alaniz. Los pergaminos han sido
-        revisados, pero no se encontró rastro.
+        La página que buscas no existe en el archivo de la Casa Alaniz.
       </p>
       <div className="space-x-4">
         <button onClick={() => window.history.back()} className="btn-secondary">
@@ -197,7 +196,7 @@ export const routes: RouteRecord[] = [
         handle: {
           title: 'Historia - Casa Alaniz',
           description:
-            'Descubre la rica historia de la Casa Alaniz, desde 1117 d.C. hasta nuestros días.',
+            'La historia de la Casa Alaniz según la tradición familiar, desde el siglo XII hasta su refundación.',
         } satisfies RouteMeta,
       },
       {
@@ -213,8 +212,9 @@ export const routes: RouteRecord[] = [
         path: 'legado',
         lazy: () => import('./pages/Legado').then((m) => ({ Component: m.default })),
         handle: {
-          title: 'El Legado Vivo - Casa Alaniz',
-          description: 'El legado vivo de la Casa Alaniz y su impacto en las generaciones futuras.',
+          title: 'El Legado - Casa Alaniz',
+          description:
+            'El legado territorial, técnico y de valores que la Casa Alaniz mantiene y transmite.',
         } satisfies RouteMeta,
       },
       {
@@ -223,7 +223,7 @@ export const routes: RouteRecord[] = [
         handle: {
           title: 'FASOR - Fuerza de Auxilio, Soporte y Rescate - Casa Alaniz',
           description:
-            'FASOR - Fuerza de Auxilio, Soporte y Rescate de la Casa Alaniz. Siempre listos, siempre vigilantes, siempre al servicio.',
+            'FASOR, la ONG de protección civil y respuesta ante emergencias impulsada por la Casa Alaniz.',
         } satisfies RouteMeta,
       },
       {

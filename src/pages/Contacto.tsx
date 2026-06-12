@@ -365,9 +365,8 @@ export default function Contacto() {
                 </h3>
 
                 <p className="text-parchment-200 leading-relaxed text-sm md:text-base">
-                  Si crees que puedes tener vínculos con nuestra noble casa o necesitas información
-                  sobre documentos genealógicos, no dudes en contactarnos. Nuestro equipo de
-                  administración te ayudará en todo el proceso.
+                  Si crees que puedes tener vínculos con la familia o necesitas información sobre
+                  genealogía, escríbenos. La administración te ayudará en lo que necesites.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">

@@ -167,9 +167,8 @@ export default function Simbolos() {
           <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
-            Los emblemas sagrados que identifican y representan la noble Casa Alaniz, cada uno con
-            un significado profundo forjado a través de los siglos y formalmente reconstituidos en
-            el año 2025.
+            Los símbolos que identifican a la Casa Alaniz —escudo, bandera y anillo—, recuperados y
+            fijados en su forma actual en 2025.
           </p>
         </div>
 
@@ -179,9 +178,8 @@ export default function Simbolos() {
           <Card src={escudo} title="Escudo de Armas" icon={Shield} delay={200}>
             <div className="bg-alanizGreen-900/30 rounded-lg p-6 border-l-4 border-alanizGold-600/50 space-y-4">
               <p className="text-parchment-200 leading-relaxed">
-                El escudo de la Casa Alaniz constituye la representación heráldica más completa de
-                nuestra identidad señorial. Cada elemento ha sido cuidadosamente diseñado para
-                reflejar los valores fundamentales del linaje.
+                El escudo reúne los principales símbolos de la Casa. Cada elemento se eligió para
+                representar uno de sus valores.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mt-6">
@@ -192,9 +190,9 @@ export default function Simbolos() {
                       El Lobo Guardián
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Figura central que simboliza la <em>inteligencia antes que la fuerza</em>.
-                      Representa la vigilancia perpetua, la valentía sin temeridad y la fidelidad
-                      inquebrantable al honor familiar. El lobo no es salvaje, es noble.
+                      Figura central del escudo. Representa la{' '}
+                      <em>inteligencia, la vigilancia y la lealtad</em> a la familia, más que la
+                      fuerza.
                     </p>
                   </div>
 
@@ -204,9 +202,9 @@ export default function Simbolos() {
                       Orbe de Ámbar
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Situada en el corazón del escudo, esta esfera dorada representa la llama
-                      interior que nunca se extingue. Simboliza la pasión por preservar la memoria y
-                      el fuego sagrado del lema <em>"Memoria Ardet"</em>.
+                      En el centro del escudo, esta esfera dorada es la llama del lema{' '}
+                      <em>"Memoria Ardet"</em>: la voluntad de mantener viva la memoria de la
+                      familia.
                     </p>
                   </div>
                 </div>
@@ -218,10 +216,8 @@ export default function Simbolos() {
                       Tres Estrellas
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Representan las luminarias del linaje vivo: <strong>Abril</strong> la heredera
-                      del señorío, <strong>Diana</strong> la valiente, y <strong>Martina</strong> la
-                      protectora. Cada estrella simboliza la continuidad y la esperanza del futuro
-                      de la Casa.
+                      Representan a las tres hijas de la familia —<strong>Abril</strong>,{' '}
+                      <strong>Diana</strong> y <strong>Martina</strong>— y la continuidad de la Casa.
                     </p>
                   </div>
 
@@ -231,9 +227,8 @@ export default function Simbolos() {
                       Raíces Profundas
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      En la base del escudo, simbolizan la profundidad de la memoria ancestral y la
-                      conexión inquebrantable con nuestros orígenes. Representan la estabilidad y la
-                      permanencia del linaje a través de los siglos.
+                      En la base del escudo, representan los orígenes de la familia y el arraigo de su
+                      memoria.
                     </p>
                   </div>
                 </div>
@@ -274,9 +269,8 @@ export default function Simbolos() {
           <Card src={bandera} title="Bandera Señorial" icon={Flag} delay={400}>
             <div className="bg-alanizGreen-900/30 rounded-lg p-6 border-l-4 border-alanizGold-600/50 space-y-4">
               <p className="text-parchment-200 leading-relaxed">
-                La bandera de la Casa Alaniz ondea como símbolo de nuestra presencia territorial y
-                autoridad señorial. Su diseño refleja la simplicidad noble y la elegancia que
-                caracterizan nuestro linaje.
+                La bandera de la Casa Alaniz. Su diseño es sencillo: el campo verde y las tres
+                estrellas doradas del escudo.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -286,8 +280,8 @@ export default function Simbolos() {
                   </h5>
                   <p className="text-sm text-parchment-300">
                     Fondo verde Alaniz con las tres estrellas doradas dispuestas en triángulo,
-                    respetando las proporciones heráldicas tradicionales. El verde domina el campo,
-                    mientras que el oro de las estrellas aporta la dignidad señorial.
+                    según las proporciones heráldicas habituales. El verde ocupa el campo y el oro de
+                    las estrellas aporta el contraste.
                   </p>
                 </div>
 
@@ -296,10 +290,9 @@ export default function Simbolos() {
                     Simbolismo de Colores
                   </h5>
                   <p className="text-sm text-parchment-300">
-                    El <strong className="text-alanizGold-400">verde</strong> representa la
-                    esperanza eterna y la conexión con la tierra ancestral del Valle de Monterrey.
-                    El <strong className="text-alanizGold-400">oro</strong> simboliza la excelencia
-                    y la nobleza de nuestros principios.
+                    El <strong className="text-alanizGold-400">verde</strong>: la esperanza y el
+                    vínculo con la tierra del Valle de Monterrey. El{' '}
+                    <strong className="text-alanizGold-400">oro</strong>: la excelencia y la dignidad.
                   </p>
                 </div>
               </div>
@@ -309,10 +302,8 @@ export default function Simbolos() {
                   Las Tres Estrellas
                 </h6>
                 <p className="text-sm text-parchment-300">
-                  Como en el escudo, las tres estrellas de la bandera representan a{' '}
-                  <strong>Abril</strong>, <strong>Diana</strong> y <strong>Martina</strong>, las
-                  luminarias que aseguran la continuidad del linaje y proyectan la Casa Alaniz hacia
-                  el futuro.
+                  Como en el escudo, las tres estrellas de la bandera son{' '}
+                  <strong>Abril</strong>, <strong>Diana</strong> y <strong>Martina</strong>.
                 </p>
               </div>
             </div>
@@ -322,9 +313,8 @@ export default function Simbolos() {
           <Card src={anillo} title="Anillo Señorial" icon={Gem} delay={600}>
             <div className="bg-alanizGreen-900/30 rounded-lg p-6 border-l-4 border-alanizGold-600/50 space-y-4">
               <p className="text-parchment-200 leading-relaxed">
-                El anillo señorial de la Casa Alaniz constituye el símbolo más personal y sagrado de
-                autoridad. Portado exclusivamente por el Señor de la Casa, es la marca tangible del
-                linaje y la responsabilidad señorial.
+                El anillo es el símbolo más personal de la Casa. Lo lleva el Señor de la Casa como
+                señal de su responsabilidad sobre ella.
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -335,10 +325,8 @@ export default function Simbolos() {
                       Orbe de Ámbar Central
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      La piedra central del anillo es el mismo orbe de ámbar que aparece en el
-                      escudo. Esta gema única simboliza la llama interior del lema{' '}
-                      <em>"Memoria Ardet"</em> y representa la autoridad ininterrumpida del Señor de
-                      la Casa Alaniz.
+                      La piedra central es el mismo orbe de ámbar del escudo, en referencia al lema{' '}
+                      <em>"Memoria Ardet"</em>.
                     </p>
                   </div>
 
@@ -348,9 +336,8 @@ export default function Simbolos() {
                       Plata y Oro Noble
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      La base de plata representa la pureza de intenciones, mientras que los
-                      detalles en oro simbolizan la excelencia en el ejercicio del señorío. La
-                      combinación refleja el equilibrio entre humildad y dignidad.
+                      La plata, la sencillez; el oro, la excelencia. Juntos, el equilibrio entre
+                      humildad y dignidad.
                     </p>
                   </div>
                 </div>
@@ -362,21 +349,19 @@ export default function Simbolos() {
                       Símbolo de Autoridad
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Por este anillo se reconoce la autoridad legítima del linaje. Su presencia
-                      confirma la identidad del portador como Señor de la Casa Alaniz y custodio de
-                      la responsabilidad territorial y familiar.
+                      El anillo identifica a quien lo lleva como Señor de la Casa Alaniz y
+                      responsable de su cuidado.
                     </p>
                   </div>
 
                   <div className="bg-alanizGold-600/10 rounded-lg p-4">
                     <h5 className="font-display font-semibold text-alanizGold-500 mb-2 flex items-center">
                       <Zap className="w-5 h-5 mr-2 text-alanizGold-600" aria-hidden="true" />{' '}
-                      Reliquia Sagrada
+                      Vínculo entre generaciones
                     </h5>
                     <p className="text-sm text-parchment-300">
-                      Más que una joya, el anillo es una reliquia sagrada que conecta al portador
-                      con todos los señores que le precedieron y con todos los que vendrán. Es el
-                      vínculo tangible con la eternidad del linaje.
+                      Más que una joya, el anillo enlaza a quien lo lleva con quienes le precedieron y
+                      con quienes vendrán.
                     </p>
                   </div>
                 </div>
@@ -406,10 +391,8 @@ export default function Simbolos() {
                 <p className="text-xl text-alanizGold-400 italic">"La memoria arde"</p>
                 <div className="max-w-3xl mx-auto">
                   <p className="text-parchment-200 leading-relaxed">
-                    Nuestro lema heráldico encapsula la esencia de la Casa Alaniz: la llama interior
-                    que mantiene viva la memoria ancestral y alimenta el compromiso con las
-                    generaciones futuras. Esta llama arde en cada símbolo, en cada gesto y en cada
-                    decisión del Señor de la Casa.
+                    El lema resume la idea que guía a la Casa Alaniz: mantener viva la memoria de la
+                    familia y cuidar de las próximas generaciones.
                   </p>
                 </div>
               </div>
@@ -420,10 +403,9 @@ export default function Simbolos() {
                     <Star className="w-6 h-6 text-alanizGold-600" aria-hidden="true" />
                   </div>
                   <h4 className="font-display font-semibold text-alanizGold-500 mb-2">Abril</h4>
-                  <p className="text-sm text-alanizGold-400 italic">Heredera del señorío</p>
+                  <p className="text-sm text-alanizGold-400 italic">La hija mayor</p>
                   <p className="text-xs text-parchment-300 mt-1">
-                    Inteligente y perseverante, destinada a continuar el linaje con sabiduría y
-                    determinación
+                    Llamada a dar continuidad a la Casa.
                   </p>
                 </div>
 
@@ -434,7 +416,7 @@ export default function Simbolos() {
                   <h4 className="font-display font-semibold text-alanizGold-500 mb-2">Diana</h4>
                   <p className="text-sm text-alanizGold-400 italic">Del linaje Alaniz</p>
                   <p className="text-xs text-parchment-300 mt-1">
-                    Valiente y fuerte, guardiana del honor familiar y protectora de las tradiciones
+                    Una de las tres estrellas de la Casa.
                   </p>
                 </div>
 
@@ -445,8 +427,7 @@ export default function Simbolos() {
                   <h4 className="font-display font-semibold text-alanizGold-500 mb-2">Martina</h4>
                   <p className="text-sm text-alanizGold-400 italic">Del linaje Alaniz</p>
                   <p className="text-xs text-parchment-300 mt-1">
-                    Protectora y audaz, defensora de la justicia y custodio de los valores
-                    familiares
+                    Una de las tres estrellas de la Casa.
                   </p>
                 </div>
               </div>
@@ -464,8 +445,8 @@ export default function Simbolos() {
                           backdrop-blur-sm shadow-elegant"
           >
             <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4 max-w-3xl mx-auto">
-              "Los símbolos no adornan la nobleza; la revelan. En cada emblema de la Casa Alaniz
-              reside el alma de ocho siglos de honor inquebrantable."
+              "Los símbolos no adornan: cuentan quiénes somos. En cada uno está la memoria de la Casa
+              Alaniz."
             </blockquote>
             <cite className="text-parchment-400 text-sm">
               — Filosofía heráldica de la Casa Alaniz

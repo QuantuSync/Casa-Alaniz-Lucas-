@@ -72,8 +72,8 @@ const HouseInfo = () => (
     </div>
 
     <p className="text-sm text-parchment-300 leading-relaxed mb-4">
-      Custodios de la memoria y preservadores del legado familiar desde el siglo XII. Nuestro
-      archivo heráldico mantiene viva la historia y tradiciones de la Casa Alaniz.
+      Archivo heráldico de la Casa Alaniz: su historia, sus símbolos y los proyectos con los que hoy
+      busca ser útil a la comunidad.
     </p>
 
     <div className="bg-alanizGreen-800/50 rounded-lg p-4 border border-alanizGold-600/20">

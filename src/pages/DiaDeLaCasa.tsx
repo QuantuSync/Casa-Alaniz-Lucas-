@@ -28,13 +28,13 @@ const programaDia = [
   },
   {
     hora: '11:00',
-    evento: 'Ceremonia de renovación de votos',
-    descripcion: 'Renovación solemne de la lealtad al linaje y sus valores',
+    evento: 'Renovación de compromisos',
+    descripcion: 'Acto en el que la familia renueva su compromiso con los valores de la Casa',
   },
   {
     hora: '12:00',
     evento: 'Lectura de la Crónica Fundacional',
-    descripcion: 'Recordatorio solemne de nuestra historia milenaria',
+    descripcion: 'Repaso de la historia y los orígenes de la Casa',
   },
   {
     hora: '13:00',
@@ -187,9 +187,8 @@ export default function DiaDeLaCasa() {
           <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            La celebración anual más solemne de nuestro linaje, donde honramos nuestra historia,
-            renovamos nuestros votos y reconocemos a quienes han demostrado honor y lealtad
-            excepcionales a la Casa Alaniz.
+            La celebración anual de la Casa Alaniz: un día para reunir a la familia, recordar su
+            historia y reconocer a quienes han contribuido a la Casa.
           </p>
 
           {/* Fecha de la celebración */}
@@ -316,23 +315,18 @@ export default function DiaDeLaCasa() {
           <div className="space-y-4 text-parchment-200 leading-relaxed">
             <p>
               El <strong className="text-alanizGold-500">Día de la Casa Alaniz</strong> se instituyó
-              oficialmente en el año <strong className="text-alanizGold-500">2025</strong>,
-              coincidiendo con la refundación formal de nuestro linaje. El{' '}
-              <em className="text-alanizGold-400">22 de septiembre</em> fue elegido como fecha
-              conmemorativa por su proximidad al equinoccio de otoño, simbolizando el equilibrio
-              entre tradición y renovación que define a nuestra Casa.
+              en <strong className="text-alanizGold-500">2025</strong>, junto con la refundación de la
+              Casa. Se eligió el <em className="text-alanizGold-400">22 de septiembre</em> por su
+              cercanía al equinoccio de otoño.
             </p>
             <p>
-              Esta celebración anual tiene como propósito{' '}
-              <strong className="text-alanizGold-500">fortalecer los lazos familiares</strong>,
-              reconocer públicamente a quienes han contribuido al honor de la Casa, y renovar
-              solemnemente nuestro compromiso con los valores ancestrales que nos han guiado durante
-              más de ocho siglos.
+              La celebración busca{' '}
+              <strong className="text-alanizGold-500">reunir a la familia</strong>, reconocer a
+              quienes han contribuido a la Casa y recordar los valores que la guían.
             </p>
             <p>
-              El <em className="text-alanizGold-400">lugar de celebración varía cada año</em>,
-              permitiendo que diferentes territorios vinculados a la Casa puedan acoger esta
-              ceremonia solemne, manteniendo viva la conexión con nuestras raíces territoriales.
+              El <em className="text-alanizGold-400">lugar de celebración varía cada año</em>, de modo
+              que distintos sitios vinculados a la Casa puedan acogerla.
             </p>
           </div>
         </div>
@@ -502,8 +496,7 @@ export default function DiaDeLaCasa() {
                           backdrop-blur-sm shadow-elegant"
           >
             <blockquote className="text-xl md:text-2xl font-display italic text-alanizGold-600 mb-4">
-              "En el Día de la Casa, la memoria arde más fuerte que nunca. Unidos en honor,
-              proyectados hacia la eternidad."
+              "El Día de la Casa es, sobre todo, un día para estar juntos."
             </blockquote>
             <cite className="text-parchment-400 text-sm">— Lema del Día de la Casa Alaniz</cite>
           </div>

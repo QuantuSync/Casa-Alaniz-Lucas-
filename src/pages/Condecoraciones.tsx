@@ -16,11 +16,11 @@ const condecoraciones: Condecoracion[] = [
     id: 'gran-cruz',
     nombre: 'Gran Cruz de la Distinción Alaniz',
     fundamento:
-      'Instituida por decreto solemne del Señor de la Casa Alaniz, la Gran Cruz de la Distinción Alaniz nace como símbolo de gratitud perpetua hacia aquellos cuyo proceder ha reforzado, de manera visible y constante, el honor, la integridad y la proyección de este linaje. Su concesión reconoce no solo los actos, sino también la disposición noble de quien, por voluntad propia, ha tejido lazos indelebles con la Casa.',
+      'Instituida por el Señor de la Casa Alaniz, la Gran Cruz de la Distinción Alaniz es la máxima distinción de la Casa. Reconoce a quienes, de forma constante, han contribuido a su prestigio y han mantenido un vínculo cercano con ella.',
     motivo:
-      'Se otorga exclusivamente a personas cuya trayectoria haya evidenciado una contribución singular al engrandecimiento moral, social o cultural de la Casa Alaniz. Comprende tanto servicios prestados en situaciones de relevancia como gestos de lealtad que, por su constancia y sinceridad, merezcan quedar inscritos en la memoria oficial del linaje.',
+      'Se concede a personas cuya trayectoria suponga una contribución destacada a la Casa Alaniz, ya sea por servicios prestados en momentos relevantes o por una lealtad sostenida en el tiempo.',
     descripcion:
-      'La cruz, esmaltada en negro profundo con bordes dorados, representa la dignidad y la autoridad que la Casa Alaniz otorga a quienes se distinguen. La corona central, labrada en metal noble, simboliza el reconocimiento supremo emanado del Señor de la Casa. La cinta, en disposición vertical y tonalidades sobrias, alude a la rectitud, la permanencia y el carácter solemne de este honor.',
+      'La cruz, esmaltada en negro con bordes dorados, representa la dignidad del reconocimiento que otorga la Casa. La corona central simboliza que la distinción procede del Señor de la Casa. La cinta, vertical y de tonos sobrios, alude a la rectitud y el carácter formal del honor.',
     imagen: '/images/condecoraciones/GranCruz.png',
     orden: 1,
   },
@@ -28,11 +28,11 @@ const condecoraciones: Condecoracion[] = [
     id: 'cruz-honor-merito',
     nombre: 'Cruz del Honor y el Mérito',
     fundamento:
-      'Creada como segunda distinción en orden de precedencia, la Cruz del Honor y el Mérito es una condecoración destinada a destacar la conducta ejemplar, la integridad personal y el compromiso inquebrantable con los valores que la Casa Alaniz preserva desde generaciones. No es una recompensa material, sino la confirmación pública de que el portador ha obrado conforme a los más altos principios.',
+      'Segunda distinción en orden de precedencia, la Cruz del Honor y el Mérito reconoce la conducta ejemplar, la integridad y el compromiso con los valores de la Casa Alaniz. No es una recompensa material, sino un reconocimiento público a quien ha obrado conforme a esos principios.',
     motivo:
-      'Se concede a quienes, mediante actos voluntarios o servicios desinteresados, hayan demostrado un compromiso activo y constante en beneficio de la Casa o de su comunidad cercana, siempre en concordancia con los valores de honor, respeto y nobleza que definen al linaje Alaniz.',
+      'Se concede a quienes, mediante actos voluntarios o servicios desinteresados, hayan mostrado un compromiso constante con la Casa o con su comunidad cercana, en concordancia con los valores de honor y respeto de la Casa Alaniz.',
     descripcion:
-      'Su diseño presenta una cruz esmaltada en blanco marfil, cuyos brazos se extienden con firmeza en las cuatro direcciones, simbolizando la proyección de la virtud en todos los ámbitos de la vida. En el centro, una estrella dorada recuerda que los principios rectores deben brillar incluso en la oscuridad. La cinta combina tonos cálidos y terrosos, evocando la raíz y la fortaleza que unen a las personas de recto proceder.',
+      'Una cruz esmaltada en blanco marfil, con los brazos extendidos en las cuatro direcciones. En el centro, una estrella dorada. La cinta combina tonos cálidos y terrosos, en alusión al arraigo y la firmeza.',
     imagen: '/images/condecoraciones/HonoryMerito.png',
     orden: 2,
   },
@@ -58,9 +58,8 @@ export default function Condecoraciones() {
               Condecoraciones de la Casa Alaniz
             </h1>
             <p className="text-lg text-parchment-300 max-w-3xl mx-auto">
-              Distinciones otorgadas en reconocimiento a quienes han demostrado valores
-              excepcionales de honor, lealtad y servicio, contribuyendo al engrandecimiento del
-              linaje Alaniz.
+              Distinciones que la Casa Alaniz otorga a quienes han destacado por su honor, lealtad y
+              servicio.
             </p>
           </div>
         </div>

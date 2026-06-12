@@ -189,26 +189,23 @@ export default function Fasor() {
           <div className="text-lg text-parchment-300 max-w-4xl mx-auto leading-relaxed mb-6 space-y-4">
             <p>
               La Fuerza de Auxilio, Soporte y Rescate (FASOR) es una{' '}
-              <strong className="text-alanizGold-500">ONG</strong> que nace bajo el amparo de la{' '}
-              <strong className="text-alanizGold-500">Casa Alaniz</strong> como reflejo de un deber
-              ancestral: servir y proteger en los momentos en que la comunidad más lo necesita. No
-              es una idea abstracta, es una respuesta concreta a la realidad que vivimos hoy.
+              <strong className="text-alanizGold-500">ONG</strong> impulsada por la{' '}
+              <strong className="text-alanizGold-500">Casa Alaniz</strong> con un objetivo claro:
+              ayudar y proteger a la comunidad cuando más lo necesita. No es una idea abstracta, sino
+              una respuesta a problemas reales.
             </p>
             <p>
-              Incendios que devoran bosques enteros, inundaciones que arrasan hogares, terremotos y
-              tormentas que ponen a prueba nuestra resistencia como sociedad. Ante un mundo cada vez
-              más vulnerable a la fuerza de la naturaleza, surge la necesidad de contar con una
-              organización civil preparada, disciplinada y entregada.
+              Incendios, inundaciones, terremotos y temporales son cada vez más frecuentes. Frente a
+              ellos hace falta contar con organizaciones civiles preparadas, disciplinadas y
+              comprometidas.
             </p>
             <p>
-              FASOR representa esa voluntad: estar listos, con la mente clara y el corazón firme,
-              para llevar auxilio donde la esperanza parece desvanecerse. Capaz de actuar con
-              decisión en medio del caos.
+              FASOR responde a esa necesidad: estar preparados para actuar con decisión allí donde se
+              necesita ayuda.
             </p>
             <p>
-              Más que una fuerza organizada, FASOR es un compromiso vivo con la comunidad, un
-              recordatorio de que el verdadero poder de un linaje se mide en su capacidad para
-              proteger a los suyos y tender la mano cuando la adversidad golpea.
+              Más que una organización, FASOR es un compromiso con la comunidad: estar presentes y
+              echar una mano cuando llega la adversidad.
             </p>
           </div>
 
@@ -229,10 +226,9 @@ export default function Fasor() {
               </h3>
               <p className="text-xl text-parchment-100 leading-relaxed text-center">
                 <strong className="text-alanizGold-400">
-                  Estar presentes allí donde la adversidad golpea
+                  Estar presentes donde se necesita ayuda
                 </strong>
-                , ya sea en incendios, inundaciones, catástrofes naturales o emergencias que
-                requieran manos firmes y corazones preparados.
+                : incendios, inundaciones, catástrofes naturales y otras emergencias.
               </p>
             </div>
 
@@ -873,12 +869,11 @@ export default function Fasor() {
                 ayuda.
               </p>
               <p>
-                La Casa Alaniz entiende que el verdadero poder de un linaje no reside en títulos
-                vacíos o recuerdos estáticos,{' '}
+                Para la Casa Alaniz, lo que de verdad importa no son los títulos ni el pasado, sino{' '}
                 <strong className="text-alanizGold-400">
-                  reside en la capacidad de responder con eficacia cuando más se le necesita
+                  la capacidad de responder con eficacia cuando más se la necesita
                 </strong>
-                . Por ello, FASOR es, al mismo tiempo, un deber histórico y una promesa de futuro.
+                . FASOR es, a la vez, una forma de honrar esa idea y un proyecto de futuro.
               </p>
 
               <div className="bg-alanizGold-600/10 rounded-lg p-6 border-l-4 border-alanizGold-600 mt-6">

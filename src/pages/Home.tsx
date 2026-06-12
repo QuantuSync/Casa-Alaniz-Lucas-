@@ -11,28 +11,25 @@ const featuredSections = [
     icon: Library,
     title: 'Historia Familiar',
     description:
-      'Descubre la rica crónica de la Casa Alaniz desde el siglo XII, con relatos de honor, valor y legado señorial.',
+      'El recorrido de la Casa Alaniz según la tradición familiar: orígenes, migraciones y la refundación del linaje.',
     link: '/historia',
   },
   {
     icon: Shield,
     title: 'Símbolos Heráldicos',
-    description:
-      'Explora el significado del escudo, bandera y anillo que identifican a nuestra noble casa señorial.',
+    description: 'El significado del escudo, la bandera y el anillo que identifican a la Casa.',
     link: '/simbolos',
   },
   {
     icon: Crown,
-    title: 'El Legado Inmutable',
-    description:
-      'Conoce cómo el legado territorial y militar de la Casa Alaniz perdura a través de los siglos.',
+    title: 'El Legado',
+    description: 'El legado territorial, técnico y de valores que la Casa mantiene hoy.',
     link: '/legado',
   },
   {
     icon: ScrollText,
     title: 'Archivo Documental',
-    description:
-      'Accede a documentos históricos, cartas y tratados que narran nuestra historia señorial.',
+    description: 'Cartas, tratados, cartografía y crónicas que documentan la historia de la Casa.',
     link: '/documentos',
   },
 ];
@@ -153,8 +150,8 @@ export default function Home() {
 
             {/* Frase breve */}
             <p className="max-w-2xl text-lg leading-relaxed text-parchment-200 md:text-xl">
-              Custodios de la memoria y el legado de una casa señorial con más de nueve siglos de
-              historia, honor &amp; servicio.
+              Archivo y memoria de la Casa Alaniz: su historia, sus símbolos y su compromiso de
+              servicio.
             </p>
 
             {/* Accesos */}
@@ -195,15 +192,13 @@ export default function Home() {
           <SectionHeading eyebrow="Quiénes somos" title="Una casa con memoria" />
           <div className="mx-auto max-w-3xl space-y-6 text-parchment-200">
             <p className="text-lg leading-relaxed">
-              Bienvenido al archivo heráldico oficial de la Casa Alaniz. Durante más de novecientos
-              años, hemos sido una casa señorial con tradición militar, preservando nuestro legado
-              territorial y familiar para las generaciones futuras.
+              Este es el archivo heráldico de la Casa Alaniz: un espacio para reunir su historia, sus
+              símbolos y los proyectos con los que hoy quiere ser útil a la comunidad.
             </p>
             <p className="leading-relaxed">
-              Desde el siglo XII, cuando nuestros ancestros servían como ingenieros y estrategas
-              militares, la Casa Alaniz ha mantenido vivos los valores de honor, disciplina y la
-              responsabilidad señorial sobre el{' '}
-              <em className="text-alanizGold-400">Valle de Monterrey</em>.
+              La tradición familiar sitúa sus orígenes en el siglo XII, en un linaje de ingenieros y
+              constructores. Sobre esa memoria, refundada en 2025, la Casa sostiene unos valores
+              sencillos: trabajo, disciplina y servicio.
             </p>
           </div>
         </div>
@@ -214,8 +209,8 @@ export default function Home() {
         <div className="content-container">
           <SectionHeading
             eyebrow="Explora el archivo"
-            title="Descubre nuestro legado"
-            intro="Historia, símbolos y documentos que conforman el rico patrimonio señorial de la Casa Alaniz."
+            title="Secciones de la Casa"
+            intro="Historia, símbolos y documentos de la Casa Alaniz."
           />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {featuredSections.map((section) => (
@@ -242,7 +237,7 @@ export default function Home() {
             </div>
             <SectionHeading
               title="¿Formas parte de la Casa Alaniz?"
-              intro="Si eres descendiente de nuestra casa señorial o necesitas información sobre documentos genealógicos y territoriales, contacta con la administración de la Casa."
+              intro="Si crees tener vínculos con la familia o buscas información sobre genealogía y documentos, escribe a la administración de la Casa."
             />
             <Link to="/contacto" className="btn-alaniz">
               <Mail className="mr-2 h-5 w-5" aria-hidden="true" />

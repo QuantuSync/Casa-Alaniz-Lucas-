@@ -69,8 +69,8 @@ export default function Documentos() {
           <div className="rule-gold mx-auto my-6" aria-hidden="true"></div>
 
           <p className="text-lg text-parchment-300 max-w-3xl mx-auto leading-relaxed">
-            El tesoro más preciado de la Casa Alaniz: documentos históricos que narran siglos de
-            historia, honor y tradición familiar.
+            Los documentos que conservan la historia de la Casa Alaniz: cartas, tratados,
+            cartografía y crónicas.
           </p>
         </div>
 
@@ -182,8 +182,7 @@ export default function Documentos() {
                   </h3>
                   <p className="text-parchment-200 leading-relaxed">
                     El archivo documental estará disponible únicamente para miembros verificados de
-                    la Casa Alaniz. Esta medida garantiza la preservación y el uso adecuado de
-                    documentos de valor histórico incalculable.
+                    la Casa Alaniz, para asegurar su conservación y un uso adecuado.
                   </p>
                   <div className="grid md:grid-cols-2 gap-6 mt-6">
                     <div className="space-y-3">
@@ -246,9 +245,9 @@ export default function Documentos() {
                     Para Miembros de la Casa Alaniz
                   </h4>
                   <p className="text-sm text-parchment-300 leading-relaxed mb-4">
-                    Si eres descendiente de nuestra noble casa y deseas acceso al archivo documental
-                    cuando esté disponible, contacta con la administración para iniciar el proceso
-                    de verificación.
+                    Si eres descendiente de la familia y deseas acceso al archivo cuando esté
+                    disponible, contacta con la administración para iniciar el proceso de
+                    verificación.
                   </p>
                   <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                     <a href="/contacto" className="btn-secondary text-center">

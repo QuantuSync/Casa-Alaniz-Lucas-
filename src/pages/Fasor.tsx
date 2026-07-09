@@ -6,12 +6,11 @@ import {
   Dumbbell,
   Flame,
   Footprints,
+  Globe,
   Handshake,
   HardHat,
   Heart,
   Hospital,
-  Map,
-  Maximize,
   Medal,
   Mountain,
   RadioTower,
@@ -191,8 +190,8 @@ export default function Fasor() {
               La Fuerza de Auxilio, Soporte y Rescate (FASOR) es una{' '}
               <strong className="text-alanizGold-500">ONG</strong> impulsada por la{' '}
               <strong className="text-alanizGold-500">Casa Alaniz</strong> con un objetivo claro:
-              ayudar y proteger a la comunidad cuando más lo necesita. No es una idea abstracta, sino
-              una respuesta a problemas reales.
+              ayudar y proteger a la comunidad cuando más lo necesita. No es una idea abstracta,
+              sino una respuesta a problemas reales.
             </p>
             <p>
               Incendios, inundaciones, terremotos y temporales son cada vez más frecuentes. Frente a
@@ -200,8 +199,8 @@ export default function Fasor() {
               comprometidas.
             </p>
             <p>
-              FASOR responde a esa necesidad: estar preparados para actuar con decisión allí donde se
-              necesita ayuda.
+              FASOR responde a esa necesidad: estar preparados para actuar con decisión allí donde
+              se necesita ayuda.
             </p>
             <p>
               Más que una organización, FASOR es un compromiso con la comunidad: estar presentes y
@@ -213,6 +212,20 @@ export default function Fasor() {
             <span className="w-3 h-3 bg-alanizGold-500 rounded-full mr-3 animate-ping"></span>
             OPERATIVO - EN SERVICIO
           </div>
+
+          <a
+            href="https://www.fasor.es"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-3 rounded-full border border-alanizGold-600/40 bg-alanizGreen-900/60 px-6 py-3 text-parchment-200 shadow-lg transition-colors hover:border-alanizGold-600/70"
+          >
+            <Globe className="h-5 w-5 text-alanizGold-600" aria-hidden="true" />
+            <span>
+              FASOR tiene su propia web:{' '}
+              <strong className="text-alanizGold-500">www.fasor.es</strong> — allí encontrarás toda
+              la información.
+            </span>
+          </a>
         </div>
 
         <div className="max-w-5xl mx-auto space-y-12">
@@ -903,73 +916,6 @@ export default function Fasor() {
                     FASOR: Honor, disciplina y servicio bajo la bandera de Casa Alaniz
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Abeiro - mapa incrustado (demostrador) */}
-          <div
-            className="card-elegant observe-me opacity-0 translate-y-8"
-            style={{ animationDelay: '1700ms' }}
-          >
-            <div className="mb-6 flex items-start space-x-6">
-              <div className="flex-shrink-0">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-alanizGold-600 bg-transparent">
-                  <Map className="h-5 w-5 text-alanizGold-600" aria-hidden="true" />
-                </div>
-              </div>
-              <div className="flex-1">
-                <p className="eyebrow mb-1 text-alanizGold-600/70">
-                  Proyecto propio · En desarrollo activo
-                </p>
-                <h3 className="font-display text-2xl font-semibold text-alanizGold-600">
-                  Abeiro — protección ante incendios forestales
-                </h3>
-              </div>
-            </div>
-
-            <div className="space-y-4 leading-relaxed text-parchment-200">
-              <p>
-                <strong className="text-alanizGold-600">Abeiro</strong> es un proyecto propio en
-                desarrollo activo: una herramienta de protección ante incendios forestales que
-                traduce el avance del fuego en decisiones de evacuación por aldea, a partir de datos
-                reales (IGE, OpenStreetMap, Sentinel-2). Nace del mismo principio que FASOR: servir
-                y proteger a quien lo necesita. Se encuentra en fase de desarrollo y aún no es un
-                sistema operativo de emergencias.
-              </p>
-            </div>
-
-            {/* Escritorio: mapa embebido usable */}
-            <div className="mt-6 hidden md:block">
-              <div className="overflow-hidden rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40">
-                <iframe
-                  src="https://abeiro.vercel.app"
-                  title="Abeiro — mapa (demostrador)"
-                  loading="lazy"
-                  className="h-[600px] w-full"
-                ></iframe>
-              </div>
-              <p className="mt-3 text-center text-sm italic text-parchment-400">
-                Abeiro · abeiro.vercel.app
-              </p>
-            </div>
-
-            {/* Móvil: vista previa + botón a pantalla completa (evita el conflicto zoom/scroll) */}
-            <div className="mt-6 md:hidden">
-              <div className="stack-centered rounded-xl border border-alanizGold-600/30 bg-alanizGreen-900/40 p-8">
-                <Map className="mb-3 h-10 w-10 text-alanizGold-600" aria-hidden="true" />
-                <p className="mb-4 text-sm text-parchment-300">
-                  Para una mejor experiencia en el móvil, abre el mapa a pantalla completa.
-                </p>
-                <a
-                  href="https://abeiro.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-alaniz"
-                >
-                  <Maximize className="mr-2 h-5 w-5" aria-hidden="true" />
-                  Abrir mapa a pantalla completa
-                </a>
               </div>
             </div>
           </div>

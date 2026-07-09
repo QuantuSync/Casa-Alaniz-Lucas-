@@ -37,38 +37,29 @@ import sanitarioLogo from '../assets/sanitario-logo.jpg';
 import AccreditationSeal from '../components/AccreditationSeal';
 
 // Distintivos de rango (SVG a medida, en oro): estrella heráldica de 5 puntas rectas
-// para mando, galón en V plano apilable para tropa.
+// para mando, galón en V plano apilable para tropa. El Comandante lleva una única
+// estrella de 8 puntas.
 const Star = () => (
   <svg viewBox="0 0 24 24" className="h-[15px] w-[15px]" fill="currentColor">
     <path d="M12 1 L14.53 8.52 L22.46 8.6 L16.09 13.33 L18.47 20.9 L12 16.3 L5.53 20.9 L7.91 13.33 L1.54 8.6 L9.47 8.52 Z" />
   </svg>
 );
 
-const RankStars = ({ count }: { count: number }) => {
-  // 3 estrellas en triángulo invertido: 2 arriba y 1 abajo centrada.
-  if (count === 3) {
-    return (
-      <span
-        className="inline-flex flex-col items-center gap-0.5 text-alanizGold-600"
-        aria-hidden="true"
-      >
-        <span className="inline-flex gap-0.5">
-          <Star />
-          <Star />
-        </span>
-        <Star />
-      </span>
-    );
-  }
+const StarEightPoints = () => (
+  <span className="inline-flex text-alanizGold-600" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className="h-[26px] w-[26px]" fill="currentColor">
+      <path d="M12 1 L13.76 7.75 L19.78 4.22 L16.25 10.24 L23 12 L16.25 13.76 L19.78 19.78 L13.76 16.25 L12 23 L10.24 16.25 L4.22 19.78 L7.75 13.76 L1 12 L7.75 10.24 L4.22 4.22 L10.24 7.75 Z" />
+    </svg>
+  </span>
+);
 
-  return (
-    <span className="inline-flex items-center gap-0.5 text-alanizGold-600" aria-hidden="true">
-      {Array.from({ length: count }, (_, i) => (
-        <Star key={i} />
-      ))}
-    </span>
-  );
-};
+const RankStars = ({ count }: { count: number }) => (
+  <span className="inline-flex items-center gap-0.5 text-alanizGold-600" aria-hidden="true">
+    {Array.from({ length: count }, (_, i) => (
+      <Star key={i} />
+    ))}
+  </span>
+);
 
 const RankChevrons = ({ count }: { count: number }) => (
   <span
@@ -466,7 +457,7 @@ export default function Fasor() {
                 <div className="bg-alanizGreen-900/50 rounded-lg p-5 border border-alanizGold-600/30">
                   <div className="flex items-center gap-4 mb-3">
                     <RankBadge>
-                      <RankStars count={3} />
+                      <StarEightPoints />
                     </RankBadge>
                     <div className="flex-1">
                       <h5 className="font-display font-bold text-alanizGold-500 text-lg mb-1">

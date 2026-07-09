@@ -882,9 +882,9 @@ export default function Fasor() {
 
               <div className="bg-alanizGold-600/10 rounded-lg p-6 border-l-4 border-alanizGold-600 mt-6">
                 <p className="text-alanizGold-400 font-medium text-center italic text-lg">
-                  "La Fuerza Casa Alaniz actúa con seriedad, método y determinación. Su estructura
-                  no busca imitar un ejército, sino transmitir la misma solidez y confianza que
-                  requiere toda organización destinada a proteger y servir en momentos de crisis."
+                  "FASOR actúa con seriedad, método y determinación. Su estructura no busca imitar
+                  un ejército, sino transmitir la misma solidez y confianza que requiere toda
+                  organización destinada a proteger y servir en momentos de crisis."
                 </p>
               </div>
 
